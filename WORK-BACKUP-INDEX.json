@@ -12659,6 +12659,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-header-live-v34-png-7b59a8a1987b79e6.zip",
       "bytes": 59367
+    },
+    "outputs/stratus-both-halves-reverse.png": {
+      "sha256": "8ec866f6768a215c552b3fccfe70ff74b5992b0f9845871c56477b38c4adecee",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-both-halves-reverse-png-85301a239961728f.zip",
+      "bytes": 69823
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
