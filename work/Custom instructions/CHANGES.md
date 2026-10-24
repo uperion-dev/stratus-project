@@ -4,6 +4,8 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 
 ## Pending changes
 
+- Appily back sheen on exposed faces of leaves (and maby any other potentialy missed blocks), just what I said was don't appily it on inside faces behind things. 
+
 - Implement temporal optimisation.
 
 - I'll allow you to temporeraly dissable some mods preventing you from live testing.
