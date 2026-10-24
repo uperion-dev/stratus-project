@@ -1,9 +1,10 @@
 'use strict';
 // Two narrow viewport canvases keep the centre clear while glass drifts outwards.
 (()=>{
- const motion=window.StratusMotion,body=document.body,reduced=matchMedia('(prefers-reduced-motion: reduce)'),coarse=matchMedia('(pointer: coarse)'),transparency=matchMedia('(prefers-reduced-transparency: reduce)');if(!motion)return;
+ const motion=window.StratusMotion,body=document.body,header=document.querySelector('.topbar'),reduced=matchMedia('(prefers-reduced-motion: reduce)'),coarse=matchMedia('(pointer: coarse)'),transparency=matchMedia('(prefers-reduced-transparency: reduce)');if(!motion)return;
  const edgeFraction=.10,edgeFadeFraction=.72,verticalFadeFraction=.10,renderResolution=()=>Math.min(3,Math.max(2,devicePixelRatio||1)),surfaces=['left','right'].map(side=>{const canvas=document.createElement('canvas');canvas.className=`shard-reflections shard-edge-${side}`;canvas.setAttribute('aria-hidden','true');body.append(canvas);return {side,canvas,ctx:canvas.getContext('2d',{alpha:true})};});if(surfaces.some(s=>!s.ctx))return;
  const canvas=surfaces[0].canvas,clamp=n=>Math.max(0,Math.min(1,n)),noise=n=>{const v=Math.sin(n*127.1+311.7)*43758.5453;return v-Math.floor(v);},smooth=n=>{n=clamp(n);return n*n*(3-2*n);};
+ const headerBusy=()=>header?.classList.contains('nav-splitting');
  const idle=fn=>'requestIdleCallback'in window?requestIdleCallback(fn,{timeout:500}):setTimeout(fn,24);
  const textures=new Map(),particles=new Map();let epoch=0,w=0,h=0,bandHeight=400,routeSeed=0,lastTick=0,lastDraw=0,gateAt=performance.now(),latestY=0,elapsed=0,timer=0,diagnosticAt=0,resolution=renderResolution();
  const disabled=s=>s.hidden||s.paused||reduced.matches||transparency.matches||location.hash==='#feedback'||document.activeElement?.matches('input,textarea,select,:focus-visible')||document.querySelector('dialog[open]');
@@ -14,13 +15,14 @@
   if(index<0||textures.has(index))return;const version=epoch,record={index,y:index*bandHeight,ready:false,bitmap:null,readyAt:0,words:0,scale:1};textures.set(index,record);
   idle(()=>{
    if(version!==epoch||document.hidden||textures.get(index)!==record){if(textures.get(index)===record)textures.delete(index);return;}
+   if(headerBusy()){textures.delete(index);return;}
    const scale=Math.min(resolution,(coarse.matches?1440:2880)/w),bitmap=document.createElement('canvas');bitmap.width=Math.ceil(w*scale);bitmap.height=Math.ceil(bandHeight*scale);const c=bitmap.getContext('2d');c.scale(scale,scale);c.fillStyle='#101817';c.fillRect(0,0,w,bandHeight);
    const root=document.querySelector('[data-view]:not([hidden])');if(!root||root.dataset.view==='feedback'){textures.delete(index);return;}
    // Reflection sources are the public view only. Form values, dialogs and private routes never enter a texture.
    const excluded='[hidden],.carousel-hidden,form,dialog,.voxel-stage,.layer-axis,.wordmark-depth i';
    const backgrounds=[root,...root.querySelectorAll('section,article,.hero,.reference-strip,.workflow-note,.world-layer,.atmosphere-wordmark,.table-scroll,img')],walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),styles=new Map();let phase=0,n=0,word=0,tokens=[],current=null;
    function slice(){
-    if(version!==epoch||document.hidden||textures.get(index)!==record){if(textures.get(index)===record)textures.delete(index);return;}const started=performance.now();
+    if(version!==epoch||document.hidden||textures.get(index)!==record){if(textures.get(index)===record)textures.delete(index);return;}if(headerBusy()){setTimeout(()=>idle(slice),80);return;}const started=performance.now();
     while(performance.now()-started<3){
      if(phase===0){
       if(n>=backgrounds.length){phase=1;continue;}const el=backgrounds[n++];if(el.closest(excluded))continue;const b=el.getBoundingClientRect(),y=b.top+scrollY-record.y;if(!b.width||y>bandHeight||y+b.height<0)continue;const st=getComputedStyle(el);if(st.visibility==='hidden'||st.display==='none')continue;
@@ -42,11 +44,13 @@
 
  function path(ctx,points){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();}
  function read(s){
-  const nextResolution=renderResolution();if(w!==s.w||h!==s.h||resolution!==nextResolution){resolution=nextResolution;setup(s);}latestY=s.y;const off=disabled(s);
+  const nextResolution=renderResolution();if(w!==s.w||h!==s.h||resolution!==nextResolution){resolution=nextResolution;setup(s);}latestY=s.y;const off=disabled(s);if(!off&&headerBusy())return 'hold';
   if(!off){const first=Math.floor(s.y/bandHeight),last=Math.floor((s.y+s.h)/bandHeight);for(let i=first;i<=last;i++)capture(i);if(textures.size>4){const far=[...textures.values()].sort((a,b)=>Math.abs(b.y-latestY)-Math.abs(a.y-latestY));for(const old of far.slice(0,textures.size-4))textures.delete(old.index);}}return off;
  }
  function write(off,s){
   const now=performance.now(),edge=s.w*edgeFraction,interval=coarse.matches?40:30;
+  if(off==='hold'){clearTimeout(timer);timer=0;lastTick=0;lastDraw=0;for(const {canvas}of surfaces)canvas.dataset.headerPriority='paused';return;}
+  for(const {canvas}of surfaces)if(canvas.dataset.headerPriority==='paused')canvas.dataset.headerPriority='running';
   if(off){for(const {canvas,ctx}of surfaces){canvas.hidden=true;ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);}clearTimeout(timer);timer=0;lastTick=0;lastDraw=0;gateAt=now;return;}
   if(lastDraw&&now-lastDraw<interval){schedule();return;}
   const dt=lastTick?Math.min(60,now-lastTick):16;lastTick=now;lastDraw=now;elapsed+=dt;

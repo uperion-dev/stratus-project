@@ -55,3 +55,8 @@ body.stratus-immersive .topbar.navigation-ready.nav-motion-off .nav-collapser{di
 body.stratus-immersive .topbar.navigation-ready :is(.nav-traveller,.nav-collapser){background-size:var(--nav-material-width,473px) 56px;background-repeat:no-repeat}
 body.stratus-immersive .topbar.navigation-ready .nav-traveller{background-position:left top}
 body.stratus-immersive .topbar.navigation-ready .nav-collapser{background-position:right top}
+
+/* Moving glass keeps its tint/bevel without re-blurring the whole backdrop each frame. */
+body.stratus-immersive .topbar.navigation-ready :is(.nav-traveller,.nav-collapser){contain:layout style;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:inset 0 1px 1px #f3fff947,inset 0 -1px 1px #00191052;will-change:opacity,transform}
+body.stratus-immersive .topbar.navigation-ready.nav-splitting :is(nav,nav .nav-track){transition:none!important}
+body.stratus-immersive .topbar.navigation-ready .nav-traveller .nav-track{transition:none}
