@@ -9,13 +9,12 @@
  const traveller=document.createElement('div');traveller.className='nav-traveller';traveller.setAttribute('aria-hidden','true');traveller.inert=true;traveller.innerHTML='<div class="nav-flight-label"></div><span class="nav-flight-arrow">'+toggle.innerHTML+'</span>';header.append(traveller);
  const collapser=document.createElement('div');collapser.className='nav-collapser';collapser.setAttribute('aria-hidden','true');collapser.inert=true;collapser.innerHTML='<div class="nav-half-content"></div><span class="nav-current-label"></span>';header.append(collapser);
  let manual=false,lastY=scrollY,mode='',flight=null,flightEffects=[],geometry='',focusAfterExpansion=null;
- function stopFlight(){for(const effect of flightEffects)effect.cancel();flightEffects=[];flight=null;traveller.style.visibility='hidden';collapser.style.visibility='hidden';header.classList.remove('nav-splitting');if(focusAfterExpansion&&document.activeElement===document.body)focusAfterExpansion.focus({preventScroll:true});focusAfterExpansion=null;}
+ function stopFlight(){for(const effect of flightEffects)effect.cancel();flightEffects=[];flight=null;traveller.style.visibility='hidden';collapser.style.visibility='hidden';header.classList.remove('nav-splitting');nav.inert=false;if(focusAfterExpansion&&document.activeElement===document.body)focusAfterExpansion.focus({preventScroll:true});focusAfterExpansion=null;}
  function copyTrack(offset){const copy=track.cloneNode(true);copy.style.transform=`translateX(${offset}px)`;for(const link of copy.querySelectorAll('a')){link.removeAttribute('href');link.tabIndex=-1;link.inert=true;link.removeAttribute('aria-hidden');}return copy;}
  function animateSplit(v){
   if(v.paused){stopFlight();return;}
-  header.classList.add('nav-splitting');traveller.style.visibility='visible';collapser.style.visibility='visible';
+  header.classList.add('nav-splitting');nav.inert=true;traveller.style.visibility='visible';collapser.style.visibility='visible';
   if(flight){for(const effect of flightEffects){effect.playbackRate=v.compact?1:-1;effect.play();}return;}
-  if(!v.compact){stopFlight();return;}
   // Two equal physical halves collapse independently; the original controls stay hidden until rejoined.
   const start={x:v.inset+v.available-v.fullWidth+v.pieceWidth/2,y:v.openTop+28},end={x:v.inset+74,y:v.brandTop+28},depth=Math.min(220,v.available*.2);
   const c1={x:start.x+Math.min(20,v.inset),y:start.y+depth},c2={x:end.x+Math.min(170,v.available*.3),y:Math.max(start.y,end.y)+depth};
@@ -24,25 +23,34 @@
   collapser.querySelector('.nav-half-content').replaceChildren(copyTrack(-v.pieceWidth-v.navScroll));
   collapser.querySelector('.nav-current-label').textContent=v.active.textContent;
   collapser.style.right=`${v.inset}px`;
-  const travelTiming={duration:640,fill:'both',easing:'cubic-bezier(.42,0,.2,1)'},collapseTiming={duration:360,fill:'both',easing:'cubic-bezier(.22,.65,.2,1)'};
+  // One reversible clock keeps both halves arriving at the seam together.
+  const travelTiming={duration:640,fill:'both',easing:'cubic-bezier(.42,0,.2,1)'},joinTiming={duration:640,fill:'both',easing:'linear'},collapseEase='cubic-bezier(.42,0,.58,1)',collapsedAt=360/640;
+  header.style.setProperty('--nav-material-width',`${v.fullWidth}px`);
+  for(const surface of [traveller,collapser]){surface.style.setProperty('--lg-x',v.lightX);surface.style.setProperty('--lg-y',v.lightY);}
   flight=traveller.animate([{offsetDistance:'0%'},{offsetDistance:'100%'}],travelTiming);
-  const leftSize=traveller.animate([{width:`${v.pieceWidth}px`,height:'56px'},{width:'44px',height:'44px'}],collapseTiming);
+  const leftSize=traveller.animate([{width:`${v.pieceWidth}px`,height:'56px',borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderTopRightRadius:'0px',borderBottomRightRadius:'0px',borderRightColor:'transparent',offset:0,easing:collapseEase},{width:'44px',height:'44px',borderTopLeftRadius:'22px',borderBottomLeftRadius:'22px',borderTopRightRadius:'22px',borderBottomRightRadius:'22px',borderRightColor:'var(--lg-rim)',offset:collapsedAt},{width:'44px',height:'44px',borderTopLeftRadius:'22px',borderBottomLeftRadius:'22px',borderTopRightRadius:'22px',borderBottomRightRadius:'22px',borderRightColor:'var(--lg-rim)',offset:1}],joinTiming);
   const leftLabel=traveller.querySelector('.nav-flight-label').animate([{opacity:1,offset:0},{opacity:0,offset:.25},{opacity:0,offset:1}],travelTiming);
   const arrow=traveller.querySelector('.nav-flight-arrow').animate([{opacity:0,offset:0},{opacity:0,offset:.3},{opacity:1,offset:.7},{opacity:1,offset:1}],travelTiming);
-  const handoff=traveller.animate([{opacity:1,offset:0},{opacity:1,offset:.8},{opacity:0,offset:1}],{...travelTiming,easing:'linear'});
-  const rightSize=collapser.animate([{width:`${v.pieceWidth}px`,height:'56px',top:`${v.openTop}px`},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`}],collapseTiming);
-  const rightLabel=collapser.querySelector('.nav-half-content').animate([{opacity:1,offset:0},{opacity:0,offset:.4},{opacity:0,offset:1}],collapseTiming);
-  const rightCurrent=collapser.querySelector('.nav-current-label').animate([{opacity:0,offset:0},{opacity:0,offset:.25},{opacity:1,offset:1}],collapseTiming);
-  flightEffects=[flight,leftSize,leftLabel,arrow,handoff,rightSize,rightLabel,rightCurrent];
-  rightSize.onfinish=()=>{if(rightSize.playbackRate>0&&mode==='compact'){collapser.style.visibility='hidden';header.classList.remove('nav-splitting');}};
-  flight.onfinish=()=>{if(flight.playbackRate<0)stopFlight();else traveller.style.visibility='hidden';};
+  // The final 115 ms of expansion blends matching surfaces rather than switching scenes.
+  const handoff=traveller.animate([{opacity:0,offset:0},{opacity:1,offset:.18},{opacity:1,offset:.8},{opacity:0,offset:1}],joinTiming);
+  const rightSize=collapser.animate([{width:`${v.pieceWidth}px`,height:'56px',top:`${v.openTop}px`,borderTopLeftRadius:'0px',borderBottomLeftRadius:'0px',borderLeftColor:'transparent',offset:0,easing:collapseEase},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:collapsedAt},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:1}],joinTiming);
+  const rightLabel=collapser.querySelector('.nav-half-content').animate([{opacity:1,offset:0},{opacity:0,offset:.25},{opacity:0,offset:1}],joinTiming);
+  const rightCurrent=collapser.querySelector('.nav-current-label').animate([{opacity:0,offset:0},{opacity:0,offset:.35},{opacity:1,offset:collapsedAt},{opacity:1,offset:1}],joinTiming);
+  const rightBlend=collapser.animate([{opacity:0,offset:0},{opacity:1,offset:.18},{opacity:1,offset:1}],joinTiming);
+  const liveBlend=nav.animate([{opacity:1,offset:0},{opacity:0,offset:.18},{opacity:0,offset:1}],joinTiming);
+  flightEffects=[flight,leftSize,leftLabel,arrow,handoff,rightSize,rightLabel,rightCurrent,rightBlend,liveBlend];
+  rightSize.onfinish=()=>{if(rightSize.playbackRate>0&&mode==='compact'){liveBlend.cancel();collapser.style.visibility='hidden';header.classList.remove('nav-splitting');nav.inert=false;}};
+  const primaryFlight=flight;primaryFlight.onfinish=()=>{if(flight!==primaryFlight)return;if(primaryFlight.playbackRate<0)stopFlight();else traveller.style.visibility='hidden';};
+  // A page restored at a scrolled position can expand smoothly without a previous collapse.
+  if(!v.compact)for(const effect of flightEffects){effect.currentTime=640;effect.playbackRate=-1;effect.play();}
+
  }
 
  function read(s){
   const changed=Math.abs(s.y-lastY)>1;lastY=s.y;if(changed)manual=false;
   const view=document.querySelector('[data-view]:not([hidden])'),anchor=view?.querySelector('.immersive-hero,.section-intro'),bottom=anchor?.getBoundingClientRect().bottom??1,past=bottom<=0;
   if(!past)manual=false;const compact=past&&!manual,active=nav.querySelector('[aria-current=page]')||links[0],inset=Math.max(12,s.w*.04),available=s.w-inset*2,fullWidth=Math.min(track.scrollWidth+12,available),narrow=available<185+fullWidth+24,closedWidth=active.offsetWidth+12,openTop=narrow?76:14,brandTop=narrow?10:14;
-  return {compact,past,active,mode:compact?'compact':past?'peek':'open',inset,available,fullWidth,narrow,openTop,brandTop,closedWidth,pieceWidth:fullWidth/2,navScroll:nav.scrollLeft,y:compact?brandTop:openTop,width:compact?closedWidth:fullWidth,shift:compact?-active.offsetLeft:0,paused:s.paused||reduced.matches};
+  return {compact,past,active,mode:compact?'compact':past?'peek':'open',inset,available,fullWidth,narrow,openTop,brandTop,closedWidth,lightX:nav.style.getPropertyValue('--lg-x')||'22%',lightY:nav.style.getPropertyValue('--lg-y')||'0%',pieceWidth:fullWidth/2,navScroll:nav.scrollLeft,y:compact?brandTop:openTop,width:compact?closedWidth:fullWidth,shift:compact?-active.offsetLeft:0,paused:s.paused||reduced.matches};
  }
  function write(v){
   const changed=mode!==v.mode,splitChanged=(mode==='compact')!==v.compact,hadMode=!!mode,nextGeometry=`${v.inset}/${v.fullWidth}/${v.openTop}/${v.closedWidth}`;

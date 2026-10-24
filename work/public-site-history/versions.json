@@ -180,6 +180,11 @@
       "commit": "c64ec756034960431bcd3f004c3bce4c5cefe898",
       "archive": "c64ec756034960431bcd3f004c3bce4c5cefe898.zip",
       "sha256": "34a62acfdec0e9cc254c9f31d63fa916eb019e95bf3e073ef748dcf30ad5e419"
+    },
+    {
+      "commit": "e933b550360828b8597495c5cc50e31e747b3732",
+      "archive": "e933b550360828b8597495c5cc50e31e747b3732.zip",
+      "sha256": "ee082ec7994fc893c041615db17535d87148c29e0121fa571ff8b87c5905cf22"
     }
   ],
   "privacy_filtered": true,

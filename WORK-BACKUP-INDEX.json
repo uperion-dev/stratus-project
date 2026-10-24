@@ -12695,6 +12695,24 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-header-live-v35-png-ecfacd5d16d0352c.zip",
       "bytes": 40382
+    },
+    "work/public-site-history/e933b550360828b8597495c5cc50e31e747b3732.zip": {
+      "sha256": "ee082ec7994fc893c041615db17535d87148c29e0121fa571ff8b87c5905cf22",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-6ede1719bc94b43f.zip",
+      "bytes": 24256696
+    },
+    "outputs/stratus-smooth-join-preview.png": {
+      "sha256": "9347fa5abe565750dc5f1be611118a9d03e8db80d600a8ce670e26526971e16d",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-smooth-join-preview-png-46f748ee906e0f6c.zip",
+      "bytes": 68003
+    },
+    "outputs/stratus-smooth-join-transition.png": {
+      "sha256": "5d16ddb330fa169152c9af1349692d9825be1c96b1d1a179dce63233150e4afc",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-smooth-join-transition-png-0b19732f9491fec8.zip",
+      "bytes": 67866
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
