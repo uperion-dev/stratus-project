@@ -311,11 +311,14 @@
     "development/stratus-public/public/experience.css",
     "development/stratus-public/public/immersive.css",
     "development/stratus-public/public/immersive.js",
+    "development/stratus-public/public/index.html",
     "development/stratus-public/public/liquid-ui.css",
     "development/stratus-public/public/liquid-ui.js",
     "development/stratus-public/public/live.js",
     "development/stratus-public/public/motion-runtime.js",
     "development/stratus-public/public/motion.js",
+    "development/stratus-public/public/navigation.css",
+    "development/stratus-public/public/navigation.js",
     "development/stratus-public/public/performance.css",
     "development/stratus-public/public/scroll-performance.css",
     "development/stratus-public/public/showcase.css",
@@ -10189,6 +10192,6 @@
     "stratus-studio-cloud": "7a6b1f68f05b437467d981b8c9e1f03284084b7c"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "0d5a94276cb17375beaad3d00c4c750e5314ffb4c0949d2ecb069b9efcaf7dc6",
+  "fingerprint": "9640c1d2003e5f1e377024e06c22febb7cf219f8a284897323a08f69f96b11ab",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
