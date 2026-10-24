@@ -12743,6 +12743,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-transition-performance-preview-png-cf94bee6fea45da3.zip",
       "bytes": 57047
+    },
+    "outputs/stratus-header-live-v38.png": {
+      "sha256": "3d013ef42827992cc96492165d8557ffc470ce2fcf9a79d4ac60f4f2e66fd74f",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-header-live-v38-png-922109084e8cbf7e.zip",
+      "bytes": 57263
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
