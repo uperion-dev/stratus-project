@@ -12665,6 +12665,30 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-both-halves-reverse-png-85301a239961728f.zip",
       "bytes": 69823
+    },
+    "work/public-site-history/c64ec756034960431bcd3f004c3bce4c5cefe898.zip": {
+      "sha256": "34a62acfdec0e9cc254c9f31d63fa916eb019e95bf3e073ef748dcf30ad5e419",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-99d7702d0421d161.zip",
+      "bytes": 24256109
+    },
+    "outputs/stratus-both-halves-collapse.png": {
+      "sha256": "58e25ced3ec7d1a572ab57a2771a404eaf62be157108577616c6e7d5f8c22d1f",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-both-halves-collapse-png-6ca4bfe126a1d389.zip",
+      "bytes": 65024
+    },
+    "outputs/stratus-both-halves-mobile.png": {
+      "sha256": "ab2c1b9e785ff4ba0f46b9e81849bcfcb6384b692324dc720011517d20b1e295",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-both-halves-mobile-png-0b280a06f38e977c.zip",
+      "bytes": 46345
+    },
+    "outputs/stratus-both-halves-transition.png": {
+      "sha256": "c952d5d4a4703c15f3bfc36bbf9efbd10f605dd95c20dd698f198671b30a4494",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-both-halves-transition-png-1f36bdba22a41586.zip",
+      "bytes": 65502
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
