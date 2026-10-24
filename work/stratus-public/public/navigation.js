@@ -16,8 +16,9 @@
   header.classList.add('nav-splitting');nav.inert=true;traveller.style.visibility='visible';collapser.style.visibility='visible';
   if(flight){for(const effect of flightEffects){effect.playbackRate=v.compact?1:-1;effect.play();}return;}
   // Two equal physical halves collapse independently; the original controls stay hidden until rejoined.
-  const start={x:v.inset+v.available-v.fullWidth+v.pieceWidth/2,y:v.openTop+28},end={x:v.inset+74,y:v.brandTop+28},depth=Math.min(220,v.available*.2);
-  const c1={x:start.x+Math.min(20,v.inset),y:start.y+depth},c2={x:end.x+Math.min(170,v.available*.3),y:Math.max(start.y,end.y)+depth};
+  const start={x:v.inset+v.available-v.fullWidth+v.pieceWidth/2,y:v.openTop+28},end={x:v.inset+74,y:v.brandTop+28},targetY=Math.max(v.viewportHeight*.5,start.y+28,end.y+28);
+  // Equal control heights place the curve's lowest point near the viewport midpoint.
+  const controlY=(targetY-(start.y+end.y)/8)/.75,c1={x:start.x+Math.min(20,v.inset),y:controlY},c2={x:end.x+Math.min(170,v.available*.3),y:controlY};
   traveller.style.offsetPath=`path("M ${start.x} ${start.y} C ${c1.x} ${c1.y} ${c2.x} ${c2.y} ${end.x} ${end.y}")`;
   traveller.querySelector('.nav-flight-label').replaceChildren(copyTrack(-v.navScroll));
   collapser.querySelector('.nav-half-content').replaceChildren(copyTrack(-v.pieceWidth-v.navScroll));
@@ -50,10 +51,10 @@
   const changed=Math.abs(s.y-lastY)>1;lastY=s.y;if(changed)manual=false;
   const view=document.querySelector('[data-view]:not([hidden])'),anchor=view?.querySelector('.immersive-hero,.section-intro'),bottom=anchor?.getBoundingClientRect().bottom??1,past=bottom<=0;
   if(!past)manual=false;const compact=past&&!manual,active=nav.querySelector('[aria-current=page]')||links[0],inset=Math.max(12,s.w*.04),available=s.w-inset*2,fullWidth=Math.min(track.scrollWidth+12,available),narrow=available<185+fullWidth+24,closedWidth=active.offsetWidth+12,openTop=narrow?76:14,brandTop=narrow?10:14;
-  return {compact,past,active,mode:compact?'compact':past?'peek':'open',inset,available,fullWidth,narrow,openTop,brandTop,closedWidth,lightX:nav.style.getPropertyValue('--lg-x')||'22%',lightY:nav.style.getPropertyValue('--lg-y')||'0%',pieceWidth:fullWidth/2,navScroll:nav.scrollLeft,y:compact?brandTop:openTop,width:compact?closedWidth:fullWidth,shift:compact?-active.offsetLeft:0,paused:s.paused||reduced.matches};
+  return {compact,past,active,mode:compact?'compact':past?'peek':'open',inset,available,fullWidth,narrow,openTop,brandTop,closedWidth,viewportHeight:s.h,lightX:nav.style.getPropertyValue('--lg-x')||'22%',lightY:nav.style.getPropertyValue('--lg-y')||'0%',pieceWidth:fullWidth/2,navScroll:nav.scrollLeft,y:compact?brandTop:openTop,width:compact?closedWidth:fullWidth,shift:compact?-active.offsetLeft:0,paused:s.paused||reduced.matches};
  }
  function write(v){
-  const changed=mode!==v.mode,splitChanged=(mode==='compact')!==v.compact,hadMode=!!mode,nextGeometry=`${v.inset}/${v.fullWidth}/${v.openTop}/${v.closedWidth}`;
+  const changed=mode!==v.mode,splitChanged=(mode==='compact')!==v.compact,hadMode=!!mode,nextGeometry=`${v.inset}/${v.fullWidth}/${v.openTop}/${v.closedWidth}/${v.viewportHeight}`;
   if(flight&&geometry!==nextGeometry)stopFlight();geometry=nextGeometry;
   if(changed){mode=v.mode;header.dataset.navMode=mode;header.classList.toggle('nav-compact',v.compact);header.classList.toggle('nav-peek',mode==='peek');const expanderFocused=document.activeElement===toggle;toggle.setAttribute('aria-expanded',String(!v.compact));toggle.setAttribute('aria-label','Expand navigation');toggle.tabIndex=v.compact?0:-1;toggle.setAttribute('aria-hidden',String(!v.compact));if(!v.compact&&expanderFocused){v.active.focus({preventScroll:true});focusAfterExpansion=v.active;}if(v.compact)focusAfterExpansion=null;toggle.inert=!v.compact;
    if(v.compact&&links.includes(document.activeElement)&&document.activeElement!==v.active)toggle.focus({preventScroll:true});

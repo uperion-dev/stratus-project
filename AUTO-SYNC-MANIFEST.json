@@ -10088,10 +10088,10 @@
     "work/write_pack.py"
   ],
   "site_commits": {
-    "stratus-public": "e933b550360828b8597495c5cc50e31e747b3732",
+    "stratus-public": "3b923b372f2176281b0cbd87a508701f8d63d07e",
     "stratus-studio-cloud": "7a6b1f68f05b437467d981b8c9e1f03284084b7c"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "c1b3c2a74d2709939da52d7b29d26c6b27ba8ebfc26786d9ae6d72ce086fad0e",
+  "fingerprint": "fe73bfc7f298e47806be2971f52116750d6bbfee0802b526825f6f22504a6a2a",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
