@@ -12689,6 +12689,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-both-halves-transition-png-1f36bdba22a41586.zip",
       "bytes": 65502
+    },
+    "outputs/stratus-header-live-v35.png": {
+      "sha256": "73f6ad334815e79ef7163e1d7874c68b38bfd0a010bb8f0d60943d10b5a46d26",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-header-live-v35-png-ecfacd5d16d0352c.zip",
+      "bytes": 40382
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
