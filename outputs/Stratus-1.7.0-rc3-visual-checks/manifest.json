@@ -1,0 +1,83 @@
+{
+  "version": "1.7.0-rc3",
+  "profile": "Main / Minecraft (1)",
+  "world": "Stratus Terrain Lab",
+  "framebuffer": [
+    1440,
+    842
+  ],
+  "render_distance": 12,
+  "time": 1000,
+  "rain": 0,
+  "FPS_samples": 0,
+  "status": "Candidate installed and loaded; finite visual coverage. Remaining cluster-interior/motion/transition/performance checks pending.",
+  "source_scope": "QA variants preceded the final additional identical front/back leaf guard for the late translucent path. Final native checks cover it; rc3-release-sky is the exact final ZIP. Do not assume all QA archives are byte-equivalent to final source.",
+  "captures": [
+    {
+      "file": "captures/rc3-before-sky.png",
+      "sha256": "23d880403a9c45f820e304bd9542913fdf0bf9897f0be12ddddf1b4b9aa12b71",
+      "review": "rc2 Reference: foliage matte. Camera settled after the first fall-offset capture was rejected. Stable loaded-chunk gate passed.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-candidate-sky.png",
+      "sha256": "5c972a2d22c4f7e3f09a0ed4d2abbd3ec15c5184a402be3effe6fe30d8159d03",
+      "review": "Candidate Reference: exposed front-facing foliage receives restrained film. Native leaf texture and sky retained. Stable gate passed; this was initially throttled, so no live reuse-rate claim.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-fresh-sky.png",
+      "sha256": "df8e0c4686a04c1bb238064a00fce6dbe7ff95d4f05ea9969e406b8fccf9fd84",
+      "review": "Temporal off at matched Reference/camera. Stable gate passed. Cloud animation phase differs.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-dry-leaves.png",
+      "sha256": "f9f276ec1ec01cb1e2ffaadab4265aabe61537fe4466f1297b360bd7a31ba73f",
+      "review": "Film amount zero at matched camera. Stable gate passed; confirms visible foliage treatment is independently switchable. No full cluster-interior acceptance.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-live-temporal-a.png",
+      "sha256": "2b2cb39f8f1577f0023984c45ff808d8b38a39b5c1b55aabcb5eddce153cf213",
+      "review": "Temporal on while Dynamic FPS runtime throttling temporarily disabled. Stable gate passed. No focused FPS or quantitative temporal hit-rate claim.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-live-temporal-b.png",
+      "sha256": "40f6ffdf73c35dff14fd4ac5b5691af787ab088b97cddc3e942bbcd33f8cc02c",
+      "review": "Later temporal-on still at same camera. No obvious gross sky/header artefact in this frame; stills cannot establish absence of motion ghosting/flicker.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-rotate-disocclusion.png",
+      "sha256": "630588943f493b6f6f85f8b7aaa88972d080b000296eab45a0c2a5277fdad2d0",
+      "review": "Rotated camera15degrees: changed sky/tree boundary looks coherent. Local scene reviewed; no fresh stable gate for this scheduling-only frame.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-return-view.png",
+      "sha256": "82b99f41ad7e8c9325160d523439563abd0b74a3484702276df72a7bc7093fd0",
+      "review": "Return to original view: finite geometry/sky check, no new stable gate. Dynamic clouds differ over time.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-live-fresh.png",
+      "sha256": "4e00e013f0ce3c3c8af2d117b2a39b8f9e49a3d3f642575ed2e0ed2f88c98403",
+      "review": "Temporal off after on/rotation route. Unfocused; not FPS evidence.",
+      "accepted_finite_view": true
+    },
+    {
+      "file": "captures/rc3-reload-sky.png",
+      "sha256": "db8ac272dbe16637c8edddc39992749024e668fe7effdab8e7cc90ad290db704",
+      "review": "REJECTED ACCEPTANCE: scheduling-only post-reload capture contains unloaded distant terrain. Preserve as diagnostic; not a clean reload/motion result.",
+      "accepted_finite_view": false
+    },
+    {
+      "file": "captures/rc3-release-sky.png",
+      "sha256": "dd9c7bdf43625bc0fc03f3f4a90cc6ff887bd9bb75332df4cf0d5cfaa08ffd03",
+      "review": "Exact final installed ZIP, stable gate passed. Uses preserved user overrides: scenery reflections2, Stratus water0, retired wet-darkening1.30. Not a matched Reference before/after water comparison.",
+      "accepted_finite_view": true
+    }
+  ]
+}

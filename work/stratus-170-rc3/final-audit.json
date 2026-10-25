@@ -1,0 +1,38 @@
+{
+  "sha256": "68cd6000b63007f7d80388c434d20d139f3367a95890be714a9773511a957ff7",
+  "entries": 249,
+  "source_archive_install_bytes_equal": true,
+  "all_saved_overrides_preserved": true,
+  "all_four_actual_Iris_profiles66_match": true,
+  "final_ZIP_loaded": true,
+  "final_release_stable_gate": {
+    "stable_ms": 5138,
+    "state": {
+      "ready": true,
+      "render_distance": 12,
+      "required_view_disk_columns": 441,
+      "present_view_disk_columns": 441,
+      "client_loaded_columns": 727,
+      "render_sections": 13296,
+      "queued_jobs": 0,
+      "busy_workers": 0,
+      "pending_uploads": 0,
+      "pending_task_lists": 0
+    }
+  },
+  "initial_rc2_config_restored": true,
+  "temporary_QA_files_remaining": 0,
+  "protected_next_queue_and_target_unchanged": true,
+  "restoration": {
+    "position": true,
+    "angles": true,
+    "HUD_pause_flight_menu": true,
+    "world_time_weather": true,
+    "Iris_original_selection_config": true,
+    "options_file_unchanged": true,
+    "DynamicFPS_config_unchanged": true,
+    "DynamicFPS_enabled_restored": true,
+    "helpers_stopped": true
+  },
+  "FPS_samples": 0
+}

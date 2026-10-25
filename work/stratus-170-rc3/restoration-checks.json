@@ -1,0 +1,11 @@
+{
+  "position": true,
+  "angles": true,
+  "HUD_pause_flight_menu": true,
+  "world_time_weather": true,
+  "Iris_original_selection_config": true,
+  "options_file_unchanged": true,
+  "DynamicFPS_config_unchanged": true,
+  "DynamicFPS_enabled_restored": true,
+  "helpers_stopped": true
+}

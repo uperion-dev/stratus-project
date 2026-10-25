@@ -11,6 +11,10 @@
  let manual=false,lastY=scrollY,mode='',flight=null,flightEffects=[],geometry='',focusAfterExpansion=null,layoutCache=null,layoutDirty=true,observedAnchor=null,lastPaused=null,lastActive=null,expandedScroll=0,scrollStateFrame=0;
  function stopFlight(){for(const effect of flightEffects)effect.cancel();flightEffects=[];flight=null;traveller.style.visibility='hidden';collapser.style.visibility='hidden';header.classList.remove('nav-splitting');nav.inert=false;if(mode!=='compact')navViewport.scrollLeft=expandedScroll;requestScrollState();motion.request();if(focusAfterExpansion&&document.activeElement===document.body)focusAfterExpansion.focus({preventScroll:true});focusAfterExpansion=null;}
  function copyTrack(offset){const copy=track.cloneNode(true);copy.style.transform=`translateX(${offset}px)`;for(const link of copy.querySelectorAll('a')){link.removeAttribute('href');link.tabIndex=-1;link.inert=true;link.removeAttribute('aria-hidden');}return copy;}
+ const selection=document.createElement('i');selection.className='nav-selection';selection.setAttribute('aria-hidden','true');track.prepend(selection);header.classList.add('nav-has-selector');let selectionAnimation=null,selectionPage=null,selectionX=-1,selectionWidth=-1;
+ function placeSelection(v){const x=v.activeOffset,w=v.closedWidth-12,page=v.active.dataset.page;if(selectionPage===page&&selectionX===x&&selectionWidth===w&&!v.paused&&!v.compact)return;const changed=selectionPage!==null&&selectionPage!==page,oldTransform=getComputedStyle(selection).transform,m=oldTransform==='none'?null:new DOMMatrixReadOnly(oldTransform),oldX=m?.m41||0,oldW=selection.getBoundingClientRect().width||w;selectionAnimation?.cancel();selection.style.width=`${w}px`;selection.style.transform=`translateX(${x}px)`;header.dataset.navPage=page;
+  if(changed&&!v.paused&&!v.compact){const direction=x>=oldX?1:-1,overshootX=Math.max(0,Math.min(v.naturalWidth-w*1.035,x+direction*2));selectionAnimation=selection.animate([{transform:`translateX(${oldX}px) scaleX(${oldW/w})`},{transform:`translateX(${overshootX}px) scaleX(1.035)`,offset:.78},{transform:`translateX(${x}px) scaleX(1)`}],{duration:640,easing:'cubic-bezier(.3,0,.16,1)',fill:'none'});}selectionPage=page;selectionX=x;selectionWidth=w;
+ }
  const leftCopy=copyTrack(0),rightCopy=copyTrack(0),copyLinks=[...leftCopy.querySelectorAll('a'),...rightCopy.querySelectorAll('a')];
  traveller.querySelector('.nav-flight-label').replaceChildren(leftCopy);collapser.querySelector('.nav-half-content').replaceChildren(rightCopy);
  // A quiet ease-in accelerates into a damped elastic arrival. Sampled once per trip.
@@ -26,6 +30,7 @@
   traveller.style.offsetPath=`path("M ${start.x} ${start.y} C ${c1.x} ${c1.y} ${c2.x} ${c2.y} ${end.x} ${end.y}")`;
   leftCopy.style.transform=`translateX(${-v.navScroll}px)`;rightCopy.style.transform=`translateX(${-v.pieceWidth-v.navScroll}px)`;
   copyLinks.forEach((link,i)=>{if(i%links.length===v.activeIndex)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
+  for(const copy of [leftCopy,rightCopy]){const marker=copy.querySelector('.nav-selection');marker.style.width=`${v.closedWidth-12}px`;marker.style.transform=`translateX(${v.activeOffset}px)`;}
   collapser.querySelector('.nav-current-label').textContent=v.active.textContent;
   collapser.style.right=`${v.inset}px`;
   // One reversible clock keeps both halves arriving at the seam together.
@@ -75,7 +80,7 @@
  function write(v){
   const changed=mode!==v.mode||lastActive!==v.active,splitChanged=(mode==='compact')!==v.compact,hadMode=!!mode,nextGeometry=`${v.inset}/${v.fullWidth}/${v.openTop}/${v.closedWidth}/${v.activeIndex}`,layoutChanged=geometry!==nextGeometry,pausedChanged=lastPaused!==v.paused;
   if(!changed&&!layoutChanged&&!pausedChanged)return;
-  lastActive=v.active;lastPaused=v.paused;if(flight&&layoutChanged)stopFlight();geometry=nextGeometry;expandedScroll=v.expandedScroll;
+  placeSelection(v);lastActive=v.active;lastPaused=v.paused;if(flight&&layoutChanged)stopFlight();geometry=nextGeometry;expandedScroll=v.expandedScroll;
   if(changed){mode=v.mode;header.dataset.navMode=mode;header.classList.toggle('nav-compact',v.compact);header.classList.toggle('nav-peek',mode==='peek');const expanderFocused=document.activeElement===toggle;toggle.setAttribute('aria-expanded',String(!v.compact));toggle.setAttribute('aria-label','Expand navigation');toggle.tabIndex=v.compact?0:-1;toggle.setAttribute('aria-hidden',String(!v.compact));if(!v.compact&&expanderFocused){v.active.focus({preventScroll:true});focusAfterExpansion=v.active;}if(v.compact)focusAfterExpansion=null;toggle.inert=!v.compact;
    if(v.compact&&links.includes(document.activeElement)&&document.activeElement!==v.active)toggle.focus({preventScroll:true});
    if(v.compact)navViewport.scrollLeft=0;
@@ -100,6 +105,7 @@
  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&manual){manual=false;header.classList.add('nav-splitting');motion.request();}});
  nav.addEventListener('click',e=>{const link=e.target.closest('a');if(link){if(link.getAttribute('href')===location.hash){e.preventDefault();window.scrollTo({top:0,behavior:reduced.matches?'instant':'smooth'});}manual=false;motion.request();}});
  brand.addEventListener('click',e=>{if(location.hash==='#overview'){e.preventDefault();window.scrollTo({top:0,behavior:reduced.matches?'instant':'smooth'});}});
+ window.addEventListener('stratus:route-changed',invalidateLayout);
  window.addEventListener('resize',invalidateLayout,{passive:true});window.addEventListener('hashchange',()=>{manual=false;lastY=scrollY;invalidateLayout();});reduced.addEventListener('change',motion.request);document.fonts?.ready.then(invalidateLayout);
  new MutationObserver(invalidateLayout).observe(nav,{subtree:true,attributes:true,attributeFilter:['aria-current']});motion.request();
 })();

@@ -1,0 +1,13 @@
+{
+  "rc3-before-sky.png": "rc2 Reference: foliage matte. Camera settled after the first fall-offset capture was rejected. Stable loaded-chunk gate passed.",
+  "rc3-candidate-sky.png": "Candidate Reference: exposed front-facing foliage receives restrained film. Native leaf texture and sky retained. Stable gate passed; this was initially throttled, so no live reuse-rate claim.",
+  "rc3-fresh-sky.png": "Temporal off at matched Reference/camera. Stable gate passed. Cloud animation phase differs.",
+  "rc3-dry-leaves.png": "Film amount zero at matched camera. Stable gate passed; confirms visible foliage treatment is independently switchable. No full cluster-interior acceptance.",
+  "rc3-live-temporal-a.png": "Temporal on while Dynamic FPS runtime throttling temporarily disabled. Stable gate passed. No focused FPS or quantitative temporal hit-rate claim.",
+  "rc3-live-temporal-b.png": "Later temporal-on still at same camera. No obvious gross sky/header artefact in this frame; stills cannot establish absence of motion ghosting/flicker.",
+  "rc3-rotate-disocclusion.png": "Rotated camera15degrees: changed sky/tree boundary looks coherent. Local scene reviewed; no fresh stable gate for this scheduling-only frame.",
+  "rc3-return-view.png": "Return to original view: finite geometry/sky check, no new stable gate. Dynamic clouds differ over time.",
+  "rc3-live-fresh.png": "Temporal off after on/rotation route. Unfocused; not FPS evidence.",
+  "rc3-reload-sky.png": "REJECTED ACCEPTANCE: scheduling-only post-reload capture contains unloaded distant terrain. Preserve as diagnostic; not a clean reload/motion result.",
+  "rc3-release-sky.png": "Exact final installed ZIP, stable gate passed. Uses preserved user overrides: scenery reflections2, Stratus water0, retired wet-darkening1.30. Not a matched Reference before/after water comparison."
+}

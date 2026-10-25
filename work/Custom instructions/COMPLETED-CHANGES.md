@@ -4,6 +4,16 @@ Archive of completed requests and their release/evidence references. This is his
 
 ## Completed changes
 
+### Stratus 1.7.0-rc3 — 25 October 2026 — batchb9a03cf9
+
+- [x] Restored exposed/front-facing material4113 sheen with back-facing leaf-plane rejection in opaque and late translucent paths. Actual raster front1/back0 checks and finite matched rc2/candidate/dry natural foliage review pass. Full cluster-interior/blocked/sheltered acceptance stays pending; no voxel-occlusion claim.
+- [x] Implemented switchable one-frame stationary-sky atmosphere reuse with consecutive-frame and camera/projection/time/weather/status/viewport guards, fresh terrain/water and safe header composition.17 actual producer and4 compositor GPU cases pass; actual Iris buffer encoding and finite complete on/off/rotation views reviewed. Broader live motion/transitions and focused performance remain pending; no net FPS claim.
+- [x] Preserved65 prior controls/defaults/ranges/menu paths/preset assignments and620 material tokens; added one reachable off/on option.12 migration checks, actual four66-option profile matching, exact final ZIP source/install/loading and saved overrides verified. Candidate remains installed; original rc2 session restored.
+- [x] Applied the authorised temporary test-mod change only after confirming Dynamic FPS's unfocused1FPS cap: disabled its runtime switch temporarily, then automatically restored without saving configuration. Both helpers stopped; original camera/HUD/menu/pause/flight/options/config/time/rain verified;6 unchanged QA files removed,2 already absent. No mod file renamed or unrelated setting changed.
+
+[Release](../../outputs/Stratus-1.7.0-rc3.zip) · [Change log and limits](CHANGE-LOG.md#25-october-2026--stratus-170-rc3--exposed-foliage-and-temporal-sky-candidate) · [Actual visual evidence](../../outputs/Stratus-1.7.0-rc3-visual-checks/index.html) · [Install/load/restoration](../../outputs/Stratus-1.7.0-rc3-install.json). Unverified portions remain in `IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/CHANGES.md`.
+
+
 ### Stratus 1.7.0-rc2 — 24 October 2026 — batch1af89474
 
 - [x] Repaired the reproduced indoor stepped-flow pale strips/patches: native dark/black atlas-light colours retain explicit valid coverage instead of bright biome substitution. Prior-source regression fails three cases; final source passes; exact installed ZIP clean cave capture reviewed. Original screenshot location unknown; finite reproduced-geometry acceptance only.

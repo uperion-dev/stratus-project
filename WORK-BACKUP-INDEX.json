@@ -13025,6 +13025,90 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-170-rc3-b7f1eae0d049176b.zip",
       "bytes": 1265728
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-before-sky.png": {
+      "sha256": "23d880403a9c45f820e304bd9542913fdf0bf9897f0be12ddddf1b4b9aa12b71",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1139508
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-candidate-sky.png": {
+      "sha256": "5c972a2d22c4f7e3f09a0ed4d2abbd3ec15c5184a402be3effe6fe30d8159d03",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1157680
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-dry-leaves.png": {
+      "sha256": "f9f276ec1ec01cb1e2ffaadab4265aabe61537fe4466f1297b360bd7a31ba73f",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1154936
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-fresh-sky.png": {
+      "sha256": "df8e0c4686a04c1bb238064a00fce6dbe7ff95d4f05ea9969e406b8fccf9fd84",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1158759
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-live-fresh.png": {
+      "sha256": "4e00e013f0ce3c3c8af2d117b2a39b8f9e49a3d3f642575ed2e0ed2f88c98403",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1162041
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-live-temporal-a.png": {
+      "sha256": "2b2cb39f8f1577f0023984c45ff808d8b38a39b5c1b55aabcb5eddce153cf213",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1164867
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-live-temporal-b.png": {
+      "sha256": "40f6ffdf73c35dff14fd4ac5b5691af787ab088b97cddc3e942bbcd33f8cc02c",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1164272
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-release-sky.png": {
+      "sha256": "dd9c7bdf43625bc0fc03f3f4a90cc6ff887bd9bb75332df4cf0d5cfaa08ffd03",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1145178
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-reload-sky.png": {
+      "sha256": "db8ac272dbe16637c8edddc39992749024e668fe7effdab8e7cc90ad290db704",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1099453
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-return-view.png": {
+      "sha256": "82b99f41ad7e8c9325160d523439563abd0b74a3484702276df72a7bc7093fd0",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1161608
+    },
+    "outputs/Stratus-1.7.0-rc3-visual-checks/captures/rc3-rotate-disocclusion.png": {
+      "sha256": "630588943f493b6f6f85f8b7aaa88972d080b000296eab45a0c2a5277fdad2d0",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc3-c0923351ebf6ea88.zip",
+      "bytes": 1265728
+    },
+    "work/public-site-history/c74369811ada9515e20a555eeb1a231722032923.zip": {
+      "sha256": "cb29b9e315a0d9983ee91c0d1ac24f3f727ec72cf1490233c62072e9f77435a3",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-ecaab84e43c3a36d.zip",
+      "bytes": 24270185
+    },
+    "work/stratus-170-rc3/agent/final.jar": {
+      "sha256": "ce059d85d11d91d2cee733068a4f19cd83234df82d650a65f7338d7116c30a7e",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc3-adae8c3abf4c48d5.zip",
+      "bytes": 5408
+    },
+    "outputs/stratus-nav-page-effects-preview.png": {
+      "sha256": "df9f5075ff6e8776f0947672a06f92f91d28a121e6002baed3125dc9d425bdb8",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-nav-page-effects-preview-png-274214d786c97df4.zip",
+      "bytes": 12461
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

@@ -2,12 +2,12 @@
 
 Navigation and fingerprints only; this file does not certify a release or authorise additional work.
 Project: /Users/william.lei/Documents/ChatGPT/MC Shader Making
-Active brief: /Users/william.lei/Documents/ChatGPT/MC Shader Making/work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/CHANGES.md
-Target snapshot: /Users/william.lei/Documents/ChatGPT/MC Shader Making/work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/TASK.md
-Brief SHA256: 042ef608d6ae6b1a3f3f080639c7d60953652e1fbb4833a582f69f60e48e60bc
+Active brief: work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/CHANGES.md
+Target snapshot: work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/TASK.md
+Brief SHA256: ab0ccc0e1db3850ae91d3af3af88ddabb4fd3512ed8ca4f191ecee6f4e4c79f7
 Target SHA256: 71d69fbb75c4773616aed62f88b607cfb56f599e37c20e881dd6b7537266191a
-Current shared TASK SHA256: 71d69fbb75c4773616aed62f88b607cfb56f599e37c20e881dd6b7537266191a
-Current shader tree SHA256: f658e4ce29a551c7c2bb66fc5aaa252f58b92f3bd06e7ec36b2d453c11c27a3d (239 files)
+Current shared TASK SHA256: b8d0719b52758cf4e1402fe02ddec320944f5fa262b62f6b0d9553b2ae28accb
+Current shader tree SHA256: 22791013348c7a1500e2d7ebc3c558467b48646fc10834ea1478b407dd8c19c6 (240 files)
 
 ## Read first
 - Project AGENTS.md, work/Custom instructions/AGENTS.md, GOALS.md and WORKFLOW.md.
@@ -28,22 +28,30 @@ Current shader tree SHA256: f658e4ce29a551c7c2bb66fc5aaa252f58b92f3bd06e7ec36b2d
 - Line 86: Packaging, testing and evidence
 
 ## Current source navigation hints
+- outputs/Stratus/shaders/core/water-interface.glsl
+- outputs/Stratus/shaders/core/water-surface.glsl
 - outputs/Stratus/shaders/block.properties
-- outputs/Stratus/shaders/shaders.properties
+- outputs/Stratus/shaders/core/air.glsl
+- outputs/Stratus/shaders/core/frame.glsl
 - outputs/Stratus/shaders/core/options.glsl
+- outputs/Stratus/shaders/core/raster.frag.glsl
+- outputs/Stratus/shaders/core/raster.vert.glsl
+- outputs/Stratus/shaders/core/scene-depth.glsl
+- outputs/Stratus/shaders/core/solar-warmth.glsl
+- outputs/Stratus/shaders/shaders.properties
 - outputs/Stratus/package.py and outputs/Stratus/install.py: existing release tooling.
 Hints are filename matches only, not a diagnosis or a complete dependency list.
 
 ## Latest recorded release summary — reported evidence, not a live check
-## 24 October 2026 — Stratus 1.7.0-rc2 — targeted repair candidate
+## 25 October 2026 — Stratus 1.7.0-rc3 — exposed foliage and temporal sky candidate
 
 ### At a glance
 
-- Repaired pale cave-water strips and native entity face shading; restored adjustable native underwater atlas; made foliage matte and reduced the excessive solar film lobe. All65 controls/defaults/ranges/menu paths and preset assignments preserved.
-- **[Candidate ZIP](../../outputs/Stratus-1.7.0-rc2.zip)** installed and actually test-loaded in Main, with exact source/archive/install bytes and all65 Reference values verified. [Install/load receipt](../../outputs/Stratus-1.7.0-rc2-install.json), [24 reviewed comparisons](../../outputs/Stratus-1.7.0-rc2-visual-checks/index.html).
--768 final native pairs, targeted GPU checks and13 migration checks pass. Finite visual acceptance only; additional solid-occluder, solar-angle and waterline/glass checks remain pending. Focused FPS explicitly skipped; no sustained-lag fix or60FPS claim. Original session and temporary test world edits restored and verified.
+- Restored film on exposed front-facing foliage; backward leaf planes stay dry. Added guarded one-frame stationary-sky atmosphere reuse and an off switch. All previous65 controls/defaults/ranges/menu access and preset assignments retained, now66 options.
+- **[Candidate ZIP](../../outputs/Stratus-1.7.0-rc3.zip)** installed and actually test-loaded in Main. [Install/load receipt](../../outputs/Stratus-1.7.0-rc3-install.json), [11 individually reviewed stills](../../outputs/Stratus-1.7.0-rc3-visual-checks/index.html), including one rejected reload diagnostic. Final exact ZIP capture passed the stable loaded-chunk gate. Existing user overrides carried, not reset to Reference.
+-768 final native pairs,17 temporal history cases,4 compositor cases,14 raster/entity/underside samples,12 migration checks and actual four66-option Iris profile matching pass. Broader leaf-interior/motion/transition and focusedFPS acceptance remains pending. Dynamic FPS was temporarily disabled through its runtime switch and automatically restored; original session/config restored and checked.
 
-Batch: [1af89474 active brief](IN-PROGRESS/1af89474-f56a-4419-bc73-7f12d4950cfa/CHANGES.md). Frozen delta only reiterated the recorded stable/candidate reference distinction; no extra shader behaviour staged. Shared next queue and immutable target snapshot unchanged. TASK, shared queue, change log and completed archive matched initial fingerprints before reconciliation; the active brief differed only by this run's staging. No newer-edit conflict found. Earlier pending batches remain separate.
+Batch: [b9a03cf9 active brief](IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/CHANGES.md). Frozen delta repeats rc2 reconciliation; no duplicate entity/water rebuild. The explicit leaf correction supersedes its whole-material matte wording. Shared next queue, batch target and frozen snapshots untouched. Current TASK/log/archive/next queue matched initial fingerprints before reconciliation; active brief differed only by this run's staging. No newer-edit conflict found. Earlier pending batches untouched.
 
 
 For earlier evidence, search the exact version or issue in CHANGE-LOG.md; do not dump its entire history.

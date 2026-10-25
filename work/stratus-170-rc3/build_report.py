@@ -1,0 +1,24 @@
+from pathlib import Path
+import json,hashlib,shutil,html
+w=Path(__file__).resolve().parent;r=w.parents[1]/'outputs/Stratus-1.7.0-rc3-visual-checks';(r/'captures').mkdir(parents=True,exist_ok=True)
+notes={
+'rc3-before-sky.png':'rc2 Reference: foliage matte. Camera settled after the first fall-offset capture was rejected. Stable loaded-chunk gate passed.',
+'rc3-candidate-sky.png':'Candidate Reference: exposed front-facing foliage receives restrained film. Native leaf texture and sky retained. Stable gate passed; this was initially throttled, so no live reuse-rate claim.',
+'rc3-fresh-sky.png':'Temporal off at matched Reference/camera. Stable gate passed. Cloud animation phase differs.',
+'rc3-dry-leaves.png':'Film amount zero at matched camera. Stable gate passed; confirms visible foliage treatment is independently switchable. No full cluster-interior acceptance.',
+'rc3-live-temporal-a.png':'Temporal on while Dynamic FPS runtime throttling temporarily disabled. Stable gate passed. No focused FPS or quantitative temporal hit-rate claim.',
+'rc3-live-temporal-b.png':'Later temporal-on still at same camera. No obvious gross sky/header artefact in this frame; stills cannot establish absence of motion ghosting/flicker.',
+'rc3-rotate-disocclusion.png':'Rotated camera15degrees: changed sky/tree boundary looks coherent. Local scene reviewed; no fresh stable gate for this scheduling-only frame.',
+'rc3-return-view.png':'Return to original view: finite geometry/sky check, no new stable gate. Dynamic clouds differ over time.',
+'rc3-live-fresh.png':'Temporal off after on/rotation route. Unfocused; not FPS evidence.',
+'rc3-reload-sky.png':'REJECTED ACCEPTANCE: scheduling-only post-reload capture contains unloaded distant terrain. Preserve as diagnostic; not a clean reload/motion result.',
+'rc3-release-sky.png':'Exact final installed ZIP, stable gate passed. Uses preserved user overrides: scenery reflections2, Stratus water0, retired wet-darkening1.30. Not a matched Reference before/after water comparison.'}
+log=(Path.home()/'Library/Application Support/ModrinthApp/profiles/Minecraft (1)/logs/latest.log').read_text();(w/'runtime-qa.log').write_text('\n'.join(l for l in log.splitlines() if 'STRATUS_VISUAL_RC3' in l)+'\n')
+rows=[]
+for name,note in notes.items():
+ p=w/'screenshots'/name;shutil.copy2(p,r/'captures'/name);rows.append({'file':'captures/'+name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'review':note,'accepted_finite_view':name!='rc3-reload-sky.png'})
+manifest={'version':'1.7.0-rc3','profile':'Main / Minecraft (1)','world':'Stratus Terrain Lab','framebuffer':[1440,842],'render_distance':12,'time':1000,'rain':0,'FPS_samples':0,'status':'Candidate installed and loaded; finite visual coverage. Remaining cluster-interior/motion/transition/performance checks pending.','source_scope':'QA variants preceded the final additional identical front/back leaf guard for the late translucent path. Final native checks cover it; rc3-release-sky is the exact final ZIP. Do not assume all QA archives are byte-equivalent to final source.','captures':rows}
+(r/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');(w/'review-notes.json').write_text(json.dumps(notes,indent=2)+'\n')
+parts=['<!doctype html><html lang="en-AU"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stratus1.7.0-rc3 checks</title><style>body{margin:0;background:#121b29;color:#edf4fc;font:16px/1.5 system-ui}main{max-width:1200px;margin:auto;padding:24px}a{color:#a7dcff}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:20px}figure{margin:0;background:#233247;border-radius:8px;overflow:hidden}img{width:100%;display:block}figcaption{padding:14px}.note{padding:16px;background:#49392d}</style><main><h1>Stratus1.7.0-rc3</h1><p>Exposed foliage and guarded stationary-sky temporal reuse.</p><p class="note">Actual Minecraft stills. Final ZIP installed and loaded. Broader leaf-interior, temporal motion/transition and focused performance checks remain pending. The rejected reload frame is diagnostic only. Dynamic FPS was temporarily disabled through its runtime switch and restored without saving config. No FPS sampled.</p><p><a href="../Stratus-1.7.0-rc3.zip">Candidate ZIP</a> · <a href="../Stratus-1.7.0-rc3-install.json">Install/load receipt</a> · <a href="manifest.json">Evidence and scope</a></p><div class="grid">']
+for row in rows:parts.append('<figure><img loading="lazy" src="'+html.escape(row['file'])+'" alt="'+html.escape(Path(row['file']).stem)+'"><figcaption><strong>'+html.escape(Path(row['file']).stem)+'</strong><p>'+html.escape(row['review'])+'</p></figcaption></figure>')
+parts.append('</div></main></html>');(r/'index.html').write_text(''.join(parts));print(len(rows),'individually inspected captures including one rejected diagnostic')

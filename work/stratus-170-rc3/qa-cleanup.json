@@ -1,0 +1,34 @@
+[
+  {
+    "file": "Stratus-1.7.0-rc3-QA-Before.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc3-QA-Before.zip.txt",
+    "status": "already absent"
+  },
+  {
+    "file": "Stratus-1.7.0-rc3-QA-Candidate.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc3-QA-Candidate.zip.txt",
+    "status": "already absent"
+  },
+  {
+    "file": "Stratus-1.7.0-rc3-QA-Dry.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc3-QA-Dry.zip.txt",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc3-QA-TemporalOff.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc3-QA-TemporalOff.zip.txt",
+    "status": "removed own unchanged QA file"
+  }
+]

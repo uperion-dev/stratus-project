@@ -26,6 +26,7 @@
   return {values,settling,progress:clamp(s.y/Math.max(1,s.height-s.h)),hasScrolled:s.y>24};
  },({values,settling,progress,hasScrolled})=>{motion.style(root,'--read-progress',progress);if(scrolled!==hasScrolled){scrolled=hasScrolled;body.classList.toggle('has-scrolled',scrolled);}for(const [r,p]of values)if(Math.abs(r.p-p)>.0001){r.p=p;r.animation.currentTime=p*revealDuration;r.el.dataset.revealProgress=p.toFixed(3);}if(settling)motion.request();});
  body.classList.add('motion-enabled','scroll-scrub');register();
+ window.addEventListener('stratus:route-changed',()=>{dirty=true;motion.request();});
  window.addEventListener('hashchange',()=>{dirty=true;motion.request();});window.addEventListener('resize',()=>{dirty=true;motion.request();},{passive:true});reduced.addEventListener('change',motion.request);
  document.addEventListener('focusin',motion.request);document.addEventListener('focusout',motion.request);document.addEventListener('load',()=>{dirty=true;motion.request();},true);document.fonts?.ready.then(()=>{dirty=true;motion.request();});
  new ResizeObserver(()=>{dirty=true;motion.request();}).observe(document.querySelector('main'));
