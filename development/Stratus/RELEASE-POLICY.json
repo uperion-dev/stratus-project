@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0-rc3",
+  "version": "1.7.0-rc4",
   "reset_related_overrides": [],
   "visual_defaults": {
     "WATER_RENDER_QUALITY": "1",
@@ -67,7 +67,8 @@
     "WATER_STYLE": "1",
     "TRANSPARENT_REFLECTIONS": "0.75",
     "TRANSPARENT_REFRACTION": "0.50",
-    "TEMPORAL_ATMOSPHERE": "1"
+    "TEMPORAL_ATMOSPHERE": "1",
+    "ORIGINAL_DAMPNESS": "0.00"
   },
   "reference_quality_defaults": {
     "WATER_RENDER_QUALITY": "1",

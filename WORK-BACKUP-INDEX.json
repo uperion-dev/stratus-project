@@ -13253,6 +13253,48 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-slow-image-drift-preview-png-06ba70982c3ba374.zip",
       "bytes": 59656
+    },
+    "work/stratus-170-rc4/screenshots/rc4-before-panels.png": {
+      "sha256": "aaf3b15f44c5ac1a6343e19389689c9d80f5e1e6f6cd84c85158d6817cf8943b",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-7f3a1c667d6ef22d.zip",
+      "bytes": 301834
+    },
+    "work/stratus-170-rc4/screenshots/rc4-damp-full.png": {
+      "sha256": "b7d235198bc3cd3ee6e492423807f827705096fba830f3bfb3b8880c73a7c489",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-7f3a1c667d6ef22d.zip",
+      "bytes": 301324
+    },
+    "work/stratus-170-rc4/screenshots/rc4-damp-half.png": {
+      "sha256": "e3388bd9aa8eb29838cecb177f7a3cce9bb52ad309671d03a5519aed4a03cd2c",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-7f3a1c667d6ef22d.zip",
+      "bytes": 301826
+    },
+    "work/stratus-170-rc4/screenshots/rc4-dry-panels.png": {
+      "sha256": "b5d6b38abf96e60d4f8b99a297ba9be5dd0f50f86ed5105635086ff49e859c82",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-7f3a1c667d6ef22d.zip",
+      "bytes": 300612
+    },
+    "work/stratus-170-rc4/screenshots/rc4-uniform-panels.png": {
+      "sha256": "add080b96e20e9b33d44176a27b561f39f3de1cc97b4634e5202e375e1450c2e",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-7f3a1c667d6ef22d.zip",
+      "bytes": 301794
+    },
+    "outputs/stratus-faster-drift-preview.png": {
+      "sha256": "ba4981e16b9e2fef0c9d9f313eea88e76c63b9da7876fbd5b8b8a419145629ac",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-faster-drift-preview-png-e2bdf73123abde5f.zip",
+      "bytes": 58236
+    },
+    "outputs/stratus-wide-drift-preview.png": {
+      "sha256": "e2a2dd76f06c63b2e12bd4270e5440bcbf132bdc1d8fe86b3f47025bdc37927f",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-wide-drift-preview-png-c8400439e7af3878.zip",
+      "bytes": 59218
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

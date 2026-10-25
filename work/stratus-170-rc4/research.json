@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "url": "https://github.com/javiergcim/MakeUpUltraFast/blob/master/ForDevelopers.EN.md",
+      "finding": "Shared shader libraries and lifetime-based buffer reuse; temporal scene history. Useful design principles, not a drop-in dependency for the existing Iris pipeline. LGPL source not copied."
+    },
+    {
+      "url": "https://github.com/sixthsurge/photon/blob/main/shaders/include/sky/clouds.glsl",
+      "finding": "Layer compositing with opacity/visibility early exits. Stratus already has transmission early termination; cannot transplant cloud algorithms without changing the intended native cloud footprint."
+    },
+    {
+      "url": "https://sildurs-shaders.github.io/",
+      "finding": "Enhanced Default targets a lightweight vanilla-style presentation. Feature set and performance claims are not evidence of Stratus performance."
+    }
+  ],
+  "decision": "Focused FPS explicitly skipped by user in this run. Preserve actual resolution/quality; no speculative third-party framework transplant or new performance claim. Existing shared-library/buffer-reuse principles remain; further measured bottleneck work pending."
+}

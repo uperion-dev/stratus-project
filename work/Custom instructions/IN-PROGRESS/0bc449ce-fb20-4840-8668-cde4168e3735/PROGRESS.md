@@ -1,16 +1,13 @@
 # Batch progress
 
-Status: not started
+Status: rc4 material source implemented; technical checks pass; in-game panel route in progress. FocusedFPS explicitly skipped by user; no performance optimisation accepted or net FPS claim.
 
-## Resume here
-- Next action:
-- Changed files:
-- Current source/target fingerprints (refresh CONTEXT.md before resuming):
+- work/stratus-170-rc4 holds original source baseline, initial docs/settings/config/player fingerprints and frozen reference. Shared next queue and batch TASK untouched; delta only repeats rc3 reconciliation. Active brief staged into three concrete requests.
+- Source5shaderfiles: diffuse.glsl uniform film exponent/roughness0.68 across eligible materials; optional ORIGINAL_DAMPNESS0..2 restores original1.6.7 exposed/humidity/shelter/drainage absorption shape independently of film/sheens. Default0, nonporous unchanged. WET_DARKENING retained no-op. moisture.glsl independent bypass/material-absorption read only when needed. Options/menu/lang plus four presets: prior66 values/ranges/menu/presets preserved,67 total. No resolution/quality/sample/pass reduction.
+- compile.log768 pairs0fail. material-checks.json1152 actual GPU cases0failure/error,uniform RGBerror0, independent original-dampness CPU error<3.1e-8. wet-checks.json96 cases0failure/error. control-checks.json pass.15 migration cases prepared/run with actual policy/installer. Source docs/version prepared rc4; no ZIP packaged yet.
+- RuntimeMain launched normally through Modrinth because no instance running; JavaPID6833 found via executable-name ps (jps did not list it). Stratus Terrain Lab, initial159.7676765,66,8.6122225,yaw-70.44592,pitch6.9865246,flyingfalse,menuclass433; selectedrc3 enabled. Desktop unlocked but Minecraft app not exposed; user answeredSkipfocusedFPSnow. Do not benchmark/fake focus. No mod changed.
+- VisualRc4 guard/watcheractive. Restores rc3enabled,HUD/menu/pause/flight onSTOP; originalcamera must be returned separately. PanelsRc4 active restores exact3042 savedair blocks at4200..4217,160..172,4200..4212; method8392 loads4chunks before snapshot/restore to avoid last batch's unloadedfill failure. Nine2x5 material panels only,noentities. fixture-original.txt/fixture-created.txt; signalrestore-fixture.txt and verify fixture-restored/stopped before ending.
+- Five matched QA packs installed:Before,Candidate,DampHalf,DampFull,Dry. Settings use savedrc3 quality/overrides, newamount0. Source values preserved; don't substitute lowerReference settings. Route before/uniform/dry/half/full at4208.5,163,4188,yaw0. RepeatedCAM afterflightsettles avoids knownfirstfall offset. Stable gates60sec; check actualframes/logs, reject missinggeometry. Currenterror/status in workdir.
+- Research primary MakeUpUltraFast developer architecture/bufferreuse, Photon layeropacity exits, SildurEnhancedDefault. No copiedthirdpartysource/frameworkimport; no speculativeFPSchanges without a measuredbottleneck. research.json. Performance request stayspending afteruserdeferral.
 
-## Evidence and remaining work
-- Checks completed (command, exact build/source, result, evidence path):
-- Visual/FPS verification still required:
-- Blockers:
-- Unfinished requests remain in this batch's CHANGES.md.
-
-Update this checkpoint at meaningful milestones and before stopping, not after every tool call.
+Remaining: inspect panel comparisons/fix failures; final docs/checks/package/install/load/profiles67; finite native/worldregression. Restore originalcamera/client/config + fixture,stophelpers/removeownunchangedQAfiles. Reconcile currentTASK/log/COMPLETED archive/activebrief only, preserving neweredits/sharedqueue. No agents/handoff/publication/automation.

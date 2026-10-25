@@ -1,9 +1,10 @@
-Stratus1.7.0-rc3 candidate. See CHECKS.json and work/stratus-170-rc3.
-768 native compatibility-shim compile/link pairs; actual atmosphere GPU history
-and invalidation cases; actual raster front/back leaf/native underside/entity
-cases; control/menu/preset audit; installer migration; ZIP/source integrity.
-These do not emulate all Iris transforms or prove appearance/performance.
-Actual loaded-pack/capture evidence is recorded externally after installation.
-No focused FPS acceptance from locked/unfocused samples. Whole-cluster interior
-leaf occlusion is not established by front/back orientation. Live remaining
-acceptance stays in the active batch, not silently moved to completion.
+Stratus1.7.0-rc4 candidate. Evidence:work/stratus-170-rc4.
+768 native compatibility-shim compile/link pairs, zero failures.
+1152 actual material GPU cases:8 classes,6 normals,3 exposure levels,2 weather
+states and4 film/original-dampness variants. Uniform sheen error0; dampness
+matches independent original-shape CPU reference within0.000000031.
+96 actual wet-film shelter/weather/zero cases; all67 menu controls and prior66
+options/ranges/preset assignments preserved. Installer policy checks use actual
+installer in temporary profiles. No unchanged prior-release test is passed off
+as a new runtime result. External receipt/report records final ZIP loading and
+finite visual evidence separately. FocusedFPS skipped by user; no speedup claim.
