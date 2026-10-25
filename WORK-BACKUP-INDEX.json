@@ -12833,6 +12833,24 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-strong-refraction-preview-png-7d0148bfaffb6326.zip",
       "bytes": 102928
+    },
+    "work/public-site-history/e0b2624da2533c1e87639bbc074edaadd2f1dc85.zip": {
+      "sha256": "0f00695cba1af9fdb76bb81120cfa4619307a12afe7f13558c0be28b1a9b6624",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-e3a45136a57f7a1a.zip",
+      "bytes": 24266468
+    },
+    "work/stratus-170-rc3/baseline/shaders/volumes/weather.rgba8": {
+      "sha256": "90d381201b4851eb65c6847678765eb71f4dfdc965b8b4e4d36f455c33b2e99a",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc3-165b20e2823eb35b.zip",
+      "bytes": 8388608
+    },
+    "outputs/stratus-sharp-droplets-smooth-scroll-preview.png": {
+      "sha256": "aef37f250e86a48f863845458abd696c230c2686c4417b647d6bd3da673c1bc9",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-sharp-droplets-smooth-scroll-preview-png-b52b96d51badd92e.zip",
+      "bytes": 49423
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

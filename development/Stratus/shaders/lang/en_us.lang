@@ -196,3 +196,8 @@ option.TRANSPARENT_REFLECTIONS=Solid reflections
 option.TRANSPARENT_REFLECTIONS.comment=View-dependent reflections on transparent solid faces. Uses current reflection quality and sky fallback. Zero disables them independently of wet film and water.
 option.TRANSPARENT_REFRACTION=Solid refraction
 option.TRANSPARENT_REFRACTION.comment=Subtle face-normal refraction on transparent solids, with depth and screen-edge guards. No animated water waves. Zero disables refraction without removing reflections.
+
+option.TEMPORAL_ATMOSPHERE=Temporal sky reuse
+option.TEMPORAL_ATMOSPHERE.comment=Reuses sky atmosphere for at most one frame only with a stationary camera and unchanged projection, time, weather and status. Moving views, terrain, water and invalid history are evaluated freshly at the selected quality. No frame skipping; may introduce one-frame cloud motion delay. Off evaluates every pixel freshly.
+value.TEMPORAL_ATMOSPHERE.0=Off
+value.TEMPORAL_ATMOSPHERE.1=On

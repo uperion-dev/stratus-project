@@ -24,6 +24,9 @@ const int colortex8Format = RGBA16F;
 const int colortex9Format = RGBA16F;
 const int colortex10Format = RGBA16F;
 const int colortex11Format = RGBA16F;
+#if TEMPORAL_ATMOSPHERE == 1
+const bool colortex11Clear = false;
+#endif
 const int colortex12Format = RGBA16F;
 const int colortex13Format = RGBA16F;
 const int colortex15Format = RGBA16F;

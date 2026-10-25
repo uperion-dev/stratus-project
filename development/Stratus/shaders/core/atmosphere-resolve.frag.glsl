@@ -6,6 +6,7 @@
 uniform sampler2D colortex3;
 uniform sampler2D colortex11;
 #include "/core/transparent-optics.glsl"
+#include "/core/temporal-atmosphere.glsl"
 in vec2 rasterUV;
 /* RENDERTARGETS: 3 */
 layout(location=0)out vec4 completedScene;
@@ -21,13 +22,14 @@ void main(){
     vec4 volume=vec4(0.0);float sum=0.0;
     for(int y=0;y<2;y++)for(int x=0;x<2;x++){
         ivec2 sampleCell=clamp(cell+ivec2(x,y),ivec2(0),size-ivec2(1));
+        if(atmosphereHeader(sampleCell))continue;
         vec2 uv=(vec2(sampleCell)+0.5)/vec2(size);
         // Radial opaque/water depth is cached in the unused metadata channel.
         // The centre still uses exact depth, retaining near translucent edges.
         float depth=texture(colortex2,uv).z;
         float depthWeight=exp(-abs(depth-distanceToScene)/max(1.0,distanceToScene*0.025));
         float weight=(x==0?1.0-f.x:f.x)*(y==0?1.0-f.y:f.y)*depthWeight;
-        volume+=texelFetch(colortex11,sampleCell,0)*weight;sum+=weight;
+        volume+=unpackAtmosphere(texelFetch(colortex11,sampleCell,0))*weight;sum+=weight;
     }
     volume/=max(sum,0.000001);
     if(isEyeInWater==0&&sum<0.12){

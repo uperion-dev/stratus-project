@@ -204,7 +204,7 @@ void main() {
     gl_FragData[3] = vec4(depth, sky, radialDepth, mark);
 #else
     gl_FragData[1] = vec4(sky, emission, 0.0, reflectable);
-    gl_FragData[2] = vec4(unitVector(orientedNormal),float(category>1.05&&category<1.5&&material!=4113));
+    gl_FragData[2] = vec4(unitVector(orientedNormal),float(category>1.05&&category<1.5&&(material!=4113||gl_FrontFacing)));
     gl_FragData[3] = vec4(wetMaterialProperties(material),0.0,0.0);
 #endif
 #endif

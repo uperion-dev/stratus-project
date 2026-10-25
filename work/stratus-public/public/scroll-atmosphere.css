@@ -1,0 +1,5 @@
+/* The scene softens, while the droplet canvas samples the original sharp image and text. */
+body.stratus-immersive .immersive-hero .hero-image{filter:blur(1.6px)!important}
+body.stratus-immersive .hero-water-droplets{filter:none!important}
+@media(max-width:650px){body.stratus-immersive .immersive-hero .hero-image{filter:blur(1.2px)!important}}
+@media(prefers-reduced-transparency:reduce){body.stratus-immersive .immersive-hero .hero-image{filter:none!important}}

@@ -67,6 +67,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define BIOME_WATER 1 //  [0 1]
 #define REFRACTION_QUALITY 0 //  [0 1 2]
 #define ATMOSPHERE_QUALITY 0 //  [0 1 2]
+#define TEMPORAL_ATMOSPHERE 1 //  [0 1]
 #define WATER_RENDER_QUALITY 0 //  [0 1 2]
 #define CLOUD_DENSITY 1.00 //  [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 1.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
@@ -1012,7 +1013,7 @@ void main() {
     shim_FragData[3] = vec4(depth, sky, radialDepth, mark);
 #else
     shim_FragData[1] = vec4(sky, emission, 0.0, reflectable);
-    shim_FragData[2] = vec4(unitVector(orientedNormal),float(category>1.05&&category<1.5&&material!=4113));
+    shim_FragData[2] = vec4(unitVector(orientedNormal),float(category>1.05&&category<1.5&&(material!=4113||gl_FrontFacing)));
     shim_FragData[3] = vec4(wetMaterialProperties(material),0.0,0.0);
 #endif
 #endif
