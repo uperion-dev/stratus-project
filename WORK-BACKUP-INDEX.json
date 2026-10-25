@@ -12797,6 +12797,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-flat-droplets-preview-png-310032d278ff52b7.zip",
       "bytes": 102809
+    },
+    "work/public-site-history/3cc8476579e19376b29d02335de90deb38cb08af.zip": {
+      "sha256": "9349b7e075cc1c600795796e81c16b31ae6d7e82892b284912144d0a567e1bef",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-e4868ed676c2af20.zip",
+      "bytes": 24266030
+    },
+    "outputs/stratus-centred-glass-preview.png": {
+      "sha256": "829dea5b0204da80df8648331d383fb441910ab5f3f27305e850ffb2d7191fde",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-centred-glass-preview-png-9398f6a68777016c.zip",
+      "bytes": 100726
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

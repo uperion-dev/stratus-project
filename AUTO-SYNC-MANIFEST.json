@@ -252,9 +252,6 @@
     "development/Stratus/shaders/world1/gbuffers_water.vsh",
     "development/Stratus/shaders/world1/gbuffers_weather.fsh",
     "development/Stratus/shaders/world1/gbuffers_weather.vsh",
-    "development/stratus-public/public/motion.js",
-    "development/stratus-public/public/navigation.css",
-    "development/stratus-public/public/spatial.js",
     "outputs/Stratus-1.0.6-visual-checks/index.html",
     "outputs/Stratus-1.0.6-visual-checks/results.json",
     "outputs/Stratus-1.1.0-visual-checks/index.html",
@@ -5266,6 +5263,7 @@
     "work/stratus-public/public/base.css",
     "work/stratus-public/public/breakaway.css",
     "work/stratus-public/public/breakaway.js",
+    "work/stratus-public/public/centred-header.css",
     "work/stratus-public/public/experience.css",
     "work/stratus-public/public/immersive.css",
     "work/stratus-public/public/immersive.js",
@@ -10093,10 +10091,10 @@
     "work/write_pack.py"
   ],
   "site_commits": {
-    "stratus-public": "39d45eebd6788ad9ecc428bd11a4d9a1b029836e",
+    "stratus-public": "3cc8476579e19376b29d02335de90deb38cb08af",
     "stratus-studio-cloud": "7a6b1f68f05b437467d981b8c9e1f03284084b7c"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "27b01f40840c4ae6e2f8f53f816e22c890c766f9911f2994a8afd89fa3153055",
+  "fingerprint": "f9fef2841112ecea6a531da357cd053c7146ffbf84a90acc058f4f146341cbbc",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }

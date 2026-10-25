@@ -1,0 +1,16 @@
+/* Layout trial: remove nav-centred-preview from body to restore the previous placement. */
+body.nav-centred-preview .topbar.navigation-ready{isolation:isolate;height:142px;min-height:142px;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:0!important}
+body.nav-centred-preview .topbar.navigation-ready:before{content:'';position:absolute;inset:0 0 auto;height:88px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 0,#bce8d60d,transparent 68%),linear-gradient(#06151070,#0a1b1833 58%,transparent);backdrop-filter:blur(13px) saturate(1.22);-webkit-backdrop-filter:blur(13px) saturate(1.22);mask-image:linear-gradient(#000 0%,#000 42%,#000a 67%,transparent);-webkit-mask-image:linear-gradient(#000 0%,#000 42%,#000a 67%,transparent)}
+body.nav-centred-preview .topbar.navigation-ready:after{content:'';position:absolute;inset:0 0 auto;height:88px;z-index:-1;pointer-events:none;background:linear-gradient(115deg,transparent 8%,#d5fff60a 32%,transparent 49%,#cdf4ea08 67%,transparent 91%);mask-image:linear-gradient(#000c,transparent 90%);-webkit-mask-image:linear-gradient(#000c,transparent 90%)}
+@supports(backdrop-filter:url('#nav-fade-glass')){body.nav-centred-preview .topbar.navigation-ready:before{backdrop-filter:url('#nav-fade-glass') blur(11px) saturate(1.22)}}
+body.nav-centred-preview .topbar.navigation-ready .brand-cluster{left:var(--brand-left,calc(50% - 92.5px));transition:width .36s cubic-bezier(.22,.65,.2,1),left .64s cubic-bezier(.42,0,.2,1)}
+body.nav-centred-preview .topbar.navigation-ready nav{right:var(--nav-right,4%);transition:width .36s cubic-bezier(.22,.65,.2,1),top .36s cubic-bezier(.22,.65,.2,1),right .64s cubic-bezier(.42,0,.2,1)}
+body.nav-centred-preview .topbar.navigation-ready.nav-compact{height:84px;min-height:84px}
+.header-glass-filter{position:absolute;pointer-events:none;overflow:hidden}
+@media(prefers-reduced-transparency:reduce){body.nav-centred-preview .topbar.navigation-ready:before{backdrop-filter:none;-webkit-backdrop-filter:none;background:linear-gradient(#0b1b18e6,transparent)}}
+@media(prefers-reduced-motion:reduce){body.nav-centred-preview .topbar.navigation-ready :is(.brand-cluster,nav){transition:none!important}}
+
+/* Let the page capsule clear the upper row before the name unfolds. */
+body.nav-centred-preview .topbar.navigation-ready:not(.nav-compact) .brand-cluster{transition-delay:.14s,0s}
+body.nav-centred-preview .topbar.navigation-ready:not(.nav-compact) .brand{transition-delay:.14s,.14s,.14s}
+body.nav-centred-preview .topbar.navigation-ready:not(.nav-compact) .brand-label{transition-delay:.14s,.14s}
