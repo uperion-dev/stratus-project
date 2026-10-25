@@ -13463,6 +13463,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-spacing-compact-preview-png-09589841b73f2da8.zip",
       "bytes": 50517
+    },
+    "outputs/stratus-larger-drops-preview.png": {
+      "sha256": "a484dc1e39e00b6d774ceee5cce6256ea31b2dba1138e3c6e7f31a2954b66488",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-larger-drops-preview-png-a948eb2e55553d9c.zip",
+      "bytes": 59978
+    },
+    "outputs/stratus-restored-water-matte-preview.png": {
+      "sha256": "3018d30dc629884acd875ce8b556ed2a9b7584a35db783b9b1166b57368d61f0",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-restored-water-matte-preview-png-0a3a3c8c55688378.zip",
+      "bytes": 59718
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
