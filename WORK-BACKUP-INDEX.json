@@ -13451,6 +13451,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-steady-glass-brand-preview-png-5fb32dfeb88de93e.zip",
       "bytes": 58494
+    },
+    "work/stratus-170-rc4/integration_probe": {
+      "sha256": "60bcf6519440d1050aafffae51710de26946fd9c4d2d8e16552537c4bc18f712",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-a1512919158bf8db.zip",
+      "bytes": 36944
+    },
+    "outputs/stratus-spacing-compact-preview.png": {
+      "sha256": "43ae10ded0583909cf33124473f56620d11a145cd65663db0e4426ad7d675ef3",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-spacing-compact-preview-png-09589841b73f2da8.zip",
+      "bytes": 50517
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

@@ -1,10 +1,10 @@
 /* Original separate logo and navigation capsules; only the navigation splits. */
 body.stratus-immersive .topbar.navigation-ready{--header-glass-height:56px;display:block;min-height:84px;height:84px;padding:0;pointer-events:none;transition:background .35s}
 body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,nav){height:var(--header-glass-height);min-height:var(--header-glass-height);border:1px solid var(--lg-rim);border-radius:999px;background:var(--lg-material);box-shadow:var(--lg-shadow);backdrop-filter:blur(10px) saturate(1.18);-webkit-backdrop-filter:blur(10px) saturate(1.18);pointer-events:auto}
-body.stratus-immersive .topbar.navigation-ready .brand-cluster{position:absolute;left:var(--header-inset,4%);top:14px;width:185px;isolation:isolate;transition:width .36s cubic-bezier(.22,.65,.2,1)}
-body.stratus-immersive .topbar.navigation-ready .brand{width:100%;min-width:0;height:54px;min-height:54px;padding:6px 16px 6px 6px;gap:10px;overflow:hidden;background:transparent;border:0;box-shadow:none;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;font-size:15px;transition:width .36s cubic-bezier(.22,.65,.2,1),padding .48s,gap .48s}
+body.stratus-immersive .topbar.navigation-ready .brand-cluster{position:absolute;left:var(--header-inset,4%);top:14px;width:200px;isolation:isolate;transition:width .36s cubic-bezier(.22,.65,.2,1)}
+body.stratus-immersive .topbar.navigation-ready .brand{width:100%;min-width:0;height:54px;min-height:54px;padding:0 14px 0 0;gap:10px;overflow:hidden;background:transparent;border:0;box-shadow:none;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;font-size:15px;transition:width .36s cubic-bezier(.22,.65,.2,1),padding .48s,gap .48s}
 body.stratus-immersive .topbar.navigation-ready .brand-label{display:block;overflow:hidden;white-space:nowrap;opacity:1;transform:translateX(0);transition:opacity .2s,transform .35s;flex-shrink:0}
-body.stratus-immersive .topbar.navigation-ready .brand img{width:40px;height:40px;flex-shrink:0}
+body.stratus-immersive .topbar.navigation-ready .brand img{width:54px;height:54px;flex-shrink:0}
 body.stratus-immersive .topbar.navigation-ready nav{position:absolute;left:auto;right:var(--header-inset,4%);top:var(--nav-top,14px);margin:0;display:block;align-self:auto;width:var(--nav-width,480px);max-width:calc(100% - var(--header-inset,4%) * 2);padding:5px;overflow:hidden;transform:none;transition:width .36s cubic-bezier(.22,.65,.2,1),top .36s cubic-bezier(.22,.65,.2,1);scrollbar-width:none}
 body.stratus-immersive .topbar.navigation-ready .nav-track{position:relative;display:flex;width:max-content;gap:3px;align-items:center;transform:translateX(var(--nav-track-shift,0px));transition:transform .36s cubic-bezier(.22,.65,.2,1)}
 body.stratus-immersive .topbar.navigation-ready nav a{height:44px;min-height:44px;flex-shrink:0;white-space:nowrap;padding:0 13px;font-size:10px;transition:opacity .2s,transform .35s,background .2s}
@@ -14,7 +14,7 @@ body.stratus-immersive .topbar.navigation-ready .nav-expand svg{width:18px;heigh
 body.stratus-immersive .topbar.navigation-ready .nav-expand:hover{color:#fff;background:#effff00d}
 body.stratus-immersive .topbar.navigation-ready:is(.nav-compact,.nav-peek){background:transparent}
 body.stratus-immersive .topbar.navigation-ready.nav-compact .brand-cluster{width:100px}
-body.stratus-immersive .topbar.navigation-ready.nav-compact .brand{width:54px;padding-right:6px;gap:0}
+body.stratus-immersive .topbar.navigation-ready.nav-compact .brand{width:54px;padding:7px;gap:0}
 body.stratus-immersive .topbar.navigation-ready.nav-compact .brand-label{opacity:0;transform:translateX(-15px)}
 body.stratus-immersive .topbar.navigation-ready.nav-compact nav a:not([aria-current=page]){opacity:0;transform:translateX(-18px);pointer-events:none}
 body.stratus-immersive .topbar.navigation-ready.nav-compact nav a[aria-current=page]{background:transparent;box-shadow:none;border:0}
@@ -56,8 +56,8 @@ body.stratus-immersive .topbar.navigation-ready :is(.nav-traveller,.nav-collapse
 body.stratus-immersive .topbar.navigation-ready .nav-traveller{background-position:left top}
 body.stratus-immersive .topbar.navigation-ready .nav-collapser{background-position:right top}
 
-/* Moving glass keeps its tint/bevel without re-blurring the whole backdrop each frame. */
-body.stratus-immersive .topbar.navigation-ready :is(.nav-traveller,.nav-collapser){contain:layout style;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:inset 0 1px 1px #f3fff947,inset 0 -1px 1px #00191052;will-change:opacity,transform}
+/* All split pieces retain the same material and blur as the resting capsules. */
+body.stratus-immersive .topbar.navigation-ready :is(.nav-traveller,.nav-collapser){contain:layout style;backdrop-filter:blur(10px) saturate(1.18);-webkit-backdrop-filter:blur(10px) saturate(1.18);box-shadow:var(--lg-shadow);will-change:transform}
 body.stratus-immersive .topbar.navigation-ready.nav-splitting :is(nav,nav .nav-track){transition:none!important}
 body.stratus-immersive .topbar.navigation-ready .nav-traveller .nav-track{transition:none}
 
@@ -77,3 +77,12 @@ body.stratus-immersive .topbar.navigation-ready .nav-scroll-cue svg{width:12px;h
 body.stratus-immersive .topbar.navigation-ready.nav-scroll-start .nav-scroll-cue-start,body.stratus-immersive .topbar.navigation-ready.nav-scroll-end .nav-scroll-cue-end{opacity:1}
 body.stratus-immersive .topbar.navigation-ready:is(.nav-compact,.nav-splitting) .nav-scroll-cue{opacity:0}
 body.stratus-immersive .topbar.navigation-ready.nav-splitting .nav-viewport{-webkit-mask-image:none;mask-image:none;scroll-snap-type:none}
+
+/* The expanded mark fills the capsule; compact navigation restores its original 40px size. */
+body.stratus-immersive .topbar.navigation-ready .brand img{transition:width .36s cubic-bezier(.22,.65,.2,1),height .36s cubic-bezier(.22,.65,.2,1)}
+body.stratus-immersive .topbar.navigation-ready.nav-compact .brand img{width:40px;height:40px}
+/* Keep the same material sample when a half hands over to its live capsule. */
+body.stratus-immersive .topbar.navigation-ready .brand-cluster{background-size:200px 56px;background-repeat:no-repeat}
+body.stratus-immersive .topbar.navigation-ready .nav-backplate{background-size:var(--nav-material-width,473px) 56px;background-repeat:no-repeat}
+body.stratus-immersive .topbar.navigation-ready.nav-compact .nav-backplate{background-position:right top}
+@media(prefers-reduced-motion:reduce){body.stratus-immersive .topbar.navigation-ready .brand img{transition:none}}

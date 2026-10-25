@@ -4,6 +4,15 @@ Archive of completed requests and their release/evidence references. This is his
 
 ## Completed changes
 
+### Stratus1.7.0-rc4 — 26 October 2026 — batch0bc449ce
+
+- [x] Uniform material sheen response: common film reflectance/lobe roughness across eligible exposed receivers, while retaining native texture/diffuse colour, exposure/drainage/weather/back-face guards and zero controls.1152 actual material GPU cases show exact class-independent response at matched inputs;96 film cases and matched nine-material rc3/candidate/dry live panels pass. Different native textures/angles/light still look different.
+- [x] Optional original dampness restored with separate ORIGINAL_DAMPNESS slider,12 choices0..2,default0 in all presets. Original project porosity/humidity/rain/partial-shelter/drainage absorption shape restored independently of film/sheens. Retired WET_DARKENING remains no-op. Graded0/.5/1 CPU/GPU and live-panel results pass; nonporous panels unchanged, zero/sealed dry,4 actual compositor independence cases pass. No stored-world-wetness claim.
+- [x] Prior66 options/defaults/ranges/menu access/preset assignments and all saved overrides preserved;67 options now.15 migration checks, actual four67-value Iris profile matching and final ZIP/source/install/load verification pass. Exact fixture restored, helpers stopped and10 unchanged QA files removed. Original shader/config restored; newer world exit/saved pose preserved, without claiming final live camera equality.
+
+[Release](../../outputs/Stratus-1.7.0-rc4.zip) · [Change log and evidence](CHANGE-LOG.md#26-october-2026--stratus-170-rc4--uniform-material-film-and-original-dampness) · [11 actual comparisons](../../outputs/Stratus-1.7.0-rc4-visual-checks/index.html) · [Install/load](../../outputs/Stratus-1.7.0-rc4-install.json). Focused performance/framework optimisation remains pending in `IN-PROGRESS/0bc449ce-fb20-4840-8668-cde4168e3735/CHANGES.md` after explicit user deferral.
+
+
 ### Stratus 1.7.0-rc3 — 25 October 2026 — batchb9a03cf9
 
 - [x] Restored exposed/front-facing material4113 sheen with back-facing leaf-plane rejection in opaque and late translucent paths. Actual raster front1/back0 checks and finite matched rc2/candidate/dry natural foliage review pass. Full cluster-interior/blocked/sheltered acceptance stays pending; no voxel-occlusion claim.

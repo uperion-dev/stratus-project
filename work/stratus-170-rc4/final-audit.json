@@ -1,0 +1,46 @@
+{
+  "sha256": "0d5803b7b5186fccdd7ba23f5193ced80bb385b5660ba161f4356dad4b6f3ce0",
+  "entries": 249,
+  "source_archive_install_bytes_equal": true,
+  "all_saved_overrides_preserved": true,
+  "all_four_actual_Iris_profiles67_match": true,
+  "final_ZIP_loaded": true,
+  "framebuffer": [
+    854,
+    480
+  ],
+  "final_release_stable_gate": {
+    "stable_ms": 5065,
+    "state": {
+      "ready": true,
+      "render_distance": 12,
+      "required_view_disk_columns": 441,
+      "present_view_disk_columns": 441,
+      "client_loaded_columns": 862,
+      "render_sections": 12792,
+      "queued_jobs": 0,
+      "busy_workers": 0,
+      "pending_uploads": 0,
+      "pending_task_lists": 0
+    }
+  },
+  "temporary_QA_files_remaining": 0,
+  "protected_next_queue_and_target_unchanged": true,
+  "restoration_verified": {
+    "HUD_pause": true,
+    "saved_flight_matches_initial": true,
+    "saved_time_rain_matches_initial": true,
+    "Iris_original_selection_config": true,
+    "options_file_unchanged": true,
+    "fixture_exact_original": true,
+    "helpers_stopped": true
+  },
+  "camera_menu_limits": {
+    "final_live_player_pose_verified": false,
+    "current_player_present": false,
+    "current_menu": "net.minecraft.class_442",
+    "newer_world_exit_and_saved_pose_preserved": true,
+    "scope": "Original rounded camera return was confirmed by server log. World subsequently left; safe final client read has no player. Persisted pose differs from test start and was preserved. No claim of fresh final camera equality."
+  },
+  "FPS_samples": 0
+}

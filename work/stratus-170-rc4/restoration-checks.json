@@ -1,0 +1,18 @@
+{
+  "verified": {
+    "HUD_pause": true,
+    "saved_flight_matches_initial": true,
+    "saved_time_rain_matches_initial": true,
+    "Iris_original_selection_config": true,
+    "options_file_unchanged": true,
+    "fixture_exact_original": true,
+    "helpers_stopped": true
+  },
+  "camera_menu_limits": {
+    "final_live_player_pose_verified": false,
+    "current_player_present": false,
+    "current_menu": "net.minecraft.class_442",
+    "newer_world_exit_and_saved_pose_preserved": true,
+    "scope": "Original rounded camera return was confirmed by server log. World subsequently left; safe final client read has no player. Persisted pose differs from test start and was preserved. No claim of fresh final camera equality."
+  }
+}

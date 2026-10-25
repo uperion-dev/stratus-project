@@ -84,8 +84,15 @@
   "newer_manual_overrides_preserved": {},
   "existing_new_version_preferences_preserved": false,
   "dry_run": false,
-  "loaded": false,
+  "loaded": true,
   "archive_created": true,
   "preferences_created": true,
-  "migration_applied": true
+  "migration_applied": true,
+  "loaded_option_count": 67,
+  "actual_saved_overrides_preserved": true,
+  "runtime_evidence": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc4/runtime-v3-Optional_Stratus-1.7.0-rc4.zip_.txt",
+  "release_capture": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc4/screenshots/rc4-release-panels.png",
+  "restoration": "Original rc3 enabled and HUD/pause/options preserved; exact fixture restored; helpers stopped. World later left and saved pose differs; newer menu/pose preserved, no fresh final camera equality claimed.",
+  "restoration_evidence": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc4/restoration-checks.json",
+  "QA_cleanup_evidence": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc4/qa-cleanup.json"
 }
