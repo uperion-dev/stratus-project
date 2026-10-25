@@ -1898,6 +1898,7 @@
     "work/stratus-170-rc4/damp-zero.fsh",
     "work/stratus-170-rc4/entity.fsh",
     "work/stratus-170-rc4/film-uniform.fsh",
+    "work/stratus-170-rc4/final-audit-run.txt",
     "work/stratus-170-rc4/final-audit.json",
     "work/stratus-170-rc4/final-client-safe.txt",
     "work/stratus-170-rc4/final-saved-player-state.json",
@@ -10919,6 +10920,6 @@
     "stratus-studio-cloud": "7a6b1f68f05b437467d981b8c9e1f03284084b7c"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "b07c5f5a772080f93b06f14702bbdace9ca59a6cc9b61644a703ce32d8ba2d00",
+  "fingerprint": "e3badd2ab34c2839620a378c3d5d9437546fec65a6564c62f135ad14c641f411",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
