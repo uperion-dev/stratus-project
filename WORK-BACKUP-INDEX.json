@@ -13499,6 +13499,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-centred-clean-header-preview-png-fd1548c5889e195e.zip",
       "bytes": 30925
+    },
+    "outputs/stratus-chromatic-cursor-dof-preview.png": {
+      "sha256": "38edcaaa33c5138327e39cd838976114010085e4ff8babf2a49b2e9a2b72c029",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-chromatic-cursor-dof-preview-png-6fc1ae8c53de40b9.zip",
+      "bytes": 52170
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
