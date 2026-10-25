@@ -12755,6 +12755,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-phone-nav-scroll-end-png-49486a6aae6fdd0c.zip",
       "bytes": 47191
+    },
+    "work/public-site-history/ccd29d5839960376d615fc1df8af7e0ac676539c.zip": {
+      "sha256": "d5b3de86e95b667c740dd7cd702e757e796eb0cf3d1beb1ffd170e261fb4b2ba",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-c91dd7e6127dd95f.zip",
+      "bytes": 24258689
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
