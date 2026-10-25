@@ -4,9 +4,14 @@
  const hero=document.querySelector('.immersive-hero'),image=hero?.querySelector('.hero-image'),motion=window.StratusMotion;if(!hero||!motion)return;
  const canvas=document.createElement('canvas');canvas.className='hero-water-droplets';canvas.setAttribute('aria-hidden','true');hero.append(canvas);
  const scene=document.createElement('canvas'),ctx=scene.getContext('2d',{alpha:false}),gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:true,antialias:true,powerPreference:'low-power'});
- let visible=true,dirty=true,needsDraw=true,lastCapture=0,prepared=null,pointerX=0,pointerY=0,fallbackLayer=null,failed=false,captureTimer=0,lastScrollY=-1;
+ let visible=true,dirty=true,needsDraw=true,lastCapture=0,prepared=null,pointerX=0,pointerY=0,fallbackLayer=null,failed=false,captureTimer=0,lastScrollY=-1,dropLayout=null;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)'),clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
- function fallback(){if(fallbackLayer)return;failed=true;canvas.hidden=true;fallbackLayer=document.createElement('div');fallbackLayer.className='hero-droplets-fallback';fallbackLayer.setAttribute('aria-hidden','true');fallbackLayer.innerHTML=[[16,27,30,21],[30,47,38,27],[44,58,26,34],[62,20,22,17],[74,36,39,26],[84,59,27,21],[66,71,18,24],[89,25,20,15],[56,40,17,22],[22,72,23,16]].map(([x,y,w,h],i)=>`<i style="left:${x}%;top:${y}%;width:${w}px;height:${h}px;rotate:${i*29-55}deg"></i>`).join('');hero.append(fallbackLayer);hero.dataset.waterRenderer='static-fallback';}
+ // Stable, separated droplets avoid a visible repeated grid or per-frame random work.
+ function makeDrops(w,h,em,box){const key=[w,h,em?.width||0,em?.height||0].join('/');if(dropLayout?.key===key){if(em)for(let i=0;i<2;i++){const d=dropLayout.drops[i];d.x=em.left-box.left+em.width*(i?.72:.28);d.y=em.top-box.top+em.height*(i?.54:.61);}return dropLayout.drops;}const excluded=[...hero.querySelectorAll('.hero-actions,.hero-bottom button')].map(el=>{const r=el.getBoundingClientRect();return {left:r.left-box.left-36,right:r.right-box.left+36,top:r.top-box.top-36,bottom:r.bottom-box.top+36};});const small=w<650,unit=clamp(w*.018,12,24),target=small?50:72,drops=[],random=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
+  if(em)for(const [i,x,size,aspect]of [[0,.28,.095,.72],[1,.72,.068,1.10]]){const radius=clamp(em.width*size,small?12:16,30);drops.push({x:em.left-box.left+em.width*x,y:em.top-box.top+em.height*(i?.54:.61),rx:radius,ry:radius*aspect,phase:1.7+i*2.3,depth:.95});}
+  for(let i=0;i<1200&&drops.length<target;i++){const rx=unit*(.32+.68*random(i*5+3)),ry=rx*(.65+.58*random(i*5+4)),x=w*(.055+.89*random(i*5+1)),y=h*(.13+.74*random(i*5+2));if(excluded.some(r=>x+rx*1.3>r.left&&x-rx*1.3<r.right&&y+ry*1.3>r.top&&y-ry*1.3<r.bottom))continue;if(drops.some(d=>Math.hypot((x-d.x)/(rx+d.rx+5),(y-d.y)/(ry+d.ry+5))<1.05))continue;drops.push({x,y,rx,ry,phase:i*2.399,depth:.82+random(i*5+5)*.30});}dropLayout={key,drops};return drops;
+ }
+ function fallback(){if(fallbackLayer)return;failed=true;canvas.hidden=true;fallbackLayer=document.createElement('div');fallbackLayer.className='hero-droplets-fallback';fallbackLayer.setAttribute('aria-hidden','true');const box=hero.getBoundingClientRect(),drops=makeDrops(box.width,box.height,hero.querySelector('h1 em')?.getBoundingClientRect(),box);fallbackLayer.innerHTML=drops.map(d=>`<i style="left:${(d.x-d.rx)/box.width*100}%;top:${(d.y-d.ry)/box.height*100}%;width:${d.rx*2}px;height:${d.ry*2}px;rotate:${d.phase*12}deg"></i>`).join('');hero.append(fallbackLayer);hero.dataset.waterRenderer='static-fallback';}
  if(!gl||!ctx){fallback();return;}
  const vertex=`attribute vec2 aPoint;uniform vec2 uResolution;uniform vec4 uDrop;varying vec2 vPoint;void main(){vPoint=uDrop.xy+aPoint*uDrop.zw*1.28;vec2 p=vPoint/uResolution;gl_Position=vec4(p.x*2.0-1.0,1.0-p.y*2.0,0.0,1.0);}`;
  const fragment=`precision highp float;uniform sampler2D uScene;uniform vec2 uResolution;uniform vec4 uDrop;uniform vec2 uShape;varying vec2 vPoint;
@@ -23,10 +28,7 @@
  function opacityOf(el,styles){let value=1;for(let node=el;node&&node!==hero;node=node.parentElement){let st=styles.get(node);if(!st){st=getComputedStyle(node);styles.set(node,st);}if(st.visibility==='hidden'||st.display==='none')return 0;value*=Number(st.opacity);}return value;}
  function measure(){
   const box=hero.getBoundingClientRect(),w=box.width,h=box.height;if(!w||!h)return null;
-  const em=hero.querySelector('h1 em')?.getBoundingClientRect(),small=w<650,unit=clamp(w*.024,14,30),spray=[[.12,.24,.64,.76],[.27,.29,.50,1.21],[.44,.18,.38,.72],[.60,.24,.78,.70],[.76,.30,1,.76],[.87,.42,.49,1.12],[.69,.51,.66,.71],[.92,.61,.77,.80],[.75,.74,.43,1.18],[.55,.68,.55,.72],[.24,.70,.43,.84],[.13,.52,.58,1.14],[.90,.21,.38,.78],[.48,.38,.38,1.17]];
-  const drops=spray.filter((_,i)=>!small||i<10).map(([x,y,size,aspect],i)=>({x:w*x,y:h*y,rx:unit*size,ry:unit*size*aspect,phase:i*2.399,depth:.82+(i%4)*.10}));
-  // Keep two smaller lenses on the actual lettering across responsive layouts.
-  if(em)for(const [i,x,size,aspect]of [[0,.28,.095,.72],[1,.72,.068,1.10]]){const radius=clamp(em.width*size,small?12:16,30);drops.push({x:em.left-box.left+em.width*x,y:em.top-box.top+em.height*(i?.54:.61),rx:radius,ry:radius*aspect,phase:1.7+i*2.3,depth:.95});}
+  const drops=makeDrops(w,h,hero.querySelector('h1 em')?.getBoundingClientRect(),box);
   const styles=new Map(),words=[];let characters=0;
   for(const textRoot of hero.querySelectorAll('.hero-content,.hero-manifesto,.hero-bottom,.scene-coordinate')){
    const walker=document.createTreeWalker(textRoot,NodeFilter.SHOW_TEXT);let node;

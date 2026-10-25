@@ -2,7 +2,6 @@
 // The navigation splits: its left piece travels to the logo, while the remainder closes at the right.
 (()=>{
  const header=document.querySelector('.topbar'),motion=window.StratusMotion,reduced=matchMedia('(prefers-reduced-motion: reduce)');if(!header||!motion)return;
- const centred=document.body.classList.contains('nav-centred-preview');
  const brand=header.querySelector('.brand'),nav=header.querySelector('nav'),links=[...nav.querySelectorAll('a')],label=brand.querySelector('span');if(!brand||!nav||!links.length)return;
  const cluster=document.createElement('div');cluster.className='brand-cluster';brand.before(cluster);cluster.append(brand);label.classList.add('brand-label');
  const toggle=document.createElement('button');toggle.type='button';toggle.className='nav-expand';toggle.setAttribute('aria-label','Expand navigation');toggle.setAttribute('aria-expanded','true');toggle.setAttribute('aria-controls','public-navigation');toggle.innerHTML='<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6 4.5 12 9 6 13.5Z"/></svg>';cluster.append(toggle);nav.id='public-navigation';
@@ -22,13 +21,13 @@
   header.classList.add('nav-splitting');nav.inert=true;traveller.style.visibility='visible';collapser.style.visibility='visible';if(!v.compact)navViewport.scrollLeft=v.expandedScroll;requestScrollState();
   if(flight){const at=Math.max(0,Math.min(1,Number(flight.currentTime)/640)),distance=parseFloat(getComputedStyle(traveller).offsetDistance)/100;flight.effect.setKeyframes(travelFrames(v.compact,at,Number.isFinite(distance)?distance:at));for(const effect of flightEffects){effect.playbackRate=v.compact?1:-1;effect.play();}return;}
   // Two equal physical halves collapse independently; the original controls stay hidden until rejoined.
-  const start={x:v.openLeft+v.pieceWidth/2,y:v.openTop+28},end={x:v.brandClosedLeft+74,y:v.brandTop+28},depth=centred?Math.min(112,v.available*.22):Math.min(220,v.available*.2);
-  const c1={x:start.x+(centred?0:Math.min(20,v.inset)),y:start.y+depth},c2={x:end.x+(centred?-Math.min(48,v.available*.12):Math.min(170,v.available*.3)),y:Math.max(start.y,end.y)+depth};
+  const start={x:v.inset+v.available-v.fullWidth+v.pieceWidth/2,y:v.openTop+28},end={x:v.inset+74,y:v.brandTop+28},depth=Math.min(220,v.available*.2);
+  const c1={x:start.x+Math.min(20,v.inset),y:start.y+depth},c2={x:end.x+Math.min(170,v.available*.3),y:Math.max(start.y,end.y)+depth};
   traveller.style.offsetPath=`path("M ${start.x} ${start.y} C ${c1.x} ${c1.y} ${c2.x} ${c2.y} ${end.x} ${end.y}")`;
   leftCopy.style.transform=`translateX(${-v.navScroll}px)`;rightCopy.style.transform=`translateX(${-v.pieceWidth-v.navScroll}px)`;
   copyLinks.forEach((link,i)=>{if(i%links.length===v.activeIndex)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
   collapser.querySelector('.nav-current-label').textContent=v.active.textContent;
-  collapser.style.right=`${v.closedRight}px`;
+  collapser.style.right=`${v.inset}px`;
   // One reversible clock keeps both halves arriving at the seam together.
   const travelTiming={duration:640,fill:'both',easing:'cubic-bezier(.42,0,.2,1)'},joinTiming={duration:640,fill:'both',easing:'linear'},collapseEase='cubic-bezier(.42,0,.58,1)',collapsedAt=360/640;
   header.style.setProperty('--nav-material-width',`${v.fullWidth}px`);
@@ -39,14 +38,13 @@
   const arrow=traveller.querySelector('.nav-flight-arrow').animate([{opacity:0,offset:0},{opacity:0,offset:.3},{opacity:1,offset:.7},{opacity:1,offset:1}],travelTiming);
   // The final 115 ms of expansion blends matching surfaces rather than switching scenes.
   const handoff=traveller.animate([{opacity:0,offset:0},{opacity:1,offset:.18},{opacity:1,offset:.8},{opacity:0,offset:1}],joinTiming);
-  // In the centred trial, clear the brand row before widening on expansion.
-  const rightSize=collapser.animate([{width:`${v.pieceWidth}px`,height:'56px',top:`${v.openTop}px`,right:`${v.openRight}px`,borderTopLeftRadius:'0px',borderBottomLeftRadius:'0px',borderLeftColor:'transparent',offset:0,easing:collapseEase},{width:`${v.closedWidth}px`,height:'56px',top:`${centred?v.openTop:v.brandTop}px`,right:`${v.closedRight}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:collapsedAt},{width:`${v.closedWidth}px`,height:'56px',top:`${centred?v.openTop:v.brandTop}px`,right:`${v.closedRight}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:.78,easing:collapseEase},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,right:`${v.closedRight}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:1}],joinTiming);
+  const rightSize=collapser.animate([{width:`${v.pieceWidth}px`,height:'56px',top:`${v.openTop}px`,borderTopLeftRadius:'0px',borderBottomLeftRadius:'0px',borderLeftColor:'transparent',offset:0,easing:collapseEase},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:collapsedAt},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:1}],joinTiming);
   const rightLabel=collapser.querySelector('.nav-half-content').animate([{opacity:1,offset:0},{opacity:0,offset:.25},{opacity:0,offset:1}],joinTiming);
   const rightCurrent=collapser.querySelector('.nav-current-label').animate([{opacity:0,offset:0},{opacity:0,offset:.35},{opacity:1,offset:collapsedAt},{opacity:1,offset:1}],joinTiming);
   const rightBlend=collapser.animate([{opacity:0,offset:0},{opacity:1,offset:.18},{opacity:1,offset:1}],joinTiming);
   const liveBlend=nav.animate([{opacity:1,offset:0},{opacity:0,offset:.18},{opacity:0,offset:1}],joinTiming);
   // The hidden live controls only change layout once, after their fade has finished.
-  const livePose=nav.animate([{width:`${v.fullWidth}px`,top:`${v.openTop}px`,right:`${v.openRight}px`,offset:0},{width:`${v.fullWidth}px`,top:`${v.openTop}px`,right:`${v.openRight}px`,offset:.18,easing:'steps(1,end)'},{width:`${v.closedWidth}px`,top:`${v.brandTop}px`,right:`${v.closedRight}px`,offset:.19},{width:`${v.closedWidth}px`,top:`${v.brandTop}px`,right:`${v.closedRight}px`,offset:1}],joinTiming);
+  const livePose=nav.animate([{width:`${v.fullWidth}px`,top:`${v.openTop}px`,offset:0},{width:`${v.fullWidth}px`,top:`${v.openTop}px`,offset:.18,easing:'steps(1,end)'},{width:`${v.closedWidth}px`,top:`${v.brandTop}px`,offset:.19},{width:`${v.closedWidth}px`,top:`${v.brandTop}px`,offset:1}],joinTiming);
   const trackPose=track.animate([{transform:'translateX(0px)',offset:0},{transform:'translateX(0px)',offset:.18,easing:'steps(1,end)'},{transform:`translateX(${-v.activeOffset}px)`,offset:.19},{transform:`translateX(${-v.activeOffset}px)`,offset:1}],joinTiming);
   flightEffects=[flight,leftSize,leftLabel,arrow,handoff,rightSize,rightLabel,rightCurrent,rightBlend,liveBlend,livePose,trackPose];
   rightSize.onfinish=()=>{if(rightSize.playbackRate>0&&mode==='compact'){liveBlend.cancel();livePose.cancel();trackPose.cancel();collapser.style.visibility='hidden';header.classList.remove('nav-splitting');nav.inert=false;requestScrollState();motion.request();}};
@@ -63,19 +61,19 @@
   // Geometry is stable between resize, font, route and label changes; scroll only compares positions.
   const freshLayout=layoutDirty||!layoutCache||layoutCache.viewportWidth!==s.w;
   if(freshLayout){
-   const view=document.querySelector('[data-view]:not([hidden])'),anchor=view?.querySelector('.immersive-hero,.section-intro'),active=nav.querySelector('[aria-current=page]')||links[0],inset=Math.max(12,s.w*.04),available=s.w-inset*2,naturalWidth=track.scrollWidth,fullWidth=Math.min(naturalWidth+12,available),narrow=centred||available<185+fullWidth+24,closedWidth=active.offsetWidth+12,brandOpenLeft=centred?(s.w-185)/2:inset,brandClosedLeft=centred?(s.w-100-12-closedWidth)/2:inset,openLeft=centred?(s.w-fullWidth)/2:inset+available-fullWidth,openRight=s.w-openLeft-fullWidth,closedRight=centred?s.w-brandClosedLeft-112-closedWidth:inset;
+   const view=document.querySelector('[data-view]:not([hidden])'),anchor=view?.querySelector('.immersive-hero,.section-intro'),active=nav.querySelector('[aria-current=page]')||links[0],inset=Math.max(12,s.w*.04),available=s.w-inset*2,naturalWidth=track.scrollWidth,fullWidth=Math.min(naturalWidth+12,available),narrow=available<185+fullWidth+24;
    if(anchor!==observedAnchor){if(observedAnchor)sizeObserver?.unobserve(observedAnchor);if(anchor)sizeObserver?.observe(anchor);observedAnchor=anchor;}
-   layoutCache={active,activeIndex:links.indexOf(active),activeOffset:active.offsetLeft,inset,available,fullWidth,naturalWidth,narrow,brandOpenLeft,brandClosedLeft,openLeft,openRight,closedRight,openTop:narrow?76:14,brandTop:narrow?10:14,closedWidth,pieceWidth:fullWidth/2,anchorEnd:anchor?anchor.getBoundingClientRect().bottom+s.y:Infinity,viewportWidth:s.w};layoutDirty=false;
+   layoutCache={active,activeIndex:links.indexOf(active),activeOffset:active.offsetLeft,inset,available,fullWidth,naturalWidth,narrow,openTop:narrow?76:14,brandTop:narrow?10:14,closedWidth:active.offsetWidth+12,pieceWidth:fullWidth/2,anchorEnd:anchor?anchor.getBoundingClientRect().bottom+s.y:Infinity,viewportWidth:s.w};layoutDirty=false;
   }
   const past=s.y>=layoutCache.anchorEnd;if(!past)manual=false;
   const compact=past&&!manual,nextMode=compact?'compact':past?'peek':'open',changing=mode!==nextMode,innerWidth=layoutCache.fullWidth-12,maxScroll=Math.max(0,layoutCache.naturalWidth-innerWidth);
   let targetScroll=Math.max(0,Math.min(maxScroll,compact&&mode!=='compact'?navViewport.scrollLeft:expandedScroll));
   if(freshLayout||lastActive!==layoutCache.active){const left=layoutCache.activeOffset,right=left+layoutCache.closedWidth-12;if(left<targetScroll+18)targetScroll=Math.max(0,left-18);else if(right>targetScroll+innerWidth-18)targetScroll=Math.min(maxScroll,right-innerWidth+18);}
-  return {...layoutCache,compact,past,mode:nextMode,lightX:changing?nav.style.getPropertyValue('--lg-x')||'22%':'22%',lightY:changing?nav.style.getPropertyValue('--lg-y')||'0%':'0%',expandedScroll:targetScroll,navScroll:changing?(compact?navViewport.scrollLeft:targetScroll):0,brandLeft:compact?layoutCache.brandClosedLeft:layoutCache.brandOpenLeft,navRight:compact?layoutCache.closedRight:layoutCache.openRight,y:compact?layoutCache.brandTop:layoutCache.openTop,width:compact?layoutCache.closedWidth:layoutCache.fullWidth,shift:compact?-layoutCache.activeOffset:0,paused:s.paused||reduced.matches};
+  return {...layoutCache,compact,past,mode:nextMode,lightX:changing?nav.style.getPropertyValue('--lg-x')||'22%':'22%',lightY:changing?nav.style.getPropertyValue('--lg-y')||'0%':'0%',expandedScroll:targetScroll,navScroll:changing?(compact?navViewport.scrollLeft:targetScroll):0,y:compact?layoutCache.brandTop:layoutCache.openTop,width:compact?layoutCache.closedWidth:layoutCache.fullWidth,shift:compact?-layoutCache.activeOffset:0,paused:s.paused||reduced.matches};
  }
 
  function write(v){
-  const changed=mode!==v.mode||lastActive!==v.active,splitChanged=(mode==='compact')!==v.compact,hadMode=!!mode,nextGeometry=`${v.inset}/${v.fullWidth}/${v.openTop}/${v.closedWidth}/${v.activeIndex}/${v.closedRight}/${v.brandOpenLeft}/${v.brandClosedLeft}`,layoutChanged=geometry!==nextGeometry,pausedChanged=lastPaused!==v.paused;
+  const changed=mode!==v.mode||lastActive!==v.active,splitChanged=(mode==='compact')!==v.compact,hadMode=!!mode,nextGeometry=`${v.inset}/${v.fullWidth}/${v.openTop}/${v.closedWidth}/${v.activeIndex}`,layoutChanged=geometry!==nextGeometry,pausedChanged=lastPaused!==v.paused;
   if(!changed&&!layoutChanged&&!pausedChanged)return;
   lastActive=v.active;lastPaused=v.paused;if(flight&&layoutChanged)stopFlight();geometry=nextGeometry;expandedScroll=v.expandedScroll;
   if(changed){mode=v.mode;header.dataset.navMode=mode;header.classList.toggle('nav-compact',v.compact);header.classList.toggle('nav-peek',mode==='peek');const expanderFocused=document.activeElement===toggle;toggle.setAttribute('aria-expanded',String(!v.compact));toggle.setAttribute('aria-label','Expand navigation');toggle.tabIndex=v.compact?0:-1;toggle.setAttribute('aria-hidden',String(!v.compact));if(!v.compact&&expanderFocused){v.active.focus({preventScroll:true});focusAfterExpansion=v.active;}if(v.compact)focusAfterExpansion=null;toggle.inert=!v.compact;
@@ -83,7 +81,7 @@
    if(v.compact)navViewport.scrollLeft=0;
    for(const link of links){const hide=v.compact&&link!==v.active;link.inert=hide;link.tabIndex=hide?-1:0;if(hide)link.setAttribute('aria-hidden','true');else link.removeAttribute('aria-hidden');}
   }
-  motion.style(header,'--header-inset',`${v.inset}px`);motion.style(header,'--brand-left',`${v.brandLeft}px`);motion.style(nav,'--nav-right',`${v.navRight}px`);motion.style(nav,'--nav-top',`${v.y}px`);
+  motion.style(header,'--header-inset',`${v.inset}px`);motion.style(nav,'--nav-top',`${v.y}px`);
   motion.style(nav,'--nav-width',`${v.width}px`);motion.style(track,'--nav-track-shift',`${v.shift}px`);
   header.classList.toggle('nav-stacked',v.narrow);header.classList.toggle('nav-motion-off',v.paused);
   if(v.paused&&flight)stopFlight();else if(splitChanged&&hadMode)animateSplit(v);
