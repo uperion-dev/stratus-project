@@ -13127,6 +13127,12 @@
       "tag": "project-work-snapshots",
       "asset": "public-site-history-3926639f9b62a04b.zip",
       "bytes": 24271209
+    },
+    "outputs/stratus-clear-droplets-nav-priority-preview.png": {
+      "sha256": "fb99a3e78cfdb7bbb769ae9cceb6beb67d21362b527eb0d12453971544b8b081",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-clear-droplets-nav-priority-preview-png-c8f6634ce3557046.zip",
+      "bytes": 83177
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
