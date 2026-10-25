@@ -4,9 +4,8 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 
 ## Pending changes
 
-- Proceed live FPS optimisation, keeping resulations. Find and use frameworks from other medium, ligth-weight shaders. 
+Batch0bc449ce. Frozen delta repeats rc3 reconciliation already implemented, so no duplicate rebuild. Explicit requests below supersede material-dependent sheen and the unconditional removal of old absorption dampness. Preserve all66 controls/preset quality/resolution/ranges, previous native/entity/water changes and the shared next queue.
 
-- Make all materals have the same ammount of sheen. Currently I can see some materals has a more matte look. 
-
-- Bring back a setting for the OG dampness. 
-
+- [ ] Resume live FPS optimisation at matched saved/Reference quality, framebuffer, resolution, distance and loaded scenes, recording focus/DynamicFPS/AFK and stable chunk gates. Research primary frameworks/algorithms used by medium/lightweight shader packs; reuse appropriate original principles with licence/attribution, not indiscriminate code imports. Measure bottlenecks before optimising, verify appearance and frame times; no speedup claim from unmatched/uncapped/unfocused samples.
+- [ ] Uniform material sheen: use the same film reflectance/lobe roughness across eligible exposed solid/leaf materials, so material class alone does not make one more matte. Preserve native diffuse colours, true off controls, weather/exposure/drainage and interior/back-face guards. Different normals, exposure, textures and lighting can still affect apparent brightness. Compare material panels at matched geometry/light with film off/on.
+- [ ] Restore optional original absorption/retained-dampness response through a separate clearly labelled control, default0/off. Retain WET_DARKENING as the existing retired no-op and preserve its saved values. Reuse the original project algorithm where applicable, including porosity/drainage/weather/humidity; keep it independent of film/sheen zeros and preserve dry mode. Verify zero equivalence, graded response, porous/nonporous/sheltered/rain cases and saved-option migration.

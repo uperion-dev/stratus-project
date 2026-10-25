@@ -1,0 +1,10 @@
+Stratus1.7.0-rc3 intended checks:
+Match Main options/camera/weather/time/resolution/render distance. Verify exact
+loaded pack. Compare rc2/candidate/dry exposed leaves, inward/back faces, holes,
+sheltered and opaque-blocked faces; confirm zero remains dry and no cast shadows.
+Compare temporal on/off static sky, motion/rotation, FOV, water entry/exit,
+terrain disocclusions, reload/dimension/time/weather/status changes. Reject
+trails, bright headers/rectangles and stale history. Stable frame sampling must
+pass the loaded-column/mesh gate and be focused with Dynamic FPS/AFK recorded.
+Restore any temporary mod runtime switch and all original client/world state.
+Never claim gameplay gains from synthetic GPU timing or unfocused frames.

@@ -2,8 +2,8 @@
 
 Navigation and fingerprints only; this file does not certify a release or authorise additional work.
 Project: /Users/william.lei/Documents/ChatGPT/MC Shader Making
-Active brief: /Users/william.lei/Documents/ChatGPT/MC Shader Making/work/Custom instructions/IN-PROGRESS/0bc449ce-fb20-4840-8668-cde4168e3735/CHANGES.md
-Target snapshot: /Users/william.lei/Documents/ChatGPT/MC Shader Making/work/Custom instructions/IN-PROGRESS/0bc449ce-fb20-4840-8668-cde4168e3735/TASK.md
+Active brief: work/Custom instructions/IN-PROGRESS/0bc449ce-fb20-4840-8668-cde4168e3735/CHANGES.md
+Target snapshot: work/Custom instructions/IN-PROGRESS/0bc449ce-fb20-4840-8668-cde4168e3735/TASK.md
 Brief SHA256: c34166a1618f4a1ba40e3ae1028cb75d2bffe78fe71d96b2ae28be1dc7089b8d
 Target SHA256: b8d0719b52758cf4e1402fe02ddec320944f5fa262b62f6b0d9553b2ae28accb
 Current shared TASK SHA256: b8d0719b52758cf4e1402fe02ddec320944f5fa262b62f6b0d9553b2ae28accb

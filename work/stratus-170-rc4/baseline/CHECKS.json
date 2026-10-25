@@ -1,0 +1,192 @@
+{
+  "version": "1.7.0-rc3",
+  "batch": "b9a03cf9-f681-4a16-8115-d8b44fd3525a",
+  "native_pairs": 768,
+  "native_failures": 0,
+  "compile_log": "work/stratus-170-rc3/compile-final.log",
+  "temporal_GPU": {
+    "scope": "actual atmosphere shader, zero-density fresh evaluation vs distinctive prior sky sample; native GPU",
+    "cases": [
+      {
+        "name": "valid consecutive static sky reused",
+        "pass": true
+      },
+      {
+        "name": "odd fresh frame",
+        "pass": true
+      },
+      {
+        "name": "stale history rejected",
+        "pass": true
+      },
+      {
+        "name": "weather change rejected",
+        "pass": true
+      },
+      {
+        "name": "camera translation rejected",
+        "pass": true
+      },
+      {
+        "name": "camera rotation rejected",
+        "pass": true
+      },
+      {
+        "name": "FOV change rejected",
+        "pass": true
+      },
+      {
+        "name": "viewport resize rejected",
+        "pass": true
+      },
+      {
+        "name": "blindness change rejected",
+        "pass": true
+      },
+      {
+        "name": "darkness change rejected",
+        "pass": true
+      },
+      {
+        "name": "world time change rejected",
+        "pass": true
+      },
+      {
+        "name": "terrain disocclusion fresh",
+        "pass": true
+      },
+      {
+        "name": "prior terrain not reused",
+        "pass": true
+      },
+      {
+        "name": "reload first frame fresh",
+        "pass": true
+      },
+      {
+        "name": "slow frame rejected",
+        "pass": true
+      },
+      {
+        "name": "submerged bypass",
+        "pass": true
+      },
+      {
+        "name": "header cell written",
+        "pass": true
+      }
+    ],
+    "failures": 0,
+    "gl_error": 0
+  },
+  "resolve_GPU": {
+    "scope": "actual atmosphere resolve, encoded sky and ordinary volume, reserved-header exact fallback, submerged bypass",
+    "cases": 4,
+    "failures": 0,
+    "gl_error": 0
+  },
+  "raster_GPU": {
+    "scope": "actual geometry raster metadata and native underside coverage; native entity helper",
+    "cases": [
+      {
+        "variant": "terrain",
+        "material": 4112,
+        "coverage_or_film_mask": 1.0,
+        "transmission_coverage": 0.0
+      },
+      {
+        "variant": "terrain",
+        "material": 4113,
+        "coverage_or_film_mask": 1.0,
+        "transmission_coverage": 0.0
+      },
+      {
+        "variant": "terrain",
+        "material": 4101,
+        "coverage_or_film_mask": 0.0,
+        "transmission_coverage": 0.0
+      },
+      {
+        "variant": "terrain",
+        "material": 4113,
+        "coverage_or_film_mask": 0.0,
+        "transmission_coverage": 0.0
+      },
+      {
+        "variant": "underside",
+        "material": 4100,
+        "coverage_or_film_mask": 0.6,
+        "transmission_coverage": 0.6
+      },
+      {
+        "variant": "underside-half",
+        "material": 4100,
+        "coverage_or_film_mask": 0.3,
+        "transmission_coverage": 0.3
+      },
+      {
+        "variant": "underside-zero",
+        "material": 4100,
+        "coverage_or_film_mask": 0.0,
+        "transmission_coverage": 0.0
+      },
+      {
+        "variant": "underside-stratus",
+        "material": 4100,
+        "coverage_or_film_mask": 0.0,
+        "transmission_coverage": 0.0
+      }
+    ],
+    "samples": 14,
+    "failures": 0,
+    "gl_error": 0
+  },
+  "controls": {
+    "previous_controls": 65,
+    "current_controls": 66,
+    "previous_defaults_and_ranges_preserved": true,
+    "reachable_controls": 66,
+    "tooltips_present": true,
+    "all_four_original_preset_assignments_preserved": true,
+    "all_presets_native_water_default": true,
+    "block_tokens_preserved": 620,
+    "changed_shader_files": [
+      "shaders/core/atmosphere-resolve.frag.glsl",
+      "shaders/core/atmosphere.frag.glsl",
+      "shaders/core/options.glsl",
+      "shaders/core/raster.frag.glsl",
+      "shaders/core/resolve.frag.glsl",
+      "shaders/core/temporal-atmosphere.glsl",
+      "shaders/lang/en_us.lang",
+      "shaders/shaders.properties"
+    ],
+    "failures": 0
+  },
+  "migration": {
+    "checks": [
+      "Dry run writes nothing",
+      "Every original override carried",
+      "Old preferences byte-identical",
+      "Manual TEMPORAL_ATMOSPHERE=0 preserved",
+      "Manual TEMPORAL_ATMOSPHERE=1 preserved",
+      "Manual WATER_STYLE=0 preserved",
+      "Manual TRANSPARENT_REFLECTIONS=0.00 preserved",
+      "Manual WATER_TEXTURE=0.00 preserved",
+      "Missing new option uses source default",
+      "Existing new release preferences win",
+      "Atomic create never overwrites",
+      "Conflicting archive refused"
+    ],
+    "failures": 0,
+    "scope": "Actual candidate policy and installer in temporary profiles"
+  },
+  "timing": "Synthetic diagnostic only; noisy batches and a native sampler warning. Not accepted gameplay FPS or a global speedup claim.",
+  "runtime": "Source-equivalent temporary QA pipeline and finite static/on/off/rotation/reload captures reviewed. External install receipt records exact final ZIP loading separately.",
+  "limitations": [
+    "Static sky reuse only; no reuse while camera moves/rotates/bobs or on terrain/water.",
+    "Exposed front-facing foliage restored; back-facing planes excluded. Full voxel-neighbour leaf-cluster interior visibility remains pending.",
+    "Mac locked; focused FPS unavailable. Temporary Dynamic FPS runtime switch restored automatically, config bytes unchanged.",
+    "Finite still captures do not establish absence of motion ghosting/flicker. Broader live FOV/weather/status/dimension/water transitions remain pending.",
+    "Known prior waterline defect and earlier pending batches unchanged."
+  ]
+}

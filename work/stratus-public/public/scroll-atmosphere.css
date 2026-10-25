@@ -1,9 +1,15 @@
 /* The scene softens, while the droplet canvas samples the original sharp image and text. */
-body.stratus-immersive .immersive-hero .hero-image{filter:blur(1.6px)!important}
+body.stratus-immersive .immersive-hero .hero-image{filter:blur(2.2px) saturate(.78) contrast(.9)!important}
 body.stratus-immersive .hero-water-droplets{filter:none!important}
-@media(max-width:650px){body.stratus-immersive .immersive-hero .hero-image{filter:blur(1.2px)!important}}
+@media(max-width:650px){body.stratus-immersive .immersive-hero .hero-image{filter:blur(1.7px) saturate(.78) contrast(.9)!important}}
 @media(prefers-reduced-transparency:reduce){body.stratus-immersive .immersive-hero .hero-image{filter:none!important}}
 
 /* Keep the full glass material at rest; simplify its live sampling during the short nav trip. */
 body.nav-glass-fade .topbar.navigation-ready.nav-animating:before{backdrop-filter:blur(6px) saturate(1.15);-webkit-backdrop-filter:blur(6px) saturate(1.15)}
 body.stratus-immersive .topbar.navigation-ready.nav-animating :is(.brand-cluster,.nav-backplate){backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* Fine 2x grain sits in background paint, never on text, glass controls or water lenses.
+   A static tile avoids a full-screen noise filter or another animation loop. */
+body.stratus-immersive{background-image:url('/assets/fine-grain.png');background-repeat:repeat;background-size:256px 256px}
+body.stratus-immersive .atmosphere-wordmark{background-image:url('/assets/fine-grain.png'),linear-gradient(#0b1417,var(--page));background-size:256px 256px,100% 100%;background-repeat:repeat,no-repeat}
+body.stratus-immersive .immersive-hero .hero-shade:after{content:'';position:absolute;inset:0;pointer-events:none;background-image:url('/assets/fine-grain.png'),linear-gradient(125deg,#c7d7ce12,#adc3b909 55%,#0917130a);background-size:256px 256px,100% 100%;background-repeat:repeat,no-repeat}
