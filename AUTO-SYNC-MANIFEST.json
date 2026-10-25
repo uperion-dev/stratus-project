@@ -310,8 +310,6 @@
     "development/stratus-public/public/base.css",
     "development/stratus-public/public/breakaway.css",
     "development/stratus-public/public/breakaway.js",
-    "development/stratus-public/public/cursor-dof.css",
-    "development/stratus-public/public/cursor-dof.js",
     "development/stratus-public/public/experience.css",
     "development/stratus-public/public/glass-soft-edges.css",
     "development/stratus-public/public/header-chromatic.css",
@@ -10923,6 +10921,6 @@
     "stratus-studio-cloud": "7a6b1f68f05b437467d981b8c9e1f03284084b7c"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "f198267aa5850ba6dfa4f883fb31fd031bba89cf0a8cca7bf3a91916617db02e",
+  "fingerprint": "cc87d5c8c965deee6261d8dc2bea9deb0d47ab2aeed1c7bcedb088833b6374ea",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }

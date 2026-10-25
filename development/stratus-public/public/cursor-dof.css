@@ -1,6 +1,0 @@
-/* One masked backdrop pass: crisp around the pointer, a soft focal falloff elsewhere. */
-.cursor-dof{position:fixed;inset:0;z-index:1000;pointer-events:none;--focus-x:50vw;--focus-y:50vh;--focus-radius:clamp(100px,16vw,220px);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);mask-image:radial-gradient(circle at var(--focus-x) var(--focus-y),transparent 0 var(--focus-radius),#0004 calc(var(--focus-radius) + 90px),#000 calc(var(--focus-radius) + 260px));-webkit-mask-image:radial-gradient(circle at var(--focus-x) var(--focus-y),transparent 0 var(--focus-radius),#0004 calc(var(--focus-radius) + 90px),#000 calc(var(--focus-radius) + 260px));opacity:0;transition:opacity .15s}
-.cursor-dof[data-active=true]{opacity:1}
-body.effects-paused .cursor-dof{opacity:0}
-@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce),(prefers-reduced-transparency:reduce),(forced-colors:active){.cursor-dof{display:none}}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.cursor-dof{display:none}}
