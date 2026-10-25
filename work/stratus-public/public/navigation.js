@@ -47,14 +47,14 @@
   const leftSize=traveller.animate([{width:`${v.pieceWidth}px`,height:'56px',borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderTopRightRadius:'0px',borderBottomRightRadius:'0px',borderRightColor:'transparent',offset:0,easing:collapseEase},{width:'44px',height:'44px',borderTopLeftRadius:'22px',borderBottomLeftRadius:'22px',borderTopRightRadius:'22px',borderBottomRightRadius:'22px',borderRightColor:'var(--lg-rim)',offset:collapsedAt},{width:'44px',height:'44px',borderTopLeftRadius:'22px',borderBottomLeftRadius:'22px',borderTopRightRadius:'22px',borderBottomRightRadius:'22px',borderRightColor:'var(--lg-rim)',offset:1}],joinTiming);
   const leftLabel=traveller.querySelector('.nav-flight-label').animate([{opacity:1,offset:0},{opacity:0,offset:.25},{opacity:0,offset:1}],travelTiming);
   const arrow=traveller.querySelector('.nav-flight-arrow').animate([{opacity:0,offset:0},{opacity:0,offset:.3},{opacity:1,offset:.7},{opacity:1,offset:1}],travelTiming);
-  // Both surfaces hand off together during the final 64 ms of the join.
-  const handoff=traveller.animate([{opacity:0,offset:0},{opacity:1,offset:.1},{opacity:1,offset:.8},{opacity:0,offset:1}],joinTiming);
+  // Swap whole glass surfaces at matching geometry; never cross-fade their material opacity.
+  const handoff=traveller.animate([{opacity:1},{opacity:1}],joinTiming);
   const rightSize=collapser.animate([{width:`${v.pieceWidth}px`,height:'56px',top:`${v.openTop}px`,borderTopLeftRadius:'0px',borderBottomLeftRadius:'0px',borderLeftColor:'transparent',offset:0,easing:collapseEase},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:collapsedAt},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:1}],joinTiming);
   const rightLabel=collapser.querySelector('.nav-half-content').animate([{opacity:1,offset:0},{opacity:0,offset:.25},{opacity:0,offset:1}],joinTiming);
   const rightCurrent=collapser.querySelector('.nav-current-label').animate([{opacity:0,offset:0},{opacity:0,offset:.35},{opacity:1,offset:collapsedAt},{opacity:1,offset:1}],joinTiming);
-  const rightBlend=collapser.animate([{opacity:0,offset:0},{opacity:1,offset:.1},{opacity:1,offset:1}],joinTiming);
-  const liveBlend=nav.animate([{opacity:1,offset:0},{opacity:0,offset:.1},{opacity:0,offset:1}],joinTiming);
-  // The hidden live controls only change layout once, after their fade has finished.
+  const rightBlend=collapser.animate([{opacity:1},{opacity:1}],joinTiming);
+  const liveBlend=nav.animate([{opacity:0},{opacity:0}],joinTiming);
+  // Hidden live controls change layout once while the two visible halves carry the material.
   const livePose=nav.animate([{width:`${v.fullWidth}px`,top:`${v.openTop}px`,offset:0},{width:`${v.fullWidth}px`,top:`${v.openTop}px`,offset:.18,easing:'steps(1,end)'},{width:`${v.closedWidth}px`,top:`${v.brandTop}px`,offset:.19},{width:`${v.closedWidth}px`,top:`${v.brandTop}px`,offset:1}],joinTiming);
   const trackPose=track.animate([{transform:'translateX(0px)',offset:0},{transform:'translateX(0px)',offset:.18,easing:'steps(1,end)'},{transform:`translateX(${-v.activeOffset}px)`,offset:.19},{transform:`translateX(${-v.activeOffset}px)`,offset:1}],joinTiming);
   flightMorphs={left:leftSize,right:rightSize};
@@ -73,7 +73,7 @@
   // Geometry is stable between resize, font, route and label changes; scroll only compares positions.
   const freshLayout=layoutDirty||!layoutCache||layoutCache.viewportWidth!==s.w;
   if(freshLayout){
-   const view=document.querySelector('[data-view]:not([hidden])'),anchor=view?.querySelector('.immersive-hero,.section-intro'),active=nav.querySelector('[aria-current=page]')||links[0],inset=Math.max(12,s.w*.04),available=s.w-inset*2,naturalWidth=track.scrollWidth,fullWidth=Math.min(naturalWidth+12,available),narrow=available<185+fullWidth+24;
+   const view=document.querySelector('[data-view]:not([hidden])'),anchor=view?.querySelector('.immersive-hero,.section-intro'),active=nav.querySelector('[aria-current=page]')||links[0],inset=Math.max(12,s.w*.04),available=s.w-inset*2,naturalWidth=track.scrollWidth,fullWidth=Math.min(naturalWidth+12,available),narrow=available<200+fullWidth+24;
    if(anchor!==observedAnchor){if(observedAnchor)sizeObserver?.unobserve(observedAnchor);if(anchor)sizeObserver?.observe(anchor);observedAnchor=anchor;}
    layoutCache={active,activeIndex:links.indexOf(active),activeOffset:active.offsetLeft,inset,available,fullWidth,naturalWidth,narrow,openTop:narrow?76:14,brandTop:narrow?10:14,closedWidth:active.offsetWidth+12,pieceWidth:fullWidth/2,anchorEnd:anchor?anchor.getBoundingClientRect().bottom+s.y:Infinity,viewportWidth:s.w};layoutDirty=false;
   }
@@ -94,7 +94,7 @@
    if(v.compact)navViewport.scrollLeft=0;
    for(const link of links){const hide=v.compact&&link!==v.active;link.inert=hide;link.tabIndex=hide?-1:0;if(hide)link.setAttribute('aria-hidden','true');else link.removeAttribute('aria-hidden');}
   }
-  motion.style(header,'--header-inset',`${v.inset}px`);motion.style(nav,'--nav-top',`${v.y}px`);
+  motion.style(header,'--nav-material-width',`${v.fullWidth}px`);motion.style(header,'--header-inset',`${v.inset}px`);motion.style(nav,'--nav-top',`${v.y}px`);
   motion.style(nav,'--nav-width',`${v.width}px`);motion.style(track,'--nav-track-shift',`${v.shift}px`);
   header.classList.toggle('nav-stacked',v.narrow);header.classList.toggle('nav-motion-off',v.paused);
   if(v.paused&&joinSettle){joinSettle.cancel();joinSettle=null;releaseNav();}
