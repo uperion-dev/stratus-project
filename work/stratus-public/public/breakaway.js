@@ -4,7 +4,7 @@
  const motion=window.StratusMotion,body=document.body,header=document.querySelector('.topbar'),reduced=matchMedia('(prefers-reduced-motion: reduce)'),coarse=matchMedia('(pointer: coarse)'),transparency=matchMedia('(prefers-reduced-transparency: reduce)');if(!motion)return;
  const edgeFraction=.10,edgeFadeFraction=.72,verticalFadeFraction=.10,renderResolution=()=>Math.min(3,Math.max(2,devicePixelRatio||1)),surfaces=['left','right'].map(side=>{const canvas=document.createElement('canvas');canvas.className=`shard-reflections shard-edge-${side}`;canvas.setAttribute('aria-hidden','true');body.append(canvas);return {side,canvas,ctx:canvas.getContext('2d',{alpha:true})};});if(surfaces.some(s=>!s.ctx))return;
  const canvas=surfaces[0].canvas,clamp=n=>Math.max(0,Math.min(1,n)),noise=n=>{const v=Math.sin(n*127.1+311.7)*43758.5453;return v-Math.floor(v);},smooth=n=>{n=clamp(n);return n*n*(3-2*n);};
- const headerBusy=()=>header?.classList.contains('nav-splitting');
+ const headerBusy=()=>header?.classList.contains('nav-animating');
  const idle=fn=>'requestIdleCallback'in window?requestIdleCallback(fn,{timeout:500}):setTimeout(fn,24);
  const textures=new Map(),particles=new Map();let epoch=0,w=0,h=0,bandHeight=400,routeSeed=0,lastTick=0,lastDraw=0,gateAt=performance.now(),latestY=0,elapsed=0,timer=0,diagnosticAt=0,resolution=renderResolution();
  const disabled=s=>s.hidden||s.paused||reduced.matches||transparency.matches||location.hash==='#feedback'||document.activeElement?.matches('input,textarea,select,:focus-visible')||document.querySelector('dialog[open]');
@@ -44,7 +44,7 @@
 
  function path(ctx,points){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();}
  function read(s){
-  const nextResolution=renderResolution();if(w!==s.w||h!==s.h||resolution!==nextResolution){resolution=nextResolution;setup(s);}latestY=s.y;const off=disabled(s);if(!off&&headerBusy())return 'hold';
+  const nextResolution=renderResolution();if(w!==s.w||h!==s.h||resolution!==nextResolution){resolution=nextResolution;setup(s);}latestY=s.y;const off=disabled(s);if(!off&&(s.navBusy||headerBusy()))return 'hold';
   if(!off){const first=Math.floor(s.y/bandHeight),last=Math.floor((s.y+s.h)/bandHeight);for(let i=first;i<=last;i++)capture(i);if(textures.size>4){const far=[...textures.values()].sort((a,b)=>Math.abs(b.y-latestY)-Math.abs(a.y-latestY));for(const old of far.slice(0,textures.size-4))textures.delete(old.index);}}return off;
  }
  function write(off,s){

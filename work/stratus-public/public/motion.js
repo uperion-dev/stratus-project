@@ -1,7 +1,7 @@
 'use strict';
 // Smoothly seek paused compositor animations: scroll powers every reveal and its reversal.
 (()=>{
- const motion=window.StratusMotion,body=document.body,root=document.documentElement,reduced=matchMedia('(prefers-reduced-motion: reduce)');if(!motion)return;
+ const motion=window.StratusMotion,body=document.body,root=document.documentElement,header=document.querySelector('.topbar'),reduced=matchMedia('(prefers-reduced-motion: reduce)');if(!motion)return;
  const groups=[['.hero-content','rise'],['.hero-manifesto,.scene-coordinate,.hero-bottom','detail'],['.workspace-card,.spec-section,.release,.upcoming-item,.roadmap-process li,.faq-list details,.preset-guide,.release-focus-grid article,#feedback-form','rise'],['.showcase-shot,.water-story-image,#home-gallery','image'],['.reference-strip,.platform-strip,.workflow-note,.roadmap-note,.spec-footnote,.public-footer','line'],['main [data-view] h1,main [data-view] h2,main [data-view] h3','heading'],['main [data-view] p,main [data-view] dl,.carousel-controls','copy'],['main [data-view] .button,main [data-view] .text-link,.home-heading>a,.chapter-label','detail']];
  const revealDuration=2600,records=new Map(),active=new Set();let observer,dirty=true,lastWidth=0,lastHeight=0,lastPaused=null,scrolled=false,lastTick=0;
  const clamp=n=>Math.max(0,Math.min(1,n)),disabled=()=>reduced.matches||body.classList.contains('effects-paused');
@@ -18,6 +18,7 @@
  if('IntersectionObserver'in window)observer=new IntersectionObserver(entries=>{for(const e of entries){const r=records.get(e.target);if(!r)continue;if(e.isIntersecting)active.add(r);else{active.delete(r);if(!disabled()&&!r.el.contains(document.activeElement)){r.animation.currentTime=0;r.p=0;r.el.dataset.revealProgress='0';}}}motion.request();},{rootMargin:'45% 0px 45% 0px'});
  function measure(s){for(const r of records.values()){if(r.el.closest('[data-view][hidden]'))continue;const b=r.el.getBoundingClientRect(),matrix=getComputedStyle(r.el).transform,m=matrix==='none'?null:new DOMMatrixReadOnly(matrix),offset=m?m.m42+(1-m.m22)*r.el.offsetHeight/2:0;r.top=b.top+s.y-offset;r.height=r.el.offsetHeight;}lastWidth=s.w;lastHeight=s.h;dirty=false;}
  motion.register('reversible-reveals',s=>{
+  if((s.navBusy||header?.classList.contains('nav-animating'))&&!disabled())return {values:[],settling:false,progress:clamp(s.y/Math.max(1,s.height-s.h)),hasScrolled:s.y>24};
   const now=performance.now(),dt=lastTick?Math.min(48,now-lastTick):16,gain=1-Math.exp(-dt/320);lastTick=now;
   const paused=disabled();if(paused!==lastPaused){lastPaused=paused;if(paused)for(const r of records.values()){r.animation.currentTime=revealDuration;r.p=1;r.el.dataset.revealProgress='1';}dirty=true;}
   if(dirty||lastWidth!==s.w||lastHeight!==s.h)measure(s);

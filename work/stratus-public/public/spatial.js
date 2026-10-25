@@ -30,7 +30,7 @@
  const motion=window.StratusMotion;let active=false,pointer=null;
  const enabled=()=>!reduced.matches&&!body.classList.contains('effects-paused');
  const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
- function read(state){if(state.hidden||hero.closest('[data-view][hidden]'))return null;const r=journey.getBoundingClientRect(),box=wordmark?.getBoundingClientRect();let tilt=null;
+ function read(state){if(state.hidden||state.navBusy||hero.closest('[data-view][hidden]')||document.querySelector('.topbar.nav-animating'))return null;const r=journey.getBoundingClientRect(),box=wordmark?.getBoundingClientRect();let tilt=null;
   if(pointer&&pointer.card.isConnected&&enabled()){const b=pointer.card.getBoundingClientRect();tilt={card:pointer.card,x:(pointer.x-b.left)/b.width,y:(pointer.y-b.top)/b.height};}pointer=null;
   return {progress:clamp(-r.top/Math.max(1,r.height-state.h)),travel:box?clamp((state.h-box.top)/(state.h+box.height)):.5,tilt};
  }
