@@ -13505,6 +13505,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-chromatic-cursor-dof-preview-png-6fc1ae8c53de40b9.zip",
       "bytes": 52170
+    },
+    "outputs/stratus-soft-glass-readable-dof-preview.png": {
+      "sha256": "5a6173bf566beb1a13447ef9d1b358db6749b5c1ee6ca701093e2fcd43d67a99",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-soft-glass-readable-dof-preview-png-8aba84df318e726f.zip",
+      "bytes": 67612
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

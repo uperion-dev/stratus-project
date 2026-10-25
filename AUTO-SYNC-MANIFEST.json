@@ -313,6 +313,7 @@
     "development/stratus-public/public/cursor-dof.css",
     "development/stratus-public/public/cursor-dof.js",
     "development/stratus-public/public/experience.css",
+    "development/stratus-public/public/glass-soft-edges.css",
     "development/stratus-public/public/header-chromatic.css",
     "development/stratus-public/public/header-fade.css",
     "development/stratus-public/public/immersive.css",
@@ -10922,6 +10923,6 @@
     "stratus-studio-cloud": "7a6b1f68f05b437467d981b8c9e1f03284084b7c"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "3bece666bc97d2f7ff016d6a021e66849540dac1607c67afa29e329a681b8b57",
+  "fingerprint": "f198267aa5850ba6dfa4f883fb31fd031bba89cf0a8cca7bf3a91916617db02e",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
