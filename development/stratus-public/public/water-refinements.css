@@ -1,0 +1,22 @@
+/* Unframed opening scene and a slower, reversible scroll composition. */
+body.stratus-immersive .hero-grid,body.stratus-immersive .scene-reticle,body.stratus-immersive .reading-progress{display:none!important}
+body.stratus-immersive .immersive-hero,body.stratus-immersive .hero-bottom{border:0;outline:0}
+body.stratus-immersive .spatial-journey{height:290svh;min-height:1800px}
+body.stratus-immersive .spatial-steps article{transition-duration:.95s}
+body.stratus-immersive .spatial-carousel .scene{transition-duration:1.45s,.95s,.95s,.65s}
+body.stratus-immersive .immersive-hero{overflow:clip}
+/* An illuminated feedback bubble, using only opacity and transform for its sheen. */
+body.stratus-immersive .topbar.navigation-ready :is(nav,.nav-traveller,.nav-collapser) .feedback-nav{position:relative;inset:auto;margin:0;isolation:isolate;overflow:hidden;padding:0 16px 0 35px;font-weight:600;color:#123b2b!important;border:1px solid #effff4a6;background:radial-gradient(ellipse at 26% 0,#ffffffe0,transparent 68%),linear-gradient(130deg,#d5fff0,#9ce3c5 65%,#c0ffe1);box-shadow:inset 0 1px 1px #fff,0 0 16px #a6f6d534;transition:color .2s,box-shadow .25s}
+body.stratus-immersive .topbar.navigation-ready :is(nav,.nav-traveller,.nav-collapser) .feedback-nav:before{content:'';position:absolute;left:12px;top:50%;width:15px;height:15px;transform:translateY(-50%);background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' d='M20 11.5a8 8 0 0 1-8 8H5l-3 2v-7a8 8 0 1 1 18-3ZM7 10h8m-8 4h5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' d='M20 11.5a8 8 0 0 1-8 8H5l-3 2v-7a8 8 0 1 1 18-3ZM7 10h8m-8 4h5'/%3E%3C/svg%3E") center/contain no-repeat}
+body.stratus-immersive .topbar.navigation-ready :is(nav,.nav-traveller,.nav-collapser) .feedback-nav:after{content:'';display:block;position:absolute;inset:-25% auto -25% -70%;width:65%;height:auto;pointer-events:none;background:linear-gradient(110deg,transparent,#ffffff9c,transparent);transform:translateX(-100%) rotate(12deg);animation:feedback-lustre 5.8s ease-in-out infinite}
+body.stratus-immersive .topbar.navigation-ready nav .feedback-nav:hover,body.stratus-immersive .topbar.navigation-ready nav .feedback-nav:focus-visible{box-shadow:inset 0 1px 1px #fff,0 0 22px #a6f6d566;color:#08291b!important}
+body.stratus-immersive .topbar.navigation-ready.nav-compact nav .feedback-nav{background:transparent;border-color:transparent;box-shadow:none;color:#f0fff6!important}
+body.stratus-immersive .topbar.navigation-ready.nav-compact nav .feedback-nav:after{display:none}
+@keyframes feedback-lustre{0%,65%{transform:translateX(-100%) rotate(12deg);opacity:0}70%{opacity:.7}91%,100%{transform:translateX(400%) rotate(12deg);opacity:0}}
+/* The water surface is pointer-transparent; all original links remain usable. */
+.hero-water-droplets{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;contain:strict}
+.hero-droplets-fallback{position:absolute;inset:0;z-index:5;pointer-events:none}
+.hero-droplets-fallback i{position:absolute;border-radius:58% 42% 53% 47% / 42% 63% 37% 58%;border:1px solid #d7f4e580;background:#dcfff30c;box-shadow:none;backdrop-filter:blur(.25px) saturate(1.05)}
+body.effects-paused .feedback-nav:after{animation:none!important;opacity:0}
+@media(max-width:650px){body.stratus-immersive .scene-coordinate{display:none}body.stratus-immersive .spatial-journey{height:auto;min-height:0}}
+@media(prefers-reduced-motion:reduce){body.stratus-immersive .feedback-nav:after{animation:none!important;opacity:0}body.stratus-immersive .spatial-steps article,body.stratus-immersive .spatial-carousel .scene{transition:none!important}}
