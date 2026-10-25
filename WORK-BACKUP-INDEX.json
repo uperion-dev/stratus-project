@@ -13493,6 +13493,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-title-focused-drops-preview-png-4a9bf2de189ce4b9.zip",
       "bytes": 55103
+    },
+    "outputs/stratus-centred-clean-header-preview.png": {
+      "sha256": "7d641ffc9e42c679e352f7d41f3ead1434bc1fcd2dd7778a4b9a18b89b3b3028",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-centred-clean-header-preview-png-fd1548c5889e195e.zip",
+      "bytes": 30925
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

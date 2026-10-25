@@ -8,6 +8,7 @@
   motion.style(root,'--camera-x',active?`${targetX}px`:'0px');motion.style(root,'--camera-y',active?`${targetY}px`:'0px');
  }
  const schedule=motion.request;motion.register('hero',null,update);
+ if(hero&&'IntersectionObserver'in window)new IntersectionObserver(entries=>hero.classList.toggle('hero-drift-paused',!entries[0].isIntersecting)).observe(hero);
  button.addEventListener('click',()=>{paused=!paused;schedule();});preference.addEventListener('change',()=>{paused=preference.matches;schedule();});
  hero?.addEventListener('pointermove',event=>{if(event.pointerType!=='mouse'||paused||preference.matches)return;targetX=(event.clientX/innerWidth-.5)*12;targetY=(event.clientY/innerHeight-.5)*10;schedule();},{passive:true});
  hero?.addEventListener('pointerleave',()=>{targetX=0;targetY=0;schedule();});

@@ -1,20 +1,22 @@
-/* Matte colour treatment keeps the scene sharp; water lenses retain their original refraction. */
-body.stratus-immersive .immersive-hero .hero-image{filter:saturate(.78) contrast(.9)!important}
-body.stratus-immersive .hero-water-droplets{filter:none!important}
-@media(prefers-reduced-transparency:reduce){body.stratus-immersive .immersive-hero .hero-image{filter:none!important}}
-
-
 /* Fine 2x grain sits in background paint, never on text, glass controls or water lenses.
    A static tile avoids a full-screen noise filter or another animation loop. */
 body.stratus-immersive{background-image:url('/assets/fine-grain.png');background-repeat:repeat;background-size:256px 256px}
 body.stratus-immersive .atmosphere-wordmark{background-image:url('/assets/fine-grain.png'),linear-gradient(#0b1417,var(--page));background-size:256px 256px,100% 100%;background-repeat:repeat,no-repeat}
-body.stratus-immersive .immersive-hero .hero-shade:after{content:'';position:absolute;inset:0;pointer-events:none;background-image:url('/assets/fine-grain.png'),linear-gradient(125deg,#c7d7ce12,#adc3b909 55%,#0917130a);background-size:256px 256px,100% 100%;background-repeat:repeat,no-repeat}
 
 /* Continuous curved travel avoids stopping at direction changes. Overscan covers every edge. */
 @property --hero-drift-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
-body.stratus-immersive .immersive-hero .hero-image{inset:-14%;width:128%;height:128%;translate:calc(cos(var(--hero-drift-angle))*4%) calc(sin(var(--hero-drift-angle))*3%);animation:hero-water-drift 30s linear infinite;will-change:translate}
-@keyframes hero-water-drift{from{--hero-drift-angle:0deg}to{--hero-drift-angle:360deg}}
+body.stratus-immersive .immersive-hero .hero-image{inset:-14%;width:128%;height:128%;translate:calc(cos(var(--hero-drift-angle))*4%) calc(sin(var(--hero-drift-angle))*3%);animation:hero-scene-drift 30s linear infinite;will-change:translate}
+@keyframes hero-scene-drift{from{--hero-drift-angle:0deg}to{--hero-drift-angle:360deg}}
 body.stratus-immersive:is(.effects-paused,.spatial-background) .immersive-hero .hero-image,
 body.stratus-immersive:has(.topbar.nav-animating) .immersive-hero .hero-image,
 body.stratus-immersive .immersive-hero.hero-drift-paused .hero-image{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){body.stratus-immersive .immersive-hero .hero-image{animation:none;translate:none;will-change:auto}}
+
+/* Centred opening composition. Navigation retains its reversible split behaviour. */
+body.stratus-immersive .immersive-hero .hero-image{filter:none!important}
+body.stratus-immersive .immersive-hero .hero-content{top:50%;bottom:auto;left:5%;right:5%;translate:0 -50%;display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center}
+body.stratus-immersive .immersive-hero h1{margin:0;max-width:100%;font-size:clamp(44px,8.7vw,132px);letter-spacing:-.055em;line-height:1.02;text-align:center}
+body.stratus-immersive .immersive-hero .hero-actions{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px}
+body.stratus-immersive .immersive-hero .hero-actions .button{min-width:0}
+body.stratus-immersive .immersive-hero .hero-bottom{justify-content:center;gap:32px}
+@media(max-width:650px){body.stratus-immersive .immersive-hero .hero-content{top:52%;gap:26px}.stratus-immersive .immersive-hero .hero-actions{max-width:100%}body.stratus-immersive .immersive-hero .hero-bottom{gap:24px}}
