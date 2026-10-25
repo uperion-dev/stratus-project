@@ -255,6 +255,16 @@
       "commit": "04153d0456cc929d0a0b6cec40b8651e558516b6",
       "archive": "04153d0456cc929d0a0b6cec40b8651e558516b6.zip",
       "sha256": "37e63262a1ceeafa9bbf13b1826530ef382ca52aecbc8118e5a63f8e92661655"
+    },
+    {
+      "commit": "150be3fb1d7c286a62e1510ede0916eaef224ff0",
+      "archive": "150be3fb1d7c286a62e1510ede0916eaef224ff0.zip",
+      "sha256": "77e87fde545b2166be6bf0dea93ce0988093a019670e5943680535688d899153"
+    },
+    {
+      "commit": "07dd46680a9f99058cc6ca2be55c6c53752ea0f4",
+      "archive": "07dd46680a9f99058cc6ca2be55c6c53752ea0f4.zip",
+      "sha256": "af2976cfcbacf3bbb42953ac0d13e53b1fb192937d6228c9ed9a8d9fce2a8092"
     }
   ],
   "privacy_filtered": true,

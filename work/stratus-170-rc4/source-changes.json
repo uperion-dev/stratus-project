@@ -1,0 +1,7 @@
+[
+  "shaders/core/diffuse.glsl",
+  "shaders/core/moisture.glsl",
+  "shaders/core/options.glsl",
+  "shaders/lang/en_us.lang",
+  "shaders/shaders.properties"
+]

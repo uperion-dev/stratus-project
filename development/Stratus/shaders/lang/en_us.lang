@@ -201,3 +201,6 @@ option.TEMPORAL_ATMOSPHERE=Temporal sky reuse
 option.TEMPORAL_ATMOSPHERE.comment=Reuses sky atmosphere for at most one frame only with a stationary camera and unchanged projection, time, weather and status. Moving views, terrain, water and invalid history are evaluated freshly at the selected quality. No frame skipping; may introduce one-frame cloud motion delay. Off evaluates every pixel freshly.
 value.TEMPORAL_ATMOSPHERE.0=Off
 value.TEMPORAL_ATMOSPHERE.1=On
+
+option.ORIGINAL_DAMPNESS=Original dampness
+option.ORIGINAL_DAMPNESS.comment=Restores optional porous-material absorption darkening and the original humidity/shelter/drainage response. Zero is off and preserves the current diffuse palette. Independent of surface film and sheen controls; nonporous materials stay unchanged. This is a local approximation, not stored wetness over time. The retired WET_DARKENING setting stays a no-op.

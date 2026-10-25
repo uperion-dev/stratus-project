@@ -77,6 +77,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define REFRACTION_QUALITY 0 //  [0 1 2]
 #define ATMOSPHERE_QUALITY 1 //  [0 1 2]
 #define TEMPORAL_ATMOSPHERE 1 //  [0 1]
+#define ORIGINAL_DAMPNESS 0.00 //  [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
 #define WATER_RENDER_QUALITY 1 //  [0 1 2]
 #define CLOUD_DENSITY 1.00 //  [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 1.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]

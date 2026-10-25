@@ -1,0 +1,9 @@
+fill 4200 160 4204 4201 164 4204 minecraft:stone
+fill 4202 160 4204 4203 164 4204 minecraft:dirt
+fill 4204 160 4204 4205 164 4204 minecraft:sandstone
+fill 4206 160 4204 4207 164 4204 minecraft:quartz_block
+fill 4208 160 4204 4209 164 4204 minecraft:iron_block
+fill 4210 160 4204 4211 164 4204 minecraft:gold_block
+fill 4212 160 4204 4213 164 4204 minecraft:oak_planks
+fill 4214 160 4204 4215 164 4204 minecraft:oak_leaves[persistent=true]
+fill 4216 160 4204 4217 164 4204 minecraft:white_wool

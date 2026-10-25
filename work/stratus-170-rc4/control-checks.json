@@ -1,0 +1,18 @@
+{
+  "previous_controls": 66,
+  "current_controls": 67,
+  "previous_defaults_and_ranges_preserved": true,
+  "reachable_controls": 67,
+  "tooltips_present": true,
+  "all_four_original_preset_assignments_preserved": true,
+  "all_presets_native_water_default": true,
+  "block_tokens_preserved": 620,
+  "changed_shader_files": [
+    "shaders/core/diffuse.glsl",
+    "shaders/core/moisture.glsl",
+    "shaders/core/options.glsl",
+    "shaders/lang/en_us.lang",
+    "shaders/shaders.properties"
+  ],
+  "failures": 0
+}

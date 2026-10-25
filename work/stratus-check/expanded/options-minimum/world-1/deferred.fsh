@@ -65,6 +65,7 @@ const float ambientOcclusionLevel = 0.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define REFRACTION_QUALITY 0 //  [0 1 2]
 #define ATMOSPHERE_QUALITY 0 //  [0 1 2]
 #define TEMPORAL_ATMOSPHERE 0 //  [0 1]
+#define ORIGINAL_DAMPNESS 0.00 //  [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
 #define WATER_RENDER_QUALITY 0 //  [0 1 2]
 #define CLOUD_DENSITY 0.15 //  [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 0.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
@@ -505,9 +506,30 @@ vec3 formIrradiance(vec3 normal, float skyExposure) {
 }
 // A surface film adds reflected highlights without changing the diffuse albedo.
 // Absorption darkening/retained dampness was deliberately retired in 1.6.9.
-// Material.x remains in the buffer for saved-layout compatibility, not gating.
+// Material absorption is used only by the separate optional original dampness.
+// Film reflectance and roughness are deliberately uniform across materials.
+// Original project1.6.7 absorption shape, restored independently of sheen.
+// The new amount replaces the old coupled dampness/darkening controls.
+float originalSurfaceMoisture(float sky,vec3 n,float absorption){
+#if DIMENSION_TYPE == 0
+    float humidity=clamp(biomeHumidity,0.0,1.0);
+    float upward=smoothstep(-0.15,0.85,n.y);
+    float exposed=smoothstep(0.12,0.83,sky)*(0.40+0.30*humidity+0.25*rainStrength)
+        *mix(0.55,1.0,upward);
+    float shelter=smoothstep(0.02,0.22,sky)*(1.0-smoothstep(0.22,0.85,sky));
+    float retained=humidity*clamp(absorption,0.0,1.0)*shelter*(0.10+0.12*upward);
+    return clamp(ORIGINAL_DAMPNESS*(exposed+retained),0.0,1.0);
+#else
+    return 0.0;
+#endif
+}
 vec3 wetSurfaceResponse(vec3 dry,vec3 n,vec3 playerPoint,float sky,vec2 material){
 #if DIMENSION_TYPE == 0
+    if(ORIGINAL_DAMPNESS>0.0){
+        float moisture=originalSurfaceMoisture(sky,n,material.x);
+        float saturation=moisture*(0.45+0.55*clamp(biomeHumidity,0.0,1.0));
+        dry/=1.0+1.40*saturation*clamp(material.x,0.0,1.0);
+    }
     float filmSource=WET_WEATHER_MODE==0?1.0:rainStrength;
     float film=filmSource*SURFACE_DAMPNESS*smoothstep(0.18,0.85,sky)
         *mix(0.78,1.0,clamp(n.y*0.5+0.5,0.0,1.0));
@@ -522,7 +544,8 @@ vec3 wetSurfaceResponse(vec3 dry,vec3 n,vec3 playerPoint,float sky,vec2 material
             // angle-dependent film, never absorption or diffuse recolouring.
             dry=mix(dry,environment,coat);
             vec3 light=broadLightDirection(),halfway=unitVector(view+light);
-            float exponent=mix(80.0,16.0,clamp(material.y,0.0,1.0));
+            // Same lobe for every material; normals/exposure still matter.
+            float exponent=mix(80.0,16.0,0.68);
             float lobe=pow(max(dot(n,halfway),0.0),exponent)*(exponent+2.0)/6.283185307;
             dry+=sunlightColour()*solarDaylight()*max(dot(n,light),0.0)
                 *lobe*film*WET_SHEEN*0.008*(1.0-0.65*rainStrength);
@@ -573,14 +596,15 @@ uniform sampler2D depthtex1;
 #ifndef STRATUS_MOISTURE_INCLUDED
 #define STRATUS_MOISTURE_INCLUDED
 // Thin film on exposed solid blocks, including non-porous materials.
-// No absorption darkening, retained dampness or extra reflection pass.
+// Optional original absorption is independent; no extra reflection pass.
 vec3 materialMoisture(vec3 dry,vec3 viewPoint,vec2 uv){
 #if DIMENSION_TYPE == 0
-    if(SURFACE_DAMPNESS<=0.0||WET_SHEEN<=0.0)return dry;
+    if((SURFACE_DAMPNESS<=0.0||WET_SHEEN<=0.0)&&ORIGINAL_DAMPNESS<=0.0)return dry;
     vec4 surface=texture(colortex1,uv);
-    if(surface.a<0.5)return dry; // Entities, held items, plants and emitters stay dry.
+    if(surface.a<0.5)return dry; // Entities, held items, excluded/back faces and emitters stay dry.
     vec3 n=unitVector(surface.xyz),p=playerFromView(viewPoint);
-    vec2 material=texture(colortex2,uv).xy;
+    vec2 material=vec2(0.0,0.68);
+    if(ORIGINAL_DAMPNESS>0.0)material.x=texture(colortex2,uv).x;
     float sky=texture(colortex0,uv).r;
     return wetSurfaceResponse(dry,n,p,sky,material);
 #else
