@@ -200,6 +200,16 @@
       "commit": "ccd29d5839960376d615fc1df8af7e0ac676539c",
       "archive": "ccd29d5839960376d615fc1df8af7e0ac676539c.zip",
       "sha256": "d5b3de86e95b667c740dd7cd702e757e796eb0cf3d1beb1ffd170e261fb4b2ba"
+    },
+    {
+      "commit": "dfc590a437bcbf46827284c075a99f62b75c8ff3",
+      "archive": "dfc590a437bcbf46827284c075a99f62b75c8ff3.zip",
+      "sha256": "52d363bf72a7d6d2a1ed254df762e08b8990b27c47e0622695f20db673867d47"
+    },
+    {
+      "commit": "a66f9dbc501de91c86843c4b68fa36d79fc8fecc",
+      "archive": "a66f9dbc501de91c86843c4b68fa36d79fc8fecc.zip",
+      "sha256": "4c9125f817f0ebd30a4239931d5dfd63091945f42307ebd88b47617f043c37fc"
     }
   ],
   "privacy_filtered": true,

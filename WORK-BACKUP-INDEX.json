@@ -12779,6 +12779,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-water-droplets-preview-png-3b652ca4da425415.zip",
       "bytes": 104229
+    },
+    "work/public-site-history/a66f9dbc501de91c86843c4b68fa36d79fc8fecc.zip": {
+      "sha256": "4c9125f817f0ebd30a4239931d5dfd63091945f42307ebd88b47617f043c37fc",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-832078f72445bf35.zip",
+      "bytes": 24263753
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
