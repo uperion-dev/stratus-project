@@ -13535,6 +13535,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-lighter-collapse-preview-png-e2d49238b9e86fbb.zip",
       "bytes": 65909
+    },
+    "work/public-site-history/de81ed60330eb02fabcf6e04a750ab8c08d0dd2e.zip": {
+      "sha256": "39795700021c18a2ec84ccb5d43954c5d46a006b7e71924b1e5fba4d3133e2ff",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-1cacce530cf1a01c.zip",
+      "bytes": 24480092
+    },
+    "outputs/stratus-fixed-pane-collapse-preview.png": {
+      "sha256": "e2a65ef80a955418193b51c0855ee801e9d4a78152e6f0f18eaacad37dea2495",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-fixed-pane-collapse-preview-png-2b46c32563a3a31a.zip",
+      "bytes": 64941
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

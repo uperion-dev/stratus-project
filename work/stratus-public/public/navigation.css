@@ -92,3 +92,11 @@ body.stratus-immersive .topbar.navigation-ready .nav-traveller{transform:transla
 body.stratus-immersive .topbar.navigation-ready .nav-collapser{transform:translateZ(0);will-change:transform}
 body.stratus-immersive .topbar.navigation-ready.nav-animating .feedback-nav:after,
 body.stratus-immersive .topbar.navigation-ready.nav-animating .feedback-orbit i{animation-play-state:paused!important}
+
+/* Fixed glass panes avoid resizing a live blur texture on every animation frame. */
+body.stratus-immersive .topbar.navigation-ready :is(.nav-traveller,.nav-collapser){border:0;border-radius:0;will-change:clip-path,transform}
+body.stratus-immersive .topbar.navigation-ready .nav-traveller{will-change:clip-path,offset-distance,transform}
+body.stratus-immersive .topbar.navigation-ready .nav-flight-rim{position:absolute;display:block;pointer-events:none;z-index:2;border:1px solid var(--lg-rim);border-radius:28px;box-shadow:inset 0 1px 2px #f3fff924,inset 0 -1px 2px #00191036;contain:layout style}
+body.stratus-immersive .topbar.navigation-ready .nav-traveller .nav-flight-rim{left:50%;top:50%;transform:translate(-50%,-50%)}
+body.stratus-immersive .topbar.navigation-ready .nav-collapser .nav-flight-rim{right:0;top:0;height:56px}
+body.stratus-immersive .topbar.navigation-ready .nav-collapser .nav-current-label{left:auto;right:0;width:var(--nav-closed-width,82px)}
