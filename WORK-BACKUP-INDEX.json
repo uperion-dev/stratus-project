@@ -12821,6 +12821,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-restored-header-dense-droplets-preview-png-00eaf0de5bb436b5.zip",
       "bytes": 104571
+    },
+    "work/public-site-history/883631e505497e057af31d46e07cbf650a244a12.zip": {
+      "sha256": "ab93e797ab8177f8fe14ddd9e50f5830791beb2b3fcce339c70b1f637cd5d84c",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-202342fe8756a9bd.zip",
+      "bytes": 24265675
+    },
+    "outputs/stratus-strong-refraction-preview.png": {
+      "sha256": "1d2a9f89e6c79719ecc38692798f00b70b6e791bcb3dea873a8fe5a6eef0ac5f",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-strong-refraction-preview-png-7d0148bfaffb6326.zip",
+      "bytes": 102928
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
