@@ -12785,6 +12785,18 @@
       "tag": "project-work-snapshots",
       "asset": "public-site-history-832078f72445bf35.zip",
       "bytes": 24263753
+    },
+    "work/public-site-history/39d45eebd6788ad9ecc428bd11a4d9a1b029836e.zip": {
+      "sha256": "4a256c348c4054b20dbdebf7e86f0d189235927a360e4db1df35267ee0d02c6c",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-ad108797af4da1c1.zip",
+      "bytes": 24264156
+    },
+    "outputs/stratus-flat-droplets-preview.png": {
+      "sha256": "5c1e8ef3cf530d76c4446f85d46fbd7a55b31d61941eeefc34036d91252274ba",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-flat-droplets-preview-png-310032d278ff52b7.zip",
+      "bytes": 102809
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
