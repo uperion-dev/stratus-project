@@ -13151,6 +13151,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-matte-grain-preview-png-df18e2890c7c3df1.zip",
       "bytes": 55125
+    },
+    "work/stratus-170-rc4/agent/read.jar": {
+      "sha256": "d86695c89e6b2eb9c57579d14f8c20a1057fcdc9421cd975976e47a64b64d1f1",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-766cae164b025f65.zip",
+      "bytes": 5399
+    },
+    "outputs/stratus-fine-grain-content-preview.png": {
+      "sha256": "e99f05e66fd8c406fcd446299e63c83cfa6c6dea11d7d95239cc4a5d55512ea6",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-fine-grain-content-preview-png-be2d72f982a69077.zip",
+      "bytes": 52084
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
