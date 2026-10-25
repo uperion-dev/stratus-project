@@ -252,6 +252,9 @@
     "development/Stratus/shaders/world1/gbuffers_water.vsh",
     "development/Stratus/shaders/world1/gbuffers_weather.fsh",
     "development/Stratus/shaders/world1/gbuffers_weather.vsh",
+    "development/stratus-public/public/motion.js",
+    "development/stratus-public/public/navigation.css",
+    "development/stratus-public/public/spatial.js",
     "outputs/Stratus-1.0.6-visual-checks/index.html",
     "outputs/Stratus-1.0.6-visual-checks/results.json",
     "outputs/Stratus-1.1.0-visual-checks/index.html",
@@ -10094,6 +10097,6 @@
     "stratus-studio-cloud": "7a6b1f68f05b437467d981b8c9e1f03284084b7c"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "9e15605eaf7681a8743f815c92cbb4174cdfd56f2e5da242b141ccd88dc30810",
+  "fingerprint": "27b01f40840c4ae6e2f8f53f816e22c890c766f9911f2994a8afd89fa3153055",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
