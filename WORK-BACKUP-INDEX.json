@@ -12767,6 +12767,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-phone-nav-preview-png-8b749128d5652a6d.zip",
       "bytes": 36598
+    },
+    "work/public-site-history/dfc590a437bcbf46827284c075a99f62b75c8ff3.zip": {
+      "sha256": "52d363bf72a7d6d2a1ed254df762e08b8990b27c47e0622695f20db673867d47",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-5e7552c4247ff863.zip",
+      "bytes": 24263743
+    },
+    "outputs/stratus-water-droplets-preview.png": {
+      "sha256": "96000b6fe52aa5d735f52caf0f1fe1797d584b4fe6f1999b85414077a3f89b74",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-water-droplets-preview-png-3b652ca4da425415.zip",
+      "bytes": 104229
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
