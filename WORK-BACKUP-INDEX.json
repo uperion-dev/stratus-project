@@ -13475,6 +13475,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-restored-water-matte-preview-png-0a3a3c8c55688378.zip",
       "bytes": 59718
+    },
+    "outputs/stratus-fewer-drops-preview.png": {
+      "sha256": "3964d219ce8449c0dfba2c82ce33f75efcbf035a2a412cd2bf3ccae81e92d1ce",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-fewer-drops-preview-png-391f90908ade1683.zip",
+      "bytes": 58945
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
