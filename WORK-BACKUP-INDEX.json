@@ -13517,6 +13517,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-no-dof-subtle-chromatic-preview-png-dcf05588e4a330ce.zip",
       "bytes": 69137
+    },
+    "outputs/stratus-balanced-chromatic-preview.png": {
+      "sha256": "778b351f9dc88f242270e8f188b93b6f73d65c5c7899c4609cce95fd6cc68caf",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-balanced-chromatic-preview-png-3af3ed1dfcad59e5.zip",
+      "bytes": 68487
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
