@@ -240,6 +240,11 @@
       "commit": "c74369811ada9515e20a555eeb1a231722032923",
       "archive": "c74369811ada9515e20a555eeb1a231722032923.zip",
       "sha256": "cb29b9e315a0d9983ee91c0d1ac24f3f727ec72cf1490233c62072e9f77435a3"
+    },
+    {
+      "commit": "dbb4192c1acfae750eb393be2f47bb298cc25c48",
+      "archive": "dbb4192c1acfae750eb393be2f47bb298cc25c48.zip",
+      "sha256": "777476be1eb4b310d0fecf22f0948e0bc4298e5e90aa8a754c90a97e7fa769f6"
     }
   ],
   "privacy_filtered": true,

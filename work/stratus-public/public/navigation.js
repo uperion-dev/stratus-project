@@ -8,8 +8,8 @@
  const track=document.createElement('div');track.className='nav-track';track.append(...links);const navViewport=document.createElement('div');navViewport.className='nav-viewport';navViewport.append(track);nav.append(navViewport);for(const side of ['start','end']){const cue=document.createElement('span');cue.className=`nav-scroll-cue nav-scroll-cue-${side}`;cue.setAttribute('aria-hidden','true');cue.innerHTML=`<svg viewBox="0 0 12 18"><path d="${side==='start'?'M8 4 3 9l5 5':'m4 4 5 5-5 5'}"/></svg>`;nav.append(cue);}const backplate=document.createElement('div');backplate.className='nav-backplate';backplate.setAttribute('aria-hidden','true');nav.prepend(backplate);nav.classList.add('nav-split-frame');header.classList.add('navigation-ready');
  const traveller=document.createElement('div');traveller.className='nav-traveller';traveller.setAttribute('aria-hidden','true');traveller.inert=true;traveller.innerHTML='<div class="nav-flight-label"></div><span class="nav-flight-arrow">'+toggle.innerHTML+'</span>';header.append(traveller);
  const collapser=document.createElement('div');collapser.className='nav-collapser';collapser.setAttribute('aria-hidden','true');collapser.inert=true;collapser.innerHTML='<div class="nav-half-content"></div><span class="nav-current-label"></span>';header.append(collapser);
- let manual=false,lastY=scrollY,mode='',flight=null,flightEffects=[],geometry='',focusAfterExpansion=null,layoutCache=null,layoutDirty=true,observedAnchor=null,lastPaused=null,lastActive=null,expandedScroll=0,scrollStateFrame=0;
- function stopFlight(){for(const effect of flightEffects)effect.cancel();flightEffects=[];flight=null;traveller.style.visibility='hidden';collapser.style.visibility='hidden';header.classList.remove('nav-splitting');nav.inert=false;if(mode!=='compact')navViewport.scrollLeft=expandedScroll;requestScrollState();motion.request();if(focusAfterExpansion&&document.activeElement===document.body)focusAfterExpansion.focus({preventScroll:true});focusAfterExpansion=null;}
+ let manual=false,lastY=scrollY,mode='',flight=null,flightEffects=[],flightMorphs=null,joinSettle=null,geometry='',focusAfterExpansion=null,layoutCache=null,layoutDirty=true,observedAnchor=null,lastPaused=null,lastActive=null,expandedScroll=0,scrollStateFrame=0;
+ function stopFlight(){joinSettle?.cancel();joinSettle=null;flightMorphs=null;for(const effect of flightEffects)effect.cancel();flightEffects=[];flight=null;traveller.style.visibility='hidden';collapser.style.visibility='hidden';header.classList.remove('nav-splitting');nav.inert=false;if(mode!=='compact')navViewport.scrollLeft=expandedScroll;requestScrollState();motion.request();if(focusAfterExpansion&&document.activeElement===document.body)focusAfterExpansion.focus({preventScroll:true});focusAfterExpansion=null;}
  function copyTrack(offset){const copy=track.cloneNode(true);copy.style.transform=`translateX(${offset}px)`;for(const link of copy.querySelectorAll('a')){link.removeAttribute('href');link.tabIndex=-1;link.inert=true;link.removeAttribute('aria-hidden');}return copy;}
  const selection=document.createElement('i');selection.className='nav-selection';selection.setAttribute('aria-hidden','true');track.prepend(selection);header.classList.add('nav-has-selector');let selectionAnimation=null,selectionPage=null,selectionX=-1,selectionWidth=-1;
  function placeSelection(v){const x=v.activeOffset,w=v.closedWidth-12,page=v.active.dataset.page;if(selectionPage===page&&selectionX===x&&selectionWidth===w&&!v.paused&&!v.compact)return;const changed=selectionPage!==null&&selectionPage!==page,oldTransform=getComputedStyle(selection).transform,m=oldTransform==='none'?null:new DOMMatrixReadOnly(oldTransform),oldX=m?.m41||0,oldW=selection.getBoundingClientRect().width||w;selectionAnimation?.cancel();selection.style.width=`${w}px`;selection.style.transform=`translateX(${x}px)`;header.dataset.navPage=page;
@@ -20,10 +20,16 @@
  // A quiet ease-in accelerates into a damped elastic arrival. Sampled once per trip.
  function travelEase(t){if(t<=0)return 0;if(t>=1)return 1;if(t<.3)return .17*Math.pow(t/.3,2);const q=(t-.3)/.7;return .17+.83*(1-Math.exp(-7.5*q)*(Math.cos(9*q)+.72*Math.sin(9*q)));}
  function travelFrames(compact,at=compact?0:1,distance=compact?0:1){const frames=[];for(let i=0;i<=64;i++){const u=i/64,offset=compact?at+(1-at)*u:at*(1-u),p=compact?distance+(1-distance)*travelEase(u):distance*(1-travelEase(u));frames.push({offsetDistance:`${p*100}%`,offset});}if(!compact)frames.reverse();if(frames[0].offset>0)frames.unshift({...frames[0],offset:0});if(frames.at(-1).offset<1)frames.push({...frames.at(-1),offset:1});return frames;}
+ // Shape and path share one progress value on return; neither half waits at the seam.
+ function synchroniseJoin(v,at=1,distance=1){
+  if(!flightMorphs)return;const l=getComputedStyle(traveller),r=getComputedStyle(collapser),start={lw:parseFloat(l.width),lh:parseFloat(l.height),lo:parseFloat(l.borderTopLeftRadius),li:parseFloat(l.borderTopRightRadius),rw:parseFloat(r.width),rt:parseFloat(r.top),ri:parseFloat(r.borderTopLeftRadius)},path=[],left=[],right=[],mix=(a,b,p)=>a+(b-a)*p;
+  for(let i=0;i<=64;i++){const u=i/64,p=u*u*(3-2*u),offset=at*(1-u);path.push({offsetDistance:`${distance*(1-p)*100}%`,offset});left.push({width:`${mix(start.lw,v.pieceWidth,p)}px`,height:`${mix(start.lh,56,p)}px`,borderTopLeftRadius:`${mix(start.lo,28,p)}px`,borderBottomLeftRadius:`${mix(start.lo,28,p)}px`,borderTopRightRadius:`${mix(start.li,0,p)}px`,borderBottomRightRadius:`${mix(start.li,0,p)}px`,offset});right.push({width:`${mix(start.rw,v.pieceWidth,p)}px`,height:'56px',top:`${mix(start.rt,v.openTop,p)}px`,borderTopLeftRadius:`${mix(start.ri,0,p)}px`,borderBottomLeftRadius:`${mix(start.ri,0,p)}px`,offset});}
+  for(const frames of [path,left,right]){frames.reverse();if(frames.at(-1).offset<1)frames.push({...frames.at(-1),offset:1});}left[0].borderRightColor='transparent';left.at(-1).borderRightColor=l.borderRightColor;right[0].borderLeftColor='transparent';right.at(-1).borderLeftColor=r.borderLeftColor;flight.effect.setKeyframes(path);flightMorphs.left.effect.setKeyframes(left);flightMorphs.right.effect.setKeyframes(right);
+ }
  function animateSplit(v){
-  if(v.paused){stopFlight();return;}
+  if(v.paused){stopFlight();return;}joinSettle?.cancel();joinSettle=null;
   header.classList.add('nav-splitting');nav.inert=true;traveller.style.visibility='visible';collapser.style.visibility='visible';if(!v.compact)navViewport.scrollLeft=v.expandedScroll;requestScrollState();
-  if(flight){const at=Math.max(0,Math.min(1,Number(flight.currentTime)/640)),distance=parseFloat(getComputedStyle(traveller).offsetDistance)/100;flight.effect.setKeyframes(travelFrames(v.compact,at,Number.isFinite(distance)?distance:at));for(const effect of flightEffects){effect.playbackRate=v.compact?1:-1;effect.play();}return;}
+  if(flight){const at=Math.max(0,Math.min(1,Number(flight.currentTime)/640)),distance=parseFloat(getComputedStyle(traveller).offsetDistance)/100;if(v.compact)flight.effect.setKeyframes(travelFrames(true,at,Number.isFinite(distance)?distance:at));else synchroniseJoin(v,at,Number.isFinite(distance)?distance:at);for(const effect of flightEffects){effect.playbackRate=v.compact?1:-1;effect.play();}return;}
   // Two equal physical halves collapse independently; the original controls stay hidden until rejoined.
   const start={x:v.inset+v.available-v.fullWidth+v.pieceWidth/2,y:v.openTop+28},end={x:v.inset+74,y:v.brandTop+28},depth=Math.min(220,v.available*.2);
   const c1={x:start.x+Math.min(20,v.inset),y:start.y+depth},c2={x:end.x+Math.min(170,v.available*.3),y:Math.max(start.y,end.y)+depth};
@@ -41,21 +47,22 @@
   const leftSize=traveller.animate([{width:`${v.pieceWidth}px`,height:'56px',borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderTopRightRadius:'0px',borderBottomRightRadius:'0px',borderRightColor:'transparent',offset:0,easing:collapseEase},{width:'44px',height:'44px',borderTopLeftRadius:'22px',borderBottomLeftRadius:'22px',borderTopRightRadius:'22px',borderBottomRightRadius:'22px',borderRightColor:'var(--lg-rim)',offset:collapsedAt},{width:'44px',height:'44px',borderTopLeftRadius:'22px',borderBottomLeftRadius:'22px',borderTopRightRadius:'22px',borderBottomRightRadius:'22px',borderRightColor:'var(--lg-rim)',offset:1}],joinTiming);
   const leftLabel=traveller.querySelector('.nav-flight-label').animate([{opacity:1,offset:0},{opacity:0,offset:.25},{opacity:0,offset:1}],travelTiming);
   const arrow=traveller.querySelector('.nav-flight-arrow').animate([{opacity:0,offset:0},{opacity:0,offset:.3},{opacity:1,offset:.7},{opacity:1,offset:1}],travelTiming);
-  // The final 115 ms of expansion blends matching surfaces rather than switching scenes.
-  const handoff=traveller.animate([{opacity:0,offset:0},{opacity:1,offset:.18},{opacity:1,offset:.8},{opacity:0,offset:1}],joinTiming);
+  // Both surfaces hand off together during the final 64 ms of the join.
+  const handoff=traveller.animate([{opacity:0,offset:0},{opacity:1,offset:.1},{opacity:1,offset:.8},{opacity:0,offset:1}],joinTiming);
   const rightSize=collapser.animate([{width:`${v.pieceWidth}px`,height:'56px',top:`${v.openTop}px`,borderTopLeftRadius:'0px',borderBottomLeftRadius:'0px',borderLeftColor:'transparent',offset:0,easing:collapseEase},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:collapsedAt},{width:`${v.closedWidth}px`,height:'56px',top:`${v.brandTop}px`,borderTopLeftRadius:'28px',borderBottomLeftRadius:'28px',borderLeftColor:'var(--lg-rim)',offset:1}],joinTiming);
   const rightLabel=collapser.querySelector('.nav-half-content').animate([{opacity:1,offset:0},{opacity:0,offset:.25},{opacity:0,offset:1}],joinTiming);
   const rightCurrent=collapser.querySelector('.nav-current-label').animate([{opacity:0,offset:0},{opacity:0,offset:.35},{opacity:1,offset:collapsedAt},{opacity:1,offset:1}],joinTiming);
-  const rightBlend=collapser.animate([{opacity:0,offset:0},{opacity:1,offset:.18},{opacity:1,offset:1}],joinTiming);
-  const liveBlend=nav.animate([{opacity:1,offset:0},{opacity:0,offset:.18},{opacity:0,offset:1}],joinTiming);
+  const rightBlend=collapser.animate([{opacity:0,offset:0},{opacity:1,offset:.1},{opacity:1,offset:1}],joinTiming);
+  const liveBlend=nav.animate([{opacity:1,offset:0},{opacity:0,offset:.1},{opacity:0,offset:1}],joinTiming);
   // The hidden live controls only change layout once, after their fade has finished.
   const livePose=nav.animate([{width:`${v.fullWidth}px`,top:`${v.openTop}px`,offset:0},{width:`${v.fullWidth}px`,top:`${v.openTop}px`,offset:.18,easing:'steps(1,end)'},{width:`${v.closedWidth}px`,top:`${v.brandTop}px`,offset:.19},{width:`${v.closedWidth}px`,top:`${v.brandTop}px`,offset:1}],joinTiming);
   const trackPose=track.animate([{transform:'translateX(0px)',offset:0},{transform:'translateX(0px)',offset:.18,easing:'steps(1,end)'},{transform:`translateX(${-v.activeOffset}px)`,offset:.19},{transform:`translateX(${-v.activeOffset}px)`,offset:1}],joinTiming);
+  flightMorphs={left:leftSize,right:rightSize};
   flightEffects=[flight,leftSize,leftLabel,arrow,handoff,rightSize,rightLabel,rightCurrent,rightBlend,liveBlend,livePose,trackPose];
   rightSize.onfinish=()=>{if(rightSize.playbackRate>0&&mode==='compact'){liveBlend.cancel();livePose.cancel();trackPose.cancel();collapser.style.visibility='hidden';header.classList.remove('nav-splitting');nav.inert=false;requestScrollState();motion.request();}};
-  const primaryFlight=flight;primaryFlight.onfinish=()=>{if(flight!==primaryFlight)return;if(primaryFlight.playbackRate<0)stopFlight();else traveller.style.visibility='hidden';};
+  const primaryFlight=flight;primaryFlight.onfinish=()=>{if(flight!==primaryFlight)return;if(primaryFlight.playbackRate<0){stopFlight();if(!reduced.matches&&!document.body.classList.contains('effects-paused'))joinSettle=nav.animate([{transform:'scaleX(1)'},{transform:'scaleX(1.006)',offset:.3},{transform:'scaleX(.998)',offset:.65},{transform:'scaleX(1)'}],{duration:180,easing:'ease-out'});}else traveller.style.visibility='hidden';};
   // A page restored at a scrolled position can expand smoothly without a previous collapse.
-  if(!v.compact)for(const effect of flightEffects){effect.currentTime=640;effect.playbackRate=-1;effect.play();}
+  if(!v.compact){for(const effect of flightEffects){effect.currentTime=640;effect.pause();}synchroniseJoin(v);for(const effect of flightEffects){effect.playbackRate=-1;effect.play();}}
 
  }
 
@@ -89,6 +96,7 @@
   motion.style(header,'--header-inset',`${v.inset}px`);motion.style(nav,'--nav-top',`${v.y}px`);
   motion.style(nav,'--nav-width',`${v.width}px`);motion.style(track,'--nav-track-shift',`${v.shift}px`);
   header.classList.toggle('nav-stacked',v.narrow);header.classList.toggle('nav-motion-off',v.paused);
+  if(v.paused&&joinSettle){joinSettle.cancel();joinSettle=null;}
   if(v.paused&&flight)stopFlight();else if(splitChanged&&hadMode)animateSplit(v);
   if(!v.compact&&!header.classList.contains('nav-splitting'))navViewport.scrollLeft=expandedScroll;requestScrollState();
  }
