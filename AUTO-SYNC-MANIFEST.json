@@ -310,7 +310,9 @@
     "development/stratus-public/public/base.css",
     "development/stratus-public/public/breakaway.css",
     "development/stratus-public/public/breakaway.js",
+    "development/stratus-public/public/cursor-dof.css",
     "development/stratus-public/public/experience.css",
+    "development/stratus-public/public/header-chromatic.css",
     "development/stratus-public/public/header-fade.css",
     "development/stratus-public/public/immersive.css",
     "development/stratus-public/public/immersive.js",
@@ -10919,6 +10921,6 @@
     "stratus-studio-cloud": "7a6b1f68f05b437467d981b8c9e1f03284084b7c"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "8550a77c625f985a0f24d4ed7eb15833a55c44c715b5f863444cc6f44c8f97aa",
+  "fingerprint": "f93edf8605dcd458718287306c406330caf395496cf0e43dffcca12f76c0729e",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
