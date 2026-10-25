@@ -1,0 +1,10 @@
+[
+  "shaders/core/atmosphere-resolve.frag.glsl",
+  "shaders/core/atmosphere.frag.glsl",
+  "shaders/core/options.glsl",
+  "shaders/core/raster.frag.glsl",
+  "shaders/core/resolve.frag.glsl",
+  "shaders/core/temporal-atmosphere.glsl",
+  "shaders/lang/en_us.lang",
+  "shaders/shaders.properties"
+]

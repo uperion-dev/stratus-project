@@ -64,6 +64,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define BIOME_WATER 1 //  [0 1]
 #define REFRACTION_QUALITY 2 //  [0 1 2]
 #define ATMOSPHERE_QUALITY 2 //  [0 1 2]
+#define TEMPORAL_ATMOSPHERE 1 //  [0 1]
 #define WATER_RENDER_QUALITY 2 //  [0 1 2]
 #define CLOUD_DENSITY 3.00 //  [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 2.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
@@ -642,6 +643,9 @@ const int colortex8Format = RGBA16F;
 const int colortex9Format = RGBA16F;
 const int colortex10Format = RGBA16F;
 const int colortex11Format = RGBA16F;
+#if TEMPORAL_ATMOSPHERE == 1
+const bool colortex11Clear = false;
+#endif
 const int colortex12Format = RGBA16F;
 const int colortex13Format = RGBA16F;
 const int colortex15Format = RGBA16F;

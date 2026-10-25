@@ -69,7 +69,8 @@
     "ambientOcclusionLevel": "1.00",
     "WATER_STYLE": "1",
     "TRANSPARENT_REFLECTIONS": "0.75",
-    "TRANSPARENT_REFRACTION": "0.50"
+    "TRANSPARENT_REFRACTION": "0.50",
+    "TEMPORAL_ATMOSPHERE": "1"
   },
   "profile-BALANCED": {
     "WATER_RENDER_QUALITY": "1",
@@ -136,7 +137,8 @@
     "ambientOcclusionLevel": "1.00",
     "WATER_STYLE": "1",
     "TRANSPARENT_REFLECTIONS": "0.75",
-    "TRANSPARENT_REFRACTION": "0.50"
+    "TRANSPARENT_REFRACTION": "0.50",
+    "TEMPORAL_ATMOSPHERE": "1"
   },
   "profile-REFERENCE": {
     "WATER_RENDER_QUALITY": "1",
@@ -203,7 +205,8 @@
     "ambientOcclusionLevel": "1.00",
     "WATER_STYLE": "1",
     "TRANSPARENT_REFLECTIONS": "0.75",
-    "TRANSPARENT_REFRACTION": "0.50"
+    "TRANSPARENT_REFRACTION": "0.50",
+    "TEMPORAL_ATMOSPHERE": "1"
   },
   "profile-HIGH": {
     "WATER_RENDER_QUALITY": "2",
@@ -270,7 +273,8 @@
     "ambientOcclusionLevel": "1.00",
     "WATER_STYLE": "1",
     "TRANSPARENT_REFLECTIONS": "0.75",
-    "TRANSPARENT_REFRACTION": "0.50"
+    "TRANSPARENT_REFRACTION": "0.50",
+    "TEMPORAL_ATMOSPHERE": "1"
   },
   "options-minimum": {
     "SKY_AMBIENT": "0.20",
@@ -327,6 +331,7 @@
     "BIOME_WATER": "0",
     "REFRACTION_QUALITY": "0",
     "ATMOSPHERE_QUALITY": "0",
+    "TEMPORAL_ATMOSPHERE": "0",
     "WATER_RENDER_QUALITY": "0",
     "CLOUD_DENSITY": "0.15",
     "CLOUD_DETAIL": "0.00",
@@ -394,6 +399,7 @@
     "BIOME_WATER": "1",
     "REFRACTION_QUALITY": "2",
     "ATMOSPHERE_QUALITY": "2",
+    "TEMPORAL_ATMOSPHERE": "1",
     "WATER_RENDER_QUALITY": "2",
     "CLOUD_DENSITY": "3.00",
     "CLOUD_DETAIL": "2.00",

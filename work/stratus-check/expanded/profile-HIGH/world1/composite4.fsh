@@ -64,6 +64,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define BIOME_WATER 1 //  [0 1]
 #define REFRACTION_QUALITY 2 //  [0 1 2]
 #define ATMOSPHERE_QUALITY 2 //  [0 1 2]
+#define TEMPORAL_ATMOSPHERE 1 //  [0 1]
 #define WATER_RENDER_QUALITY 2 //  [0 1 2]
 #define CLOUD_DENSITY 1.00 //  [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 1.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
@@ -888,6 +889,29 @@ vec3 transparentSolidOptics(vec3 scene,vec2 uv){
 
 // END INCLUDE /core/transparent-optics.glsl
 
+
+// BEGIN INCLUDE /core/temporal-atmosphere.glsl
+#ifndef STRATUS_TEMPORAL_ATMOSPHERE
+#define STRATUS_TEMPORAL_ATMOSPHERE
+// History lives in the existing ping-pong atmosphere target. Negative alpha
+// marks sky, keeping terrain/water out of history without another depth buffer.
+vec4 unpackAtmosphere(vec4 value){
+#if TEMPORAL_ATMOSPHERE == 1
+    if(value.a<0.0)value.a=-value.a-1.0;
+#endif
+    return value;
+}
+bool atmosphereHeader(ivec2 cell){
+#if TEMPORAL_ATMOSPHERE == 1
+    return cell.y==0&&cell.x<2;
+#else
+    return false;
+#endif
+}
+#endif
+
+// END INCLUDE /core/temporal-atmosphere.glsl
+
 in vec2 rasterUV;
 /* RENDERTARGETS: 3 */
 layout(location=0)out vec4 completedScene;
@@ -903,13 +927,14 @@ void main(){
     vec4 volume=vec4(0.0);float sum=0.0;
     for(int y=0;y<2;y++)for(int x=0;x<2;x++){
         ivec2 sampleCell=clamp(cell+ivec2(x,y),ivec2(0),size-ivec2(1));
+        if(atmosphereHeader(sampleCell))continue;
         vec2 uv=(vec2(sampleCell)+0.5)/vec2(size);
         // Radial opaque/water depth is cached in the unused metadata channel.
         // The centre still uses exact depth, retaining near translucent edges.
         float depth=texture(colortex2,uv).z;
         float depthWeight=exp(-abs(depth-distanceToScene)/max(1.0,distanceToScene*0.025));
         float weight=(x==0?1.0-f.x:f.x)*(y==0?1.0-f.y:f.y)*depthWeight;
-        volume+=texelFetch(colortex11,sampleCell,0)*weight;sum+=weight;
+        volume+=unpackAtmosphere(texelFetch(colortex11,sampleCell,0))*weight;sum+=weight;
     }
     volume/=max(sum,0.000001);
     if(isEyeInWater==0&&sum<0.12){

@@ -1,0 +1,21 @@
+{
+  "previous_controls": 65,
+  "current_controls": 66,
+  "previous_defaults_and_ranges_preserved": true,
+  "reachable_controls": 66,
+  "tooltips_present": true,
+  "all_four_original_preset_assignments_preserved": true,
+  "all_presets_native_water_default": true,
+  "block_tokens_preserved": 620,
+  "changed_shader_files": [
+    "shaders/core/atmosphere-resolve.frag.glsl",
+    "shaders/core/atmosphere.frag.glsl",
+    "shaders/core/options.glsl",
+    "shaders/core/raster.frag.glsl",
+    "shaders/core/resolve.frag.glsl",
+    "shaders/core/temporal-atmosphere.glsl",
+    "shaders/lang/en_us.lang",
+    "shaders/shaders.properties"
+  ],
+  "failures": 0
+}
