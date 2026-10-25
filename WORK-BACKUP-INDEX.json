@@ -13439,6 +13439,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-gentle-drift-preview-png-95352ef3a3c6a18b.zip",
       "bytes": 57451
+    },
+    "work/stratus-170-rc4/agent/final-safe.jar": {
+      "sha256": "f814a2e78d68e01d877f223d1bb7caf10cba246dfe8e9bb50b877a02cb9cc06a",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-b625a85fadf1fa84.zip",
+      "bytes": 4266
+    },
+    "outputs/stratus-steady-glass-brand-preview.png": {
+      "sha256": "e13af47f7a79f627bf73edef0d8f5d93f0fed8d2048b411e379acf9612f5816b",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-steady-glass-brand-preview-png-5fb32dfeb88de93e.zip",
+      "bytes": 58494
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

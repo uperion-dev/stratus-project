@@ -1,0 +1,16 @@
+{
+  "source": "Persisted level.dat after the test world logged out; read-only bounded field extraction",
+  "position": [
+    161.9081496915558,
+    65.0,
+    7.434772423909747
+  ],
+  "rotation": [
+    -68.16533660888672,
+    11.547701835632324
+  ],
+  "flying": 0,
+  "daytime": 1000,
+  "raining": 0,
+  "rainTime": 0
+}

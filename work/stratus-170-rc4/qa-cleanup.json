@@ -1,0 +1,42 @@
+[
+  {
+    "file": "Stratus-1.7.0-rc4-QA-Before.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-Before.zip.txt",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-Candidate.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-Candidate.zip.txt",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-DampFull.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-DampFull.zip.txt",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-DampHalf.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-DampHalf.zip.txt",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-Dry.zip",
+    "status": "removed own unchanged QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc4-QA-Dry.zip.txt",
+    "status": "removed own unchanged QA file"
+  }
+]
