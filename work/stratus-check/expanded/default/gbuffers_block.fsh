@@ -931,7 +931,7 @@ void main() {
 #endif
     vec3 colour = diffuseRadiance(surface.rgb, lm, sky, orientedNormal, category, relativeLocation, material);
 #if PASS_KIND == 6
-    if(blockCategory!=4100&&blockCategory!=4103)
+    if(blockCategory!=4100&&blockCategory!=4103&&(material!=4113||gl_FrontFacing))
         colour=wetSurfaceResponse(colour,unitVector(orientedNormal),relativeLocation,sky,wetMaterialProperties(material));
 #elif BLOCK_SURFACE == 1 && LATE_SURFACE == 1
     // Translucent block entities receive film; ordinary entities stay excluded.

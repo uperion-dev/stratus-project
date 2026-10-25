@@ -81,13 +81,13 @@
   },
   {
     "path": "shaders/core/atmosphere-resolve.frag.glsl",
-    "bytes": 2268,
-    "sha256": "40919e457cc196aed6cb7a1caeee26d1dd7e3396dae6df63b84eee10add3ee57"
+    "bytes": 2378,
+    "sha256": "7e4f06d728a99b3d6fbcf425980eed3b1697e8bcec56b744f6e52b1cc5f70ab0"
   },
   {
     "path": "shaders/core/atmosphere.frag.glsl",
-    "bytes": 620,
-    "sha256": "a8ad87874adbc3b12f1564d55ae57ee380dd723a56402699e7217ad739b1784e"
+    "bytes": 2542,
+    "sha256": "0bc2ed07c51a63f60be1e58137c385a4bf11ff4f1b59a5ff50e620c596be69df"
   },
   {
     "path": "shaders/core/bloom-horizontal.frag.glsl",
@@ -161,8 +161,8 @@
   },
   {
     "path": "shaders/core/options.glsl",
-    "bytes": 5181,
-    "sha256": "fdc0def815c1c2179ff40479e802d623607f3bf5cfc70d6b7738cec0185b006b"
+    "bytes": 5220,
+    "sha256": "435c4142b55c7ed02abb8fad513fc5bc3b6fc65c20b7f2abe8a07525aac94fda"
   },
   {
     "path": "shaders/core/output.frag.glsl",
@@ -171,8 +171,8 @@
   },
   {
     "path": "shaders/core/raster.frag.glsl",
-    "bytes": 8451,
-    "sha256": "fb3790034a0a04e6259b43227d8c5fb877195653980bea7228184f621d8f4a69"
+    "bytes": 8503,
+    "sha256": "b0148f6c0e3cbaa8ea4eb27bfa1fc925ff76032cc1b8a9a2bb10022a2301318c"
   },
   {
     "path": "shaders/core/raster.vert.glsl",
@@ -186,8 +186,8 @@
   },
   {
     "path": "shaders/core/resolve.frag.glsl",
-    "bytes": 3228,
-    "sha256": "f5423e67a39c0a69151295ab31510d703414f083fd66987c6b1f1ff5ed80be0d"
+    "bytes": 3300,
+    "sha256": "d33b16df5e579d8c606207c306863df4ccd2a362b05dc867f2ea4c5b084c4e8b"
   },
   {
     "path": "shaders/core/scene-depth.glsl",
@@ -223,6 +223,11 @@
     "path": "shaders/core/submerged-view.glsl",
     "bytes": 1594,
     "sha256": "66f69ef2f724227672ed768045e9a90f0a76e2603a6e037692e5727ecc0fe49c"
+  },
+  {
+    "path": "shaders/core/temporal-atmosphere.glsl",
+    "bytes": 498,
+    "sha256": "37705589007cee0ebf3c1a983c0dd20a5b5a48c540dc3c86ad642d9d80c2f700"
   },
   {
     "path": "shaders/core/trace.glsl",
@@ -531,13 +536,13 @@
   },
   {
     "path": "shaders/lang/en_us.lang",
-    "bytes": 16146,
-    "sha256": "2027710fa532f79cd660de060b3efdb875d8a7a8ba95e07a8d8a6465284756fd"
+    "bytes": 16611,
+    "sha256": "8e00591746e9ef2a949c28b8a27ab505ee5293b2df3b9096d448fa6d757c005d"
   },
   {
     "path": "shaders/shaders.properties",
-    "bytes": 18430,
-    "sha256": "033b697d348f2b71c9e9ed22d1e8c784dd39829e1efd66b89bd8262ec4591139"
+    "bytes": 18542,
+    "sha256": "866ef20b4acdacb5233285a749719284a53c46febfe6a74acb2edbabdee23687"
   },
   {
     "path": "shaders/volumes/weather.rgba8",

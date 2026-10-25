@@ -1,0 +1,3 @@
+enabled=true
+configuration_bytes_unchanged=true
+restore_watcher_stopped=true

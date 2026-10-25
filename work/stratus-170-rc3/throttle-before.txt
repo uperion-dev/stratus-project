@@ -1,0 +1,3 @@
+enabled=true
+powerState=UNFOCUSED
+targetFrameRate=1

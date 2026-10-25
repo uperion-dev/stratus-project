@@ -1,9 +1,90 @@
 {
-  "version": "1.7.0-rc2",
-  "batch": "1af89474-f56a-4419-bc73-7f12d4950cfa",
+  "version": "1.7.0-rc3",
+  "batch": "b9a03cf9-f681-4a16-8115-d8b44fd3525a",
   "native_pairs": 768,
   "native_failures": 0,
-  "native_matrix_log": "work/stratus-170-rc2/compile-final-v3.log",
+  "compile_log": "work/stratus-170-rc3/compile-final.log",
+  "temporal_GPU": {
+    "scope": "actual atmosphere shader, zero-density fresh evaluation vs distinctive prior sky sample; native GPU",
+    "cases": [
+      {
+        "name": "valid consecutive static sky reused",
+        "pass": true
+      },
+      {
+        "name": "odd fresh frame",
+        "pass": true
+      },
+      {
+        "name": "stale history rejected",
+        "pass": true
+      },
+      {
+        "name": "weather change rejected",
+        "pass": true
+      },
+      {
+        "name": "camera translation rejected",
+        "pass": true
+      },
+      {
+        "name": "camera rotation rejected",
+        "pass": true
+      },
+      {
+        "name": "FOV change rejected",
+        "pass": true
+      },
+      {
+        "name": "viewport resize rejected",
+        "pass": true
+      },
+      {
+        "name": "blindness change rejected",
+        "pass": true
+      },
+      {
+        "name": "darkness change rejected",
+        "pass": true
+      },
+      {
+        "name": "world time change rejected",
+        "pass": true
+      },
+      {
+        "name": "terrain disocclusion fresh",
+        "pass": true
+      },
+      {
+        "name": "prior terrain not reused",
+        "pass": true
+      },
+      {
+        "name": "reload first frame fresh",
+        "pass": true
+      },
+      {
+        "name": "slow frame rejected",
+        "pass": true
+      },
+      {
+        "name": "submerged bypass",
+        "pass": true
+      },
+      {
+        "name": "header cell written",
+        "pass": true
+      }
+    ],
+    "failures": 0,
+    "gl_error": 0
+  },
+  "resolve_GPU": {
+    "scope": "actual atmosphere resolve, encoded sky and ordinary volume, reserved-header exact fallback, submerged bypass",
+    "cases": 4,
+    "failures": 0,
+    "gl_error": 0
+  },
   "raster_GPU": {
     "scope": "actual geometry raster metadata and native underside coverage; native entity helper",
     "cases": [
@@ -16,12 +97,18 @@
       {
         "variant": "terrain",
         "material": 4113,
-        "coverage_or_film_mask": 0.0,
+        "coverage_or_film_mask": 1.0,
         "transmission_coverage": 0.0
       },
       {
         "variant": "terrain",
         "material": 4101,
+        "coverage_or_film_mask": 0.0,
+        "transmission_coverage": 0.0
+      },
+      {
+        "variant": "terrain",
+        "material": 4113,
         "coverage_or_film_mask": 0.0,
         "transmission_coverage": 0.0
       },
@@ -50,355 +137,56 @@
         "transmission_coverage": 0.0
       }
     ],
-    "samples": 13,
+    "samples": 14,
     "failures": 0,
     "gl_error": 0
-  },
-  "wet_GPU": {
-    "scope": "actual wet-film GLSL, all six face normals, shelter/weather/zero controls",
-    "samples": 96,
-    "minimum_exposed_face_change": 0.00525482,
-    "failures": 0,
-    "gl_error": 0
-  },
-  "native_dark_cache_before_expected_failure": {
-    "scope": "actual full-resolution native water resolve: valid dark, valid black, absent native cache",
-    "cases": [
-      {
-        "case": 0,
-        "max_error": 0.38381547,
-        "rgb": [
-          0.120044,
-          0.216049,
-          0.392454
-        ]
-      },
-      {
-        "case": 1,
-        "max_error": 0.38414273,
-        "rgb": [
-          0.120044,
-          0.216049,
-          0.392454
-        ]
-      },
-      {
-        "case": 2,
-        "max_error": 0.35245404,
-        "rgb": [
-          0.120044,
-          0.216049,
-          0.392454
-        ]
-      }
-    ],
-    "failures": 3,
-    "gl_error": 0,
-    "worst_error": 0.38414273
-  },
-  "native_dark_cache_after": {
-    "scope": "actual full-resolution native water resolve: valid dark, valid black, absent native cache",
-    "cases": [
-      {
-        "case": 0,
-        "max_error": 0.0,
-        "rgb": [
-          0.005046,
-          0.006873,
-          0.008639
-        ]
-      },
-      {
-        "case": 1,
-        "max_error": 0.0,
-        "rgb": [
-          0.004966,
-          0.006681,
-          0.008311
-        ]
-      },
-      {
-        "case": 2,
-        "max_error": 1e-08,
-        "rgb": [
-          0.02,
-          0.03,
-          0.04
-        ]
-      }
-    ],
-    "failures": 0,
-    "gl_error": 0,
-    "worst_error": 1e-08
-  },
-  "native_underwater_GPU": {
-    "scope": "actual full-resolution water-resolve shader",
-    "cases": [
-      {
-        "name": "air_receiver_near",
-        "rgb": [
-          0.5984013,
-          0.3107674,
-          0.1698051
-        ],
-        "max_error": 9e-08
-      },
-      {
-        "name": "air_receiver_far",
-        "rgb": [
-          0.5984013,
-          0.3107674,
-          0.1698051
-        ],
-        "max_error": 9e-08
-      },
-      {
-        "name": "submerged_receiver",
-        "rgb": [
-          0.6949394,
-          0.3537433,
-          0.1845424
-        ],
-        "max_error": 2.4e-07
-      },
-      {
-        "name": "deep_submerged",
-        "rgb": [
-          0.1857498,
-          0.117702,
-          0.0959369
-        ],
-        "max_error": 7e-08
-      },
-      {
-        "name": "sky_after_exit",
-        "rgb": [
-          0.5984013,
-          0.3107674,
-          0.1698051
-        ],
-        "max_error": 9e-08
-      },
-      {
-        "name": "sky_missing_exit",
-        "rgb": [
-          0.7999998,
-          0.3999999,
-          0.2
-        ],
-        "max_error": 1.8e-07
-      },
-      {
-        "name": "glass_before_exit",
-        "rgb": [
-          0.582804,
-          0.1711673,
-          0.0941888
-        ],
-        "max_error": 1.2e-07
-      },
-      {
-        "name": "glass_after_exit",
-        "rgb": [
-          0.5244983,
-          0.1627223,
-          0.0933723
-        ],
-        "max_error": 3e-08
-      },
-      {
-        "name": "additive_particle",
-        "rgb": [
-          0.8458905,
-          0.3947957,
-          0.1698051
-        ],
-        "max_error": 2.4e-07
-      },
-      {
-        "name": "vertical_exit",
-        "rgb": [
-          0.6749566,
-          0.3448879,
-          0.1815376
-        ],
-        "max_error": 1.8e-07
-      }
-    ],
-    "failures": 0,
-    "opengl_errors": 0
-  },
-  "physical_underwater_GPU": {
-    "scope": "actual full-resolution water-resolve shader",
-    "cases": [
-      {
-        "name": "air_receiver_near",
-        "rgb": [
-          0.6602546,
-          0.3753241,
-          0.1976346
-        ],
-        "max_error": 6e-08
-      },
-      {
-        "name": "air_receiver_far",
-        "rgb": [
-          0.6602546,
-          0.3753241,
-          0.1976346
-        ],
-        "max_error": 6e-08
-      },
-      {
-        "name": "submerged_receiver",
-        "rgb": [
-          0.7265702,
-          0.3873817,
-          0.1988004
-        ],
-        "max_error": 6e-08
-      },
-      {
-        "name": "deep_submerged",
-        "rgb": [
-          0.3774901,
-          0.3134322,
-          0.1913006
-        ],
-        "max_error": 3e-08
-      },
-      {
-        "name": "sky_after_exit",
-        "rgb": [
-          0.6602546,
-          0.3753241,
-          0.1976346
-        ],
-        "max_error": 6e-08
-      },
-      {
-        "name": "sky_missing_exit",
-        "rgb": [
-          0.8,
-          0.4,
-          0.2
-        ],
-        "max_error": 0.0
-      },
-      {
-        "name": "glass_before_exit",
-        "rgb": [
-          0.6162699,
-          0.1938531,
-          0.1048677
-        ],
-        "max_error": 6e-08
-      },
-      {
-        "name": "glass_after_exit",
-        "rgb": [
-          0.5786929,
-          0.1972679,
-          0.10793
-        ],
-        "max_error": 1e-08
-      },
-      {
-        "name": "additive_particle",
-        "rgb": [
-          0.9453518,
-          0.4730772,
-          0.1976346
-        ],
-        "max_error": 6e-08
-      },
-      {
-        "name": "vertical_exit",
-        "rgb": [
-          0.712761,
-          0.3849262,
-          0.1985645
-        ],
-        "max_error": 6e-08
-      }
-    ],
-    "failures": 0,
-    "opengl_errors": 0
   },
   "controls": {
     "previous_controls": 65,
-    "current_controls": 65,
+    "current_controls": 66,
     "previous_defaults_and_ranges_preserved": true,
-    "reachable_controls": 65,
+    "reachable_controls": 66,
     "tooltips_present": true,
     "all_four_original_preset_assignments_preserved": true,
     "all_presets_native_water_default": true,
     "block_tokens_preserved": 620,
     "changed_shader_files": [
       "shaders/core/atmosphere-resolve.frag.glsl",
-      "shaders/core/diffuse.glsl",
-      "shaders/core/entity-lighting.glsl",
-      "shaders/core/lake.frag.glsl",
+      "shaders/core/atmosphere.frag.glsl",
+      "shaders/core/options.glsl",
       "shaders/core/raster.frag.glsl",
-      "shaders/core/raster.vert.glsl",
-      "shaders/core/water-resolve.frag.glsl",
-      "shaders/lang/en_us.lang"
+      "shaders/core/resolve.frag.glsl",
+      "shaders/core/temporal-atmosphere.glsl",
+      "shaders/lang/en_us.lang",
+      "shaders/shaders.properties"
     ],
     "failures": 0
   },
   "migration": {
     "checks": [
       "Dry run writes nothing",
-      "Related native water default resets selectively; unrelated wet and quality carry",
-      "Previous preferences byte-identical",
-      "Later manual native-layer value 0.00 wins",
-      "Later manual native-layer value 0.50 wins",
-      "Later manual native-layer value 0.75 wins",
-      "Missing overrides use source defaults",
-      "Explicit saved manual WATER_STYLE preserved",
-      "Explicit saved manual TRANSPARENT_REFLECTIONS preserved",
-      "Explicit saved manual TRANSPARENT_REFRACTION preserved",
+      "Every original override carried",
+      "Old preferences byte-identical",
+      "Manual TEMPORAL_ATMOSPHERE=0 preserved",
+      "Manual TEMPORAL_ATMOSPHERE=1 preserved",
+      "Manual WATER_STYLE=0 preserved",
+      "Manual TRANSPARENT_REFLECTIONS=0.00 preserved",
+      "Manual WATER_TEXTURE=0.00 preserved",
+      "Missing new option uses source default",
       "Existing new release preferences win",
       "Atomic create never overwrites",
       "Conflicting archive refused"
     ],
     "failures": 0,
-    "scope": "Actual candidate policy/unchanged installer in temporary profiles; no Main writes"
+    "scope": "Actual candidate policy and installer in temporary profiles"
   },
-  "atmosphere_single_pass": {
-    "scope": "actual atmosphere resolve, controlled submerged zero-volume 512x512; native GL_TIME_ELAPSED, not Minecraft FPS",
-    "equal_pixel_output": true,
-    "before_ms": [
-      0.039086,
-      0.023076,
-      0.022464,
-      0.022547,
-      0.022242,
-      0.022013,
-      0.021635
-    ],
-    "after_ms": [
-      0.036906,
-      0.056867,
-      0.014716,
-      0.010937,
-      0.009979,
-      0.009742,
-      0.009422
-    ],
-    "failures": 0,
-    "gl_error": 0
-  },
-  "FPS_samples": 0,
-  "performance_acceptance": "Pending; focused comparison skipped by user. Native pass timings do not establish gameplay performance.",
-  "live_evidence": "See versioned gallery and external install/load receipt. Source-equivalent QA checks are separate from final ZIP loading.",
-  "limits": [
-    "Focused Minecraft FPS comparison skipped at user request after locked-Mac prerequisite. No global speedup or60FPS claim; sustained approximately25FPS report still pending.",
-    "Progressive unfinished-frame presentation cannot be implemented by a shader pack. No renderer/mod or swapchain changes made.",
-    "Known rectangular waterline band and earlier unverified cloud/fog/transparent-solid coverage remain in their earlier batches; no clean1.7 milestone claim.",
-    "Finite current-world/fixture coverage only; exact original cave camera not recovered. Original user screenshot and controlled stepped-water reproduction both informed the repair.",
-    "Native underwater surface texture is restored, with native atlas/light and slider coverage. Submerged-only fog keeps air beyond the interface clearer than shaders-off vanilla; not pixel-identical vanilla rendering.",
-    "Foliage/cutout material4113 stays matte as a whole, avoiding interior leaf-plane sheen. This is a material exclusion, not full voxel-based occlusion or cast shadows.",
-    "Remaining local-fixture frames are reviewed as finite visual evidence; several five-second stable FPS-style gates could not settle while unfocused. Scheduling waits are not chunk-readiness or FPS proof."
+  "timing": "Synthetic diagnostic only; noisy batches and a native sampler warning. Not accepted gameplay FPS or a global speedup claim.",
+  "runtime": "Source-equivalent temporary QA pipeline and finite static/on/off/rotation/reload captures reviewed. External install receipt records exact final ZIP loading separately.",
+  "limitations": [
+    "Static sky reuse only; no reuse while camera moves/rotates/bobs or on terrain/water.",
+    "Exposed front-facing foliage restored; back-facing planes excluded. Full voxel-neighbour leaf-cluster interior visibility remains pending.",
+    "Mac locked; focused FPS unavailable. Temporary Dynamic FPS runtime switch restored automatically, config bytes unchanged.",
+    "Finite still captures do not establish absence of motion ghosting/flicker. Broader live FOV/weather/status/dimension/water transitions remain pending.",
+    "Known prior waterline defect and earlier pending batches unchanged."
   ]
 }

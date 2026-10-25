@@ -1,31 +1,9 @@
-STRATUS 1.7.0-rc2 — TECHNICAL EVIDENCE
-
-Final source:768 native Apple M1 OpenGL4.1 compatibility-shim program pairs,
-0 failures (compile-final-v3.log). All dimensions/presets/extrema; this is not
-Iris transformation or visual proof. Exact warnings/logs retained in project.
-
-Targeted actual GLSL GPU checks:
--13 raster/entity cases: opaque/cutout/emissive film masks, native underside
-  full/half/zero and physical-mode coverage/transmission, six directional faces.
--96 wet-film weather/shelter/zero/face samples,0 failures/API errors.
--Ten native and ten physical full-resolution underwater composition cases,
-  including glass/additive/exit inputs,0 failures/API errors.
--Three dark/native-cache cases: prior source reproduced bright substitution
-  on valid dark, valid black and absent-cache inputs. Final source passes all
-  three to within1e-8 maximum error; valid black stays valid and missing alpha
-  skips the native layer. The prior failures are intentional reproduction proof.
--Single-pass submerged atmosphere timing uses native GL_TIME_ELAPSED at512².
-  Output is identical with the zero-contribution bypass. All timing batches are
-  recorded, with warm-up variance. This is not Minecraft FPS or proof that the
-  user's sustained25FPS problem is solved.
-
-Control audit:65 controls, every old default/range/menu path, all four original
-preset assignments and all620 material tokens preserved; tooltips updated.
-Thirteen temporary-profile installer checks pass. Source/ZIP integrity and
-installed-byte comparison use existing package/install tools. Final selection,
-load and effective options are recorded externally in the versioned receipt.
-
-No FPS sample accepted. Performance remains pending after user skipped the
-locked-Mac focus prerequisite. Research used primary Sodium/Khronos/GLFW
-sources; existing culling configuration was inspected and preserved. No new
-mod, presentation/frame skipping, cast-shadow pass or quality reduction added.
+Stratus1.7.0-rc3 candidate. See CHECKS.json and work/stratus-170-rc3.
+768 native compatibility-shim compile/link pairs; actual atmosphere GPU history
+and invalidation cases; actual raster front/back leaf/native underside/entity
+cases; control/menu/preset audit; installer migration; ZIP/source integrity.
+These do not emulate all Iris transforms or prove appearance/performance.
+Actual loaded-pack/capture evidence is recorded externally after installation.
+No focused FPS acceptance from locked/unfocused samples. Whole-cluster interior
+leaf occlusion is not established by front/back orientation. Live remaining
+acceptance stays in the active batch, not silently moved to completion.

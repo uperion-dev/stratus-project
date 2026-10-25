@@ -1,8 +1,6 @@
 {
-  "version": "1.7.0-rc2",
-  "reset_related_overrides": [
-    "WATER_TEXTURE"
-  ],
+  "version": "1.7.0-rc3",
+  "reset_related_overrides": [],
   "visual_defaults": {
     "WATER_RENDER_QUALITY": "1",
     "ATMOSPHERE_QUALITY": "1",
@@ -68,7 +66,8 @@
     "ambientOcclusionLevel": "1.00",
     "WATER_STYLE": "1",
     "TRANSPARENT_REFLECTIONS": "0.75",
-    "TRANSPARENT_REFRACTION": "0.50"
+    "TRANSPARENT_REFRACTION": "0.50",
+    "TEMPORAL_ATMOSPHERE": "1"
   },
   "reference_quality_defaults": {
     "WATER_RENDER_QUALITY": "1",
