@@ -1,0 +1,5 @@
+#include <ApplicationServices/ApplicationServices.h>
+#include <ImageIO/ImageIO.h>
+#include <stdio.h>
+#include <stdlib.h>
+int main(int argc,char**argv){for(int f=1;f<argc;f++){CFURLRef u=CFURLCreateFromFileSystemRepresentation(0,(unsigned char*)argv[f],strlen(argv[f]),0);CGImageSourceRef s=CGImageSourceCreateWithURL(u,0);CGImageRef im=CGImageSourceCreateImageAtIndex(s,0,0);size_t w=CGImageGetWidth(im),h=CGImageGetHeight(im);unsigned char*data=calloc(w*h,4);CGColorSpaceRef cs=CGColorSpaceCreateDeviceRGB();CGContextRef c=CGBitmapContextCreate(data,w,h,8,w*4,cs,kCGImageAlphaPremultipliedLast);CGContextDrawImage(c,CGRectMake(0,0,w,h),im);printf("%s %zux%zu",argv[f],w,h);for(int mat=0;mat<9;mat++){double total=0;int n=0;for(int y=247;y<283;y++)for(int x=310+mat*25;x<324+mat*25;x++){if(x>=w||y>=h)continue;for(int k=0;k<3;k++){total+=data[(y*w+x)*4+k];n++;}}printf(" %.3f",total/n);}puts("");free(data);CGContextRelease(c);CGColorSpaceRelease(cs);CGImageRelease(im);CFRelease(s);CFRelease(u);}return 0;}

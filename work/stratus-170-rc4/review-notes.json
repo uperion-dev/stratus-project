@@ -1,0 +1,13 @@
+{
+  "rc4-before-panels.png": "rc3 baseline, original saved quality at854x480. Native textures differ; full loaded-chunk gate passed.",
+  "rc4-uniform-panels.png": "Uniform film response, original dampness0. Same native texture palette retained. Exact material-response equality is isolated by the GPU constant-colour cases.",
+  "rc4-dry-panels.png": "Both film/sheen and original dampness off. Native material comparison.",
+  "rc4-damp-half.png": "Original dampness0.5 with film unchanged. Porous panels moderately darken; nonporous iron/gold sample regions unchanged.",
+  "rc4-damp-full.png": "Original dampness1.0, matched scene. Porous panels darken further; same iron/gold sample regions unchanged.",
+  "rc4-close-before.png": "Closer rc3 baseline. Left to right: wool,leaves,wood,gold,iron,quartz,sandstone,dirt,stone. Same geometry/light for all panels.",
+  "rc4-close-uniform.png": "Closer uniform sheen, original dampnessoff. Same lobe/reflectance does not force different textures and native colours to look identical.",
+  "rc4-close-dry.png": "Closer dry reference, all film/sheen/original dampness zeros. No hidden dampness from the retired control.",
+  "rc4-close-damp-half.png": "Closer0.5 original dampness. Fixed local humidity/exposure; no stored wetness simulation.",
+  "rc4-close-damp-full.png": "Closer1.0 original dampness. Graded porous darkening visible with nonporous panels stable.",
+  "rc4-release-panels.png": "Exact installed final rc4 ZIP loaded, original dampnessdefault0 and every saved prior override preserved. Full loaded-chunk gate passed."
+}

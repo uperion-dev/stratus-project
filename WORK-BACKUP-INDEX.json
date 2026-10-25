@@ -13295,6 +13295,150 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-wide-drift-preview-png-c8400439e7af3878.zip",
       "bytes": 59218
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-before-panels.png": {
+      "sha256": "aaf3b15f44c5ac1a6343e19389689c9d80f5e1e6f6cd84c85158d6817cf8943b",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 301834
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-close-before.png": {
+      "sha256": "98b3132b69e6887cc8318aa460a7e5e2a4c1a82a763591ea642b48c8e35cefd1",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 287013
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-close-damp-full.png": {
+      "sha256": "cf8356a8a8e6eae119073d269f42b603b01ce9a841a22cf7556ddc1796927674",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 288977
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-close-damp-half.png": {
+      "sha256": "bec4499b5666d32fb92d627fa847e4fabd6cb721daadc8d7e56091038d9b3ef3",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 286132
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-close-dry.png": {
+      "sha256": "5be54ab7debf65ed8011a9adda856120089a894ef3516bdb7a78da1a5323aa46",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 285969
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-close-uniform.png": {
+      "sha256": "6998f4b5b080d5afb30544467437b03341788be1ad1195eab97df8ebfaaed801",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 287621
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-damp-full.png": {
+      "sha256": "b7d235198bc3cd3ee6e492423807f827705096fba830f3bfb3b8880c73a7c489",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 301324
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-damp-half.png": {
+      "sha256": "e3388bd9aa8eb29838cecb177f7a3cce9bb52ad309671d03a5519aed4a03cd2c",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 301826
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-dry-panels.png": {
+      "sha256": "b5d6b38abf96e60d4f8b99a297ba9be5dd0f50f86ed5105635086ff49e859c82",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 300612
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-release-panels.png": {
+      "sha256": "48f10a85f7c68153c58de4f393eff72212931ba0a89bc3b21c0daf62a0778567",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 287683
+    },
+    "outputs/Stratus-1.7.0-rc4-visual-checks/captures/rc4-uniform-panels.png": {
+      "sha256": "add080b96e20e9b33d44176a27b561f39f3de1cc97b4634e5202e375e1450c2e",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 301794
+    },
+    "outputs/Stratus-1.7.0-rc4.zip": {
+      "sha256": "0d5803b7b5186fccdd7ba23f5193ced80bb385b5660ba161f4356dad4b6f3ce0",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc4-b1b59ada9d163485.zip",
+      "bytes": 7782898
+    },
+    "work/stratus-170-rc4/agent/final.jar": {
+      "sha256": "3784a060fd55ee51c1f7946154f237af938596fbbe59e1a9362053e35b7eabb9",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 5408
+    },
+    "work/stratus-170-rc4/agent/metrics.jar": {
+      "sha256": "3ddd98384ec11ea77166b976821aa519bea4f270c6cae690625c658bffb8031e",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 10154
+    },
+    "work/stratus-170-rc4/agent/profile.jar": {
+      "sha256": "a0aa261db9dacb892b2f3fc1bb4d9c224eb124effc7c0cd361db30027cef49ca",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 6843
+    },
+    "work/stratus-170-rc4/image_stats": {
+      "sha256": "f86e3c8ba719f8d174485d82a66b01f1a9eda3fc77e33ed3c2afe2a3a94096f4",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 34504
+    },
+    "work/stratus-170-rc4/screenshots/rc4-close-before.png": {
+      "sha256": "98b3132b69e6887cc8318aa460a7e5e2a4c1a82a763591ea642b48c8e35cefd1",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 287013
+    },
+    "work/stratus-170-rc4/screenshots/rc4-close-damp-full.png": {
+      "sha256": "cf8356a8a8e6eae119073d269f42b603b01ce9a841a22cf7556ddc1796927674",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 288977
+    },
+    "work/stratus-170-rc4/screenshots/rc4-close-damp-half.png": {
+      "sha256": "bec4499b5666d32fb92d627fa847e4fabd6cb721daadc8d7e56091038d9b3ef3",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 286132
+    },
+    "work/stratus-170-rc4/screenshots/rc4-close-dry.png": {
+      "sha256": "5be54ab7debf65ed8011a9adda856120089a894ef3516bdb7a78da1a5323aa46",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 285969
+    },
+    "work/stratus-170-rc4/screenshots/rc4-close-uniform.png": {
+      "sha256": "6998f4b5b080d5afb30544467437b03341788be1ad1195eab97df8ebfaaed801",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 287621
+    },
+    "work/stratus-170-rc4/screenshots/rc4-release-panels.png": {
+      "sha256": "48f10a85f7c68153c58de4f393eff72212931ba0a89bc3b21c0daf62a0778567",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc4-0dcaf576bae94486.zip",
+      "bytes": 287683
+    },
+    "outputs/stratus-continuous-drift-preview.png": {
+      "sha256": "473c9dc8ccc801d0812fd1af4aa201704847ee41cbb0f9ece4f51b2573579761",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-continuous-drift-preview-png-19588dc57a16fbef.zip",
+      "bytes": 60171
+    },
+    "outputs/stratus-gentle-drift-preview.png": {
+      "sha256": "51fe743989aae4076bd5b524f0c31f053dc33a3c7dd274b1ed88cce6d6b9da8b",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-gentle-drift-preview-png-95352ef3a3c6a18b.zip",
+      "bytes": 57451
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

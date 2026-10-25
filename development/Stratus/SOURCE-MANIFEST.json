@@ -106,8 +106,8 @@
   },
   {
     "path": "shaders/core/diffuse.glsl",
-    "bytes": 5131,
-    "sha256": "e9032ed8f172e23387c3521ada046915ab3600412624c4e1eaa655c47f702a48"
+    "bytes": 6202,
+    "sha256": "3c9bb9445116a3a3dc0cce702c48a0db484576f5344d6809c5c5f8585d466cfe"
   },
   {
     "path": "shaders/core/entity-lighting.glsl",
@@ -156,13 +156,13 @@
   },
   {
     "path": "shaders/core/moisture.glsl",
-    "bytes": 713,
-    "sha256": "542515b335b5ce2e091be6b9829d6121816004bff8bdbff0c08d7f79515d47cd"
+    "bytes": 809,
+    "sha256": "053dfb5697c563b614fddf22d6d7488cf94447c4ea9f33ae99f58543934fa964"
   },
   {
     "path": "shaders/core/options.glsl",
-    "bytes": 5220,
-    "sha256": "435c4142b55c7ed02abb8fad513fc5bc3b6fc65c20b7f2abe8a07525aac94fda"
+    "bytes": 5316,
+    "sha256": "0bf9a353dcb01fef69f6d0ff61e7f342a8471f18423e93a29cc52d758d652fd5"
   },
   {
     "path": "shaders/core/output.frag.glsl",
@@ -536,13 +536,13 @@
   },
   {
     "path": "shaders/lang/en_us.lang",
-    "bytes": 16611,
-    "sha256": "8e00591746e9ef2a949c28b8a27ab505ee5293b2df3b9096d448fa6d757c005d"
+    "bytes": 17045,
+    "sha256": "05f9f2dbc17fed61ef256588f7c1b653037d6a6fd50eebb24ca4a25e08c1a6e3"
   },
   {
     "path": "shaders/shaders.properties",
-    "bytes": 18542,
-    "sha256": "866ef20b4acdacb5233285a749719284a53c46febfe6a74acb2edbabdee23687"
+    "bytes": 18678,
+    "sha256": "2c1b7665b833add407e249319131c41943692fc19619c18f177716919e251ede"
   },
   {
     "path": "shaders/volumes/weather.rgba8",

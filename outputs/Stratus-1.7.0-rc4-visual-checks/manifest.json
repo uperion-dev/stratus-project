@@ -1,0 +1,78 @@
+{
+  "version": "1.7.0-rc4",
+  "profile": "Main / Minecraft (1)",
+  "world": "Stratus Terrain Lab",
+  "framebuffer": [
+    854,
+    480
+  ],
+  "render_distance": 12,
+  "time": 1000,
+  "rain": 0,
+  "matched_saved_quality": true,
+  "FPS_samples": 0,
+  "status": "Material candidate installed and loaded; finite panel review. Focused performance explicitly skipped.",
+  "limits": [
+    "Native textures/colours/face geometry/exposure still affect apparent sheen; class-independent response tested separately on GPU.",
+    "Wet weather/shelter behaviour checked by controlled GPU inputs, not a new exhaustive live rain/world acceptance.",
+    "Return-world stable gate failed to settle, even though final snapshot showed all columns/queues ready. Capture was cancelled; no accepted final return-world image.",
+    "Prior waterline/leaf-cluster/temporal acceptance remains in earlier batches."
+  ],
+  "captures": [
+    {
+      "file": "captures/rc4-before-panels.png",
+      "sha256": "aaf3b15f44c5ac1a6343e19389689c9d80f5e1e6f6cd84c85158d6817cf8943b",
+      "review": "rc3 baseline, original saved quality at854x480. Native textures differ; full loaded-chunk gate passed."
+    },
+    {
+      "file": "captures/rc4-uniform-panels.png",
+      "sha256": "add080b96e20e9b33d44176a27b561f39f3de1cc97b4634e5202e375e1450c2e",
+      "review": "Uniform film response, original dampness0. Same native texture palette retained. Exact material-response equality is isolated by the GPU constant-colour cases."
+    },
+    {
+      "file": "captures/rc4-dry-panels.png",
+      "sha256": "b5d6b38abf96e60d4f8b99a297ba9be5dd0f50f86ed5105635086ff49e859c82",
+      "review": "Both film/sheen and original dampness off. Native material comparison."
+    },
+    {
+      "file": "captures/rc4-damp-half.png",
+      "sha256": "e3388bd9aa8eb29838cecb177f7a3cce9bb52ad309671d03a5519aed4a03cd2c",
+      "review": "Original dampness0.5 with film unchanged. Porous panels moderately darken; nonporous iron/gold sample regions unchanged."
+    },
+    {
+      "file": "captures/rc4-damp-full.png",
+      "sha256": "b7d235198bc3cd3ee6e492423807f827705096fba830f3bfb3b8880c73a7c489",
+      "review": "Original dampness1.0, matched scene. Porous panels darken further; same iron/gold sample regions unchanged."
+    },
+    {
+      "file": "captures/rc4-close-before.png",
+      "sha256": "98b3132b69e6887cc8318aa460a7e5e2a4c1a82a763591ea642b48c8e35cefd1",
+      "review": "Closer rc3 baseline. Left to right: wool,leaves,wood,gold,iron,quartz,sandstone,dirt,stone. Same geometry/light for all panels."
+    },
+    {
+      "file": "captures/rc4-close-uniform.png",
+      "sha256": "6998f4b5b080d5afb30544467437b03341788be1ad1195eab97df8ebfaaed801",
+      "review": "Closer uniform sheen, original dampnessoff. Same lobe/reflectance does not force different textures and native colours to look identical."
+    },
+    {
+      "file": "captures/rc4-close-dry.png",
+      "sha256": "5be54ab7debf65ed8011a9adda856120089a894ef3516bdb7a78da1a5323aa46",
+      "review": "Closer dry reference, all film/sheen/original dampness zeros. No hidden dampness from the retired control."
+    },
+    {
+      "file": "captures/rc4-close-damp-half.png",
+      "sha256": "bec4499b5666d32fb92d627fa847e4fabd6cb721daadc8d7e56091038d9b3ef3",
+      "review": "Closer0.5 original dampness. Fixed local humidity/exposure; no stored wetness simulation."
+    },
+    {
+      "file": "captures/rc4-close-damp-full.png",
+      "sha256": "cf8356a8a8e6eae119073d269f42b603b01ce9a841a22cf7556ddc1796927674",
+      "review": "Closer1.0 original dampness. Graded porous darkening visible with nonporous panels stable."
+    },
+    {
+      "file": "captures/rc4-release-panels.png",
+      "sha256": "48f10a85f7c68153c58de4f393eff72212931ba0a89bc3b21c0daf62a0778567",
+      "review": "Exact installed final rc4 ZIP loaded, original dampnessdefault0 and every saved prior override preserved. Full loaded-chunk gate passed."
+    }
+  ]
+}
