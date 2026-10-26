@@ -1,0 +1,35 @@
+{
+  "version": "1.7.0-rc5",
+  "sha256": "4424a2f229ffca4519e0b619264b933de44b3f365532246492ad6b2fa68632d0",
+  "entries": 250,
+  "source_archive_install_bytes_equal": true,
+  "rc4_archive_unchanged": true,
+  "final_zip_loaded": true,
+  "effective_options": 68,
+  "all_four_actual_Iris_profiles_match": true,
+  "all_saved_overrides_match": true,
+  "new_option_default": 0,
+  "reviewed_QA_v1_river_frame": true,
+  "final_candidate_motion_visual_acceptance": false,
+  "focused_fps_samples": 0,
+  "final_runtime_focused": 0,
+  "restored": {
+    "pose_HUD_pause_flight_time_rain": true,
+    "Iris_selection_config": true,
+    "options_file_unchanged": true,
+    "original_rc3_override_values_unchanged": true,
+    "dynamic_fps_config_unchanged": true,
+    "visual_driver_stopped": true,
+    "release_one_shot_restored": true,
+    "owned_QA_removed": true
+  },
+  "protected_documents_before_reconciliation": {
+    "work/Custom instructions/TASK.md": true,
+    "work/Custom instructions/CHANGES.md": true
+  },
+  "original_rc3_settings_normalisation": "Iris changed the timestamp comment only; all saved override values are identical. No user values overwritten.",
+  "pending": [
+    "all-optics temporal coverage and representative moving/live On-Off acceptance",
+    "focused active-game performance comparison; Mac locked/unfocused, no accepted FPS"
+  ]
+}

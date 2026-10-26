@@ -1,0 +1,21 @@
+from pathlib import Path
+import hashlib,json,zipfile
+w=Path(__file__).resolve().parent;root=w.parents[1];p=root/'outputs/Stratus';game=Path.home()/'Library/Application Support/ModrinthApp/profiles/Minecraft (1)'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def props(p):return dict(l.split('=',1) for l in p.read_text().splitlines() if '=' in l and not l.startswith('#'))
+a=root/'outputs/Stratus-1.7.0-rc5.zip'
+with zipfile.ZipFile(a) as z:
+ assert z.testzip() is None
+ assert all(z.read(n)==(p/n).read_bytes() for n in z.namelist() if not n.endswith('/'))
+ entries=len(z.namelist())
+assert sha(a)==sha(game/'shaderpacks'/a.name)
+assert sha(root/'outputs/Stratus-1.7.0-rc4.zip')=='0d5803b7b5186fccdd7ba23f5193ced80bb385b5660ba161f4356dad4b6f3ce0'
+rt=json.loads((w/'final-release-runtime.json').read_text());assert 'IrisRenderingPipeline' in rt['pipeline'];assert len(rt['options'])==68;assert rt['options']['TEMPORAL_OPTICS']=='0'
+assert len(rt['profiles'])==4 and all(v['option_count']==68 and v['matches_after_applying_full_profile'] for v in rt['profiles'].values())
+saved=props(game/'shaderpacks/Stratus-1.7.0-rc5.zip.txt');assert all(rt['options'].get(k)==v for k,v in saved.items())
+initial=props(w/'initial-client-state.txt');final=props(w/'final-client-state.txt');restored={'pose_HUD_pause_flight_time_rain':all(initial[k]==final[k] for k in initial),'Iris_selection_config':props(w/'initial-iris.properties')==props(game/'config/iris.properties'),'options_file_unchanged':(w/'initial-options.txt').read_bytes()==(game/'options.txt').read_bytes(),'original_rc3_override_values_unchanged':props(w/'initial-rc3-settings.txt')==props(game/'shaderpacks/Stratus-1.7.0-rc3.zip.txt'),'dynamic_fps_config_unchanged':(w/'initial-dynamic-fps.json').read_bytes()==(game/'config/dynamic_fps.json').read_bytes(),'visual_driver_stopped':(w/'visual-driver-stopped.txt').exists(),'release_one_shot_restored':(w/'release-verify-restored.txt').exists(),'owned_QA_removed':not list((game/'shaderpacks').glob('Stratus-1.7.0-rc5-QA-v1-*'))}
+assert all(restored.values()),restored
+fingerprints=json.loads((w/'initial-fingerprints.json').read_text());protected={k:sha(root/k)==v for k,v in fingerprints.items() if k.endswith('/TASK.md') or k=='work/Custom instructions/CHANGES.md'}
+result={'version':'1.7.0-rc5','sha256':sha(a),'entries':entries,'source_archive_install_bytes_equal':True,'rc4_archive_unchanged':True,'final_zip_loaded':True,'effective_options':68,'all_four_actual_Iris_profiles_match':True,'all_saved_overrides_match':True,'new_option_default':0,'reviewed_QA_v1_river_frame':True,'final_candidate_motion_visual_acceptance':False,'focused_fps_samples':0,'final_runtime_focused':rt['focused'],'restored':restored,'protected_documents_before_reconciliation':protected,'original_rc3_settings_normalisation':'Iris changed the timestamp comment only; all saved override values are identical. No user values overwritten.','pending':['all-optics temporal coverage and representative moving/live On-Off acceptance','focused active-game performance comparison; Mac locked/unfocused, no accepted FPS']}
+(w/'final-audit.json').write_text(json.dumps(result,indent=2)+'\n')
+receipt=root/'outputs/Stratus-1.7.0-rc5-install.json';j=json.loads(receipt.read_text());j.update({'loaded':True,'loaded_option_count':68,'all_four_profiles_match':True,'all_saved_overrides_preserved':True,'runtime_evidence':str(w/'final-release-runtime.json'),'selected_after_verification':'Stratus-1.7.0-rc3.zip','TEMPORAL_OPTICS_default':0,'live_visual_acceptance':'pending; reviewed QA-v1 river static frame only','focused_fps_samples':0,'restoration_evidence':str(w/'final-audit.json')});receipt.write_text(json.dumps(j,indent=2)+'\n');print(json.dumps(result,indent=2))

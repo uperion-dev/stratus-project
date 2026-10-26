@@ -1,0 +1,22 @@
+[
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v1-Off.zip",
+    "result": "removed unchanged owned QA copy"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v1-Off.zip.txt",
+    "result": "removed unchanged owned QA copy"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v1-On.zip",
+    "result": "removed unchanged owned QA copy"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v1-On.zip.txt",
+    "result": "preserved newer changed copy"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v1-On.zip.txt",
+    "result": "removed after QA-v1 archive-default plus effective-settings equality; Iris removed redundant TEMPORAL_OPTICS=1 and changed timestamp only"
+  }
+]
