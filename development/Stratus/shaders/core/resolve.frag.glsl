@@ -29,6 +29,19 @@ const bool colortex11Clear = false;
 #endif
 const int colortex12Format = RGBA16F;
 const int colortex13Format = RGBA16F;
+#if TEMPORAL_OPTICS == 1
+const int RG16F = 33327;
+#if REFLECTION_MODE != 0
+const int colortex16Format = RG16F;
+const int colortex17Format = RG16F;
+const bool colortex16Clear = false;
+const bool colortex17Clear = false;
+#endif
+#if REFRACTION_QUALITY > 0
+const int colortex18Format = RG16F;
+const bool colortex18Clear = false;
+#endif
+#endif
 const int colortex15Format = RGBA16F;
 const vec4 colortex15ClearColor = vec4(0.0,0.0,0.0,0.0);
 const vec4 colortex13ClearColor = vec4(0.0, 0.0, 0.0, 0.0);

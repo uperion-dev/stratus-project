@@ -22,10 +22,22 @@ uniform sampler2D depthtex0;
 #include "/core/refraction.glsl"
 #include "/core/scene-trace.glsl"
 #include "/core/water-buffer.glsl"
+#include "/core/temporal-optics.glsl"
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+uniform sampler2D colortex18;
+#endif
 in vec2 rasterUV;
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+/* RENDERTARGETS: 12,18 */
+layout(location=1)out vec2 refractionHint;
+#else
 /* RENDERTARGETS: 12 */
+#endif
 layout(location=0)out vec4 completedScene;
 void main(){
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+    refractionHint=nextOpticalHint(0.0);
+#endif
     vec3 image=texture(colortex3,rasterUV).rgb;
     vec4 markedColour=texture(colortex0,rasterUV);
     if(isEyeInWater==1){
@@ -62,7 +74,14 @@ void main(){
         vec3 reflected=mix(fallback,traced.rgb,traced.a);
         float thickness=opaqueDepth<0.999999?length(opaqueView-waterView):24.0;
         // v1.3.1 screen-space water refraction, with the original shoreline guard.
-        vec2 shifted=legacyWaterRefractionUV(rasterUV,nView,faceView,thickness,markedDepth.x);
+        float hint=0.0,rejected;
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+        hint=previousOpticalHint(colortex18,ivec2(gl_FragCoord.xy));
+#endif
+        vec2 shifted=legacyWaterRefractionUV(rasterUV,nView,faceView,thickness,markedDepth.x,hint,rejected);
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+        refractionHint=nextOpticalHint(rejected);
+#endif
         float shiftedDepth=texture(depthtex1,shifted).r;
         vec3 transmitted=texture(colortex4,shifted).rgb;
         vec3 backRay=unitVector(mat3(gbufferModelViewInverse)*positionFromDepth(shifted,0.5));

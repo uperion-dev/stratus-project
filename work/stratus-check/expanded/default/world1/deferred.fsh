@@ -65,6 +65,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define REFRACTION_QUALITY 1 // [0 1 2]
 #define ATMOSPHERE_QUALITY 1 // [0 1 2]
 #define TEMPORAL_ATMOSPHERE 1 // [0 1]
+#define TEMPORAL_OPTICS 0 // [0 1]
 #define ORIGINAL_DAMPNESS 0.00 // [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
 #define WATER_RENDER_QUALITY 1 // [0 1 2]
 #define CLOUD_DENSITY 1.00 // [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
@@ -672,6 +673,19 @@ const bool colortex11Clear = false;
 #endif
 const int colortex12Format = RGBA16F;
 const int colortex13Format = RGBA16F;
+#if TEMPORAL_OPTICS == 1
+const int RG16F = 33327;
+#if REFLECTION_MODE != 0
+const int colortex16Format = RG16F;
+const int colortex17Format = RG16F;
+const bool colortex16Clear = false;
+const bool colortex17Clear = false;
+#endif
+#if REFRACTION_QUALITY > 0
+const int colortex18Format = RG16F;
+const bool colortex18Clear = false;
+#endif
+#endif
 const int colortex15Format = RGBA16F;
 const vec4 colortex15ClearColor = vec4(0.0,0.0,0.0,0.0);
 const vec4 colortex13ClearColor = vec4(0.0, 0.0, 0.0, 0.0);

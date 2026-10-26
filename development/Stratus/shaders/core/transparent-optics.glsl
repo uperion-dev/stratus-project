@@ -5,8 +5,16 @@ uniform sampler2D colortex15;
 #include "/core/medium.glsl"
 uniform sampler2D colortex4;
 #include "/core/scene-trace.glsl"
+#include "/core/temporal-optics.glsl"
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+uniform sampler2D colortex17;
+vec2 solidOpticalHint;
+#endif
 // One nearest visible thin-solid interface. No volume traversal or water waves.
 vec3 transparentSolidOptics(vec3 scene,vec2 uv){
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+    solidOpticalHint=nextOpticalHint(0.0);
+#endif
     if(TRANSPARENT_REFLECTIONS<=0.0&&TRANSPARENT_REFRACTION<=0.0)return scene;
     vec4 data=texture(colortex15,uv);
     if(data.a<0.5||data.z<=0.0)return scene;
@@ -33,7 +41,14 @@ vec3 transparentSolidOptics(vec3 scene,vec2 uv){
         vec3 direction=reflect(incident,n),world=mat3(gbufferModelViewInverse)*direction;
         vec4 hit=vec4(0.0);
 #if REFLECTION_MODE != 0
-        float path;hit=traceOpticalScene(point+n*0.015,direction,n,1,REFLECTION_MODE,min(REFLECT_RANGE,max(16.0,far)),false,path);
+        float path,hint=0.0;
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+        hint=previousOpticalHint(colortex17,ivec2(gl_FragCoord.xy));
+#endif
+        hit=traceOpticalSceneHint(point+n*0.015,direction,n,1,REFLECTION_MODE,min(REFLECT_RANGE,max(16.0,far)),path,hint);
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+        solidOpticalHint=nextOpticalHint(hit.a>0.0?path:0.0);
+#endif
 #endif
         float sky=clamp(float(eyeBrightnessSmooth.y)/240.0,0.0,1.0);
         vec3 fallback=reflectedEnvironment(world)*mix(0.03,1.0,smoothstep(0.04,0.8,sky));

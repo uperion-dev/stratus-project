@@ -1,0 +1,24 @@
+{
+  "previous_controls": 67,
+  "current_controls": 68,
+  "previous_defaults_and_ranges_preserved": true,
+  "reachable_controls": 68,
+  "tooltips_present": true,
+  "all_four_original_preset_assignments_preserved": true,
+  "all_presets_native_water_default": true,
+  "block_tokens_preserved": 620,
+  "changed_shader_files": [
+    "shaders/core/atmosphere-resolve.frag.glsl",
+    "shaders/core/lake.frag.glsl",
+    "shaders/core/options.glsl",
+    "shaders/core/refraction.glsl",
+    "shaders/core/resolve.frag.glsl",
+    "shaders/core/scene-trace.glsl",
+    "shaders/core/temporal-optics.glsl",
+    "shaders/core/transparent-optics.glsl",
+    "shaders/core/water-reflection.frag.glsl",
+    "shaders/lang/en_us.lang",
+    "shaders/shaders.properties"
+  ],
+  "failures": 0
+}

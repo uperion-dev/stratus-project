@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Stratus-1.7.0-rc5-QA-v1-On.zip",
+    "sha256": "84fb0beeb83692d437a0185776c757900faac0f673c9335c9ed8d0fbe7b1497d",
+    "temporal_optics": "1"
+  },
+  {
+    "name": "Stratus-1.7.0-rc5-QA-v1-Off.zip",
+    "sha256": "84fb0beeb83692d437a0185776c757900faac0f673c9335c9ed8d0fbe7b1497d",
+    "temporal_optics": "0"
+  }
+]

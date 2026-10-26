@@ -204,3 +204,8 @@ value.TEMPORAL_ATMOSPHERE.1=On
 
 option.ORIGINAL_DAMPNESS=Original dampness
 option.ORIGINAL_DAMPNESS.comment=Restores optional porous-material absorption darkening and the original humidity/shelter/drainage response. Zero is off and preserves the current diffuse palette. Independent of surface film and sheen controls; nonporous materials stay unchanged. This is a local approximation, not stored wetness over time. The retired WET_DARKENING setting stays a no-op.
+
+option.TEMPORAL_OPTICS=Temporal optics hints
+option.TEMPORAL_OPTICS.comment=Previous-frame intersection hints guide water and glass reflection searches and water shoreline rejection. All hits, occlusion and colours are evaluated from current geometry at the selected quality; no colour history, trails or frame skipping. Cheap sky lookup, thin-glass refraction and the straight underwater exit remain fresh. Experimental and default Off until matched live performance/visual acceptance. Extra history storage can cost performance; compare On and Off.
+value.TEMPORAL_OPTICS.0=Off
+value.TEMPORAL_OPTICS.1=On
