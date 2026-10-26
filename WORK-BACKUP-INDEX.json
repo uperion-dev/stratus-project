@@ -13559,6 +13559,18 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-seamless-header-fade-preview-png-abc5bd3659d67e73.zip",
       "bytes": 54567
+    },
+    "outputs/stratus-fitted-logo-preview.png": {
+      "sha256": "243f0a6d112953c37e2a2c52c6d8348cc8ec56b7685049643c30e32292236d23",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-fitted-logo-preview-png-11975ec1670855d8.zip",
+      "bytes": 72835
+    },
+    "outputs/stratus-flat-soft-logo-preview.png": {
+      "sha256": "2b8d6e039e1c4f927ba6781efa4e0c84c4343a3ddec69961878c176e30341185",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-flat-soft-logo-preview-png-8386fb7a8ff0d711.zip",
+      "bytes": 74501
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
