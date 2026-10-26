@@ -45,17 +45,19 @@ float opticsHitPixelTolerance(vec2 projectedPixels,int count,float requestedStri
 // Bound expensive pixel traversal by a receiver plane that has already been
 // validated at the projected intersection. This preserves the depth search in
 // front of it, but avoids marching empty space all the way to the far plane.
-float opticsPlaneBound(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,bool cache,float minimum,float maximum,out vec2 boundUV,out vec3 boundPoint,out vec3 boundNormal){
+float opticsPlaneBound(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,bool cache,float minimum,float maximum,out vec2 boundUV,out vec3 boundPoint,out vec3 boundNormal,float temporalDistance){
     float sampleT=minimum+0.025;boundUV=vec2(0);boundPoint=vec3(0);boundNormal=vec3(0);
-    for(int iteration=0;iteration<4;iteration++){
-        vec2 uv;if(!opticsProjection(origin+direction*sampleT,uv,cache))break;
+    for(int iteration=-1;iteration<4;iteration++){
+        if(iteration<0){if(temporalDistance<=minimum||temporalDistance>=maximum)continue;sampleT=temporalDistance;}
+        else if(iteration==0)sampleT=minimum+0.025;
+        vec2 uv;if(!opticsProjection(origin+direction*sampleT,uv,cache)){if(iteration<0)continue;break;}
         ivec2 size=opticsSize(cache),cell=clamp(ivec2(uv*vec2(size)),ivec2(0),size-ivec2(1));
-        vec4 data;vec3 receiver=opticsReceiver(cell,data,cache);if(data.a<0.5)break;
+        vec4 data;vec3 receiver=opticsReceiver(cell,data,cache);if(data.a<0.5){if(iteration<0)continue;break;}
         vec3 n=unitVector(mat3(gbufferModelView)*data.xyz);float denominator=dot(direction,n);
-        if(abs(denominator)<0.00001)break;
+        if(abs(denominator)<0.00001){if(iteration<0)continue;break;}
         float distance=dot(receiver-origin,n)/denominator;
-        if(distance<=minimum||distance>maximum)break;
-        vec3 candidate=origin+direction*distance;vec2 hitUV;if(!opticsProjection(candidate,hitUV,cache))break;
+        if(distance<=minimum||distance>maximum){if(iteration<0)continue;break;}
+        vec3 candidate=origin+direction*distance;vec2 hitUV;if(!opticsProjection(candidate,hitUV,cache)){if(iteration<0)continue;break;}
         vec4 hitData;vec3 actual=opticsReceiver(clamp(ivec2(hitUV*vec2(size)),ivec2(0),size-ivec2(1)),hitData,cache);
         vec3 hitNormal=unitVector(mat3(gbufferModelView)*hitData.xyz);
         bool samePlane=hitData.a>0.5&&dot(hitNormal,n)>0.95&&abs(dot(actual-candidate,n))<0.018+length(actual)*0.0004;
@@ -64,13 +66,13 @@ float opticsPlaneBound(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,
     }
     return maximum;
 }
-vec4 traceOpticalSegment(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,bool cache,float minimum,out float path){
+vec4 traceOpticalSegment(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,bool cache,float minimum,out float path,float temporalDistance){
     path=0.0;
     if(!cache&&direction.z>0.00001)maximum=min(maximum,max(0.0,(-0.10-origin.z)/direction.z));
     if(maximum<0.03)return vec4(0.0);
     vec2 boundUV;vec3 boundPoint,boundNormal;
     float previousMaximum=maximum;
-    maximum=opticsPlaneBound(origin,direction,interfaceNormal,side,cache,max(minimum,0.025),maximum,boundUV,boundPoint,boundNormal);
+    maximum=opticsPlaneBound(origin,direction,interfaceNormal,side,cache,max(minimum,0.025),maximum,boundUV,boundPoint,boundNormal,temporalDistance);
     bool bounded=maximum<previousMaximum;
     vec3 start=origin+direction*max(minimum,0.025),end=origin+direction*maximum;
     vec4 a=gbufferProjection*vec4(start,1.0),b=gbufferProjection*vec4(end,1.0);
@@ -135,6 +137,10 @@ vec4 traceOpticalSegment(vec3 origin,vec3 direction,vec3 interfaceNormal,int sid
     return vec4(0.0);
 }
 vec4 traceOpticalScene(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,bool unused,out float path){
-    return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path);
+    return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path,0.0);
 }
+vec4 traceOpticalSceneHint(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,out float path,float temporalDistance){
+    return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path,temporalDistance);
+}
+
 #endif

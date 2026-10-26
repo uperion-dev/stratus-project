@@ -13583,6 +13583,30 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-170-rc5-3ac588d9d865c538.zip",
       "bytes": 2336
+    },
+    "work/stratus-170-rc5/agent/initial.jar": {
+      "sha256": "1694b5301a0b1b9b386fb701f6240ffc4075d590695398c32c6559611fe0e023",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-5f83bfdc89e1ba51.zip",
+      "bytes": 2830
+    },
+    "work/stratus-170-rc5/agent/metrics.jar": {
+      "sha256": "98d8f4febb2ffd791cecd8f494d847d8b2ecb94aaf90bf76641089ee99d7e05d",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-5f83bfdc89e1ba51.zip",
+      "bytes": 5520
+    },
+    "work/stratus-170-rc5/baseline-shaders/volumes/weather.rgba8": {
+      "sha256": "90d381201b4851eb65c6847678765eb71f4dfdc965b8b4e4d36f455c33b2e99a",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-5f83bfdc89e1ba51.zip",
+      "bytes": 8388608
+    },
+    "work/stratus-170-rc5/baseline/shaders/volumes/weather.rgba8": {
+      "sha256": "90d381201b4851eb65c6847678765eb71f4dfdc965b8b4e4d36f455c33b2e99a",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-5f83bfdc89e1ba51.zip",
+      "bytes": 8388608
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

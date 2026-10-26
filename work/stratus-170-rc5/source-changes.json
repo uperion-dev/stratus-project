@@ -1,0 +1,13 @@
+[
+  "shaders/core/atmosphere-resolve.frag.glsl",
+  "shaders/core/lake.frag.glsl",
+  "shaders/core/options.glsl",
+  "shaders/core/refraction.glsl",
+  "shaders/core/resolve.frag.glsl",
+  "shaders/core/scene-trace.glsl",
+  "shaders/core/temporal-optics.glsl",
+  "shaders/core/transparent-optics.glsl",
+  "shaders/core/water-reflection.frag.glsl",
+  "shaders/lang/en_us.lang",
+  "shaders/shaders.properties"
+]
