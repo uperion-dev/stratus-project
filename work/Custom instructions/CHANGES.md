@@ -4,5 +4,5 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 
 ## Pending changes
 
-No pending changes.
+- Think harder and find the ways to maximise performance, visuals can be deformed except resulution. 
 

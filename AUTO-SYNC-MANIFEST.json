@@ -11526,6 +11526,6 @@
     "stratus-studio-cloud": "839019025c56d237951b524a53f14fe6a4e1bcbb"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "db170fcfa35c892c7c01a307cf833b3842933437902a53ac43fd916007864fd0",
+  "fingerprint": "134ef309214073eb0638a82270e703c24a43ce1e48cccd0085828fbc34044d68",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
