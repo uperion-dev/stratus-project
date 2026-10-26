@@ -4,5 +4,5 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 
 ## Pending changes
 
-- Temporal optimisation on all reflectio and refractions too.
+No pending changes.
 

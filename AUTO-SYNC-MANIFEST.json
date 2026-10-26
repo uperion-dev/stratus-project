@@ -773,6 +773,9 @@
     "work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/CONTEXT.md",
     "work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/PROGRESS.md",
     "work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/TASK.md",
+    "work/Custom instructions/IN-PROGRESS/c3ec7834-5d1e-403e-9eb7-7a12a3226909/CHANGES.md",
+    "work/Custom instructions/IN-PROGRESS/c3ec7834-5d1e-403e-9eb7-7a12a3226909/PROGRESS.md",
+    "work/Custom instructions/IN-PROGRESS/c3ec7834-5d1e-403e-9eb7-7a12a3226909/TASK.md",
     "work/Custom instructions/PROMPTS.md",
     "work/Custom instructions/README.md",
     "work/Custom instructions/RELEASE-ROADMAP.md",
@@ -10813,9 +10816,9 @@
   ],
   "site_commits": {
     "stratus-public": "9098ac5213529c0f800ae9d29b9dd5c6c9538a0d",
-    "stratus-studio-cloud": "59ac3283fd58e5769b2c0536cee143b1e54bd291"
+    "stratus-studio-cloud": "839019025c56d237951b524a53f14fe6a4e1bcbb"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "d71bf2b2c0f5834d6f71bf24c838251d92f3723f1e914da98027d7b177f09f15",
+  "fingerprint": "0929de0ab9a61d2bd7ea0f398248348076e5931da5ef3b3988b7850b43ced03d",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
