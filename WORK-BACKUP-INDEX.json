@@ -13547,6 +13547,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-fixed-pane-collapse-preview-png-2b46c32563a3a31a.zip",
       "bytes": 64941
+    },
+    "outputs/stratus-clean-layered-gradient-preview.png": {
+      "sha256": "40950ded7a1684b3c41a008b733336834ef9a28a17fa6660b8fcb1d5d68364b8",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-clean-layered-gradient-preview-png-163f25d6c683675e.zip",
+      "bytes": 73079
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
