@@ -11,8 +11,10 @@
   "new_option_default": 0,
   "reviewed_QA_v1_river_frame": true,
   "final_candidate_motion_visual_acceptance": false,
-  "focused_fps_samples": 0,
-  "final_runtime_focused": 0,
+  "focused_fps_samples": 6,
+  "initial_final_ZIP_load_focused": 0,
+  "focused_benchmark_evidence": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc5/performance-results.json",
+  "newer_user_camera_preserved": true,
   "restored": {
     "pose_HUD_pause_flight_time_rain": true,
     "Iris_selection_config": true,
@@ -30,6 +32,6 @@
   "original_rc3_settings_normalisation": "Iris changed the timestamp comment only; all saved override values are identical. No user values overwritten.",
   "pending": [
     "all-optics temporal coverage and representative moving/live On-Off acceptance",
-    "focused active-game performance comparison; Mac locked/unfocused, no accepted FPS"
+    "effective all-optics speedup and approximately60FPS Reference target; focused comparisons complete but show no gain"
   ]
 }

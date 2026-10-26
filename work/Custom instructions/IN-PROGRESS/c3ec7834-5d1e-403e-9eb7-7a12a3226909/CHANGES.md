@@ -4,10 +4,13 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 
 ## Pending changes
 
-- [ ] Extend temporal optimisation to active reflection and refraction paths. Preserve sharp current-frame colour, all controls and selected sampling/resolution. Start with validated prior-frame intersection/shoreline hints; always reject stale history and validate current geometry. Check water/scenery/sky and transparent-solid paths, motion, disocclusion, reload, viewport and waterline cases. Keep any unsupported or unverified coverage pending rather than claiming all optics are finished.
-- [ ] Run matched, focused active-game FPS/frame-time comparisons after the stable chunk-readiness gate, recording hardware, exact options/framebuffer/camera/time/weather, Dynamic FPS and inactivity limiter state. The user has explicitly resumed this test and intends to keep Minecraft focused. Preserve quality; do not claim an improvement from unmatched or throttled samples.
+- [ ] Complete efficient temporal optimisation across **all reflections and refractions**, preserving sharp current colour, correct occlusion/motion, all controls and selected sampling/resolution. Rc5 adds optional prior-frame intersection hints for water/glass scenery searches and prior shoreline-rejection ordering for water refraction, but this is only a default-off experiment. Six matched focused samples show no speedup (manual On about3% slower; Reference difference under1%). Cheap sky lookup, thin-glass refraction and the straight underwater exit remain fresh. Deliver a net-efficient approach; keep the approximately60FPS Reference goal pending. Continuous motion/disocclusion, glass/layering, waterline, reload/viewport and full-path acceptance remain unverified.
 
-## Staging notes
+## Progress and evidence
 
-- Frozen TASK delta contains already completed rc4 material/default/evidence reconciliation. No additional material implementation is staged.
-- Shared CHANGES.md is protected as the next unsent queue. This active batch alone is being processed.
+- Focused FPS comparison itself is complete and moved to COMPLETED-CHANGES.md; that does not complete the optimisation request above. Six accepted primary20-second samples at1440×842, real focus, stable441/441-column/zero-mesh gates, documented active limiter/quality. No visual-quality reductions or supported speedup claim.
+- Candidate `outputs/Stratus-1.7.0-rc5.zip` installed and actually loaded; source/archive/install match.68 controls/four actual Iris profiles,768 native pairs, targeted GPU cases at all three refraction qualities and17 migration checks pass.
+- Details: `work/stratus-170-rc5/performance-results.json`, `final-audit.json`, `optics-checks-final.json`, nine reviewed river captures and CHANGE-LOG.md26October2026 rc5 entry.
+- Per-pass GPU profiling could not initialise under Fabric class-loader visibility checks, before transformer registration; no timings or active hook claimed. Use a supported profiling integration for deeper bottleneck work.
+- Original rc3 selection/config/HUD/pause/options restored; newer user camera angle preserved; helpers stopped and owned QA files removed. No fixtures/world blocks changed. Shared next queue, immutable batch target and frozen bridge snapshots untouched.
+- Frozen TASK delta only repeated completed rc4 material/evidence reconciliation; no new material work staged. No newer document conflict found.

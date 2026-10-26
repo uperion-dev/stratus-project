@@ -4,6 +4,13 @@ Archive of completed requests and their release/evidence references. This is his
 
 ## Completed changes
 
+### Stratus1.7.0-rc5 — 26 October 2026 — batchc3ec7834 — focused comparison only
+
+- [x] Requested focused active-game comparison completed: six primary20-second samples,1440×842, Apple M1, actual focus/throttling/activity and loaded-column/mesh gates recorded. Two matched manual pairs (~31.4Off/30.4On and30.9Off/30.0On) and a separate strict Reference pair (50.24Off/49.91On) show no supported gain. All quality choices preserved; no60FPS acceptance. Nine finite river captures inspected. Original shader/config/options/HUD/pause restored, newer camera angle preserved and helpers/owned QA files cleaned up.
+
+This archives the **measurement**, not the full optimisation request. Effective all-reflections/refractions temporal work, net performance improvement and broader live motion acceptance remain pending in the active batch. [Evidence and limitations](CHANGE-LOG.md#26-october-2026--stratus-170-rc5--experimental-temporal-optics-hints) · [Raw comparison report](../../work/stratus-170-rc5/performance-results.json) · [Candidate](../../outputs/Stratus-1.7.0-rc5.zip).
+
+
 ### Stratus1.7.0-rc4 — 26 October 2026 — batch0bc449ce
 
 - [x] Uniform material sheen response: common film reflectance/lobe roughness across eligible exposed receivers, while retaining native texture/diffuse colour, exposure/drainage/weather/back-face guards and zero controls.1152 actual material GPU cases show exact class-independent response at matched inputs;96 film cases and matched nine-material rc3/candidate/dry live panels pass. Different native textures/angles/light still look different.

@@ -1,0 +1,63 @@
+{
+  "hardware": "Apple M1 / OpenGL4.1 Metal91.7",
+  "framebuffer": [
+    1440,
+    842
+  ],
+  "render_distance": 12,
+  "time": 1000,
+  "rain": 0,
+  "accepted_samples": 6,
+  "seconds_per_sample": 20,
+  "focused": true,
+  "DynamicFPS": "enabled, FOCUSED, idle false,260 target; actual Minecraft cap70",
+  "inactivity": "manual pairs: bounded five-second activity monitor, NONE throughout windows; strict Reference pair: reset and verify NONE/FOCUSED/idlefalse at every50ms sample poll, zero bad polls",
+  "chunk_gate": "441/441 view disk columns, stable counts>=5000ms, zero jobs/workers/uploads/tasks; fresh gate at start and loading/camera/focus/size guarded throughout",
+  "manual_quality": "initial rc3 manual overrides, reflection mode2, water style0, water quality1, refraction1, atmosphere1, turbidity0.50, visibility6",
+  "Reference_quality": "all68 current source Reference values; sceneryreflection0, waterstyle1, waterquality1, refraction1, atmosphere1; separate baseline, not a constant-quality speedup over manual",
+  "camera_scope": "Manual pair A uses original pitch11.547702/yaw-68.16534. User moved between pairs; manual B/Reference use pitch10.483427/yaw-67.70922. Each pair matches, no movement during accepted samples. Newer user pose preserved.",
+  "pairs": [
+    {
+      "pair": "manual-A",
+      "off_fps": 31.4156,
+      "on_fps": 30.4226,
+      "on_relative_fps_change_percent": -3.160850023555184,
+      "off_median_ms": 31.7145,
+      "on_median_ms": 33.0758,
+      "off_p95_ms": 41.3527,
+      "on_p95_ms": 43.6683
+    },
+    {
+      "pair": "manual-B",
+      "off_fps": 30.933,
+      "on_fps": 30.0311,
+      "on_relative_fps_change_percent": -2.91565641871141,
+      "off_median_ms": 32.296,
+      "on_median_ms": 33.1093,
+      "off_p95_ms": 43.3888,
+      "on_p95_ms": 46.2996
+    },
+    {
+      "pair": "Reference",
+      "off_fps": 50.2411,
+      "on_fps": 49.9118,
+      "on_relative_fps_change_percent": -0.6554394708714661,
+      "off_median_ms": 19.703,
+      "on_median_ms": 19.8241,
+      "off_p95_ms": 26.4176,
+      "on_p95_ms": 25.5165
+    }
+  ],
+  "speedup_supported": false,
+  "conclusion": "Manual On is about3% slower in both orders; Reference difference under1% shows no meaningful benefit. Keep experimental switch defaultoff; approximately60FPS target and effective all-optics optimisation remain pending.",
+  "preliminary_samples_retained_not_primary": [
+    "reference-off",
+    "reference-on"
+  ],
+  "preliminary_limit": "Standalone activity helper expired near final preliminary sample; reran with sample-bound continuous limiter checks.",
+  "profiling": "Four-second per-pass GPU query agent could not initialise because Fabric refused access to unexposed helper class, before any transformer was registered. No pass timings/hook success claimed; no persistent instrumentation installed.",
+  "saved_VSync": true,
+  "DynamicFPS_reported_enableVsync": false,
+  "effective_swap_interval_verified": false,
+  "VSync_scope": "Saved options and reported mod VSync state are both recorded; effective swap interval not independently queried. Matched user settings, not an uncapped GPU throughput claim."
+}

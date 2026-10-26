@@ -95,7 +95,9 @@
   "runtime_evidence": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc5/final-release-runtime.json",
   "selected_after_verification": "Stratus-1.7.0-rc3.zip",
   "TEMPORAL_OPTICS_default": 0,
-  "live_visual_acceptance": "pending; reviewed QA-v1 river static frame only",
-  "focused_fps_samples": 0,
-  "restoration_evidence": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc5/final-audit.json"
+  "live_visual_acceptance": "Nine finite river captures reviewed, including final-byte On/Off variants; continuous motion/glass/waterline coverage remains pending",
+  "focused_fps_samples": 6,
+  "restoration_evidence": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc5/final-audit.json",
+  "performance_evidence": "/Users/william.lei/Documents/ChatGPT/MC Shader Making/work/stratus-170-rc5/performance-results.json",
+  "performance_result": "No supported gain; keep optics hints off by default. Approx60FPS target remains pending."
 }

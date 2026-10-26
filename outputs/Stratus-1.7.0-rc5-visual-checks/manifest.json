@@ -1,0 +1,56 @@
+[
+  {
+    "file": "river-off-a.png",
+    "label": "Manual A \u2014 Off,31.42 FPS",
+    "sha256": "d8d2268b6aca7b942b56e3013f5c4bf418879ad6f17bf5697e791b26f80ec231",
+    "reviewed": true
+  },
+  {
+    "file": "river-on-a.png",
+    "label": "Manual A \u2014 On,30.42 FPS",
+    "sha256": "b6562d94516ccfb1f76ab581425b3fdcce4f26c679e455bee8eda5ad1a140bf9",
+    "reviewed": true
+  },
+  {
+    "file": "river-on-b.png",
+    "label": "Manual B \u2014 On,30.03 FPS",
+    "sha256": "dc60cb689f794658aa4db0a8af228d5731959762b1920f536cc9649256cc7439",
+    "reviewed": true
+  },
+  {
+    "file": "river-off-b.png",
+    "label": "Manual B \u2014 Off,30.93 FPS",
+    "sha256": "4bcbcfd5e11651555a49f34218f2c74c83f9995e614767c66dc6a75429d0daa2",
+    "reviewed": true
+  },
+  {
+    "file": "reference-on-verified.png",
+    "label": "Reference strict \u2014 On,49.91 FPS",
+    "sha256": "c30e62a1141de99cc56db65481f38ad23617aa9df15f240cf7350723c5476e9f",
+    "reviewed": true
+  },
+  {
+    "file": "reference-off-verified.png",
+    "label": "Reference strict \u2014 Off,50.24 FPS",
+    "sha256": "8b8c7d359de389dba146f880349eb20496f8f97e1a642ae99d6aab85de9489b1",
+    "reviewed": true
+  },
+  {
+    "file": "reference-off.png",
+    "label": "Preliminary Reference Off \u2014 superseded by strict pair",
+    "sha256": "d113ed7816ed9a8eb531b327d72fd0121d62a8480bf487737acceb2e9c98ddf3",
+    "reviewed": true
+  },
+  {
+    "file": "reference-on.png",
+    "label": "Preliminary Reference On \u2014 superseded by strict pair",
+    "sha256": "161dd07d66f37e8121ecf87c06c94604150e1faa3082eab33b459110ed94d9ca",
+    "reviewed": true
+  },
+  {
+    "file": "rc5-optics-on.png.png",
+    "label": "Earlier QA-v1 \u2014 unfocused1FPS; not temporal/motion acceptance",
+    "sha256": "66dae98a3e7ef8f3c54cdaf8ff26869d1f8fa20ba741665a0f2880c0dd2e6bd4",
+    "reviewed": true
+  }
+]

@@ -1,5 +1,46 @@
 # Stratus change and output log
 
+## 26 October 2026 — Stratus 1.7.0-rc5 — experimental temporal optics hints
+
+### At a glance
+
+- Optional **Temporal optics hints**, default **Off**, adds prior-frame geometry/search hints for water/glass scenery reflections and water shoreline refraction checks. Fresh depth, occlusion and colour remain; no renderer frame skipping or colour accumulation. **The full all-reflections/refractions optimisation request remains pending.**
+- [Candidate ZIP](../../outputs/Stratus-1.7.0-rc5.zip), [install/load receipt](../../outputs/Stratus-1.7.0-rc5-install.json), [nine reviewed finite river captures](../../outputs/Stratus-1.7.0-rc5-visual-checks/index.html). Exact final source/archive/install bytes match;250 entries,7,785,718bytes;SHA256 `4424a2f229ffca4519e0b619264b933de44b3f365532246492ad6b2fa68632d0`.
+-768 native pairs, targeted GPU comparisons at all three refraction qualities,17 installer checks,68 reachable options and four actual68-option Iris profiles pass. All previous67 option defaults/ranges/preset assignments and620 block tokens retained. **Six valid focused FPS samples now recorded; no speedup.** Keep this experiment disabled. Net optimisation, approximately60FPS Reference goal and broad motion/glass/waterline acceptance remain pending.
+
+Batch: [c3ec7834 active brief](IN-PROGRESS/c3ec7834-5d1e-403e-9eb7-7a12a3226909/CHANGES.md). Frozen delta repeats completed rc4 material reconciliation, so no duplicate material work. Shared next queue, immutable batch target and frozen snapshots are preserved. Only this batch's brief is staged/reconciled; earlier pending batches remain untouched. No newer document conflict was found before reconciliation.
+
+### Implementation and technical evidence
+
+Eleven shader files listed in `work/stratus-170-rc5/source-changes.json`, with exact `changes.diff`. New `temporal-optics.glsl` retains only the immediately preceding distance/rejected-step hint, frame stamps and slow-frame rejection. Water reflection and transparent-solid scenery searches validate a current receiver plane from the hint, then retain current foreground traversal and selected ray budgets. A failed seed falls back to the original search. Water refraction may test its prior rejected guard first using current depth; all accepted rays still evaluate the full chosen guard set. Cheap sky/environment lookups, thin-glass single-guard refraction and the straight underwater exit remain fresh. This is partial temporal search acceleration, not a claim of full radiance-history coverage or final optimisation success.
+
+No new pass, reduced resolution, smaller ray budget, draw-distance change or deleted control. Optional On uses up to three RG16F ping-pong histories in existing passes, following their existing resolutions; unused scenery/quality-zero targets are conditional. At1440×842/full scenery/half water, raw paired storage is about21.8MB before driver overhead. Extra writes and invalid hints can cost more than saved reads, which is why the measured experiment remains default Off in all presets.
+
+`compile-final.log`:768 final native compatibility-shim program pairs, zero failures (not a Minecraft emulator). `optics-checks-final.json`:960 reflection comparisons across planar/foreground/missing/cutout data and valid/invalid seeds;1344 UV comparisons at each refraction quality0/1/2; eight RG16F consecutive/stale/first/slow/wrapped-history checks per run. Tested reflection RGBA error0, matching refraction UVs, zero failures/API errors. Instrumented valid-seed receiver reads3620→3597; quality2 refraction reads598→559. These are finite synthetic read counts, not GPU timings or gameplay speedup; deliberately wrong seeds add work. `control-checks.json`, `migration-checks.json` and `final-release-runtime.json` record full control/menu/preset/migration checks. Final actual Iris load verifies all68 effective options, saved overrides and four complete68-option profiles. No override reset. Rc4 ZIP remains byte-identical. Packaged CHECKS/VALIDATION are pre-live-test snapshots; external receipt and this entry carry subsequent runtime/FPS evidence without rewriting the immutable ZIP.
+
+Primary design references: [Iris ColorTex lifetime/ping-pong and32-buffer support](https://shaders.properties/current/reference/buffers/colortex/) and [GPUOpen temporal denoising/disocclusion discussion](https://gpuopen.com/manuals/fidelityfx_sdk/techniques/denoiser/). No third-party shader implementation copied. Current code validates fresh geometry instead of assuming previous reflected radiance stays valid as waves or objects move.
+
+### Focused performance and finite visual review
+
+Actual Main/Stratus Terrain Lab, Apple M1, OpenGL4.1 Metal91.7,1440×842, render distance12/simulation8, time1000/rain0. Saved VSync=true; DynamicFPS reports enableVsync=false, effective swap interval not independently queried. Matched user-setting comparisons, not uncapped GPU-throughput certification. DynamicFPS stays enabled/FOCUSED/idlefalse; actual Minecraft limiter is NONE with cap70 during accepted sampling. The initial SHORT_AFK30FPS cap was cleared by bounded timer activity, without saved-setting changes or fake focus. All primary samples are20seconds, real focus throughout, fixed camera/framebuffer,441/441 disk columns, stable counts at least5seconds and zero queued jobs/busy workers/uploads/task lists. Fresh gate at start and continued loading/camera/focus/size guards pass.
+
+| Matched pair | Off FPS | On FPS | On relative change | Off/On median ms | Off/On p95 ms |
+|---|---:|---:|---:|---:|---:|
+| Manual A |31.4156|30.4226|−3.16%|31.7145 /33.0758|41.3527 /43.6683|
+| Manual B, reverse order |30.9330|30.0311|−2.92%|32.2960 /33.1093|43.3888 /46.2996|
+| Complete Reference, strict limiter checks |50.2411|49.9118|−0.66%|19.7030 /19.8241|26.4176 /25.5165|
+
+Manual uses saved full scenery mode2, waterstyle0, half water/atmosphere and refraction1, turbidity0.50/visibility6. Reference applies all68 source profile values, including sky-only reflections and native water; it is a separate baseline, not a constant-quality gain over manual. User changed camera between A and B; pairs each match, and Reference uses B's view. The newer angle is preserved. Two preliminary Reference samples (~51.8/~51.6FPS) remain as secondary evidence only: the standalone activity helper expired near their end, so the pair was rerun with sample-bound activity and per-poll limiter/DynamicFPS checks; zero bad polls. Raw frame times, gates, active-monitor metadata, exact options and qualification details live in `work/stratus-170-rc5/benchmarks/`, `activity-monitor.txt`, `bench-runtime-*.txt` and `performance-results.json`.
+
+Nine unedited actual captures were inspected, including final-byte manual/Reference On/Off variants. No obvious water rectangles, stale-colour accumulation or broken river composition seen in this finite coverage. Animated waves/textures/clouds/particles vary naturally. One earlier QA-v1 screenshot was unfocused1FPS and proves neither temporal reuse nor motion safety. Continuous motion/disocclusion, glass/layering, waterline, resize/reload and all-path acceptance are still pending. Gallery images/links/hashes checked; gallery HTML was not separately browser-rendered. Per-pass GPU-query profiling was attempted, but Fabric refused access to the unexposed helper class before any transformer registration. No per-pass timings or successful hook claimed; no persistent instrumentation installed.
+
+### Restoration and remaining work
+
+Original rc3 enabled selection/config, HUD/pause/menu, flight, saved options, weather/time and all saved override values restored/retained. The user moved the view between test pairs; that newer angle was preserved instead of resetting the old one. Iris updated timestamp comments only in the original settings file. Helpers stopped;12 owned temporary QA files removed or automatically discarded by Iris after effective-option equality checks; no fixtures/world blocks changed. Final candidate stays installed alongside preserved old releases. `final-audit.json` checks exact source/archive/install equivalence, loaded options/profiles, restoration and cleanup.
+
+Focused comparison is complete and archived as verification only. The all-optics temporal optimisation request remains pending because this hint approach provides no measured benefit and does not cover full temporal colour reuse. Next work is a more effective design with motion/disocclusion validity and practical profiling through a supported integration, followed by matched active-game acceptance at unchanged quality. Do not enable/promote this prototype as a performance improvement or mark the full batch complete.
+
+
 ## 26 October 2026 — Stratus 1.7.0-rc4 — uniform material film and original dampness
 
 ### At a glance
