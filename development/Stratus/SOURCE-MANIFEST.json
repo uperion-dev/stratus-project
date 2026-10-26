@@ -81,8 +81,8 @@
   },
   {
     "path": "shaders/core/atmosphere-resolve.frag.glsl",
-    "bytes": 2378,
-    "sha256": "7e4f06d728a99b3d6fbcf425980eed3b1697e8bcec56b744f6e52b1cc5f70ab0"
+    "bytes": 2604,
+    "sha256": "c4615ee49ea80cde27dbfac9c816e873c21c9cd38f01d5796e440f1cbeeebe5a"
   },
   {
     "path": "shaders/core/atmosphere.frag.glsl",
@@ -146,8 +146,8 @@
   },
   {
     "path": "shaders/core/lake.frag.glsl",
-    "bytes": 6597,
-    "sha256": "7ed6529d2a321be056985eb95bd808a9d7d80d0d95e29b7a6035210c90f16d6f"
+    "bytes": 7238,
+    "sha256": "d6f8d2e8d4494048d6b66258e19b2e9fac8a79140ec4a9862d048fd18571735b"
   },
   {
     "path": "shaders/core/medium.glsl",
@@ -161,8 +161,8 @@
   },
   {
     "path": "shaders/core/options.glsl",
-    "bytes": 5316,
-    "sha256": "0bf9a353dcb01fef69f6d0ff61e7f342a8471f18423e93a29cc52d758d652fd5"
+    "bytes": 5351,
+    "sha256": "7c4225972013a4253499ad0470151ebd6358b01b05fe2c3e0f1f16e032c1739a"
   },
   {
     "path": "shaders/core/output.frag.glsl",
@@ -181,13 +181,13 @@
   },
   {
     "path": "shaders/core/refraction.glsl",
-    "bytes": 1027,
-    "sha256": "aff5f9ad2ed6077955b7b2be6dc981683c9f01758d9aac64d6f79b564ad54a78"
+    "bytes": 1781,
+    "sha256": "bc70b16d5aa9e07718209fe9ac26c65e377d3d170f33728ca8a7770ab1369fa4"
   },
   {
     "path": "shaders/core/resolve.frag.glsl",
-    "bytes": 3300,
-    "sha256": "d33b16df5e579d8c606207c306863df4ccd2a362b05dc867f2ea4c5b084c4e8b"
+    "bytes": 3639,
+    "sha256": "64de9f2b524814463600d64f6dd7211472584a2066e84f1c18174d5feeb4762d"
   },
   {
     "path": "shaders/core/scene-depth.glsl",
@@ -196,8 +196,8 @@
   },
   {
     "path": "shaders/core/scene-trace.glsl",
-    "bytes": 8469,
-    "sha256": "cea54efeef4927ff8b5b911fa4f171c0dfb3dcf6870364745352c7749f4b61e2"
+    "bytes": 9109,
+    "sha256": "c21529bacff7564e046f3a031576aacdb4f2a2dfe4402e3cc03b25c5addeb006"
   },
   {
     "path": "shaders/core/screen.vert.glsl",
@@ -230,14 +230,19 @@
     "sha256": "37705589007cee0ebf3c1a983c0dd20a5b5a48c540dc3c86ad642d9d80c2f700"
   },
   {
+    "path": "shaders/core/temporal-optics.glsl",
+    "bytes": 677,
+    "sha256": "57413bc1273c7184581465270656487f27f66c6c50520b7dd124d8798f396a4d"
+  },
+  {
     "path": "shaders/core/trace.glsl",
     "bytes": 485,
     "sha256": "239ddee1175526427c7547388184110e9d4ad4a32c797f7a9441d91703941d19"
   },
   {
     "path": "shaders/core/transparent-optics.glsl",
-    "bytes": 2600,
-    "sha256": "0a74a595f1fe81ec5141a43413aad3192b900c25bbd20a379f5435273afbb7fa"
+    "bytes": 3110,
+    "sha256": "568ef5bc0f4d8d397d2baa069f433b73d4833eb754be12215fbcef7929db55a2"
   },
   {
     "path": "shaders/core/volume.glsl",
@@ -261,8 +266,8 @@
   },
   {
     "path": "shaders/core/water-reflection.frag.glsl",
-    "bytes": 1489,
-    "sha256": "4c1c678b3d2e8c064734b7794089b5c5b4caf8e309c78ee9102469cdd3af71ef"
+    "bytes": 2164,
+    "sha256": "3b81c0ab53f9c1a1046da46029d04711bc357c470e258f07b1630d0f0a9c83ec"
   },
   {
     "path": "shaders/core/water-resolve.frag.glsl",
@@ -536,13 +541,13 @@
   },
   {
     "path": "shaders/lang/en_us.lang",
-    "bytes": 17045,
-    "sha256": "05f9f2dbc17fed61ef256588f7c1b653037d6a6fd50eebb24ca4a25e08c1a6e3"
+    "bytes": 17652,
+    "sha256": "ef13a71fdd77bd575c03ed5d1b0049bee77f0f327044b62d7108497811bd868b"
   },
   {
     "path": "shaders/shaders.properties",
-    "bytes": 18678,
-    "sha256": "2c1b7665b833add407e249319131c41943692fc19619c18f177716919e251ede"
+    "bytes": 19231,
+    "sha256": "c4ad184410e7eb2f98d90c0bee0bb727a60c650d6b0f983e2ab45a004d360cb8"
   },
   {
     "path": "shaders/volumes/weather.rgba8",

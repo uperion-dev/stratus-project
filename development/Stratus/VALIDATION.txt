@@ -1,10 +1,23 @@
-Stratus1.7.0-rc4 candidate. Evidence:work/stratus-170-rc4.
-768 native compatibility-shim compile/link pairs, zero failures.
-1152 actual material GPU cases:8 classes,6 normals,3 exposure levels,2 weather
-states and4 film/original-dampness variants. Uniform sheen error0; dampness
-matches independent original-shape CPU reference within0.000000031.
-96 actual wet-film shelter/weather/zero cases; all67 menu controls and prior66
-options/ranges/preset assignments preserved. Installer policy checks use actual
-installer in temporary profiles. No unchanged prior-release test is passed off
-as a new runtime result. External receipt/report records final ZIP loading and
-finite visual evidence separately. FocusedFPS skipped by user; no speedup claim.
+Stratus 1.7.0-rc5 candidate; evidence: work/stratus-170-rc5.
+Final native compatibility-shim compilation covers 768 program pairs across
+8 variants; results are in compile-final.log. This is not Iris integration.
+Targeted actual GLSL GPU checks compare hinted/fresh reflection RGBA across
+planar, foreground, missing and cutout receivers and valid/invalid seeds;
+refraction UVs against all selected guards at quality 0/1/2; and RG16F history
+headers for consecutive, stale, first/slow and wrapped frames. Counts and
+results are in optics-checks-final.json. Instrumented read counts are not
+GPU timings or gameplay FPS. Deliberately wrong hints may increase reads.
+Control audit preserves all 67 prior defaults/ranges/preset assignments and
+620 block tokens, checks all 68 options reachable with labels/tooltips.
+Actual installer policy tests run in temporary profiles. No override resets.
+
+Development QA-v1 On loaded in the actual Main/Iris pipeline. One 1440x842
+normal-world river view was captured/reviewed after a stable 5124ms gate,
+441/441 disk columns and no mesh jobs/workers/uploads/tasks pending. Actual
+probe was unfocused with Dynamic FPS capped at 1 FPS; slow-frame rejection
+means this is not proof of effective temporal hint reuse or motion safety.
+The Mac was reported locked. Test driver stopped and original rc3 selection,
+HUD/pause/menu restored. Final candidate runtime evidence is external to this
+immutable archive. Focused FPS, motion/disocclusion/glass/waterline/resize/
+reload and representative matched On/Off acceptance remain required. No
+performance gain or full all-reflections/refractions completion is claimed.

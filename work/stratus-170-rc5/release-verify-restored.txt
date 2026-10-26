@@ -1,0 +1,1 @@
+Restored Stratus-1.7.0-rc3.zip enabled=true; one-shot verification has no polling helper.

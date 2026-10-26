@@ -13631,6 +13631,30 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-170-rc5-fc1f6529e04c7fe3.zip",
       "bytes": 1979835
+    },
+    "outputs/Stratus-1.7.0-rc5.zip": {
+      "sha256": "4424a2f229ffca4519e0b619264b933de44b3f365532246492ad6b2fa68632d0",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc5-28f1f619b2423957.zip",
+      "bytes": 7785718
+    },
+    "work/stratus-170-rc5/agent/final-state.jar": {
+      "sha256": "eb6bd9839f3bfc06590b82e137d91b5df85bcb114b7d6d2bf6405df007e0b1c7",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-3a911d6b726f7285.zip",
+      "bytes": 2840
+    },
+    "work/stratus-170-rc5/agent/verify-release.jar": {
+      "sha256": "05ef9dd30553639b743ef03463e05bc6bdbd49daff18b397b0abcc95a626c19c",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-3a911d6b726f7285.zip",
+      "bytes": 4931
+    },
+    "work/stratus-170-rc5/optics_probe": {
+      "sha256": "c00e6a1fd3a61ad8a75f61ffca86aad968af815dbfde577bfd9dab6c9328b3ee",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-3a911d6b726f7285.zip",
+      "bytes": 37248
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

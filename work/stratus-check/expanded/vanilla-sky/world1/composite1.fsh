@@ -65,6 +65,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define REFRACTION_QUALITY 1 // [0 1 2]
 #define ATMOSPHERE_QUALITY 1 // [0 1 2]
 #define TEMPORAL_ATMOSPHERE 1 // [0 1]
+#define TEMPORAL_OPTICS 0 // [0 1]
 #define ORIGINAL_DAMPNESS 0.00 // [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
 #define WATER_RENDER_QUALITY 1 // [0 1 2]
 #define CLOUD_DENSITY 1.00 // [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
@@ -994,7 +995,8 @@ uniform sampler2D depthtex0;
 #define STRATUS_REFRACTION_INCLUDED
 // Restored from Stratus v1.3.1: inexpensive normal-offset transmission.
 // This is a screen-space approximation, not a Snell geometry ray tracer.
-vec2 legacyWaterRefractionUV(vec2 uv,vec3 nView,vec3 faceView,float thickness,float surfaceDepth){
+vec2 legacyWaterRefractionUV(vec2 uv,vec3 nView,vec3 faceView,float thickness,float surfaceDepth,float previousRejectedStep,out float rejectedStep){
+    rejectedStep=0.0;
     vec2 distortion=(nView.xy-faceView.xy)*WATER_DISTORTION*0.15*clamp(thickness*0.3,0.25,1.0);
     vec2 shifted=clamp(uv+distortion,vec2(0.001),vec2(0.999));
     float shiftedDepth=texture(depthtex1,shifted).r;
@@ -1002,13 +1004,24 @@ vec2 legacyWaterRefractionUV(vec2 uv,vec3 nView,vec3 faceView,float thickness,fl
 #if REFRACTION_QUALITY > 0
     // Optional extra edge protection; mode zero is the original v1.3.1 guard.
     int checks=REFRACTION_QUALITY==2?4:2;
+    int previous=int(previousRejectedStep);
+    // A previous rejection is only a search-order hint. Probe that CURRENT
+    // segment location first; every accepted ray still runs every guard.
+    if(previous>=1&&previous<=checks){
+        vec2 edge=mix(uv,shifted,float(previous)/float(checks));float d=texture(depthtex1,edge).r;
+        if(d<0.999999&&-positionFromDepth(edge,d).z<surfaceDepth+0.03){rejectedStep=float(previous);return uv;}
+    }
     for(int i=1;i<=checks;i++){
         vec2 edge=mix(uv,shifted,float(i)/float(checks));float d=texture(depthtex1,edge).r;
-        if(d<0.999999&&-positionFromDepth(edge,d).z<surfaceDepth+0.03)return uv;
+        if(d<0.999999&&-positionFromDepth(edge,d).z<surfaceDepth+0.03){rejectedStep=float(i);return uv;}
     }
 #endif
     return shifted;
 }
+vec2 legacyWaterRefractionUV(vec2 uv,vec3 nView,vec3 faceView,float thickness,float surfaceDepth){
+    float rejected;return legacyWaterRefractionUV(uv,nView,faceView,thickness,surfaceDepth,0.0,rejected);
+}
+
 #endif
 
 // END INCLUDE /core/refraction.glsl
@@ -1062,17 +1075,19 @@ float opticsHitPixelTolerance(vec2 projectedPixels,int count,float requestedStri
 // Bound expensive pixel traversal by a receiver plane that has already been
 // validated at the projected intersection. This preserves the depth search in
 // front of it, but avoids marching empty space all the way to the far plane.
-float opticsPlaneBound(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,bool cache,float minimum,float maximum,out vec2 boundUV,out vec3 boundPoint,out vec3 boundNormal){
+float opticsPlaneBound(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,bool cache,float minimum,float maximum,out vec2 boundUV,out vec3 boundPoint,out vec3 boundNormal,float temporalDistance){
     float sampleT=minimum+0.025;boundUV=vec2(0);boundPoint=vec3(0);boundNormal=vec3(0);
-    for(int iteration=0;iteration<4;iteration++){
-        vec2 uv;if(!opticsProjection(origin+direction*sampleT,uv,cache))break;
+    for(int iteration=-1;iteration<4;iteration++){
+        if(iteration<0){if(temporalDistance<=minimum||temporalDistance>=maximum)continue;sampleT=temporalDistance;}
+        else if(iteration==0)sampleT=minimum+0.025;
+        vec2 uv;if(!opticsProjection(origin+direction*sampleT,uv,cache)){if(iteration<0)continue;break;}
         ivec2 size=opticsSize(cache),cell=clamp(ivec2(uv*vec2(size)),ivec2(0),size-ivec2(1));
-        vec4 data;vec3 receiver=opticsReceiver(cell,data,cache);if(data.a<0.5)break;
+        vec4 data;vec3 receiver=opticsReceiver(cell,data,cache);if(data.a<0.5){if(iteration<0)continue;break;}
         vec3 n=unitVector(mat3(gbufferModelView)*data.xyz);float denominator=dot(direction,n);
-        if(abs(denominator)<0.00001)break;
+        if(abs(denominator)<0.00001){if(iteration<0)continue;break;}
         float distance=dot(receiver-origin,n)/denominator;
-        if(distance<=minimum||distance>maximum)break;
-        vec3 candidate=origin+direction*distance;vec2 hitUV;if(!opticsProjection(candidate,hitUV,cache))break;
+        if(distance<=minimum||distance>maximum){if(iteration<0)continue;break;}
+        vec3 candidate=origin+direction*distance;vec2 hitUV;if(!opticsProjection(candidate,hitUV,cache)){if(iteration<0)continue;break;}
         vec4 hitData;vec3 actual=opticsReceiver(clamp(ivec2(hitUV*vec2(size)),ivec2(0),size-ivec2(1)),hitData,cache);
         vec3 hitNormal=unitVector(mat3(gbufferModelView)*hitData.xyz);
         bool samePlane=hitData.a>0.5&&dot(hitNormal,n)>0.95&&abs(dot(actual-candidate,n))<0.018+length(actual)*0.0004;
@@ -1081,13 +1096,13 @@ float opticsPlaneBound(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,
     }
     return maximum;
 }
-vec4 traceOpticalSegment(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,bool cache,float minimum,out float path){
+vec4 traceOpticalSegment(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,bool cache,float minimum,out float path,float temporalDistance){
     path=0.0;
     if(!cache&&direction.z>0.00001)maximum=min(maximum,max(0.0,(-0.10-origin.z)/direction.z));
     if(maximum<0.03)return vec4(0.0);
     vec2 boundUV;vec3 boundPoint,boundNormal;
     float previousMaximum=maximum;
-    maximum=opticsPlaneBound(origin,direction,interfaceNormal,side,cache,max(minimum,0.025),maximum,boundUV,boundPoint,boundNormal);
+    maximum=opticsPlaneBound(origin,direction,interfaceNormal,side,cache,max(minimum,0.025),maximum,boundUV,boundPoint,boundNormal,temporalDistance);
     bool bounded=maximum<previousMaximum;
     vec3 start=origin+direction*max(minimum,0.025),end=origin+direction*maximum;
     vec4 a=gbufferProjection*vec4(start,1.0),b=gbufferProjection*vec4(end,1.0);
@@ -1152,8 +1167,12 @@ vec4 traceOpticalSegment(vec3 origin,vec3 direction,vec3 interfaceNormal,int sid
     return vec4(0.0);
 }
 vec4 traceOpticalScene(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,bool unused,out float path){
-    return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path);
+    return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path,0.0);
 }
+vec4 traceOpticalSceneHint(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,out float path,float temporalDistance){
+    return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path,temporalDistance);
+}
+
 #endif
 
 // END INCLUDE /core/scene-trace.glsl
@@ -1191,10 +1210,41 @@ vec4 readWaterReflection(vec2 screen,vec3 faceNormal,float surfaceDepth){
 
 // END INCLUDE /core/water-buffer.glsl
 
+
+// BEGIN INCLUDE /core/temporal-optics.glsl
+#ifndef STRATUS_TEMPORAL_OPTICS_INCLUDED
+#define STRATUS_TEMPORAL_OPTICS_INCLUDED
+// Geometry hints only: no previous radiance, omitted occlusion search or
+// accumulated colour. Every accepted hit is validated against current depth.
+#if TEMPORAL_OPTICS == 1
+uniform int frameCounter;
+uniform float frameTime;
+float previousOpticalHint(sampler2D history,ivec2 cell){
+    if(frameCounter<=1||frameTime<=0.0||frameTime>0.05)return 0.0;
+    vec2 value=texelFetch(history,cell,0).rg;
+    return value.y==float((frameCounter-1)%1024)&&value.x>0.0&&value.x<65504.0?value.x:0.0;
+}
+vec2 nextOpticalHint(float value){return vec2(max(value,0.0),float(frameCounter%1024));}
+#endif
+#endif
+
+// END INCLUDE /core/temporal-optics.glsl
+
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+uniform sampler2D colortex18;
+#endif
 in vec2 rasterUV;
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+/* RENDERTARGETS: 12,18 */
+layout(location=1)out vec2 refractionHint;
+#else
 /* RENDERTARGETS: 12 */
+#endif
 layout(location=0)out vec4 completedScene;
 void main(){
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+    refractionHint=nextOpticalHint(0.0);
+#endif
     vec3 image=texture(colortex3,rasterUV).rgb;
     vec4 markedColour=texture(colortex0,rasterUV);
     if(isEyeInWater==1){
@@ -1231,7 +1281,14 @@ void main(){
         vec3 reflected=mix(fallback,traced.rgb,traced.a);
         float thickness=opaqueDepth<0.999999?length(opaqueView-waterView):24.0;
         // v1.3.1 screen-space water refraction, with the original shoreline guard.
-        vec2 shifted=legacyWaterRefractionUV(rasterUV,nView,faceView,thickness,markedDepth.x);
+        float hint=0.0,rejected;
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+        hint=previousOpticalHint(colortex18,ivec2(gl_FragCoord.xy));
+#endif
+        vec2 shifted=legacyWaterRefractionUV(rasterUV,nView,faceView,thickness,markedDepth.x,hint,rejected);
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+        refractionHint=nextOpticalHint(rejected);
+#endif
         float shiftedDepth=texture(depthtex1,shifted).r;
         vec3 transmitted=texture(colortex4,shifted).rgb;
         vec3 backRay=unitVector(mat3(gbufferModelViewInverse)*positionFromDepth(shifted,0.5));

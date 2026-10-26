@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "Dry run writes nothing",
+    "Every original override carried",
+    "Old preferences byte-identical",
+    "Manual ORIGINAL_DAMPNESS=0.00 preserved",
+    "Manual ORIGINAL_DAMPNESS=1.00 preserved",
+    "Manual WET_DARKENING=1.30 preserved",
+    "Manual TEMPORAL_OPTICS=0 preserved",
+    "Manual TEMPORAL_OPTICS=1 preserved",
+    "Manual TEMPORAL_ATMOSPHERE=0 preserved",
+    "Manual TEMPORAL_ATMOSPHERE=1 preserved",
+    "Manual WATER_STYLE=0 preserved",
+    "Manual TRANSPARENT_REFLECTIONS=0.00 preserved",
+    "Manual WATER_TEXTURE=0.00 preserved",
+    "Missing new option uses source default",
+    "Existing new release preferences win",
+    "Atomic create never overwrites",
+    "Conflicting archive refused"
+  ],
+  "failures": 0,
+  "scope": "Actual candidate policy and installer in temporary profiles"
+}

@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0-rc4",
+  "version": "1.7.0-rc5",
   "reset_related_overrides": [],
   "visual_defaults": {
     "WATER_RENDER_QUALITY": "1",
@@ -68,7 +68,8 @@
     "TRANSPARENT_REFLECTIONS": "0.75",
     "TRANSPARENT_REFRACTION": "0.50",
     "TEMPORAL_ATMOSPHERE": "1",
-    "ORIGINAL_DAMPNESS": "0.00"
+    "ORIGINAL_DAMPNESS": "0.00",
+    "TEMPORAL_OPTICS": "0"
   },
   "reference_quality_defaults": {
     "WATER_RENDER_QUALITY": "1",
@@ -229,5 +230,6 @@
     "TRANSPARENT_REFLECTIONS": "0.75",
     "TRANSPARENT_REFRACTION": "0.50"
   },
-  "preserve_newer_manual_overrides": true
+  "preserve_newer_manual_overrides": true,
+  "notes": "Experimental optical intersection/shoreline hints, default off in all presets. Preserve every existing override. No measured gameplay speedup or full temporal-optics acceptance."
 }
