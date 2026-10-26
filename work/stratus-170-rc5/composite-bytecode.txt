@@ -1,0 +1,1200 @@
+Compiled from "CompositeRenderer.java"
+public class net.irisshaders.iris.pipeline.CompositeRenderer {
+  public static final com.mojang.blaze3d.pipeline.RenderPipeline COMPOSITE_PIPELINE;
+
+  private final net.irisshaders.iris.targets.RenderTargets renderTargets;
+
+  private final com.google.common.collect.ImmutableList<net.irisshaders.iris.pipeline.CompositeRenderer$Pass> passes;
+
+  private final net.irisshaders.iris.gl.texture.TextureAccess noiseTexture;
+
+  private final net.irisshaders.iris.pathways.CenterDepthSampler centerDepthSampler;
+
+  private final it.unimi.dsi.fastutil.objects.Object2ObjectMap<java.lang.String, net.irisshaders.iris.gl.texture.TextureAccess> customTextureIds;
+
+  private final com.google.common.collect.ImmutableSet<java.lang.Integer> flippedAtLeastOnceFinal;
+
+  private final net.irisshaders.iris.uniforms.custom.CustomUniforms customUniforms;
+
+  private final it.unimi.dsi.fastutil.objects.Object2ObjectMap<java.lang.String, net.irisshaders.iris.gl.texture.TextureAccess> irisCustomTextures;
+
+  private final java.util.Set<net.irisshaders.iris.gl.image.GlImage> customImages;
+
+  private final net.irisshaders.iris.shaderpack.texture.TextureStage textureStage;
+
+  private final net.irisshaders.iris.pipeline.WorldRenderingPipeline pipeline;
+
+  private final net.irisshaders.iris.pipeline.CompositePass compositePass;
+
+  public net.irisshaders.iris.pipeline.CompositeRenderer(net.irisshaders.iris.pipeline.WorldRenderingPipeline, net.irisshaders.iris.pipeline.CompositePass, net.irisshaders.iris.shaderpack.properties.PackDirectives, net.irisshaders.iris.shaderpack.programs.ProgramSource[], net.irisshaders.iris.shaderpack.programs.ComputeSource[][], net.irisshaders.iris.targets.RenderTargets, net.irisshaders.iris.gl.buffer.ShaderStorageBufferHolder, net.irisshaders.iris.gl.texture.TextureAccess, net.irisshaders.iris.uniforms.FrameUpdateNotifier, net.irisshaders.iris.pathways.CenterDepthSampler, net.irisshaders.iris.targets.BufferFlipper, java.util.function.Supplier<net.irisshaders.iris.shadows.ShadowRenderTargets>, net.irisshaders.iris.shaderpack.texture.TextureStage, it.unimi.dsi.fastutil.objects.Object2ObjectMap<java.lang.String, net.irisshaders.iris.gl.texture.TextureAccess>, it.unimi.dsi.fastutil.objects.Object2ObjectMap<java.lang.String, net.irisshaders.iris.gl.texture.TextureAccess>, java.util.Set<net.irisshaders.iris.gl.image.GlImage>, com.google.common.collect.ImmutableMap<java.lang.Integer, java.lang.Boolean>, net.irisshaders.iris.uniforms.custom.CustomUniforms);
+    Code:
+         0: aload_0
+         1: invokespecial #108                // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #110                // Field pipeline:Lnet/irisshaders/iris/pipeline/WorldRenderingPipeline;
+         9: aload_0
+        10: aload_2
+        11: putfield      #112                // Field compositePass:Lnet/irisshaders/iris/pipeline/CompositePass;
+        14: aload_0
+        15: aload         8
+        17: putfield      #114                // Field noiseTexture:Lnet/irisshaders/iris/gl/texture/TextureAccess;
+        20: aload_0
+        21: aload         10
+        23: putfield      #116                // Field centerDepthSampler:Lnet/irisshaders/iris/pathways/CenterDepthSampler;
+        26: aload_0
+        27: aload         6
+        29: putfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+        32: aload_0
+        33: aload         14
+        35: putfield      #120                // Field customTextureIds:Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
+        38: aload_0
+        39: aload         18
+        41: putfield      #122                // Field customUniforms:Lnet/irisshaders/iris/uniforms/custom/CustomUniforms;
+        44: aload_0
+        45: aload         15
+        47: putfield      #124                // Field irisCustomTextures:Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
+        50: aload_0
+        51: aload         16
+        53: putfield      #126                // Field customImages:Ljava/util/Set;
+        56: aload_0
+        57: aload         13
+        59: putfield      #128                // Field textureStage:Lnet/irisshaders/iris/shaderpack/texture/TextureStage;
+        62: aload_3
+        63: invokevirtual #134                // Method net/irisshaders/iris/shaderpack/properties/PackDirectives.getRenderTargetDirectives:()Lnet/irisshaders/iris/shaderpack/properties/PackRenderTargetDirectives;
+        66: astore        19
+        68: aload         19
+        70: invokevirtual #138                // Method net/irisshaders/iris/shaderpack/properties/PackRenderTargetDirectives.getRenderTargetSettings:()Ljava/util/Map;
+        73: astore        20
+        75: invokestatic  #142                // Method com/google/common/collect/ImmutableList.builder:()Lcom/google/common/collect/ImmutableList$Builder;
+        78: astore        21
+        80: new           #16                 // class com/google/common/collect/ImmutableSet$Builder
+        83: dup
+        84: invokespecial #143                // Method com/google/common/collect/ImmutableSet$Builder."<init>":()V
+        87: astore        22
+        89: aload         17
+        91: aload         11
+        93: invokedynamic #163,  0            // InvokeDynamic #0:accept:(Lnet/irisshaders/iris/targets/BufferFlipper;)Ljava/util/function/BiConsumer;
+        98: invokevirtual #169                // Method com/google/common/collect/ImmutableMap.forEach:(Ljava/util/function/BiConsumer;)V
+       101: iconst_0
+       102: istore        23
+       104: iload         23
+       106: aload         4
+       108: arraylength
+       109: if_icmpge     652
+       112: aload         4
+       114: iload         23
+       116: aaload
+       117: astore        24
+       119: aload         11
+       121: invokevirtual #205                // Method net/irisshaders/iris/targets/BufferFlipper.snapshot:()Lcom/google/common/collect/ImmutableSet;
+       124: astore        25
+       126: aload         22
+       128: invokevirtual #208                // Method com/google/common/collect/ImmutableSet$Builder.build:()Lcom/google/common/collect/ImmutableSet;
+       131: astore        26
+       133: aload         24
+       135: ifnull        146
+       138: aload         24
+       140: invokevirtual #214                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.isValid:()Z
+       143: ifne          271
+       146: aload         5
+       148: arraylength
+       149: ifeq          646
+       152: aload         5
+       154: iload         23
+       156: aaload
+       157: ifnull        646
+       160: aload         5
+       162: iload         23
+       164: aaload
+       165: arraylength
+       166: ifle          646
+       169: new           #7                  // class net/irisshaders/iris/pipeline/CompositeRenderer$ComputeOnlyPass
+       172: dup
+       173: invokespecial #215                // Method net/irisshaders/iris/pipeline/CompositeRenderer$ComputeOnlyPass."<init>":()V
+       176: astore        27
+       178: aload         27
+       180: aload         5
+       182: iload         23
+       184: aaload
+       185: arraylength
+       186: ifle          232
+       189: aload         5
+       191: iload         23
+       193: aaload
+       194: invokestatic  #221                // Method java/util/Arrays.stream:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+       197: invokedynamic #235,  0            // InvokeDynamic #1:test:()Ljava/util/function/Predicate;
+       202: invokeinterface #241,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+       207: invokeinterface #245,  1          // InterfaceMethod java/util/stream/Stream.findFirst:()Ljava/util/Optional;
+       212: invokedynamic #260,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+       217: invokevirtual #266                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+       220: ldc_w         #268                // String unknown
+       223: invokevirtual #271                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+       226: checkcast     #273                // class java/lang/String
+       229: goto          235
+       232: ldc_w         #268                // String unknown
+       235: putfield      #277                // Field net/irisshaders/iris/pipeline/CompositeRenderer$ComputeOnlyPass.name:Ljava/lang/String;
+       238: aload         27
+       240: aload_0
+       241: aload         5
+       243: iload         23
+       245: aaload
+       246: aload         25
+       248: aload         26
+       250: aload         12
+       252: aload         7
+       254: invokevirtual #281                // Method createComputes:([Lnet/irisshaders/iris/shaderpack/programs/ComputeSource;Lcom/google/common/collect/ImmutableSet;Lcom/google/common/collect/ImmutableSet;Ljava/util/function/Supplier;Lnet/irisshaders/iris/gl/buffer/ShaderStorageBufferHolder;)[Lnet/irisshaders/iris/gl/program/ComputeProgram;
+       257: putfield      #284                // Field net/irisshaders/iris/pipeline/CompositeRenderer$ComputeOnlyPass.computes:[Lnet/irisshaders/iris/gl/program/ComputeProgram;
+       260: aload         21
+       262: aload         27
+       264: invokevirtual #288                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+       267: pop
+       268: goto          646
+       271: new           #9                  // class net/irisshaders/iris/pipeline/CompositeRenderer$Pass
+       274: dup
+       275: invokespecial #289                // Method net/irisshaders/iris/pipeline/CompositeRenderer$Pass."<init>":()V
+       278: astore        27
+       280: aload         24
+       282: invokevirtual #293                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getDirectives:()Lnet/irisshaders/iris/shaderpack/properties/ProgramDirectives;
+       285: astore        28
+       287: aload         27
+       289: aload         24
+       291: invokevirtual #294                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getName:()Ljava/lang/String;
+       294: putfield      #295                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.name:Ljava/lang/String;
+       297: aload         27
+       299: aload_0
+       300: aload         24
+       302: aload         25
+       304: aload         26
+       306: aload         12
+       308: invokevirtual #299                // Method createProgram:(Lnet/irisshaders/iris/shaderpack/programs/ProgramSource;Lcom/google/common/collect/ImmutableSet;Lcom/google/common/collect/ImmutableSet;Ljava/util/function/Supplier;)Lnet/irisshaders/iris/gl/program/Program;
+       311: putfield      #303                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.program:Lnet/irisshaders/iris/gl/program/Program;
+       314: aload         27
+       316: aload         24
+       318: invokevirtual #293                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getDirectives:()Lnet/irisshaders/iris/shaderpack/properties/ProgramDirectives;
+       321: invokevirtual #308                // Method net/irisshaders/iris/shaderpack/properties/ProgramDirectives.getBlendModeOverride:()Ljava/util/Optional;
+       324: aconst_null
+       325: invokevirtual #271                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+       328: checkcast     #310                // class net/irisshaders/iris/gl/blending/BlendModeOverride
+       331: putfield      #314                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.blendModeOverride:Lnet/irisshaders/iris/gl/blending/BlendModeOverride;
+       334: aload         5
+       336: arraylength
+       337: ifeq          365
+       340: aload         27
+       342: aload_0
+       343: aload         5
+       345: iload         23
+       347: aaload
+       348: aload         25
+       350: aload         26
+       352: aload         12
+       354: aload         7
+       356: invokevirtual #281                // Method createComputes:([Lnet/irisshaders/iris/shaderpack/programs/ComputeSource;Lcom/google/common/collect/ImmutableSet;Lcom/google/common/collect/ImmutableSet;Ljava/util/function/Supplier;Lnet/irisshaders/iris/gl/buffer/ShaderStorageBufferHolder;)[Lnet/irisshaders/iris/gl/program/ComputeProgram;
+       359: putfield      #315                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.computes:[Lnet/irisshaders/iris/gl/program/ComputeProgram;
+       362: goto          374
+       365: aload         27
+       367: iconst_0
+       368: anewarray     #317                // class net/irisshaders/iris/gl/program/ComputeProgram
+       371: putfield      #315                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.computes:[Lnet/irisshaders/iris/gl/program/ComputeProgram;
+       374: aload         28
+       376: invokevirtual #321                // Method net/irisshaders/iris/shaderpack/properties/ProgramDirectives.getDrawBuffers:()[I
+       379: astore        29
+       381: iconst_0
+       382: istore        30
+       384: iconst_0
+       385: istore        31
+       387: aload         28
+       389: invokevirtual #325                // Method net/irisshaders/iris/shaderpack/properties/ProgramDirectives.getExplicitFlips:()Lcom/google/common/collect/ImmutableMap;
+       392: astore        32
+       394: aload         6
+       396: aload         25
+       398: aload         29
+       400: invokevirtual #329                // Method net/irisshaders/iris/targets/RenderTargets.createColorFramebuffer:(Lcom/google/common/collect/ImmutableSet;[I)Lnet/irisshaders/iris/gl/framebuffer/GlFramebuffer;
+       403: astore        33
+       405: aload         29
+       407: astore        34
+       409: aload         34
+       411: arraylength
+       412: istore        35
+       414: iconst_0
+       415: istore        36
+       417: iload         36
+       419: iload         35
+       421: if_icmpge     559
+       424: aload         34
+       426: iload         36
+       428: iaload
+       429: istore        37
+       431: aload         6
+       433: iload         37
+       435: invokevirtual #337                // Method net/irisshaders/iris/targets/RenderTargets.get:(I)Lnet/irisshaders/iris/targets/RenderTarget;
+       438: astore        38
+       440: iload         30
+       442: ifle          455
+       445: iload         30
+       447: aload         38
+       449: invokevirtual #343                // Method net/irisshaders/iris/targets/RenderTarget.getWidth:()I
+       452: if_icmpne     470
+       455: iload         31
+       457: ifle          502
+       460: iload         31
+       462: aload         38
+       464: invokevirtual #346                // Method net/irisshaders/iris/targets/RenderTarget.getHeight:()I
+       467: if_icmpeq     502
+       470: new           #348                // class java/lang/IllegalStateException
+       473: dup
+       474: aload         29
+       476: invokestatic  #352                // Method java/util/Arrays.toString:([I)Ljava/lang/String;
+       479: iload         30
+       481: aload         38
+       483: invokevirtual #343                // Method net/irisshaders/iris/targets/RenderTarget.getWidth:()I
+       486: iload         31
+       488: aload         38
+       490: invokevirtual #346                // Method net/irisshaders/iris/targets/RenderTarget.getHeight:()I
+       493: invokedynamic #364,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;IIII)Ljava/lang/String;
+       498: invokespecial #367                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       501: athrow
+       502: aload         38
+       504: invokevirtual #343                // Method net/irisshaders/iris/targets/RenderTarget.getWidth:()I
+       507: istore        30
+       509: aload         38
+       511: invokevirtual #346                // Method net/irisshaders/iris/targets/RenderTarget.getHeight:()I
+       514: istore        31
+       516: aload         32
+       518: iload         37
+       520: invokestatic  #373                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       523: invokevirtual #375                // Method com/google/common/collect/ImmutableMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       526: getstatic     #381                // Field java/lang/Boolean.FALSE:Ljava/lang/Boolean;
+       529: if_acmpne     535
+       532: goto          553
+       535: aload         11
+       537: iload         37
+       539: invokevirtual #385                // Method net/irisshaders/iris/targets/BufferFlipper.flip:(I)V
+       542: aload         22
+       544: iload         37
+       546: invokestatic  #373                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       549: invokevirtual #388                // Method com/google/common/collect/ImmutableSet$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableSet$Builder;
+       552: pop
+       553: iinc          36, 1
+       556: goto          417
+       559: aload         32
+       561: aload         11
+       563: aload         22
+       565: invokedynamic #396,  0            // InvokeDynamic #4:accept:(Lnet/irisshaders/iris/targets/BufferFlipper;Lcom/google/common/collect/ImmutableSet$Builder;)Ljava/util/function/BiConsumer;
+       570: invokevirtual #169                // Method com/google/common/collect/ImmutableMap.forEach:(Ljava/util/function/BiConsumer;)V
+       573: aload         27
+       575: aload         28
+       577: invokevirtual #321                // Method net/irisshaders/iris/shaderpack/properties/ProgramDirectives.getDrawBuffers:()[I
+       580: putfield      #399                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.drawBuffers:[I
+       583: aload         27
+       585: iload         30
+       587: putfield      #403                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewWidth:I
+       590: aload         27
+       592: iload         31
+       594: putfield      #406                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewHeight:I
+       597: aload         27
+       599: aload         25
+       601: putfield      #409                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.stageReadsFromAlt:Lcom/google/common/collect/ImmutableSet;
+       604: aload         27
+       606: aload         33
+       608: putfield      #413                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.framebuffer:Lnet/irisshaders/iris/gl/framebuffer/GlFramebuffer;
+       611: aload         27
+       613: aload         28
+       615: invokevirtual #417                // Method net/irisshaders/iris/shaderpack/properties/ProgramDirectives.getViewportScale:()Lnet/irisshaders/iris/gl/framebuffer/ViewportData;
+       618: putfield      #421                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewportScale:Lnet/irisshaders/iris/gl/framebuffer/ViewportData;
+       621: aload         27
+       623: aload         28
+       625: invokevirtual #424                // Method net/irisshaders/iris/shaderpack/properties/ProgramDirectives.getMipmappedBuffers:()Lcom/google/common/collect/ImmutableSet;
+       628: putfield      #427                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.mipmappedBuffers:Lcom/google/common/collect/ImmutableSet;
+       631: aload         27
+       633: aload         26
+       635: putfield      #430                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.flippedAtLeastOnce:Lcom/google/common/collect/ImmutableSet;
+       638: aload         21
+       640: aload         27
+       642: invokevirtual #288                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+       645: pop
+       646: iinc          23, 1
+       649: goto          104
+       652: aload_0
+       653: aload         21
+       655: invokevirtual #433                // Method com/google/common/collect/ImmutableList$Builder.build:()Lcom/google/common/collect/ImmutableList;
+       658: putfield      #435                // Field passes:Lcom/google/common/collect/ImmutableList;
+       661: aload_0
+       662: aload         22
+       664: invokevirtual #208                // Method com/google/common/collect/ImmutableSet$Builder.build:()Lcom/google/common/collect/ImmutableSet;
+       667: putfield      #437                // Field flippedAtLeastOnceFinal:Lcom/google/common/collect/ImmutableSet;
+       670: ldc_w         #438                // int 36008
+       673: iconst_0
+       674: invokestatic  #442                // Method com/mojang/blaze3d/opengl/GlStateManager._glBindFramebuffer:(II)V
+       677: return
+
+  private boolean hasComputes(net.irisshaders.iris.shaderpack.programs.ComputeSource[][]);
+    Code:
+         0: iconst_0
+         1: istore_2
+         2: iconst_0
+         3: istore_3
+         4: iload_3
+         5: aload_1
+         6: arraylength
+         7: if_icmpge     55
+        10: aload_1
+        11: iload_3
+        12: aaload
+        13: arraylength
+        14: ifle          49
+        17: iconst_0
+        18: istore        4
+        20: iload         4
+        22: aload_1
+        23: iload_3
+        24: aaload
+        25: arraylength
+        26: if_icmpge     49
+        29: aload_1
+        30: iload_3
+        31: aaload
+        32: iload         4
+        34: aaload
+        35: ifnull        43
+        38: iconst_1
+        39: istore_2
+        40: goto          49
+        43: iinc          4, 1
+        46: goto          20
+        49: iinc          3, 1
+        52: goto          4
+        55: iload_2
+        56: ireturn
+
+  private static void setupMipmapping(net.irisshaders.iris.targets.RenderTarget, boolean);
+    Code:
+         0: aload_0
+         1: ifnonnull     5
+         4: return
+         5: iload_1
+         6: ifeq          16
+         9: aload_0
+        10: invokevirtual #488                // Method net/irisshaders/iris/targets/RenderTarget.getAltTexture:()I
+        13: goto          20
+        16: aload_0
+        17: invokevirtual #491                // Method net/irisshaders/iris/targets/RenderTarget.getMainTexture:()I
+        20: istore_2
+        21: iload_2
+        22: sipush        3553
+        25: invokestatic  #496                // Method net/irisshaders/iris/gl/IrisRenderSystem.generateMipmaps:(II)V
+        28: aload_0
+        29: iload_1
+        30: invokevirtual #500                // Method net/irisshaders/iris/targets/RenderTarget.turnOnMips:(Z)V
+        33: return
+
+  public com.google.common.collect.ImmutableSet<java.lang.Integer> getFlippedAtLeastOnceFinal();
+    Code:
+         0: aload_0
+         1: getfield      #437                // Field flippedAtLeastOnceFinal:Lcom/google/common/collect/ImmutableSet;
+         4: areturn
+
+  public void recalculateSizes();
+    Code:
+         0: aload_0
+         1: getfield      #435                // Field passes:Lcom/google/common/collect/ImmutableList;
+         4: invokevirtual #508                // Method com/google/common/collect/ImmutableList.iterator:()Lcom/google/common/collect/UnmodifiableIterator;
+         7: astore_1
+         8: aload_1
+         9: invokeinterface #513,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        14: ifeq          183
+        17: aload_1
+        18: invokeinterface #517,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        23: checkcast     #9                  // class net/irisshaders/iris/pipeline/CompositeRenderer$Pass
+        26: astore_2
+        27: aload_2
+        28: instanceof    #7                  // class net/irisshaders/iris/pipeline/CompositeRenderer$ComputeOnlyPass
+        31: ifeq          37
+        34: goto          8
+        37: iconst_0
+        38: istore_3
+        39: iconst_0
+        40: istore        4
+        42: aload_2
+        43: getfield      #399                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.drawBuffers:[I
+        46: astore        5
+        48: aload         5
+        50: arraylength
+        51: istore        6
+        53: iconst_0
+        54: istore        7
+        56: iload         7
+        58: iload         6
+        60: if_icmpge     139
+        63: aload         5
+        65: iload         7
+        67: iaload
+        68: istore        8
+        70: aload_0
+        71: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+        74: iload         8
+        76: invokevirtual #337                // Method net/irisshaders/iris/targets/RenderTargets.get:(I)Lnet/irisshaders/iris/targets/RenderTarget;
+        79: astore        9
+        81: iload_3
+        82: ifle          94
+        85: iload_3
+        86: aload         9
+        88: invokevirtual #343                // Method net/irisshaders/iris/targets/RenderTarget.getWidth:()I
+        91: if_icmpne     109
+        94: iload         4
+        96: ifle          120
+        99: iload         4
+       101: aload         9
+       103: invokevirtual #346                // Method net/irisshaders/iris/targets/RenderTarget.getHeight:()I
+       106: if_icmpeq     120
+       109: new           #348                // class java/lang/IllegalStateException
+       112: dup
+       113: ldc_w         #519                // String Pass widths must match
+       116: invokespecial #367                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       119: athrow
+       120: aload         9
+       122: invokevirtual #343                // Method net/irisshaders/iris/targets/RenderTarget.getWidth:()I
+       125: istore_3
+       126: aload         9
+       128: invokevirtual #346                // Method net/irisshaders/iris/targets/RenderTarget.getHeight:()I
+       131: istore        4
+       133: iinc          7, 1
+       136: goto          56
+       139: aload_0
+       140: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       143: aload_2
+       144: getfield      #413                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.framebuffer:Lnet/irisshaders/iris/gl/framebuffer/GlFramebuffer;
+       147: invokevirtual #523                // Method net/irisshaders/iris/targets/RenderTargets.destroyFramebuffer:(Lnet/irisshaders/iris/gl/framebuffer/GlFramebuffer;)V
+       150: aload_2
+       151: aload_0
+       152: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       155: aload_2
+       156: getfield      #409                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.stageReadsFromAlt:Lcom/google/common/collect/ImmutableSet;
+       159: aload_2
+       160: getfield      #399                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.drawBuffers:[I
+       163: invokevirtual #329                // Method net/irisshaders/iris/targets/RenderTargets.createColorFramebuffer:(Lcom/google/common/collect/ImmutableSet;[I)Lnet/irisshaders/iris/gl/framebuffer/GlFramebuffer;
+       166: putfield      #413                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.framebuffer:Lnet/irisshaders/iris/gl/framebuffer/GlFramebuffer;
+       169: aload_2
+       170: iload_3
+       171: putfield      #403                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewWidth:I
+       174: aload_2
+       175: iload         4
+       177: putfield      #406                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewHeight:I
+       180: goto          8
+       183: return
+
+  public void renderAll();
+    Code:
+         0: iconst_1
+         1: putstatic     #531                // Field net/irisshaders/iris/vertices/ImmediateState.temporarilyIgnorePass:Z
+         4: bipush        20
+         6: aload_0
+         7: getfield      #112                // Field compositePass:Lnet/irisshaders/iris/pipeline/CompositePass;
+        10: invokevirtual #534                // Method net/irisshaders/iris/pipeline/CompositePass.ordinal:()I
+        13: iadd
+        14: aload_0
+        15: getfield      #112                // Field compositePass:Lnet/irisshaders/iris/pipeline/CompositePass;
+        18: invokevirtual #536                // Method net/irisshaders/iris/pipeline/CompositePass.name:()Ljava/lang/String;
+        21: getstatic     #542                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+        24: invokevirtual #546                // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+        27: invokestatic  #552                // Method net/irisshaders/iris/gl/GLDebug.pushGroup:(ILjava/lang/String;)V
+        30: invokestatic  #558                // Method net/minecraft/class_310.method_1551:()Lnet/minecraft/class_310;
+        33: invokevirtual #562                // Method net/minecraft/class_310.method_1522:()Lnet/minecraft/class_276;
+        36: astore_1
+        37: getstatic     #566                // Field com/mojang/blaze3d/vertex/VertexFormat$class_5596.field_27382:Lcom/mojang/blaze3d/vertex/VertexFormat$class_5596;
+        40: invokestatic  #570                // Method com/mojang/blaze3d/systems/RenderSystem.getSequentialBuffer:(Lcom/mojang/blaze3d/vertex/VertexFormat$class_5596;)Lcom/mojang/blaze3d/systems/RenderSystem$class_5590;
+        43: bipush        6
+        45: invokevirtual #574                // Method com/mojang/blaze3d/systems/RenderSystem$class_5590.method_68274:(I)Lcom/mojang/blaze3d/buffers/GpuBuffer;
+        48: astore_2
+        49: getstatic     #566                // Field com/mojang/blaze3d/vertex/VertexFormat$class_5596.field_27382:Lcom/mojang/blaze3d/vertex/VertexFormat$class_5596;
+        52: invokestatic  #570                // Method com/mojang/blaze3d/systems/RenderSystem.getSequentialBuffer:(Lcom/mojang/blaze3d/vertex/VertexFormat$class_5596;)Lcom/mojang/blaze3d/systems/RenderSystem$class_5590;
+        55: invokevirtual #578                // Method com/mojang/blaze3d/systems/RenderSystem$class_5590.method_31924:()Lcom/mojang/blaze3d/vertex/VertexFormat$class_5595;
+        58: astore_3
+        59: invokestatic  #582                // Method com/mojang/blaze3d/systems/RenderSystem.getDevice:()Lcom/mojang/blaze3d/systems/GpuDevice;
+        62: invokeinterface #588,  1          // InterfaceMethod com/mojang/blaze3d/systems/GpuDevice.createCommandEncoder:()Lcom/mojang/blaze3d/systems/CommandEncoder;
+        67: invokedynamic #597,  0            // InvokeDynamic #5:get:()Ljava/util/function/Supplier;
+        72: invokestatic  #558                // Method net/minecraft/class_310.method_1551:()Lnet/minecraft/class_310;
+        75: invokevirtual #562                // Method net/minecraft/class_310.method_1522:()Lnet/minecraft/class_276;
+        78: invokevirtual #603                // Method net/minecraft/class_276.method_71639:()Lcom/mojang/blaze3d/textures/GpuTextureView;
+        81: invokestatic  #609                // Method java/util/OptionalInt.empty:()Ljava/util/OptionalInt;
+        84: invokeinterface #615,  4          // InterfaceMethod com/mojang/blaze3d/systems/CommandEncoder.createRenderPass:(Ljava/util/function/Supplier;Lcom/mojang/blaze3d/textures/GpuTextureView;Ljava/util/OptionalInt;)Lcom/mojang/blaze3d/systems/RenderPass;
+        89: astore        4
+        91: aload         4
+        93: getstatic     #617                // Field COMPOSITE_PIPELINE:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+        96: invokeinterface #623,  2          // InterfaceMethod com/mojang/blaze3d/systems/RenderPass.setPipeline:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;)V
+       101: aload         4
+       103: aload_2
+       104: aload_3
+       105: invokeinterface #627,  3          // InterfaceMethod com/mojang/blaze3d/systems/RenderPass.setIndexBuffer:(Lcom/mojang/blaze3d/buffers/GpuBuffer;Lcom/mojang/blaze3d/vertex/VertexFormat$class_5595;)V
+       110: aload         4
+       112: iconst_0
+       113: getstatic     #633                // Field net/irisshaders/iris/pathways/FullScreenQuadRenderer.INSTANCE:Lnet/irisshaders/iris/pathways/FullScreenQuadRenderer;
+       116: invokevirtual #637                // Method net/irisshaders/iris/pathways/FullScreenQuadRenderer.getQuad:()Lcom/mojang/blaze3d/buffers/GpuBuffer;
+       119: invokeinterface #641,  3          // InterfaceMethod com/mojang/blaze3d/systems/RenderPass.setVertexBuffer:(ILcom/mojang/blaze3d/buffers/GpuBuffer;)V
+       124: iconst_0
+       125: istore        5
+       127: aload_0
+       128: getfield      #435                // Field passes:Lcom/google/common/collect/ImmutableList;
+       131: invokevirtual #644                // Method com/google/common/collect/ImmutableList.size:()I
+       134: istore        6
+       136: iload         5
+       138: iload         6
+       140: if_icmpge     497
+       143: aload_0
+       144: getfield      #435                // Field passes:Lcom/google/common/collect/ImmutableList;
+       147: iload         5
+       149: invokevirtual #649                // Method com/google/common/collect/ImmutableList.get:(I)Ljava/lang/Object;
+       152: checkcast     #9                  // class net/irisshaders/iris/pipeline/CompositeRenderer$Pass
+       155: astore        7
+       157: bipush        20
+       159: aload_0
+       160: getfield      #112                // Field compositePass:Lnet/irisshaders/iris/pipeline/CompositePass;
+       163: invokevirtual #534                // Method net/irisshaders/iris/pipeline/CompositePass.ordinal:()I
+       166: imul
+       167: iload         5
+       169: iadd
+       170: aload         7
+       172: getfield      #295                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.name:Ljava/lang/String;
+       175: invokestatic  #552                // Method net/irisshaders/iris/gl/GLDebug.pushGroup:(ILjava/lang/String;)V
+       178: iconst_0
+       179: istore        8
+       181: aload         7
+       183: getfield      #315                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.computes:[Lnet/irisshaders/iris/gl/program/ComputeProgram;
+       186: astore        9
+       188: aload         9
+       190: arraylength
+       191: istore        10
+       193: iconst_0
+       194: istore        11
+       196: iload         11
+       198: iload         10
+       200: if_icmpge     253
+       203: aload         9
+       205: iload         11
+       207: aaload
+       208: astore        12
+       210: aload         12
+       212: ifnull        247
+       215: iconst_1
+       216: istore        8
+       218: aload         12
+       220: invokevirtual #653                // Method net/irisshaders/iris/gl/program/ComputeProgram.use:()V
+       223: aload_0
+       224: getfield      #122                // Field customUniforms:Lnet/irisshaders/iris/uniforms/custom/CustomUniforms;
+       227: aload         12
+       229: invokevirtual #657                // Method net/irisshaders/iris/uniforms/custom/CustomUniforms.push:(Ljava/lang/Object;)V
+       232: aload         12
+       234: aload_1
+       235: getfield      #660                // Field net/minecraft/class_276.field_1482:I
+       238: i2f
+       239: aload_1
+       240: getfield      #663                // Field net/minecraft/class_276.field_1481:I
+       243: i2f
+       244: invokevirtual #667                // Method net/irisshaders/iris/gl/program/ComputeProgram.dispatch:(FF)V
+       247: iinc          11, 1
+       250: goto          196
+       253: iload         8
+       255: ifeq          264
+       258: sipush        8232
+       261: invokestatic  #670                // Method net/irisshaders/iris/gl/IrisRenderSystem.memoryBarrier:(I)V
+       264: invokestatic  #675                // Method net/irisshaders/iris/gl/program/Program.unbind:()V
+       267: aload         7
+       269: instanceof    #7                  // class net/irisshaders/iris/pipeline/CompositeRenderer$ComputeOnlyPass
+       272: ifeq          281
+       275: invokestatic  #678                // Method net/irisshaders/iris/gl/GLDebug.popGroup:()V
+       278: goto          491
+       281: aload         7
+       283: getfield      #427                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.mipmappedBuffers:Lcom/google/common/collect/ImmutableSet;
+       286: invokevirtual #681                // Method com/google/common/collect/ImmutableSet.isEmpty:()Z
+       289: ifne          361
+       292: ldc_w         #682                // int 33984
+       295: invokestatic  #685                // Method com/mojang/blaze3d/opengl/GlStateManager._activeTexture:(I)V
+       298: aload         7
+       300: getfield      #427                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.mipmappedBuffers:Lcom/google/common/collect/ImmutableSet;
+       303: invokevirtual #686                // Method com/google/common/collect/ImmutableSet.iterator:()Lcom/google/common/collect/UnmodifiableIterator;
+       306: astore        9
+       308: aload         9
+       310: invokeinterface #513,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       315: ifeq          361
+       318: aload         9
+       320: invokeinterface #517,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       325: checkcast     #369                // class java/lang/Integer
+       328: invokevirtual #689                // Method java/lang/Integer.intValue:()I
+       331: istore        10
+       333: aload_0
+       334: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       337: iload         10
+       339: invokevirtual #337                // Method net/irisshaders/iris/targets/RenderTargets.get:(I)Lnet/irisshaders/iris/targets/RenderTarget;
+       342: aload         7
+       344: getfield      #409                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.stageReadsFromAlt:Lcom/google/common/collect/ImmutableSet;
+       347: iload         10
+       349: invokestatic  #373                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       352: invokevirtual #692                // Method com/google/common/collect/ImmutableSet.contains:(Ljava/lang/Object;)Z
+       355: invokestatic  #694                // Method setupMipmapping:(Lnet/irisshaders/iris/targets/RenderTarget;Z)V
+       358: goto          308
+       361: aload         4
+       363: aload         7
+       365: invokeinterface #698,  2          // InterfaceMethod com/mojang/blaze3d/systems/RenderPass.iris$setCustomPass:(Lnet/irisshaders/iris/mixinterface/CustomPass;)V
+       370: aload         7
+       372: getfield      #403                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewWidth:I
+       375: i2f
+       376: aload         7
+       378: getfield      #421                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewportScale:Lnet/irisshaders/iris/gl/framebuffer/ViewportData;
+       381: invokevirtual #704                // Method net/irisshaders/iris/gl/framebuffer/ViewportData.scale:()F
+       384: fmul
+       385: fstore        9
+       387: aload         7
+       389: getfield      #406                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewHeight:I
+       392: i2f
+       393: aload         7
+       395: getfield      #421                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewportScale:Lnet/irisshaders/iris/gl/framebuffer/ViewportData;
+       398: invokevirtual #704                // Method net/irisshaders/iris/gl/framebuffer/ViewportData.scale:()F
+       401: fmul
+       402: fstore        10
+       404: aload         7
+       406: getfield      #403                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewWidth:I
+       409: i2f
+       410: aload         7
+       412: getfield      #421                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewportScale:Lnet/irisshaders/iris/gl/framebuffer/ViewportData;
+       415: invokevirtual #707                // Method net/irisshaders/iris/gl/framebuffer/ViewportData.viewportX:()F
+       418: fmul
+       419: f2i
+       420: istore        11
+       422: aload         7
+       424: getfield      #406                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewHeight:I
+       427: i2f
+       428: aload         7
+       430: getfield      #421                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.viewportScale:Lnet/irisshaders/iris/gl/framebuffer/ViewportData;
+       433: invokevirtual #710                // Method net/irisshaders/iris/gl/framebuffer/ViewportData.viewportY:()F
+       436: fmul
+       437: f2i
+       438: istore        12
+       440: iload         11
+       442: iload         12
+       444: fload         9
+       446: f2i
+       447: fload         10
+       449: f2i
+       450: invokestatic  #714                // Method com/mojang/blaze3d/opengl/GlStateManager._viewport:(IIII)V
+       453: aload         7
+       455: getfield      #303                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.program:Lnet/irisshaders/iris/gl/program/Program;
+       458: invokevirtual #715                // Method net/irisshaders/iris/gl/program/Program.use:()V
+       461: aload_0
+       462: getfield      #122                // Field customUniforms:Lnet/irisshaders/iris/uniforms/custom/CustomUniforms;
+       465: aload         7
+       467: getfield      #303                // Field net/irisshaders/iris/pipeline/CompositeRenderer$Pass.program:Lnet/irisshaders/iris/gl/program/Program;
+       470: invokevirtual #657                // Method net/irisshaders/iris/uniforms/custom/CustomUniforms.push:(Ljava/lang/Object;)V
+       473: aload         4
+       475: iconst_0
+       476: iconst_0
+       477: bipush        6
+       479: iconst_1
+       480: invokeinterface #718,  5          // InterfaceMethod com/mojang/blaze3d/systems/RenderPass.drawIndexed:(IIII)V
+       485: invokestatic  #721                // Method net/irisshaders/iris/gl/blending/BlendModeOverride.restore:()V
+       488: invokestatic  #678                // Method net/irisshaders/iris/gl/GLDebug.popGroup:()V
+       491: iinc          5, 1
+       494: goto          136
+       497: aload         4
+       499: ifnull        541
+       502: aload         4
+       504: invokeinterface #724,  1          // InterfaceMethod com/mojang/blaze3d/systems/RenderPass.close:()V
+       509: goto          541
+       512: astore        5
+       514: aload         4
+       516: ifnull        538
+       519: aload         4
+       521: invokeinterface #724,  1          // InterfaceMethod com/mojang/blaze3d/systems/RenderPass.close:()V
+       526: goto          538
+       529: astore        6
+       531: aload         5
+       533: aload         6
+       535: invokevirtual #728                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       538: aload         5
+       540: athrow
+       541: invokestatic  #733                // Method net/irisshaders/iris/gl/program/ProgramUniforms.clearActiveUniforms:()V
+       544: invokestatic  #736                // Method net/irisshaders/iris/gl/program/ProgramSamplers.clearActiveSamplers:()V
+       547: iconst_0
+       548: invokestatic  #739                // Method com/mojang/blaze3d/opengl/GlStateManager._glUseProgram:(I)V
+       551: iconst_0
+       552: istore        4
+       554: iload         4
+       556: invokestatic  #744                // Method net/irisshaders/iris/gl/sampler/SamplerLimits.get:()Lnet/irisshaders/iris/gl/sampler/SamplerLimits;
+       559: invokevirtual #747                // Method net/irisshaders/iris/gl/sampler/SamplerLimits.getMaxTextureUnits:()I
+       562: if_icmpge     596
+       565: invokestatic  #753                // InterfaceMethod net/irisshaders/iris/mixin/GlStateManagerAccessor.getTEXTURES:()[Lcom/mojang/blaze3d/opengl/GlStateManager$class_1039;
+       568: iload         4
+       570: aaload
+       571: getfield      #756                // Field com/mojang/blaze3d/opengl/GlStateManager$class_1039.field_5167:I
+       574: ifeq          590
+       577: ldc_w         #682                // int 33984
+       580: iload         4
+       582: iadd
+       583: invokestatic  #685                // Method com/mojang/blaze3d/opengl/GlStateManager._activeTexture:(I)V
+       586: iconst_0
+       587: invokestatic  #759                // Method com/mojang/blaze3d/opengl/GlStateManager._bindTexture:(I)V
+       590: iinc          4, 1
+       593: goto          554
+       596: ldc_w         #682                // int 33984
+       599: invokestatic  #685                // Method com/mojang/blaze3d/opengl/GlStateManager._activeTexture:(I)V
+       602: invokestatic  #678                // Method net/irisshaders/iris/gl/GLDebug.popGroup:()V
+       605: iconst_0
+       606: putstatic     #531                // Field net/irisshaders/iris/vertices/ImmediateState.temporarilyIgnorePass:Z
+       609: return
+      Exception table:
+         from    to  target type
+            91   497   512   Class java/lang/Throwable
+           519   526   529   Class java/lang/Throwable
+
+  private net.irisshaders.iris.gl.program.Program createProgram(net.irisshaders.iris.shaderpack.programs.ProgramSource, com.google.common.collect.ImmutableSet<java.lang.Integer>, com.google.common.collect.ImmutableSet<java.lang.Integer>, java.util.function.Supplier<net.irisshaders.iris.shadows.ShadowRenderTargets>);
+    Code:
+         0: aload_1
+         1: invokevirtual #294                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getName:()Ljava/lang/String;
+         4: aload_1
+         5: invokevirtual #785                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getVertexSource:()Ljava/util/Optional;
+         8: invokedynamic #792,  0            // InvokeDynamic #6:get:()Ljava/util/function/Supplier;
+        13: invokevirtual #796                // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+        16: checkcast     #273                // class java/lang/String
+        19: aload_1
+        20: invokevirtual #799                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getGeometrySource:()Ljava/util/Optional;
+        23: aconst_null
+        24: invokevirtual #271                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+        27: checkcast     #273                // class java/lang/String
+        30: aload_1
+        31: invokevirtual #802                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getFragmentSource:()Ljava/util/Optional;
+        34: invokedynamic #792,  0            // InvokeDynamic #6:get:()Ljava/util/function/Supplier;
+        39: invokevirtual #796                // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+        42: checkcast     #273                // class java/lang/String
+        45: aload_0
+        46: getfield      #128                // Field textureStage:Lnet/irisshaders/iris/shaderpack/texture/TextureStage;
+        49: aload_0
+        50: getfield      #110                // Field pipeline:Lnet/irisshaders/iris/pipeline/WorldRenderingPipeline;
+        53: invokeinterface #806,  1          // InterfaceMethod net/irisshaders/iris/pipeline/WorldRenderingPipeline.getTextureMap:()Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
+        58: invokestatic  #812                // Method net/irisshaders/iris/pipeline/transform/TransformPatcher.patchComposite:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lnet/irisshaders/iris/shaderpack/texture/TextureStage;Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;)Ljava/util/Map;
+        61: astore        5
+        63: aload         5
+        65: getstatic     #818                // Field net/irisshaders/iris/pipeline/transform/PatchShaderType.VERTEX:Lnet/irisshaders/iris/pipeline/transform/PatchShaderType;
+        68: invokeinterface #819,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        73: checkcast     #273                // class java/lang/String
+        76: astore        6
+        78: aload         5
+        80: getstatic     #822                // Field net/irisshaders/iris/pipeline/transform/PatchShaderType.GEOMETRY:Lnet/irisshaders/iris/pipeline/transform/PatchShaderType;
+        83: invokeinterface #819,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        88: checkcast     #273                // class java/lang/String
+        91: astore        7
+        93: aload         5
+        95: getstatic     #825                // Field net/irisshaders/iris/pipeline/transform/PatchShaderType.FRAGMENT:Lnet/irisshaders/iris/pipeline/transform/PatchShaderType;
+        98: invokeinterface #819,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       103: checkcast     #273                // class java/lang/String
+       106: astore        8
+       108: aload_1
+       109: invokevirtual #294                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getName:()Ljava/lang/String;
+       112: invokestatic  #829                // Method net/irisshaders/iris/pipeline/transform/ShaderPrinter.printProgram:(Ljava/lang/String;)Lnet/irisshaders/iris/pipeline/transform/ShaderPrinter$ProgramPrintBuilder;
+       115: aload         5
+       117: invokevirtual #833                // Method net/irisshaders/iris/pipeline/transform/ShaderPrinter$ProgramPrintBuilder.addSources:(Ljava/util/Map;)Lnet/irisshaders/iris/pipeline/transform/ShaderPrinter$ProgramPrintBuilder;
+       120: invokevirtual #836                // Method net/irisshaders/iris/pipeline/transform/ShaderPrinter$ProgramPrintBuilder.print:()V
+       123: aload_2
+       124: invokestatic  #839                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       127: pop
+       128: aload_1
+       129: invokevirtual #294                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getName:()Ljava/lang/String;
+       132: aload         6
+       134: aload         7
+       136: aload         8
+       138: getstatic     #844                // Field net/irisshaders/iris/samplers/IrisSamplers.COMPOSITE_RESERVED_TEXTURE_UNITS:Lcom/google/common/collect/ImmutableSet;
+       141: invokestatic  #850                // Method net/irisshaders/iris/gl/program/ProgramBuilder.begin:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/google/common/collect/ImmutableSet;)Lnet/irisshaders/iris/gl/program/ProgramBuilder;
+       144: astore        9
+       146: goto          175
+       149: astore        10
+       151: aload         10
+       153: athrow
+       154: astore        10
+       156: new           #782                // class java/lang/RuntimeException
+       159: dup
+       160: aload_1
+       161: invokevirtual #294                // Method net/irisshaders/iris/shaderpack/programs/ProgramSource.getName:()Ljava/lang/String;
+       164: invokedynamic #855,  0            // InvokeDynamic #7:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       169: aload         10
+       171: invokespecial #858                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       174: athrow
+       175: aload         9
+       177: getstatic     #864                // Field net/irisshaders/iris/gl/state/FogMode.OFF:Lnet/irisshaders/iris/gl/state/FogMode;
+       180: invokestatic  #870                // Method net/irisshaders/iris/uniforms/CommonUniforms.addDynamicUniforms:(Lnet/irisshaders/iris/gl/uniform/DynamicUniformHolder;Lnet/irisshaders/iris/gl/state/FogMode;)V
+       183: aload_0
+       184: getfield      #122                // Field customUniforms:Lnet/irisshaders/iris/uniforms/custom/CustomUniforms;
+       187: aload         9
+       189: invokevirtual #874                // Method net/irisshaders/iris/uniforms/custom/CustomUniforms.assignTo:(Lnet/irisshaders/iris/gl/uniform/LocationalUniformHolder;)V
+       192: aload         9
+       194: aload_0
+       195: getfield      #120                // Field customTextureIds:Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
+       198: aload_3
+       199: invokestatic  #878                // Method net/irisshaders/iris/gl/program/ProgramSamplers.customTextureSamplerInterceptor:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;Lcom/google/common/collect/ImmutableSet;)Lnet/irisshaders/iris/gl/program/ProgramSamplers$CustomTextureSamplerInterceptor;
+       202: astore        10
+       204: aload         10
+       206: aload_2
+       207: invokedynamic #887,  0            // InvokeDynamic #8:get:(Lcom/google/common/collect/ImmutableSet;)Ljava/util/function/Supplier;
+       212: aload_0
+       213: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       216: iconst_1
+       217: aload_0
+       218: getfield      #110                // Field pipeline:Lnet/irisshaders/iris/pipeline/WorldRenderingPipeline;
+       221: invokestatic  #891                // Method net/irisshaders/iris/samplers/IrisSamplers.addRenderTargetSamplers:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Ljava/util/function/Supplier;Lnet/irisshaders/iris/targets/RenderTargets;ZLnet/irisshaders/iris/pipeline/WorldRenderingPipeline;)V
+       224: aload         9
+       226: aload_0
+       227: getfield      #124                // Field irisCustomTextures:Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
+       230: invokestatic  #895                // Method net/irisshaders/iris/samplers/IrisSamplers.addCustomTextures:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;)V
+       233: aload         10
+       235: aload_0
+       236: getfield      #126                // Field customImages:Ljava/util/Set;
+       239: invokestatic  #899                // Method net/irisshaders/iris/samplers/IrisSamplers.addCustomImages:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Ljava/util/Set;)V
+       242: aload         9
+       244: aload_2
+       245: invokedynamic #904,  0            // InvokeDynamic #9:get:(Lcom/google/common/collect/ImmutableSet;)Ljava/util/function/Supplier;
+       250: aload_0
+       251: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       254: invokestatic  #910                // Method net/irisshaders/iris/samplers/IrisImages.addRenderTargetImages:(Lnet/irisshaders/iris/gl/image/ImageHolder;Ljava/util/function/Supplier;Lnet/irisshaders/iris/targets/RenderTargets;)V
+       257: aload         9
+       259: aload_0
+       260: getfield      #126                // Field customImages:Ljava/util/Set;
+       263: invokestatic  #913                // Method net/irisshaders/iris/samplers/IrisImages.addCustomImages:(Lnet/irisshaders/iris/gl/image/ImageHolder;Ljava/util/Set;)V
+       266: aload         10
+       268: aload_0
+       269: getfield      #114                // Field noiseTexture:Lnet/irisshaders/iris/gl/texture/TextureAccess;
+       272: invokestatic  #917                // Method net/irisshaders/iris/samplers/IrisSamplers.addNoiseSampler:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lnet/irisshaders/iris/gl/texture/TextureAccess;)V
+       275: aload         10
+       277: aload_0
+       278: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       281: invokestatic  #921                // Method net/irisshaders/iris/samplers/IrisSamplers.addCompositeSamplers:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lnet/irisshaders/iris/targets/RenderTargets;)V
+       284: aload         10
+       286: invokestatic  #925                // Method net/irisshaders/iris/samplers/IrisSamplers.hasShadowSamplers:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;)Z
+       289: ifeq          337
+       292: aload         10
+       294: aload         4
+       296: invokeinterface #927,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       301: checkcast     #929                // class net/irisshaders/iris/shadows/ShadowRenderTargets
+       304: aconst_null
+       305: aload_0
+       306: getfield      #110                // Field pipeline:Lnet/irisshaders/iris/pipeline/WorldRenderingPipeline;
+       309: getstatic     #935                // Field net/irisshaders/iris/features/FeatureFlags.SEPARATE_HARDWARE_SAMPLERS:Lnet/irisshaders/iris/features/FeatureFlags;
+       312: invokeinterface #939,  2          // InterfaceMethod net/irisshaders/iris/pipeline/WorldRenderingPipeline.hasFeature:(Lnet/irisshaders/iris/features/FeatureFlags;)Z
+       317: invokestatic  #943                // Method net/irisshaders/iris/samplers/IrisSamplers.addShadowSamplers:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lnet/irisshaders/iris/shadows/ShadowRenderTargets;Lcom/google/common/collect/ImmutableSet;Z)Z
+       320: pop
+       321: aload         9
+       323: aload         4
+       325: invokeinterface #927,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       330: checkcast     #929                // class net/irisshaders/iris/shadows/ShadowRenderTargets
+       333: aconst_null
+       334: invokestatic  #947                // Method net/irisshaders/iris/samplers/IrisImages.addShadowColorImages:(Lnet/irisshaders/iris/gl/image/ImageHolder;Lnet/irisshaders/iris/shadows/ShadowRenderTargets;Lcom/google/common/collect/ImmutableSet;)V
+       337: aload_0
+       338: getfield      #116                // Field centerDepthSampler:Lnet/irisshaders/iris/pathways/CenterDepthSampler;
+       341: aload         9
+       343: aload_0
+       344: getfield      #116                // Field centerDepthSampler:Lnet/irisshaders/iris/pathways/CenterDepthSampler;
+       347: dup
+       348: invokestatic  #839                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       351: pop
+       352: invokedynamic #956,  0            // InvokeDynamic #10:getAsInt:(Lnet/irisshaders/iris/pathways/CenterDepthSampler;)Ljava/util/function/IntSupplier;
+       357: getstatic     #962                // Field net/irisshaders/iris/gl/sampler/GlSampler.NEAREST:Lnet/irisshaders/iris/gl/sampler/GlSampler;
+       360: iconst_1
+       361: anewarray     #273                // class java/lang/String
+       364: dup
+       365: iconst_0
+       366: ldc_w         #964                // String iris_centerDepthSmooth
+       369: aastore
+       370: invokevirtual #968                // Method net/irisshaders/iris/gl/program/ProgramBuilder.addDynamicSampler:(Ljava/util/function/IntSupplier;Lnet/irisshaders/iris/gl/sampler/GlSampler;[Ljava/lang/String;)Z
+       373: invokevirtual #971                // Method net/irisshaders/iris/pathways/CenterDepthSampler.setUsage:(Z)V
+       376: aload         9
+       378: invokevirtual #974                // Method net/irisshaders/iris/gl/program/ProgramBuilder.build:()Lnet/irisshaders/iris/gl/program/Program;
+       381: astore        11
+       383: aload_0
+       384: getfield      #122                // Field customUniforms:Lnet/irisshaders/iris/uniforms/custom/CustomUniforms;
+       387: aload         9
+       389: aload         11
+       391: invokevirtual #978                // Method net/irisshaders/iris/uniforms/custom/CustomUniforms.mapholderToPass:(Lnet/irisshaders/iris/gl/uniform/LocationalUniformHolder;Ljava/lang/Object;)V
+       394: aload         11
+       396: areturn
+      Exception table:
+         from    to  target type
+           128   146   149   Class net/irisshaders/iris/gl/shader/ShaderCompileException
+           128   146   154   Class java/lang/RuntimeException
+
+  private net.irisshaders.iris.gl.program.ComputeProgram[] createComputes(net.irisshaders.iris.shaderpack.programs.ComputeSource[], com.google.common.collect.ImmutableSet<java.lang.Integer>, com.google.common.collect.ImmutableSet<java.lang.Integer>, java.util.function.Supplier<net.irisshaders.iris.shadows.ShadowRenderTargets>, net.irisshaders.iris.gl.buffer.ShaderStorageBufferHolder);
+    Code:
+         0: aload_1
+         1: arraylength
+         2: anewarray     #317                // class net/irisshaders/iris/gl/program/ComputeProgram
+         5: astore        6
+         7: iconst_0
+         8: istore        7
+        10: iload         7
+        12: aload         6
+        14: arraylength
+        15: if_icmpge     406
+        18: aload_1
+        19: iload         7
+        21: aaload
+        22: astore        8
+        24: aload         8
+        26: ifnull        400
+        29: aload         8
+        31: invokevirtual #993                // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getSource:()Ljava/util/Optional;
+        34: invokevirtual #994                // Method java/util/Optional.isEmpty:()Z
+        37: ifeq          43
+        40: goto          400
+        43: aload_2
+        44: invokestatic  #839                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        47: pop
+        48: aload         8
+        50: invokevirtual #253                // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getName:()Ljava/lang/String;
+        53: aload         8
+        55: invokevirtual #993                // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getSource:()Ljava/util/Optional;
+        58: aconst_null
+        59: invokevirtual #271                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+        62: checkcast     #273                // class java/lang/String
+        65: aload_0
+        66: getfield      #128                // Field textureStage:Lnet/irisshaders/iris/shaderpack/texture/TextureStage;
+        69: aload_0
+        70: getfield      #110                // Field pipeline:Lnet/irisshaders/iris/pipeline/WorldRenderingPipeline;
+        73: invokeinterface #806,  1          // InterfaceMethod net/irisshaders/iris/pipeline/WorldRenderingPipeline.getTextureMap:()Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
+        78: invokestatic  #998                // Method net/irisshaders/iris/pipeline/transform/TransformPatcher.patchCompute:(Ljava/lang/String;Ljava/lang/String;Lnet/irisshaders/iris/shaderpack/texture/TextureStage;Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;)Ljava/lang/String;
+        81: astore        10
+        83: aload         8
+        85: invokevirtual #253                // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getName:()Ljava/lang/String;
+        88: invokestatic  #829                // Method net/irisshaders/iris/pipeline/transform/ShaderPrinter.printProgram:(Ljava/lang/String;)Lnet/irisshaders/iris/pipeline/transform/ShaderPrinter$ProgramPrintBuilder;
+        91: getstatic     #1001               // Field net/irisshaders/iris/pipeline/transform/PatchShaderType.COMPUTE:Lnet/irisshaders/iris/pipeline/transform/PatchShaderType;
+        94: aload         10
+        96: invokevirtual #1005               // Method net/irisshaders/iris/pipeline/transform/ShaderPrinter$ProgramPrintBuilder.addSource:(Lnet/irisshaders/iris/pipeline/transform/PatchShaderType;Ljava/lang/String;)Lnet/irisshaders/iris/pipeline/transform/ShaderPrinter$ProgramPrintBuilder;
+        99: invokevirtual #836                // Method net/irisshaders/iris/pipeline/transform/ShaderPrinter$ProgramPrintBuilder.print:()V
+       102: aload         8
+       104: invokevirtual #253                // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getName:()Ljava/lang/String;
+       107: aload         10
+       109: getstatic     #844                // Field net/irisshaders/iris/samplers/IrisSamplers.COMPOSITE_RESERVED_TEXTURE_UNITS:Lcom/google/common/collect/ImmutableSet;
+       112: invokestatic  #1009               // Method net/irisshaders/iris/gl/program/ProgramBuilder.beginCompute:(Ljava/lang/String;Ljava/lang/String;Lcom/google/common/collect/ImmutableSet;)Lnet/irisshaders/iris/gl/program/ProgramBuilder;
+       115: astore        9
+       117: goto          147
+       120: astore        10
+       122: aload         10
+       124: athrow
+       125: astore        10
+       127: new           #782                // class java/lang/RuntimeException
+       130: dup
+       131: aload         8
+       133: invokevirtual #253                // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getName:()Ljava/lang/String;
+       136: invokedynamic #1012,  0           // InvokeDynamic #11:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       141: aload         10
+       143: invokespecial #858                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       146: athrow
+       147: aload         9
+       149: aload_0
+       150: getfield      #120                // Field customTextureIds:Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
+       153: aload_3
+       154: invokestatic  #878                // Method net/irisshaders/iris/gl/program/ProgramSamplers.customTextureSamplerInterceptor:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;Lcom/google/common/collect/ImmutableSet;)Lnet/irisshaders/iris/gl/program/ProgramSamplers$CustomTextureSamplerInterceptor;
+       157: astore        10
+       159: aload         9
+       161: getstatic     #864                // Field net/irisshaders/iris/gl/state/FogMode.OFF:Lnet/irisshaders/iris/gl/state/FogMode;
+       164: invokestatic  #870                // Method net/irisshaders/iris/uniforms/CommonUniforms.addDynamicUniforms:(Lnet/irisshaders/iris/gl/uniform/DynamicUniformHolder;Lnet/irisshaders/iris/gl/state/FogMode;)V
+       167: aload_0
+       168: getfield      #122                // Field customUniforms:Lnet/irisshaders/iris/uniforms/custom/CustomUniforms;
+       171: aload         9
+       173: invokevirtual #874                // Method net/irisshaders/iris/uniforms/custom/CustomUniforms.assignTo:(Lnet/irisshaders/iris/gl/uniform/LocationalUniformHolder;)V
+       176: aload         10
+       178: aload_2
+       179: invokedynamic #1017,  0           // InvokeDynamic #12:get:(Lcom/google/common/collect/ImmutableSet;)Ljava/util/function/Supplier;
+       184: aload_0
+       185: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       188: iconst_1
+       189: aload_0
+       190: getfield      #110                // Field pipeline:Lnet/irisshaders/iris/pipeline/WorldRenderingPipeline;
+       193: invokestatic  #891                // Method net/irisshaders/iris/samplers/IrisSamplers.addRenderTargetSamplers:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Ljava/util/function/Supplier;Lnet/irisshaders/iris/targets/RenderTargets;ZLnet/irisshaders/iris/pipeline/WorldRenderingPipeline;)V
+       196: aload         9
+       198: aload_0
+       199: getfield      #124                // Field irisCustomTextures:Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;
+       202: invokestatic  #895                // Method net/irisshaders/iris/samplers/IrisSamplers.addCustomTextures:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lit/unimi/dsi/fastutil/objects/Object2ObjectMap;)V
+       205: aload         10
+       207: aload_0
+       208: getfield      #126                // Field customImages:Ljava/util/Set;
+       211: invokestatic  #899                // Method net/irisshaders/iris/samplers/IrisSamplers.addCustomImages:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Ljava/util/Set;)V
+       214: aload         9
+       216: aload_2
+       217: invokedynamic #1022,  0           // InvokeDynamic #13:get:(Lcom/google/common/collect/ImmutableSet;)Ljava/util/function/Supplier;
+       222: aload_0
+       223: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       226: invokestatic  #910                // Method net/irisshaders/iris/samplers/IrisImages.addRenderTargetImages:(Lnet/irisshaders/iris/gl/image/ImageHolder;Ljava/util/function/Supplier;Lnet/irisshaders/iris/targets/RenderTargets;)V
+       229: aload         9
+       231: aload_0
+       232: getfield      #126                // Field customImages:Ljava/util/Set;
+       235: invokestatic  #913                // Method net/irisshaders/iris/samplers/IrisImages.addCustomImages:(Lnet/irisshaders/iris/gl/image/ImageHolder;Ljava/util/Set;)V
+       238: aload         10
+       240: aload_0
+       241: getfield      #114                // Field noiseTexture:Lnet/irisshaders/iris/gl/texture/TextureAccess;
+       244: invokestatic  #917                // Method net/irisshaders/iris/samplers/IrisSamplers.addNoiseSampler:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lnet/irisshaders/iris/gl/texture/TextureAccess;)V
+       247: aload         10
+       249: aload_0
+       250: getfield      #118                // Field renderTargets:Lnet/irisshaders/iris/targets/RenderTargets;
+       253: invokestatic  #921                // Method net/irisshaders/iris/samplers/IrisSamplers.addCompositeSamplers:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lnet/irisshaders/iris/targets/RenderTargets;)V
+       256: aload         10
+       258: invokestatic  #925                // Method net/irisshaders/iris/samplers/IrisSamplers.hasShadowSamplers:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;)Z
+       261: ifeq          309
+       264: aload         10
+       266: aload         4
+       268: invokeinterface #927,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       273: checkcast     #929                // class net/irisshaders/iris/shadows/ShadowRenderTargets
+       276: aconst_null
+       277: aload_0
+       278: getfield      #110                // Field pipeline:Lnet/irisshaders/iris/pipeline/WorldRenderingPipeline;
+       281: getstatic     #935                // Field net/irisshaders/iris/features/FeatureFlags.SEPARATE_HARDWARE_SAMPLERS:Lnet/irisshaders/iris/features/FeatureFlags;
+       284: invokeinterface #939,  2          // InterfaceMethod net/irisshaders/iris/pipeline/WorldRenderingPipeline.hasFeature:(Lnet/irisshaders/iris/features/FeatureFlags;)Z
+       289: invokestatic  #943                // Method net/irisshaders/iris/samplers/IrisSamplers.addShadowSamplers:(Lnet/irisshaders/iris/gl/sampler/SamplerHolder;Lnet/irisshaders/iris/shadows/ShadowRenderTargets;Lcom/google/common/collect/ImmutableSet;Z)Z
+       292: pop
+       293: aload         9
+       295: aload         4
+       297: invokeinterface #927,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       302: checkcast     #929                // class net/irisshaders/iris/shadows/ShadowRenderTargets
+       305: aconst_null
+       306: invokestatic  #947                // Method net/irisshaders/iris/samplers/IrisImages.addShadowColorImages:(Lnet/irisshaders/iris/gl/image/ImageHolder;Lnet/irisshaders/iris/shadows/ShadowRenderTargets;Lcom/google/common/collect/ImmutableSet;)V
+       309: aload_0
+       310: getfield      #116                // Field centerDepthSampler:Lnet/irisshaders/iris/pathways/CenterDepthSampler;
+       313: aload         9
+       315: aload_0
+       316: getfield      #116                // Field centerDepthSampler:Lnet/irisshaders/iris/pathways/CenterDepthSampler;
+       319: dup
+       320: invokestatic  #839                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       323: pop
+       324: invokedynamic #956,  0            // InvokeDynamic #10:getAsInt:(Lnet/irisshaders/iris/pathways/CenterDepthSampler;)Ljava/util/function/IntSupplier;
+       329: getstatic     #962                // Field net/irisshaders/iris/gl/sampler/GlSampler.NEAREST:Lnet/irisshaders/iris/gl/sampler/GlSampler;
+       332: iconst_1
+       333: anewarray     #273                // class java/lang/String
+       336: dup
+       337: iconst_0
+       338: ldc_w         #964                // String iris_centerDepthSmooth
+       341: aastore
+       342: invokevirtual #968                // Method net/irisshaders/iris/gl/program/ProgramBuilder.addDynamicSampler:(Ljava/util/function/IntSupplier;Lnet/irisshaders/iris/gl/sampler/GlSampler;[Ljava/lang/String;)Z
+       345: invokevirtual #971                // Method net/irisshaders/iris/pathways/CenterDepthSampler.setUsage:(Z)V
+       348: aload         6
+       350: iload         7
+       352: aload         9
+       354: invokevirtual #1026               // Method net/irisshaders/iris/gl/program/ProgramBuilder.buildCompute:()Lnet/irisshaders/iris/gl/program/ComputeProgram;
+       357: aastore
+       358: aload_0
+       359: getfield      #122                // Field customUniforms:Lnet/irisshaders/iris/uniforms/custom/CustomUniforms;
+       362: aload         9
+       364: aload         6
+       366: iload         7
+       368: aaload
+       369: invokevirtual #978                // Method net/irisshaders/iris/uniforms/custom/CustomUniforms.mapholderToPass:(Lnet/irisshaders/iris/gl/uniform/LocationalUniformHolder;Ljava/lang/Object;)V
+       372: aload         6
+       374: iload         7
+       376: aaload
+       377: aload         8
+       379: invokevirtual #1030               // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getWorkGroupRelative:()Lorg/joml/Vector2f;
+       382: aload         8
+       384: invokevirtual #1034               // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getWorkGroups:()Lorg/joml/Vector3i;
+       387: aload         5
+       389: aload         8
+       391: invokevirtual #1038               // Method net/irisshaders/iris/shaderpack/programs/ComputeSource.getIndirectPointer:()Lnet/irisshaders/iris/shaderpack/properties/IndirectPointer;
+       394: invokestatic  #1044               // Method net/irisshaders/iris/shaderpack/FilledIndirectPointer.basedOff:(Lnet/irisshaders/iris/gl/buffer/ShaderStorageBufferHolder;Lnet/irisshaders/iris/shaderpack/properties/IndirectPointer;)Lnet/irisshaders/iris/shaderpack/FilledIndirectPointer;
+       397: invokevirtual #1048               // Method net/irisshaders/iris/gl/program/ComputeProgram.setWorkGroupInfo:(Lorg/joml/Vector2f;Lorg/joml/Vector3i;Lnet/irisshaders/iris/shaderpack/FilledIndirectPointer;)V
+       400: iinc          7, 1
+       403: goto          10
+       406: aload         6
+       408: areturn
+      Exception table:
+         from    to  target type
+            48   117   120   Class net/irisshaders/iris/gl/shader/ShaderCompileException
+            48   117   125   Class java/lang/RuntimeException
+
+  public void destroy();
+    Code:
+         0: aload_0
+         1: getfield      #435                // Field passes:Lcom/google/common/collect/ImmutableList;
+         4: invokevirtual #508                // Method com/google/common/collect/ImmutableList.iterator:()Lcom/google/common/collect/UnmodifiableIterator;
+         7: astore_1
+         8: aload_1
+         9: invokeinterface #513,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        14: ifeq          34
+        17: aload_1
+        18: invokeinterface #517,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        23: checkcast     #9                  // class net/irisshaders/iris/pipeline/CompositeRenderer$Pass
+        26: astore_2
+        27: aload_2
+        28: invokevirtual #1054               // Method net/irisshaders/iris/pipeline/CompositeRenderer$Pass.destroy:()V
+        31: goto          8
+        34: return
+
+  private static com.google.common.collect.ImmutableSet lambda$createComputes$6(com.google.common.collect.ImmutableSet);
+    Code:
+         0: aload_0
+         1: areturn
+
+  private static com.google.common.collect.ImmutableSet lambda$createComputes$5(com.google.common.collect.ImmutableSet);
+    Code:
+         0: aload_0
+         1: areturn
+
+  private static com.google.common.collect.ImmutableSet lambda$createProgram$4(com.google.common.collect.ImmutableSet);
+    Code:
+         0: aload_0
+         1: areturn
+
+  private static com.google.common.collect.ImmutableSet lambda$createProgram$3(com.google.common.collect.ImmutableSet);
+    Code:
+         0: aload_0
+         1: areturn
+
+  private static java.lang.String lambda$renderAll$2();
+    Code:
+         0: ldc_w         #1056               // String Composites
+         3: areturn
+
+  private static void lambda$new$1(net.irisshaders.iris.targets.BufferFlipper, com.google.common.collect.ImmutableSet$Builder, java.lang.Integer, java.lang.Boolean);
+    Code:
+         0: aload_3
+         1: invokevirtual #1060               // Method java/lang/Boolean.booleanValue:()Z
+         4: ifeq          21
+         7: aload_0
+         8: aload_2
+         9: invokevirtual #689                // Method java/lang/Integer.intValue:()I
+        12: invokevirtual #385                // Method net/irisshaders/iris/targets/BufferFlipper.flip:(I)V
+        15: aload_1
+        16: aload_2
+        17: invokevirtual #388                // Method com/google/common/collect/ImmutableSet$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableSet$Builder;
+        20: pop
+        21: return
+
+  private static void lambda$new$0(net.irisshaders.iris.targets.BufferFlipper, java.lang.Integer, java.lang.Boolean);
+    Code:
+         0: aload_2
+         1: invokevirtual #1060               // Method java/lang/Boolean.booleanValue:()Z
+         4: ifeq          15
+         7: aload_0
+         8: aload_1
+         9: invokevirtual #689                // Method java/lang/Integer.intValue:()I
+        12: invokevirtual #385                // Method net/irisshaders/iris/targets/BufferFlipper.flip:(I)V
+        15: return
+
+  static {};
+    Code:
+         0: iconst_0
+         1: anewarray     #50                 // class com/mojang/blaze3d/pipeline/RenderPipeline$Snippet
+         4: invokestatic  #1065               // Method com/mojang/blaze3d/pipeline/RenderPipeline.builder:([Lcom/mojang/blaze3d/pipeline/RenderPipeline$Snippet;)Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+         7: getstatic     #1071               // Field com/mojang/blaze3d/platform/DepthTestFunction.NO_DEPTH_TEST:Lcom/mojang/blaze3d/platform/DepthTestFunction;
+        10: invokevirtual #1075               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.withDepthTestFunction:(Lcom/mojang/blaze3d/platform/DepthTestFunction;)Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+        13: iconst_0
+        14: invokevirtual #1079               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.withDepthWrite:(Z)Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+        17: iconst_1
+        18: invokevirtual #1082               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.withColorWrite:(Z)Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+        21: invokevirtual #1086               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.withoutBlend:()Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+        24: ldc_w         #1088               // String iris
+        27: ldc_w         #1090               // String composite
+        30: invokestatic  #1096               // Method net/minecraft/class_2960.method_60655:(Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/class_2960;
+        33: invokevirtual #1100               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.withLocation:(Lnet/minecraft/class_2960;)Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+        36: ldc_w         #1102               // String core/screenquad
+        39: invokevirtual #1106               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.withVertexShader:(Ljava/lang/String;)Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+        42: ldc_w         #1108               // String core/blit_screen
+        45: invokevirtual #1111               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.withFragmentShader:(Ljava/lang/String;)Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+        48: getstatic     #1117               // Field net/minecraft/class_290.field_1585:Lcom/mojang/blaze3d/vertex/VertexFormat;
+        51: getstatic     #566                // Field com/mojang/blaze3d/vertex/VertexFormat$class_5596.field_27382:Lcom/mojang/blaze3d/vertex/VertexFormat$class_5596;
+        54: invokevirtual #1121               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.withVertexFormat:(Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$class_5596;)Lcom/mojang/blaze3d/pipeline/RenderPipeline$Builder;
+        57: invokevirtual #1124               // Method com/mojang/blaze3d/pipeline/RenderPipeline$Builder.build:()Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+        60: putstatic     #617                // Field COMPOSITE_PIPELINE:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+        63: return
+}
