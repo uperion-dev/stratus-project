@@ -13577,6 +13577,12 @@
       "tag": "project-work-snapshots",
       "asset": "public-site-history-e7374d2728d2b2e4.zip",
       "bytes": 24479839
+    },
+    "work/stratus-170-rc5/agent/read.jar": {
+      "sha256": "f05e92db410992124b817264d4a6febd8be13604e9dce23af306f60efd45eaed",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-3ac588d9d865c538.zip",
+      "bytes": 2336
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

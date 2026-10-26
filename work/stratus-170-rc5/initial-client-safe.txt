@@ -1,0 +1,4 @@
+player_present=true
+hud=false
+pause=true
+screen=net.minecraft.class_433

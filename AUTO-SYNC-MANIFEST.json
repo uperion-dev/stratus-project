@@ -774,6 +774,7 @@
     "work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/PROGRESS.md",
     "work/Custom instructions/IN-PROGRESS/b9a03cf9-f681-4a16-8115-d8b44fd3525a/TASK.md",
     "work/Custom instructions/IN-PROGRESS/c3ec7834-5d1e-403e-9eb7-7a12a3226909/CHANGES.md",
+    "work/Custom instructions/IN-PROGRESS/c3ec7834-5d1e-403e-9eb7-7a12a3226909/CONTEXT.md",
     "work/Custom instructions/IN-PROGRESS/c3ec7834-5d1e-403e-9eb7-7a12a3226909/PROGRESS.md",
     "work/Custom instructions/IN-PROGRESS/c3ec7834-5d1e-403e-9eb7-7a12a3226909/TASK.md",
     "work/Custom instructions/PROMPTS.md",
@@ -1879,6 +1880,9 @@
     "work/stratus-170-rc4/wet-film-zero.fsh",
     "work/stratus-170-rc4/wet-rain-only.fsh",
     "work/stratus-170-rc4/wet-sheen-zero.fsh",
+    "work/stratus-170-rc5/agent/ReadStateRc5.java",
+    "work/stratus-170-rc5/agent/read.mf",
+    "work/stratus-170-rc5/initial-client-safe.txt",
     "work/stratus-check/ACTIVE-150.txt",
     "work/stratus-check/ACTIVE-151.txt",
     "work/stratus-check/ACTIVE-153.txt",
@@ -10819,6 +10823,6 @@
     "stratus-studio-cloud": "839019025c56d237951b524a53f14fe6a4e1bcbb"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "0929de0ab9a61d2bd7ea0f398248348076e5931da5ef3b3988b7850b43ced03d",
+  "fingerprint": "a1cb6726008c1bf2837efadf7e9da2868463f32a2d45111b3b2568cf60050a3a",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
