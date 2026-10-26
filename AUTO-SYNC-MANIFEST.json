@@ -310,6 +310,7 @@
     "development/stratus-public/public/assets/underwater.png",
     "development/stratus-public/public/base.css",
     "development/stratus-public/public/breakaway.css",
+    "development/stratus-public/public/breakaway.js",
     "development/stratus-public/public/content-layers.css",
     "development/stratus-public/public/experience.css",
     "development/stratus-public/public/glass-soft-edges.css",
@@ -317,6 +318,7 @@
     "development/stratus-public/public/header-fade.css",
     "development/stratus-public/public/immersive.css",
     "development/stratus-public/public/immersive.js",
+    "development/stratus-public/public/index.html",
     "development/stratus-public/public/liquid-ui.css",
     "development/stratus-public/public/liquid-ui.js",
     "development/stratus-public/public/live.js",
@@ -11524,6 +11526,6 @@
     "stratus-studio-cloud": "839019025c56d237951b524a53f14fe6a4e1bcbb"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "00e00f6d4e90aa49e2e29272995b00b85db9401d98520960b5a173f9826cdfc6",
+  "fingerprint": "db170fcfa35c892c7c01a307cf833b3842933437902a53ac43fd916007864fd0",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
