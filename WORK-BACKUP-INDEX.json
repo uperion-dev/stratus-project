@@ -13811,6 +13811,12 @@
       "tag": "project-work-snapshots",
       "asset": "Stratus-1-7-0-rc5-913c4ef5ac0b09c2.zip",
       "bytes": 1973073
+    },
+    "outputs/stratus-page-anchored-shards-preview.png": {
+      "sha256": "2e39f1c3513898d2ad43218f8cd491147e1d105ff30c2bbb39d63a162628a34c",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-page-anchored-shards-preview-png-c6c72e65cb59621d.zip",
+      "bytes": 76998
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

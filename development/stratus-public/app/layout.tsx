@@ -1,0 +1,1 @@
+export const metadata={title:"Stratus Project",description:"Minecraft, with atmosphere.",icons:{icon:[{url:"/assets/icon.svg?v=consistent-mark-5",type:"image/svg+xml",sizes:"any"}],shortcut:"/assets/icon.svg?v=consistent-mark-5"}}; export default function Layout({children}:{children:React.ReactNode}){return <html lang="en-AU"><body>{children}</body></html>;}
