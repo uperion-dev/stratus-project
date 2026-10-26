@@ -1,0 +1,30 @@
+[
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v2-Off.zip",
+    "result": "removed owned unchanged/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v2-Off.zip.txt",
+    "result": "removed owned unchanged/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v2-On.zip",
+    "result": "removed owned unchanged/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v2-On.zip.txt",
+    "result": "removed owned unchanged/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v2-ReferenceOff.zip",
+    "result": "removed owned unchanged/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v2-ReferenceOn.zip",
+    "result": "removed owned unchanged/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc5-QA-v2-ReferenceOn.zip.txt",
+    "result": "removed owned unchanged/effective-equivalent QA file"
+  }
+]

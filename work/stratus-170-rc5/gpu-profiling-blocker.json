@@ -1,0 +1,6 @@
+{
+  "accepted_timings": 0,
+  "reason": "Fabric KnotClassLoader could not load unexposed GpuTimerRc5 helper",
+  "before_transformer_registration": true,
+  "no_shader_or_quality_change": true
+}
