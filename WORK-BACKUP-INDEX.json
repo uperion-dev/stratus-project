@@ -13571,6 +13571,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-flat-soft-logo-preview-png-8386fb7a8ff0d711.zip",
       "bytes": 74501
+    },
+    "work/public-site-history/9098ac5213529c0f800ae9d29b9dd5c6c9538a0d.zip": {
+      "sha256": "b44d56ecb57d53f22557ae181c701dca63379a9c62f33cb25ac1f0d01cd2bb70",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-e7374d2728d2b2e4.zip",
+      "bytes": 24479839
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

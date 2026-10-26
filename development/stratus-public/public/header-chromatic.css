@@ -1,9 +1,0 @@
-/* Fine spectral edges on the opening typography and controls; no displaced duplicate layers. */
-body.stratus-immersive .immersive-hero h1{ text-shadow:-1.5px .4px 0 #66dcf2a6,1.5px -.4px 0 #f3a5c396,0 4px 32px #081b192b }
-body.stratus-immersive .immersive-hero h1 em{ text-shadow:-1.3px .35px 0 #85efffab,1.3px -.35px 0 #ffb5d199 }
-body.stratus-immersive .immersive-hero .hero-actions .button{ text-shadow:-.45px 0 0 #70e8ff8c,.45px 0 0 #ff98bf7a;box-shadow:inset 1px 0 0 #7ce9ff32,inset -1px 0 0 #ffaad130,var(--lg-shadow);transition:box-shadow .25s,translate .25s }
-body.stratus-immersive .immersive-hero .hero-actions .button:hover{ box-shadow:inset 1px 0 0 #9df2ff70,inset -1px 0 0 #ffbddc60,var(--lg-shadow-raised) }
-@media(forced-colors:active){body.stratus-immersive .immersive-hero h1,body.stratus-immersive .immersive-hero h1 em,body.stratus-immersive .immersive-hero .hero-actions .button,body.stratus-immersive .topbar .brand-label{text-shadow:none}}
-
-@media(forced-colors:active){body.stratus-immersive .wordmark-depth :is(b,i){text-shadow:none}}
-body.stratus-immersive .wordmark-depth :is(b,i),body.stratus-immersive .topbar .brand-label{text-shadow:none}

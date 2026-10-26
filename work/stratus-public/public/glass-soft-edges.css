@@ -9,3 +9,6 @@ body.stratus-immersive :is(.release-evidence,.release-content details,.platform-
 body.stratus-immersive .world-layer{border-color:#c9ffee30}
 body.stratus-immersive .layer-light{border-color:#ffedbb35}
 body.stratus-immersive .layer-sky{border-color:#c5f9ef28}
+
+/* A flat mark with an alpha-feathered edge, without a cast shadow or bevel. */
+body.stratus-immersive .topbar .brand img{box-shadow:none;background:transparent;filter:none}

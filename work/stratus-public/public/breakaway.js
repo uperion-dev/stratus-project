@@ -16,7 +16,7 @@
   idle(()=>{
    if(version!==epoch||document.hidden||textures.get(index)!==record){if(textures.get(index)===record)textures.delete(index);return;}
    if(headerBusy()){textures.delete(index);return;}
-   const scale=Math.min(resolution,(coarse.matches?1440:2880)/w),bitmap=document.createElement('canvas');bitmap.width=Math.ceil(w*scale);bitmap.height=Math.ceil(bandHeight*scale);const c=bitmap.getContext('2d');c.scale(scale,scale);c.fillStyle='#101817';c.fillRect(0,0,w,bandHeight);
+   const scale=Math.min(resolution,(coarse.matches?1440:2880)/w),bitmap=document.createElement('canvas');bitmap.width=Math.ceil(w*scale);bitmap.height=Math.ceil(bandHeight*scale);const c=bitmap.getContext('2d');c.scale(scale,scale);const backdrop=c.createLinearGradient(0,-record.y,0,document.documentElement.scrollHeight-record.y);backdrop.addColorStop(0,'#2b463d');backdrop.addColorStop(.42,'#192c25');backdrop.addColorStop(1,'#09110e');c.fillStyle=backdrop;c.fillRect(0,0,w,bandHeight);
    const root=document.querySelector('[data-view]:not([hidden])');if(!root||root.dataset.view==='feedback'){textures.delete(index);return;}
    // Reflection sources are the public view only. Form values, dialogs and private routes never enter a texture.
    const excluded='[hidden],.carousel-hidden,form,dialog,.voxel-stage,.layer-axis,.wordmark-depth i';
