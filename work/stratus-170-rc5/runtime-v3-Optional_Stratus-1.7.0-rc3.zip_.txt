@@ -1,4 +1,4 @@
-focused=0
+focused=1
 framebuffer=1440x842
 profiles=[FAST, BALANCED, REFERENCE, HIGH]
 profile_info=Profile: Custom (+5 options changed by user)
@@ -72,8 +72,8 @@ ambientOcclusionLevel=1.00
 TEMPORAL_ATMOSPHERE=1
 ORIGINAL_DAMPNESS=<absent in loaded pack>
 DynamicFPS.enabled=true
-DynamicFPS.powerState=UNFOCUSED
-DynamicFPS.targetFrameRate=1
+DynamicFPS.powerState=FOCUSED
+DynamicFPS.targetFrameRate=260
 DynamicFPS.enableVsync=false
 DynamicFPS.isForcingLowFPS=false
 DynamicFPS.isDisabled=false

@@ -13655,6 +13655,48 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-170-rc5-3a911d6b726f7285.zip",
       "bytes": 37248
+    },
+    "work/stratus-170-rc5/Stratus-1.7.0-rc5-QA-v2-Off.zip": {
+      "sha256": "4424a2f229ffca4519e0b619264b933de44b3f365532246492ad6b2fa68632d0",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-d4fa04f375f07dae.zip",
+      "bytes": 7785718
+    },
+    "work/stratus-170-rc5/Stratus-1.7.0-rc5-QA-v2-On.zip": {
+      "sha256": "4424a2f229ffca4519e0b619264b933de44b3f365532246492ad6b2fa68632d0",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-d4fa04f375f07dae.zip",
+      "bytes": 7785718
+    },
+    "work/stratus-170-rc5/agent/active-bench.jar": {
+      "sha256": "a0402b5ba61eb551e6dfa3509f00458b4dd814d7ccf91a2d7f9c8bf214b68fa2",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-d4fa04f375f07dae.zip",
+      "bytes": 3717
+    },
+    "work/stratus-170-rc5/agent/bench-metrics.jar": {
+      "sha256": "058840e27907b89063cd30b6377ab6d04f470c28fec053e8c1deed6ce79891e8",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-d4fa04f375f07dae.zip",
+      "bytes": 5713
+    },
+    "work/stratus-170-rc5/agent/visual-bench.jar": {
+      "sha256": "85567af3c00f22fa2ac7f78fe8e5d0be1535b432c8d3b4a2a809cf5413ec6074",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-d4fa04f375f07dae.zip",
+      "bytes": 16387
+    },
+    "work/stratus-170-rc5/screenshots/river-off-a.png": {
+      "sha256": "d8d2268b6aca7b942b56e3013f5c4bf418879ad6f17bf5697e791b26f80ec231",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-d4fa04f375f07dae.zip",
+      "bytes": 1979453
+    },
+    "work/stratus-170-rc5/screenshots/river-on-a.png": {
+      "sha256": "b6562d94516ccfb1f76ab581425b3fdcce4f26c679e455bee8eda5ad1a140bf9",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc5-d4fa04f375f07dae.zip",
+      "bytes": 1977366
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
