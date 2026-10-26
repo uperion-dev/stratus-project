@@ -1,0 +1,22 @@
+/* One glass capsule travels behind the real, keyboard-accessible navigation links. */
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector .nav-selection{position:absolute;left:0;top:0;height:44px;width:70px;z-index:0;pointer-events:none;transform-origin:left center;border-radius:999px;background:linear-gradient(145deg,#effff334,#c9e5dd0f);box-shadow:inset 0 1px 1px #fff6,inset 0 -1px 1px #041c1b3b;will-change:transform}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) .nav-track a{position:relative;z-index:1}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) a[aria-current=page]:not(.feedback-nav){background:transparent;box-shadow:none}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) .feedback-nav{color:#fff5ff!important;border:1px solid #ebcaff8c;background:radial-gradient(ellipse at 26% 0,#f7dbff70,transparent 68%),linear-gradient(130deg,#9271db,#7045b4 65%,#9e77d9);box-shadow:inset 0 1px 1px #fff7,0 0 17px #9d68df4a}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector[data-nav-page=feedback] .nav-selection{background:linear-gradient(145deg,#d1b0ff66,#9e74d333)}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector.nav-compact nav .nav-selection{opacity:0}
+/* Small fragments sit just outside the button without affecting its click target. */
+.feedback-orbit{position:absolute;z-index:5;pointer-events:none;opacity:0;transition:opacity .25s}
+.feedback-orbit i{position:absolute;display:block;width:7px;height:9px;clip-path:polygon(16% 0,100% 24%,78% 100%,0 65%);background:linear-gradient(140deg,#f4ddffb8,#a673dd66 46%,#7543b333);filter:drop-shadow(0 0 2px #c48bff33);animation:purple-fragment-drift 6.8s ease-in-out infinite alternate;animation-delay:calc(var(--piece)*-.87s)}
+.feedback-orbit i:after{content:'';position:absolute;inset:1px;clip-path:inherit;background:linear-gradient(135deg,#ab78d844,#d3b1ff24)}
+.feedback-orbit i:nth-child(1){left:-5px;top:5px;rotate:-23deg}
+.feedback-orbit i:nth-child(2){left:21%;top:-5px;width:5px;height:7px;rotate:32deg;animation-duration:7.9s}
+.feedback-orbit i:nth-child(3){right:9%;top:-6px;width:8px;height:6px;rotate:68deg;animation-duration:6.1s}
+.feedback-orbit i:nth-child(4){right:-5px;top:52%;width:5px;height:8px;rotate:-35deg;animation-duration:8.3s}
+.feedback-orbit i:nth-child(5){right:30%;bottom:-5px;width:6px;height:7px;rotate:18deg;animation-duration:7.3s}
+.feedback-orbit i:nth-child(6){left:5%;bottom:-4px;width:5px;height:5px;rotate:73deg;animation-duration:8.7s}
+@keyframes purple-fragment-drift{0%{transform:translate3d(-1px,1px,0) rotate(-7deg);opacity:.36}100%{transform:translate3d(2px,-3px,0) rotate(11deg);opacity:.72}}
+/* A page switch has an outgoing beat, a translucent sweep and a settling arrival. */
+.page-transition-veil{position:fixed;inset:0;z-index:24;pointer-events:none;opacity:0;background:linear-gradient(110deg,transparent 24%,#d9fbed10 41%,#d2b5ef18 51%,#d7fff40d 62%,transparent 76%);contain:strict}
+@media(prefers-reduced-motion:reduce){.feedback-orbit i{animation:none!important;opacity:.45}.page-transition-veil{display:none}.nav-selection{will-change:auto!important}}
+body.effects-paused .feedback-orbit i{animation-play-state:paused;opacity:.45}

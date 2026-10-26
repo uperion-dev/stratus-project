@@ -2,14 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Starter Project",
-  description: "A clean starting point for building your site.",
-  other: {
-    "codex-preview": "development",
-  },
+  title: "Stratus Studio",
+  description: "Private Stratus document editor and coding workspace.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/favicon.svg?v=studio-white-1",
+    shortcut: "/favicon.svg?v=studio-white-1",
   },
 };
 
