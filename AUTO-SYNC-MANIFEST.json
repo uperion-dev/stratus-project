@@ -3500,6 +3500,7 @@
     "work/stratus-170-rc8/prepare_tests.py",
     "work/stratus-170-rc8/screen.vsh",
     "work/stratus-170-rc8/source-changes.json",
+    "work/stratus-170-rc8/underwater-gpu.json",
     "work/stratus-170-rc8/underwater/current.fsh",
     "work/stratus-170-rc8/underwater/fog_probe.c",
     "work/stratus-170-rc8/underwater/screen.vsh",
@@ -12445,6 +12446,6 @@
     "stratus-studio-cloud": "bb94ab1c5ae832b1650b79c2f5e89fa4dc664b9b"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "76ce6b08f60f9bbec4fa98c6dd6c81450bf60f2cf9b36cc37f1f41e7dbf7c691",
+  "fingerprint": "c18929a25adfdf9d982ed20922d2ca63e30ff18cfcd9943ac9f9f64d123d5bbb",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
