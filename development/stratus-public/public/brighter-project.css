@@ -11,3 +11,21 @@ body.stratus-immersive :is(.release-evidence,.evidence-note,.roadmap-note,.spec-
 body.stratus-immersive .project-hero-intro{margin:0;color:#e3f0e2;font-size:clamp(14px,1.15vw,18px);font-weight:500;line-height:1.5;text-align:center;text-shadow:0 2px 12px #10291f99}
 body.stratus-immersive .home-heading p{max-width:48ch;color:#c8dbcd;line-height:1.7}
 body.stratus-immersive .server-view .spec-section p{color:#d0ded1;line-height:1.8;font-size:clamp(13px,1vw,15px);margin:0}
+
+/* Lift the shared glass material on every UI surface, including both moving nav halves. */
+body.stratus-immersive{
+ --lg-material:radial-gradient(ellipse at var(--lg-x,22%) var(--lg-y,0%),#edfff72b,transparent 62%),linear-gradient(145deg,#e8fff31e,#d5f5e708 48%,#173a2b18),#476d59df;
+ --lg-rim:#e4fff450;
+}
+body.stratus-immersive :is(.spec-section,.release,.upcoming-item,.feedback-form){background-color:#426c55df}
+body.stratus-immersive :is(.release-evidence,.release-content details,.platform-strip span,.release-label,.pending-badge,.scene-caption){background:linear-gradient(145deg,#e5fff12a,#d6f9e70d)}
+body.stratus-immersive .feedback-form :is(input,textarea,select){background:linear-gradient(145deg,#315943db,#648e744d);color:#f8fff9}
+body.stratus-immersive .feedback-form :is(input,textarea,select):focus{background:#3a7058e8}
+body.stratus-immersive .feedback-form option{background:#355c47;color:#fff}
+body.nav-glass-fade .topbar.navigation-ready:before{background:radial-gradient(ellipse at 50% 0,#d7ffeb18,transparent 68%),linear-gradient(#2b4c3c82,#32574938 58%,transparent)}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) .feedback-nav{color:#27133b!important;background:radial-gradient(ellipse at 26% 0,#fffaffb3,transparent 70%),linear-gradient(130deg,#dbc4f8,#b99ae8 65%,#d4b8f4);border-color:#f2e4ffb0}
+@media(prefers-reduced-transparency:reduce){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f)}body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser){background:#436a53}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f)}}
+/* Keep small copy legible against the brighter panels. */
+body.stratus-immersive :is(.spec-section dd,.release-content li,.upcoming-item p,.faq-list p,.water-story dd,.server-view .spec-section p){color:#f1faf1}
+body.stratus-immersive .feedback-form :is(input,textarea)::placeholder{color:#d4e6d9;opacity:1}

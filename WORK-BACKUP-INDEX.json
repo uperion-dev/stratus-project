@@ -14399,6 +14399,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-project-server-png-241d44b07a78e584.zip",
       "bytes": 45539
+    },
+    "outputs/stratus-brighter-ui.png": {
+      "sha256": "eda6682bf0b4cafbed791660ec96e06756a7eff4628e1da1b110b7eadbeea5cd",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-brighter-ui-png-3e426ff445278e2d.zip",
+      "bytes": 43985
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
