@@ -14435,6 +14435,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-170-rc8-22ef43ee1d621bce.zip",
       "bytes": 17227
+    },
+    "outputs/stratus-clear-glass-preview.png": {
+      "sha256": "b5fccaee873557e65369a6fcd1389fc0ee89312ad8e6623a79638d53eee54d1e",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-clear-glass-preview-png-92ac4738fbe66995.zip",
+      "bytes": 84333
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

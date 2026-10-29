@@ -29,7 +29,11 @@
  document.querySelectorAll('[data-view],.immersive-hero').forEach(view=>{
   view.classList.add('scatter-scene');
   const field=document.createElement('div');field.className='block-scatter';field.setAttribute('aria-hidden','true');
-  field.innerHTML=Array.from({length:view.matches('.immersive-hero')?4:18},(_,i)=>`<span class="minecraft-block scattered-block scatter-${i%2}" style="--scatter-y:${view.matches('.immersive-hero')?16+i*20+random()*4:5+i*5.2+random()*1.5}%;--scatter-x:${random()*1.2}%;--scatter-size:${48+random()*28}px;--block-angle:${random()*20-10}deg;--drift-delay:${-random()*8}s">${cube(['grass','stone','oak'][Math.floor(random()*3)])}</span>`).join('');
+  const hero=view.matches('.immersive-hero');
+  // Uneven gaps and independently placed sides keep the field natural while
+  // retaining stable positions and leaving the reading column unobstructed.
+  const layout=hero?[[0,13],[1,32],[0,64],[1,85]]:[[0,3],[1,7],[0,14],[1,16],[1,24],[0,30],[1,36],[0,39],[0,46],[1,52],[0,56],[1,65],[0,71],[1,74],[0,82],[1,88],[0,93],[1,97]];
+  field.innerHTML=layout.map(([side,y])=>`<span class="minecraft-block scattered-block scatter-${side}" style="--scatter-y:${y+(random()-.5)*1.8}%;--scatter-x:${random()*2.4}%;--scatter-size:${48+random()*28}px;--block-angle:${random()*20-10}deg;--drift-delay:${-random()*8}s">${cube(['grass','stone','oak'][Math.floor(random()*3)])}</span>`).join('');
   view.append(field);observer.observe(view);
  });
 
