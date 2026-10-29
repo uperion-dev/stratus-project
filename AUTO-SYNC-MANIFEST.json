@@ -3227,6 +3227,7 @@
     "work/stratus-170-rc6/wet-film-zero.fsh",
     "work/stratus-170-rc6/wet-rain-only.fsh",
     "work/stratus-170-rc6/wet-sheen-zero.fsh",
+    "work/stratus-170-rc8/after-resolve.fsh",
     "work/stratus-170-rc8/baseline/CHECKS.json",
     "work/stratus-170-rc8/baseline/IN-GAME-TEST.txt",
     "work/stratus-170-rc8/baseline/LICENSE.txt",
@@ -3477,9 +3478,16 @@
     "work/stratus-170-rc8/baseline/shaders/world1/gbuffers_water.vsh",
     "work/stratus-170-rc8/baseline/shaders/world1/gbuffers_weather.fsh",
     "work/stratus-170-rc8/baseline/shaders/world1/gbuffers_weather.vsh",
+    "work/stratus-170-rc8/before-lake.fsh",
+    "work/stratus-170-rc8/before-resolve.fsh",
+    "work/stratus-170-rc8/face-gpu.json",
+    "work/stratus-170-rc8/face_probe.c",
+    "work/stratus-170-rc8/faces.fsh",
     "work/stratus-170-rc8/initial-CHANGES.md",
     "work/stratus-170-rc8/initial-TASK.md",
     "work/stratus-170-rc8/initial-hashes.json",
+    "work/stratus-170-rc8/prepare_tests.py",
+    "work/stratus-170-rc8/screen.vsh",
     "work/stratus-check/ACTIVE-150.txt",
     "work/stratus-check/ACTIVE-151.txt",
     "work/stratus-check/ACTIVE-153.txt",
@@ -12420,6 +12428,6 @@
     "stratus-studio-cloud": "bb94ab1c5ae832b1650b79c2f5e89fa4dc664b9b"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "3ff6c1c0d5a6f37814656cdd1dbc5b3987e5b9232e60d410655dfe6b0277048f",
+  "fingerprint": "d322387f2d3eddcd6ddf7217897935f30d586f60fda7e283b564e39476c8c11c",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }

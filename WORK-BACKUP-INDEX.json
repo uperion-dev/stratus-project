@@ -14339,6 +14339,42 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-170-rc8-9ea59643408925e0.zip",
       "bytes": 8388608
+    },
+    "work/stratus-170-rc8/face_probe": {
+      "sha256": "4b5c246e2eb3a3486694cb0d3d063d1dd7ac3e23fec18089059fa6767218af19",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-6f6676ee889591f3.zip",
+      "bytes": 36728
+    },
+    "work/stratus-170-rc8/water_probe": {
+      "sha256": "cae535b42c793fdd87482cdfb898e146328f0b1ef1cd044fc32f3dadf3d905e9",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-6f6676ee889591f3.zip",
+      "bytes": 37176
+    },
+    "outputs/stratus-brighter-home.png": {
+      "sha256": "8dac60c8a5060a55e3cd9c82dfe16d84bb08f25c031c35ec206b4c00b0ba1076",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-brighter-home-png-0dc7ef1c18ad09b8.zip",
+      "bytes": 46083
+    },
+    "outputs/stratus-brighter-project-preview.png": {
+      "sha256": "f4d35b08d11cdc57e4d9991633ef5b802bc4f9956c75c00ab1d015142059d735",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-brighter-project-preview-png-147099c37bdb9f50.zip",
+      "bytes": 36843
+    },
+    "outputs/stratus-brighter-specs.png": {
+      "sha256": "03ee86aed4ed4593951a1c024e03e246ee33888aa54cc913941c77077fc36a74",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-brighter-specs-png-d57f7e40b14db818.zip",
+      "bytes": 35227
+    },
+    "outputs/stratus-brighter-upcoming.png": {
+      "sha256": "80ce718e0f3bb62f37f6f78376e3c86faa511c738a2db6a4e1678e9edc49fdc9",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-brighter-upcoming-png-bd8343cc5fba0dbb.zip",
+      "bytes": 36921
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
