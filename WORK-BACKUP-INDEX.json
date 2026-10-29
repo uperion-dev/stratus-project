@@ -14333,6 +14333,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-wet-cubes-preview-png-6200a542aae39aaf.zip",
       "bytes": 52874
+    },
+    "work/stratus-170-rc8/baseline/shaders/volumes/weather.rgba8": {
+      "sha256": "90d381201b4851eb65c6847678765eb71f4dfdc965b8b4e4d36f455c33b2e99a",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-9ea59643408925e0.zip",
+      "bytes": 8388608
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",
