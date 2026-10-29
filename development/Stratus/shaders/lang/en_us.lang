@@ -162,7 +162,7 @@ option.SUN_HALO_RADIUS.comment=Angular spread of the polished sun's smoothly fal
 option.CIRRUS_DENSITY=High cloud density
 option.CIRRUS_DENSITY.comment=Optical density of the independent high cloud layer. 0 hides it; coverage/altitude and lower-cloud controls remain independent.
 option.REALISTIC_LIGHTING=Realistic lighting
-option.REALISTIC_LIGHTING.comment=Off (default) restores the game's vertex face lighting/AO and lightmap colour/brightness, bypassing ambient/lamp boosts, ground warmth, bloom and camera grading. Independent wet highlights, Stratus water and atmosphere remain. On retains artistic controls; saved settings are preserved.
+option.REALISTIC_LIGHTING.comment=Off (default) restores the game's vertex face lighting/AO and lightmap colour/brightness, bypassing ambient/lamp boosts, ground warmth and camera grading. Independent bloom, wet highlights, Stratus water and atmosphere remain. On retains artistic controls; saved settings are preserved.
 value.REALISTIC_LIGHTING.0=Off (vanilla, default)
 value.REALISTIC_LIGHTING.1=On
 option.WET_WEATHER_MODE=Wet sheen conditions
@@ -209,3 +209,17 @@ option.TEMPORAL_OPTICS=Temporal optics hints
 option.TEMPORAL_OPTICS.comment=Previous-frame intersection hints guide water and glass reflection searches and water shoreline rejection. All hits, occlusion and colours are evaluated from current geometry at the selected quality; no colour history, trails or frame skipping. Cheap sky lookup, thin-glass refraction and the straight underwater exit remain fresh. Experimental and default Off until matched live performance/visual acceptance. Extra history storage can cost performance; compare On and Off.
 value.TEMPORAL_OPTICS.0=Off
 value.TEMPORAL_OPTICS.1=On
+
+option.REFLECTION_TRACE=Reflection renderer
+option.REFLECTION_TRACE.comment=Classic restores1.3.1's16/28-depth-sample reflections and omits added reflected-mist integration. Detailed retains receiver-plane geometry tracing and reflected volumetric mist. Both retain the selected effect resolution, range and sky fallback; Classic can miss thin scenery. Temporal intersection hints apply to Detailed only.
+value.REFLECTION_TRACE.0=Classic1.3.1 (default)
+value.REFLECTION_TRACE.1=Detailed geometry
+option.WET_FILM_STYLE=Wet sheen style
+option.WET_FILM_STYLE.comment=Classic restores1.3.1 dielectric sky film and GGX sun highlights with common material roughness. Current retains the rc5 film. Both preserve weather/exposure, separate amount/sheen, zero controls and optional independent Original dampness; no forced pore darkening.
+value.WET_FILM_STYLE.0=Classic1.3.1 (default)
+value.WET_FILM_STYLE.1=Current restrained
+
+option.WATER_RENDERER=Water renderer
+option.WATER_RENDERER.comment=Classic fused follows 1.3.1 scene-resolution composition without an intermediate optics pass. Layered retains selected optics-buffer resolution. Experimental temporal hints use Layered. No proven FPS parity yet.
+value.WATER_RENDERER.0=Classic fused
+value.WATER_RENDERER.1=Layered

@@ -15,9 +15,9 @@ void main() {
     relativeLocation = playerFromView(cameraVertex.xyz);
     orientedNormal = mat3(gbufferModelViewInverse) * (gl_NormalMatrix * gl_Normal);
     tintAndOpacity = gl_Color;
-#if REALISTIC_LIGHTING == 0 && PASS_KIND == 4 && (!defined(BLOCK_SURFACE) || BLOCK_SURFACE == 0)
-    // Iris pack geometry supplies unlit entity vertex colour. Terrain's native
-    // oldLighting shading is already present and must not be applied twice.
+#if REALISTIC_LIGHTING == 0 && (PASS_KIND == 4 || PASS_KIND == 5)
+    // All model geometry, including block entities and held items/hand, needs
+    // native directional lights. Terrain and emissive passes stay excluded.
     tintAndOpacity.rgb*=nativeEntityLighting(unitVector(orientedNormal));
 #endif
     atlasCoordinate = (gl_TextureMatrix[0] * gl_MultiTexCoord0).st;

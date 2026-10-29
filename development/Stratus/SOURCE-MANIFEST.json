@@ -81,8 +81,8 @@
   },
   {
     "path": "shaders/core/atmosphere-resolve.frag.glsl",
-    "bytes": 2604,
-    "sha256": "c4615ee49ea80cde27dbfac9c816e873c21c9cd38f01d5796e440f1cbeeebe5a"
+    "bytes": 2654,
+    "sha256": "621935c6b04839864f599e6b5ebc531349096de4d63f81a7c515acea934192d8"
   },
   {
     "path": "shaders/core/atmosphere.frag.glsl",
@@ -91,13 +91,13 @@
   },
   {
     "path": "shaders/core/bloom-horizontal.frag.glsl",
-    "bytes": 1199,
-    "sha256": "436c26beb287bf8166cae576ac0ac0c31f9f61a75ad2f0b7315af8cae8dcec10"
+    "bytes": 1461,
+    "sha256": "3aa325748ae00acb928bd0c5c1690e33656d647f1cd97dd8a0a1a5032a8cb7b7"
   },
   {
     "path": "shaders/core/bloom-vertical.frag.glsl",
-    "bytes": 527,
-    "sha256": "7acc666e5e688a3d13535438dfcaed0d5387a82daed39646e2f51ee0eaee9d09"
+    "bytes": 813,
+    "sha256": "a95c3fc1bbdd0b22cd14dc694d6c4adffdf4d5015ee5466ccbd83670cdc33d4b"
   },
   {
     "path": "shaders/core/ceiling.glsl",
@@ -105,9 +105,14 @@
     "sha256": "ff5b5e782ecc7666889da3a7021b891332946b9214b50a4d3a025e65aefbcf20"
   },
   {
+    "path": "shaders/core/classic-reflection.glsl",
+    "bytes": 4121,
+    "sha256": "91cee948cbcf866a512b755af8431f4e094871bc6ae07a05d4c3b26ec434913f"
+  },
+  {
     "path": "shaders/core/diffuse.glsl",
-    "bytes": 6202,
-    "sha256": "3c9bb9445116a3a3dc0cce702c48a0db484576f5344d6809c5c5f8585d466cfe"
+    "bytes": 8136,
+    "sha256": "66b227750a2cad7cf619f043bc3a458894f64c30ec90158a289cc07e702e9fad"
   },
   {
     "path": "shaders/core/entity-lighting.glsl",
@@ -161,13 +166,13 @@
   },
   {
     "path": "shaders/core/options.glsl",
-    "bytes": 5351,
-    "sha256": "7c4225972013a4253499ad0470151ebd6358b01b05fe2c3e0f1f16e032c1739a"
+    "bytes": 5421,
+    "sha256": "49b5a2ce14e8121a2cc1613411b42a0f10b4efff19bd4cfb12acc47d3a9223c2"
   },
   {
     "path": "shaders/core/output.frag.glsl",
-    "bytes": 1562,
-    "sha256": "7b9f5c02c4f3787557afc88c7e328eba350b8fbaa143885c4df142cd0c3e2c63"
+    "bytes": 1644,
+    "sha256": "4f4a71e417eeafbe1af4409412a8895ab2675628b2062812fb7ed02509aba6bd"
   },
   {
     "path": "shaders/core/raster.frag.glsl",
@@ -186,8 +191,8 @@
   },
   {
     "path": "shaders/core/resolve.frag.glsl",
-    "bytes": 3639,
-    "sha256": "64de9f2b524814463600d64f6dd7211472584a2066e84f1c18174d5feeb4762d"
+    "bytes": 3835,
+    "sha256": "b2ff21383ab6c6906b9fea86be9728547bc112e2419ded010de91123960dba24"
   },
   {
     "path": "shaders/core/scene-depth.glsl",
@@ -196,8 +201,8 @@
   },
   {
     "path": "shaders/core/scene-trace.glsl",
-    "bytes": 9109,
-    "sha256": "c21529bacff7564e046f3a031576aacdb4f2a2dfe4402e3cc03b25c5addeb006"
+    "bytes": 9455,
+    "sha256": "c9aa2684d0ed5509d94de9c931ad80b4e71dc2e3949e87350cdc5f058364b985"
   },
   {
     "path": "shaders/core/screen.vert.glsl",
@@ -241,8 +246,8 @@
   },
   {
     "path": "shaders/core/transparent-optics.glsl",
-    "bytes": 3110,
-    "sha256": "568ef5bc0f4d8d397d2baa069f433b73d4833eb754be12215fbcef7929db55a2"
+    "bytes": 3210,
+    "sha256": "7d25e31a06d2426de049a89367ee6de15c3c504961177085d2c61bff9ab25e1b"
   },
   {
     "path": "shaders/core/volume.glsl",
@@ -266,8 +271,8 @@
   },
   {
     "path": "shaders/core/water-reflection.frag.glsl",
-    "bytes": 2164,
-    "sha256": "3b81c0ab53f9c1a1046da46029d04711bc357c470e258f07b1630d0f0a9c83ec"
+    "bytes": 2322,
+    "sha256": "262776eededa833ec5c0d74f7f8c92dabe8189532ac2a2204223a85da417ca77"
   },
   {
     "path": "shaders/core/water-resolve.frag.glsl",
@@ -541,13 +546,13 @@
   },
   {
     "path": "shaders/lang/en_us.lang",
-    "bytes": 17652,
-    "sha256": "ef13a71fdd77bd575c03ed5d1b0049bee77f0f327044b62d7108497811bd868b"
+    "bytes": 18571,
+    "sha256": "aa3a41085313d4bc8464b581bef9f714a6c4cba0c159c464ad467bdc934c4e61"
   },
   {
     "path": "shaders/shaders.properties",
-    "bytes": 19231,
-    "sha256": "c4ad184410e7eb2f98d90c0bee0bb727a60c650d6b0f983e2ab45a004d360cb8"
+    "bytes": 19287,
+    "sha256": "fd91412df8132eae53d8ad2dfdee40e269afeadbfda9385f5a8560ff26d71b13"
   },
   {
     "path": "shaders/volumes/weather.rgba8",

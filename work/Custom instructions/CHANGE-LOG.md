@@ -1,5 +1,46 @@
 # Stratus change and output log
 
+## 27 October 2026 — Stratus 1.7.0-rc7 — classic restoration and independent bloom
+
+### At a glance
+
+- Restored selectable **Classic1.3.1 reflection** and **Classic wet sheen** defaults, retaining Detailed geometry/Current film and every prior control. Current sky, cloud/mist producer, water/refraction/underwater modules preserved. Bloom now works in vanilla lighting; fractional native emitters and visibly adjustable smooth radius repaired.
+- [Final ZIP](../../outputs/Stratus-1.7.0-rc7.zip) · [Actual visual checks](../../outputs/Stratus-1.7.0-rc7-visual-checks/index.html) · [Install/load receipt](../../outputs/Stratus-1.7.0-rc7-install.json).251 entries,7,789,615bytes;SHA256 `cc0fd043e8f96d415d7376aba0f0835596971e28a2155cccda1458c78d986d9b`. Exact source/archive/installed bytes match; final ZIP loaded and left selected/enabled in Main.
+-768 native pairs,1152 material cases,96 wet cases,288 original1.3.1 trace comparisons, targeted bloom GPU checks,33 installer cases,70 reachable options and four actual70-option Iris profiles pass. All prior68 defaults/ranges/preset assignments and620 block tokens retained.
+- **Focused development pair30.51→48.59FPS (~59.2%) predates final bloom corrections. Final rc7 FPS and valid1.3.1 comparison remain pending after the Mac locked.** No final60FPS/max-FPS or full temporal completion claim.
+
+Batch: [6d616ef5 active brief](IN-PROGRESS/6d616ef5-4067-4c24-afdc-c69e622af1c9/CHANGES.md). Shared next queue and immutable snapshots preserved; no newer document conflict before reconciliation. Frozen delta’s unfinished all-optics temporal target is staged and retained, not treated as completed by classic restoration. Old chat was read only (three recent turns); no handoff/message/revival. Actual own1.3.1 archive source is the restoration reference.
+
+### Implementation and controls
+
+Thirteen changed shader files are listed in `work/stratus-170-rc6/source-changes.json` and exact `changes.diff`: new `classic-reflection.glsl`; scene trace, water/transparent reflection, conditional atmosphere metadata; diffuse/options/output; both bloom passes; properties/English labels. `REFLECTION_TRACE` selects Classic0/ Detailed1; `WET_FILM_STYLE` selects Classic0/Current1. Both new defaults0 in all four presets; old controls/settings/quality choices retained.
+
+Classic reinstates1.3.1’s perspective depth crossing,16/28 samples,4/5 bisections and three-tap radiance/confidence, adding the current medium-side guard. It omits the newer per-hit20-step reflected volumetric mist and unused receiver-normal/distance-history targets. Detailed retains receiver-plane search (up to192 steps/neighbour gathers), reflected mist and optional geometry hints. Selected resolution/range/mode are preserved. Old1.3.1 used its own half-resolution reflection path; algorithm/appearance choice is deliberately labelled and is not identical-quality certification. Sky/cloud/mist producers, lake normals, water resolve, refraction and submerged composition are byte-identical to rc5 (`preserved-sky-water-checks.json`).
+
+Classic wet style restores the original dielectric sky film and GGX sun shape, saturating film amount, sky exposure and drainage. The later user-approved common roughness is retained across eligible materials; native diffuse colour remains. Original dampness stays independent/default Off; retired WET_DARKENING remains no-op. Current film remains selectable, with zero/weather/shelter/back-face/depth guards. No coupled historical absorption or material-specific roughness rollback.
+
+Bloom was disabled by vanilla lighting, so both producers and final contribution now remain independent of realistic lighting/artistic grading. Live sea-lantern testing then exposed a second issue: fractional native emissive metadata produced no halo. A native GPU regression reproduced zero bloom mass before the fix, then0.97528726 after coverage remapping. Ordinary white metadata still contributes0. Wide radius initially showed sparse sampling boxes; a bloom-only mip prefilter smooths the existing five-tap output without changing scene resolution. Final actual small/wide captures show a tight versus broad smooth halo; true zero is retained. Full identifiers/ranges/menu access remain.
+
+### Technical, package and live evidence
+
+All evidence is under `work/stratus-170-rc6/` despite final versionrc7. `compile-final.log`:768 native compatibility-shim pairs,0 failures. `material-checks.json`:1152 cases, common-material error0, independent absorption CPU/GPU max error3.1e-8. `wet-checks.json`:96 cases,0 failures. `restoration-gpu-final.json`:288 classic comparisons,RGBA error0; small/wide kernel second moments11.525721/685.645722; ordinary-white bloom0, vanilla output bloom contribution0.21653813, fractional native-emitter mass0.97528726;0 failures/GL errors. Final vertical mip change is covered by final compile and actual images, not a separate isolated vertical GPU assertion.
+
+`control-checks.json` verifies68→70 controls, defaults/ranges/presets/tooltips/menu paths and620 block tokens. `migration-checks.json` runs33 actual final-policy installer cases, no override resets; latest saved values carry and existing new-version preferences win. Older archives/settings preserved. Executable release-policy reset list is empty; a retained historical descriptive migration-rule string concerns old water releases and does not execute a reset. `final-release-runtime.json` records actual final ZIP/IrisRenderingPipeline,70 effective values, saved overrides and all four complete70-option profile matches. Actual bloom/reflection/material UI screenshots inspected. Frozen rc6 intermediate (before final bloom fixes) remains preserved and is not the final candidate. Packaged CHECKS/VALIDATION are pre-final-live snapshots; external receipt/log hold later evidence without rewriting an immutable ZIP.
+
+Finite reviewed captures cover river before/restored/actual1.3.1, wet/current/dry material panels, native emissive zero/small/wide and exact final rc7 river/menu views. Original1.3.1 visual tuning and material model differ, so its images are a historical character reference. Some earlier bloom captures failed and are superseded; final smooth images are labelled. User camera movement caused one guard rejection rather than accepting a moved capture. Gallery originals/hashes/links checked; gallery HTML not separately browser-rendered. Broader motion/disocclusion/waterline/glass/weather acceptance is not implied by finite static views.
+
+### Performance diagnosis and limits
+
+Accepted20-second development pair: rc5 baseline30.5145FPS, restored48.5922FPS,1440×842, same camera/manual68 values, Apple M1/OpenGL4.1 Metal91.7, render12/simulation8, time1000/rain0. Zero unfocused/limiter violations; stable441/441-column/zero-job/worker/upload/task gates at start and throughout. Bounded sampling resets inactivity without saved config changes; real focus and DynamicFPS FOCUSED/idlefalse/NONE limiter checked each poll. Cap70; savedVSync=true, DynamicFPS reports enableVsync=false, effective swap interval not independently verified. Classic rendering/film and restored bloom are intentional requested algorithm/appearance changes, not identical Detailed quality. These samples precede final native-emitter/mip corrections; **not finalrc7 acceptance**. Unpaired repeat45.46FPS is secondary only; reverse baseline had47 unfocused polls, original1.3.1 failed focus at start, neither used for gain claims. Raw accepted/rejected samples and frame times preserved in `benchmarks/` and `performance-results.json`.
+
+A transient per-draw profiler used Fabric’s normal scoped helper classpath API, then removed transformer/restored original bytecode/deleted queries. Five background draws showed reflection median14.81ms before/1.23ms restored, sky about4.2ms both. Baseline readiness did not settle and some other pass times were0, so these limited diagnostic queries identify added reflection work but do not establish steady gameplay throughput. `gpu-profiler-stopped.txt`/`gpu-transformer-restored.txt` confirm cleanup; loaded helper definition remains inert until JVM exit. Mac lock prevented final focused repeat; no background FPS substituted.
+
+### Restoration and remaining work
+
+Exact3042 initially-air fixture cells restored, watcher/visual/profiler stopped and30 unchanged owned QA files removed. No helper entity spawned/deleted/teleported; visible sheep left untouched. Original normal river position within0.001, view direction (yaw modulo360),HUD/menu/pause/flight/time/rain restored; options/DynamicFPS bytes, rc5 override values, original1.3.1 settings and other Iris config preserved. Deliberate final selection isrc7. `final-audit.json` records equality/restoration checks.
+
+Remaining in this batch: finalrc7 focused matched repeat plus valid historical1.3.1 comparison/approximately60FPS acceptance, and net-efficient full all-reflections/refractions temporal implementation with motion/disocclusion coverage. Prior batches retain their own unfinished waterline/leaf/transition requirements. Do not mark this batch or the1.7 milestone complete.
+
 ## 26 October 2026 — Stratus 1.7.0-rc5 — experimental temporal optics hints
 
 ### At a glance

@@ -8,4 +8,4 @@ After every completed shader change, reconcile `TASK.md` against actual source, 
 
 When the user asks for a prompt, draft or refine the instructions without implementing shader code unless they also ask for implementation.
 
-In the prompt-generator chat, review `CHANGES.md` and the relevant parts of `TASK.md` when the user asks for feedback or handoff. Make small clarifying edits that preserve intent, then send the coding chat a concise summary of pending items only if the user has authorised the handoff. Report what was changed and sent. Do not treat a file save alone as the trigger.
+When the user asks for feedback or handoff, read `CHANGES.md` and the relevant parts of `TASK.md` without automatically refining or rewriting the submitted changes. Rewrite the brief only when the user explicitly requests it. Send the coding chat a concise summary of pending items only if the user has authorised the handoff. Report what was sent. Do not treat a file save alone as the trigger.

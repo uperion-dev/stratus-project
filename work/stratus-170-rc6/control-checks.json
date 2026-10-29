@@ -1,0 +1,26 @@
+{
+  "previous_controls": 68,
+  "current_controls": 70,
+  "previous_defaults_and_ranges_preserved": true,
+  "reachable_controls": 70,
+  "tooltips_present": true,
+  "all_four_original_preset_assignments_preserved": true,
+  "all_presets_native_water_default": true,
+  "block_tokens_preserved": 620,
+  "changed_shader_files": [
+    "shaders/core/atmosphere-resolve.frag.glsl",
+    "shaders/core/bloom-horizontal.frag.glsl",
+    "shaders/core/bloom-vertical.frag.glsl",
+    "shaders/core/classic-reflection.glsl",
+    "shaders/core/diffuse.glsl",
+    "shaders/core/options.glsl",
+    "shaders/core/output.frag.glsl",
+    "shaders/core/resolve.frag.glsl",
+    "shaders/core/scene-trace.glsl",
+    "shaders/core/transparent-optics.glsl",
+    "shaders/core/water-reflection.frag.glsl",
+    "shaders/lang/en_us.lang",
+    "shaders/shaders.properties"
+  ],
+  "failures": 0
+}

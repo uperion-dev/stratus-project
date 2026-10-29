@@ -33,6 +33,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define MIST_DETAIL 3 // [1 2 3]
 #define REFLECT_LEVEL 1.00 // [0.00 0.40 0.60 0.85 1.00]
 #define REFLECTION_MODE 0 // [0 1 2]
+#define REFLECTION_TRACE 0 // [0 1]
 #define REFLECT_RANGE 120.0 // [24.0 48.0 64.0 88.0 120.0 160.0 224.0 320.0]
 #define WATER_VISIBILITY 2.20 // [0.05 0.10 0.20 0.35 0.50 0.70 0.90 1.10 1.30 1.70 2.20 3.00 4.00 6.00 8.00 12.00 16.00]
 #define WATER_EXTINCTION 0.90 // [0.10 0.20 0.45 0.65 0.90 1.15 1.40 2.00 3.00]
@@ -41,6 +42,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define RIPPLE_RATE 1.00 // [0.00 0.10 0.20 0.45 0.70 1.00 1.50 2.00 3.00]
 #define FACE_SHADING 1.00 // [0.00 0.15 0.25 0.35 0.50 0.70 0.85 1.00 1.25 1.50 2.00]
 #define WET_DARKENING 1.00 // [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00 2.50]
+#define WET_FILM_STYLE 0 // [0 1]
 #define WET_SHEEN 0.85 // [0.00 0.15 0.35 0.65 0.85 1.00 1.35 1.70 2.00]
 #define BLOOM_STRENGTH 0.18 // [0.00 0.03 0.06 0.12 0.18 0.25 0.35 0.50 0.75 1.00]
 #define BLOOM_RADIUS 3.00 // [0.25 0.50 1.00 1.50 2.00 3.00 4.00 6.00 8.00 12.00]
@@ -70,6 +72,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define TEMPORAL_ATMOSPHERE 1 // [0 1]
 #define TEMPORAL_OPTICS 0 // [0 1]
 #define ORIGINAL_DAMPNESS 0.00 // [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
+#define WATER_RENDERER 0 // [0 1]
 #define WATER_RENDER_QUALITY 1 // [0 1 2]
 #define CLOUD_DENSITY 1.00 // [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 1.00 // [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
@@ -652,26 +655,20 @@ vec2 wetMaterialProperties(int material) {
 vec3 formIrradiance(vec3 normal, float skyExposure) {
     float vertical=normal.y>=0.0?1.0:0.5;
     float vanilla=dot(normal*normal,vec3(0.6,vertical,0.8));
-    float vanillaWeight=1.0,physicalWeight=0.0;
-    float physical=1.0;
-#if DIMENSION_TYPE == 0
-    vec3 sun=broadLightDirection();
-    float direct=daytimeWeight()*smoothstep(-0.04,0.16,sun.y)*(1.0-0.85*rainStrength);
-    float facing=max(dot(normal,sun),0.0);
-    float hemisphere=mix(0.38,0.78,normal.y*0.5+0.5);
-    physical=hemisphere*(1.0-0.20*direct)+0.44*direct*facing;
-    float exposure=smoothstep(0.08,0.85,skyExposure);
-    vanillaWeight=1.0-0.35*exposure;physicalWeight=0.35*exposure;
-#endif
-    // Separate linear components preserve the exact old mixture at 1/1.
-    // Each zero removes only that component; both zero produce unshaded faces.
-    float contrast=(vanilla-1.0)*vanillaWeight*VANILLA_FACE_CONTRAST
-                  +(physical-1.0)*physicalWeight*REALISTIC_FACE_CONTRAST;
-    float irradiance=1.0+contrast;
-    float strength=FACE_BLEND*FACE_SHADING;
-    // Linear contrast keeps saved 2.0 settings readable instead of squaring
-    // already-dark surfaces. Zero for either control is an exact bypass.
-    return vec3(clamp(1.0+(irradiance-1.0)*strength,0.18,1.18));
+    float upperHemisphere = 0.5 + 0.5 * normal.y;
+    vec3 sky = mix(vec3(0.31, 0.295, 0.275), vec3(1.025, 1.0, 0.95), upperHemisphere);
+    vec3 skyKey=unitVector(broadLightDirection()+vec3(-0.20,0.0,0.13));
+    float directional = max(dot(normal, skyKey), 0.0);
+    sky += sunlightColour() * 0.23 * directional * daytimeWeight() * (1.0 - 0.65 * rainStrength);
+    sky /= 1.12;
+    // The lightmap has no point-light positions: retain broad indoor fill.
+    float indoor = 0.72 + 0.20 * max(normal.y, 0.0) - 0.12 * max(-normal.y, 0.0);
+    vec3 physical = mix(vec3(indoor), sky, smoothstep(0.04, 0.85, skyExposure));
+    // Separate controls: realistic=1/vanilla=1 reproduces the original
+    // 1.3.1 form response; zero remains an exact component bypass.
+    vec3 realistic=mix(vec3(1.0),physical,REALISTIC_FACE_CONTRAST);
+    vec3 irradiance=realistic*mix(1.0,vanilla,FACE_BLEND*VANILLA_FACE_CONTRAST);
+    return mix(vec3(1.0),irradiance,FACE_SHADING);
 }
 // A surface film adds reflected highlights without changing the diffuse albedo.
 // Absorption darkening/retained dampness was deliberately retired in 1.6.9.
@@ -692,6 +689,22 @@ float originalSurfaceMoisture(float sky,vec3 n,float absorption){
     return 0.0;
 #endif
 }
+float classicWetFresnel(float cosine) {
+    return 0.0204 + 0.9796 * pow(1.0 - clamp(cosine, 0.0, 1.0), 5.0);
+}
+float classicWetSunSpecular(vec3 n, vec3 v, vec3 l, float roughness) {
+    float nv = max(dot(n, v), 0.001), nl = max(dot(n, l), 0.0);
+    if (nl <= 0.0) return 0.0;
+    vec3 h = unitVector(v + l);
+    float nh = max(dot(n, h), 0.0), vh = max(dot(v, h), 0.0);
+    float alpha = max(roughness * roughness, 0.08), a2 = alpha * alpha;
+    float denominator = nh * nh * (a2 - 1.0) + 1.0;
+    float distribution = a2 / max(3.14159265 * denominator * denominator, 0.00001);
+    float visibility = 0.5 / max(nl * sqrt(nv * nv * (1.0 - a2) + a2)
+                        + nv * sqrt(nl * nl * (1.0 - a2) + a2), 0.0001);
+    return distribution * visibility * classicWetFresnel(vh) * nl;
+}
+
 vec3 wetSurfaceResponse(vec3 dry,vec3 n,vec3 playerPoint,float sky,vec2 material){
 #if DIMENSION_TYPE == 0
     if(ORIGINAL_DAMPNESS>0.0){
@@ -699,6 +712,28 @@ vec3 wetSurfaceResponse(vec3 dry,vec3 n,vec3 playerPoint,float sky,vec2 material
         float saturation=moisture*(0.45+0.55*clamp(biomeHumidity,0.0,1.0));
         dry/=1.0+1.40*saturation*clamp(material.x,0.0,1.0);
     }
+#if WET_FILM_STYLE == 0
+    float source=WET_WEATHER_MODE==0?1.0:rainStrength;
+    float moisture=clamp(source*smoothstep(0.18,0.88,sky)
+        *(1.0-exp(-1.75*SURFACE_DAMPNESS))*(1.0+0.08*rainStrength),0.0,1.0);
+    if(moisture>0.001&&WET_SHEEN>0.0){
+        vec3 view=unitVector(-playerPoint);
+        float nv=max(dot(n,view),0.0);
+        if(nv>0.001){
+            // Uniform material response retained; only exposure/angle vary.
+            float roughness=mix(0.68,max(0.28,0.68*0.48),moisture);
+            float film=moisture*mix(0.32,1.0,max(n.y,0.0))*WET_SHEEN;
+            vec3 ray=reflect(-view,n),environment=softSkyReflection(ray);
+            float exposure=sky*mix(0.12,1.0,smoothstep(-0.10,0.45,ray.y));
+            float fresnel=classicWetFresnel(nv)*(1.0-0.42*roughness);
+            float coat=clamp(film*fresnel,0.0,0.85);
+            dry=mix(dry,environment*exposure,coat);
+            float specular=classicWetSunSpecular(n,view,broadLightDirection(),roughness);
+            float sun=solarDaylight()*sky*(1.0-0.75*rainStrength);
+            dry+=sunlightColour()*0.72*specular*sun*film;
+        }
+    }
+#else
     float filmSource=WET_WEATHER_MODE==0?1.0:rainStrength;
     float film=filmSource*SURFACE_DAMPNESS*smoothstep(0.18,0.85,sky)
         *mix(0.78,1.0,clamp(n.y*0.5+0.5,0.0,1.0));
@@ -720,6 +755,7 @@ vec3 wetSurfaceResponse(vec3 dry,vec3 n,vec3 playerPoint,float sky,vec2 material
                 *lobe*film*WET_SHEEN*0.008*(1.0-0.65*rainStrength);
         }
     }
+#endif
 #endif
     // Keep the retired option discoverable by Iris; every allowed value is a no-op.
     return dry+vec3(0.0)*WET_DARKENING;

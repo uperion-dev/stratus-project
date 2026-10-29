@@ -8,7 +8,7 @@ uniform sampler2D colortex11;
 #include "/core/transparent-optics.glsl"
 #include "/core/temporal-atmosphere.glsl"
 in vec2 rasterUV;
-#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0 && REFLECTION_TRACE == 1
 /* RENDERTARGETS: 3,17 */
 layout(location=1)out vec2 transparentHint;
 #else
@@ -17,7 +17,7 @@ layout(location=1)out vec2 transparentHint;
 layout(location=0)out vec4 completedScene;
 void main(){
     vec3 scene=transparentSolidOptics(texture(colortex3,rasterUV).rgb,rasterUV);
-#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0 && REFLECTION_TRACE == 1
     transparentHint=solidOpticalHint;
 #endif
     // The atmosphere producer writes exact zero in water/lava/snow. Avoid

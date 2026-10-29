@@ -1,0 +1,9 @@
+selected=Optional[Stratus-1.7.0-rc6-QA-v1-Restored.zip]
+target=0 getMainTexture size=1440x842 maxRGB=1.0 maxG=0.0 maxA=1.0 sum=668647.2698846161 positive=818590
+target=0 getAltTexture size=1440x842 maxRGB=1.0 maxG=0.0 maxA=1.0 sum=342035.16266965866 positive=488576
+target=3 getMainTexture size=1440x842 maxRGB=5.2734375 maxG=4.2421875 maxA=1.0 sum=418254.42165851593 positive=1212480
+target=3 getAltTexture size=1440x842 maxRGB=2.8945312 maxG=2.4023438 maxA=1.0 sum=381233.0137615204 positive=1212480
+target=5 getMainTexture size=360x210 maxRGB=0.0 maxG=0.0 maxA=0.0 sum=0.0 positive=0
+target=5 getAltTexture size=360x210 maxRGB=1.9736328 maxG=1.6396484 maxA=1.0 sum=853.4666247367859 positive=18388
+target=6 getMainTexture size=360x210 maxRGB=0.0 maxG=0.0 maxA=0.0 sum=0.0 positive=0
+target=6 getAltTexture size=360x210 maxRGB=1.9111328 maxG=1.5742188 maxA=1.0 sum=865.6988079547882 positive=25909

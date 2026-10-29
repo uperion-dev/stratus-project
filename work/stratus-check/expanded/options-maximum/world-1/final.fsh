@@ -30,6 +30,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define MIST_DETAIL 3 //  [1 2 3]
 #define REFLECT_LEVEL 1.00 //  [0.00 0.40 0.60 0.85 1.00]
 #define REFLECTION_MODE 2 //  [0 1 2]
+#define REFLECTION_TRACE 1 //  [0 1]
 #define REFLECT_RANGE 320.0 //  [24.0 48.0 64.0 88.0 120.0 160.0 224.0 320.0]
 #define WATER_VISIBILITY 16.00 //  [0.05 0.10 0.20 0.35 0.50 0.70 0.90 1.10 1.30 1.70 2.20 3.00 4.00 6.00 8.00 12.00 16.00]
 #define WATER_EXTINCTION 3.00 //  [0.10 0.20 0.45 0.65 0.90 1.15 1.40 2.00 3.00]
@@ -38,6 +39,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define RIPPLE_RATE 3.00 //  [0.00 0.10 0.20 0.45 0.70 1.00 1.50 2.00 3.00]
 #define FACE_SHADING 2.00 //  [0.00 0.15 0.25 0.35 0.50 0.70 0.85 1.00 1.25 1.50 2.00]
 #define WET_DARKENING 2.50 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00 2.50]
+#define WET_FILM_STYLE 1 //  [0 1]
 #define WET_SHEEN 2.00 //  [0.00 0.15 0.35 0.65 0.85 1.00 1.35 1.70 2.00]
 #define BLOOM_STRENGTH 1.00 //  [0.00 0.03 0.06 0.12 0.18 0.25 0.35 0.50 0.75 1.00]
 #define BLOOM_RADIUS 12.00 //  [0.25 0.50 1.00 1.50 2.00 3.00 4.00 6.00 8.00 12.00]
@@ -67,6 +69,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define TEMPORAL_ATMOSPHERE 1 //  [0 1]
 #define TEMPORAL_OPTICS 1 //  [0 1]
 #define ORIGINAL_DAMPNESS 2.00 //  [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
+#define WATER_RENDERER 1 //  [0 1]
 #define WATER_RENDER_QUALITY 2 //  [0 1 2]
 #define CLOUD_DENSITY 3.00 //  [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 2.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
@@ -162,13 +165,14 @@ in vec2 rasterUV;
 layout(location = 0) out vec4 displayPixel;
 void main() {
     vec3 physicalColour = max(texture(colortex3, rasterUV).rgb, vec3(0.0));
+    if(BLOOM_STRENGTH>0.0)physicalColour+=max(texture(colortex6,rasterUV).rgb,vec3(0.0))*BLOOM_STRENGTH;
 #if REALISTIC_LIGHTING == 0
     // Original game lightmap/vertex colours: no exposure, colour grading,
-    // bloom or highlight shoulder changes their brightness or ambient level.
+    // highlight shoulder changes their brightness or ambient level.
+    // Requested bloom remains independent of this lighting/colour bypass.
     displayPixel=vec4(clamp(encodeDisplay(physicalColour),0.0,1.0),1.0);
     return;
 #endif
-    physicalColour += max(texture(colortex6, rasterUV).rgb, vec3(0.0)) * BLOOM_STRENGTH;
     // Camera exposure changes the complete scene, independently of the local
     // skylight/lamplight controls; UI brightness remains Minecraft's own.
     physicalColour *= exp2(EXPOSURE);

@@ -22,7 +22,9 @@ const int colortex6Format = RGBA16F;
 const int colortex7Format = RGBA16F;
 const int colortex8Format = RGBA16F;
 const int colortex9Format = RGBA16F;
+#if REFLECTION_TRACE == 1
 const int colortex10Format = RGBA16F;
+#endif
 const int colortex11Format = RGBA16F;
 #if TEMPORAL_ATMOSPHERE == 1
 const bool colortex11Clear = false;
@@ -31,7 +33,7 @@ const int colortex12Format = RGBA16F;
 const int colortex13Format = RGBA16F;
 #if TEMPORAL_OPTICS == 1
 const int RG16F = 33327;
-#if REFLECTION_MODE != 0
+#if REFLECTION_MODE != 0 && REFLECTION_TRACE == 1
 const int colortex16Format = RG16F;
 const int colortex17Format = RG16F;
 const bool colortex16Clear = false;
@@ -52,14 +54,20 @@ const vec4 colortex0ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
 const vec4 colortex1ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
 const vec4 colortex2ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
 const vec4 colortex3ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
+#if REFLECTION_TRACE == 1
 /* RENDERTARGETS: 3,4,0,1,2,8,10 */
+#else
+/* RENDERTARGETS: 3,4,0,1,2,8 */
+#endif
 layout(location = 0) out vec4 resolvedScene;
 layout(location = 1) out vec4 reflectionScene;
 layout(location = 2) out vec4 emptyWaterColour;
 layout(location = 3) out vec4 emptyWaterGeometry;
 layout(location = 4) out vec4 emptyWaterDepth;
 layout(location = 5) out vec4 emptyWaterTint;
+#if REFLECTION_TRACE == 1
 layout(location = 6) out vec4 opaqueReceiverNormal;
+#endif
 void main() {
     float z = texture(depthtex1, rasterUV).r;
     vec3 viewPoint = positionFromDepth(rasterUV, min(z, 0.999999));
@@ -75,7 +83,9 @@ void main() {
     vec4 normalData=texture(colortex1,rasterUV);
     if(geometry&&normalData.a>0.5)
         radiance=goldenSurfaceWarmth(radiance,viewPoint,unitVector(normalData.xyz),texture(colortex0,rasterUV).r);
+#if REFLECTION_TRACE == 1
     opaqueReceiverNormal=geometry?vec4(texture(colortex1,rasterUV).xyz,1.0):vec4(0.0);
+#endif
     emptyWaterTint=vec4(0.0);
     resolvedScene = vec4(radiance, 1.0);
     reflectionScene = vec4(radiance, geometry ? texture(colortex0, rasterUV).a : 0.0);

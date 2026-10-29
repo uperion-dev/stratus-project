@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0-rc5",
+  "version": "1.7.0-rc7",
   "reset_related_overrides": [],
   "visual_defaults": {
     "WATER_RENDER_QUALITY": "1",
@@ -69,7 +69,9 @@
     "TRANSPARENT_REFRACTION": "0.50",
     "TEMPORAL_ATMOSPHERE": "1",
     "ORIGINAL_DAMPNESS": "0.00",
-    "TEMPORAL_OPTICS": "0"
+    "TEMPORAL_OPTICS": "0",
+    "REFLECTION_TRACE": "0",
+    "WET_FILM_STYLE": "0"
   },
   "reference_quality_defaults": {
     "WATER_RENDER_QUALITY": "1",
@@ -231,5 +233,5 @@
     "TRANSPARENT_REFRACTION": "0.50"
   },
   "preserve_newer_manual_overrides": true,
-  "notes": "Experimental optical intersection/shoreline hints, default off in all presets. Preserve every existing override. No measured gameplay speedup or full temporal-optics acceptance."
+  "notes": "Requested classic1.3.1 reflection and sheen defaults; current algorithms retained as new selectors. Bloom independent of realistic lighting. Existing68 option values/defaults/ranges/preset assignments preserved,70 total. No saved override reset. Live performance acceptance tracked externally."
 }

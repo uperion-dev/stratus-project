@@ -1,0 +1,5 @@
+{
+  "archive": "outputs/Stratus-1.7.0-rc6.zip",
+  "sha256": "ed1009df10eb3abc13becaaaaaffe9be59c24adc473e7d5dca7b0f4e35af0516",
+  "status": "intermediate before native-emitter and smooth wide-radius bloom fixes; do not promote as final"
+}

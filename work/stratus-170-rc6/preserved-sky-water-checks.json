@@ -1,0 +1,11 @@
+{
+  "core/ceiling.glsl": true,
+  "core/volume.glsl": true,
+  "core/atmosphere.frag.glsl": true,
+  "core/weather-volume.glsl": true,
+  "core/air.glsl": true,
+  "core/lake-normal.glsl": true,
+  "core/water-resolve.frag.glsl": true,
+  "core/refraction.glsl": true,
+  "core/submerged-compose.glsl": true
+}

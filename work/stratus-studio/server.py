@@ -29,8 +29,8 @@ DIST = HERE / 'dist'
 TOKEN = secrets.token_urlsafe(32)
 LOCK = threading.Lock()
 MAX_BYTES = 2_000_000
-CHAT_ID = '01a15d03-320f-7422-9005-6d7f85ce5aa9'
-CHAT_NAME = 'Coding Stratus (2)'
+CHAT_ID = '01a13e62-2c43-7200-8e49-451e289f18d9'
+CHAT_NAME = 'Coding Stratus (Old)'
 BRIDGE = HERE / '.bridge'
 BRIDGE_LOCK = threading.Lock()
 SPEC_STAGE_BASE = BRIDGE / 'spec-stage-base.md'
@@ -136,7 +136,7 @@ def send_to_chat(body, frozen=None):
             'run': 'Implement only pending requests in the active batch brief. If empty, stop.',
             'stage_run': 'Stage meaningful TASK additions, modifications and removals from the frozen delta into the active batch, then implement it. Ignore formatting-only edits. With no delta, use only existing pending requests and explicit instructions; do not audit the whole target for new work.',
             'run_both': 'Implement the active batch AND unfinished requirements in the complete TASK target. Review source/evidence first, stage concrete gaps in this batch, and keep verification gaps distinct from defects. Preserve working code; a clean-rebuild specification does not require rebuilding it.',
-            'stage': 'Refine only the shared pending CHANGES brief against TASK. Do not implement code or send another handoff.',
+            'stage': 'Review the shared pending CHANGES brief against TASK and report feedback only. Do not refine or rewrite CHANGES.md, implement code or send another handoff.',
             'spec': 'Modify only the shared TASK.md as instructed; preserve unrelated requirements. No shader implementation.',
             'related': 'Carry out only the explicit related work below; other pending requests are not authorised.'
         }

@@ -136,11 +136,22 @@ vec4 traceOpticalSegment(vec3 origin,vec3 direction,vec3 interfaceNormal,int sid
     if(bounded){path=maximum;return vec4(opticsColour(boundUV,boundPoint,boundNormal,cache),opticsBorderCoverage(boundUV,size));}
     return vec4(0.0);
 }
+#if REFLECTION_TRACE == 0
+#include "/core/classic-reflection.glsl"
+#endif
 vec4 traceOpticalScene(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,bool unused,out float path){
+#if REFLECTION_TRACE == 0
+    return classicSceneryReflection(origin,direction,interfaceNormal,side,quality,maximum,path);
+#else
     return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path,0.0);
+#endif
 }
 vec4 traceOpticalSceneHint(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,out float path,float temporalDistance){
+#if REFLECTION_TRACE == 0
+    return classicSceneryReflection(origin,direction,interfaceNormal,side,quality,maximum,path);
+#else
     return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path,temporalDistance);
+#endif
 }
 
 #endif

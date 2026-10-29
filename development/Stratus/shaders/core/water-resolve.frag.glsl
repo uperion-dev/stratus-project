@@ -4,6 +4,10 @@
 #include "/core/water-surface.glsl"
 #include "/core/forward.glsl"
 #include "/core/submerged-compose.glsl"
+#if WATER_RENDERER == 0 && TEMPORAL_OPTICS == 0
+#include "/core/water-optics.glsl"
+uniform sampler2D colortex14;
+#else
 uniform sampler2D colortex0;
 uniform sampler2D colortex1;
 uniform sampler2D colortex2;
@@ -15,6 +19,7 @@ uniform sampler2D colortex13;
 uniform sampler2D colortex14;
 uniform sampler2D depthtex0;
 uniform sampler2D depthtex1;
+#endif
 in vec2 rasterUV;
 /* RENDERTARGETS: 3 */
 layout(location=0)out vec4 completedScene;
@@ -36,6 +41,12 @@ void main(){
     if(mark.a<=0.5||depth.a<=0.5){
         completedScene=vec4(max(scene,vec3(0)),1.0);return;
     }
+    vec4 tint=texture(colortex8,rasterUV);
+#if WATER_RENDERER == 0 && TEMPORAL_OPTICS == 0
+    // Like 1.3.1, compose current optics directly in the scene-resolution pass.
+    // Keep modern native atlas, foreground alpha and water-exit protections.
+    vec2 unusedHint;vec3 optics=computeWaterOptics(rasterUV,unusedHint);
+#else
     ivec2 size=textureSize(colortex12,0);vec2 grid=rasterUV*vec2(size)-0.5;
     ivec2 cell=ivec2(floor(grid));vec2 f=fract(grid);vec3 optics=vec3(0);float total=0.0;
     for(int y=0;y<2;y++)for(int x=0;x<2;x++){
@@ -46,7 +57,7 @@ void main(){
         weight*=exp(-abs(depth.x-d.x)/max(0.10,depth.x*0.025));
         optics+=texelFetch(colortex12,c,0).rgb*weight;total+=weight;
     }
-    vec4 tint=texture(colortex8,rasterUV);
+    tint=texture(colortex8,rasterUV);
 #if WATER_STYLE == 0
     if(dot(tint.rgb,tint.rgb)<0.001)tint.rgb=biomeWaterTint;
 #endif
@@ -61,6 +72,7 @@ void main(){
         optics=travelThroughWater(texture(colortex4,rasterUV).rgb,path,tint.rgb,depth.y,tint.a);
 
     }
+#endif
 #if WATER_STYLE == 1
     // Preserve native atlas detail independently of the selected optics buffer.
     optics=nativeWaterSurface(optics,vec4(tint.rgb,mark.g*step(0.5,tint.a)));

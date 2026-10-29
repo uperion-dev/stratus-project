@@ -1,0 +1,122 @@
+[
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-Before.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-Before.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-BloomSmall.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-BloomSmall.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-BloomWide.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-BloomWide.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-BloomZero.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-BloomZero.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-Dry.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-Dry.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-Original131.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-Original131.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-Restored.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v1-Restored.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v2-BloomSmall.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v2-BloomSmall.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v2-BloomWide.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v2-BloomWide.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v2-BloomZero.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v2-BloomZero.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v2-Restored.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v2-Restored.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v3-BloomSmall.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v3-BloomSmall.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v3-BloomWide.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v3-BloomWide.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v3-BloomZero.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v3-BloomZero.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v3-Restored.zip",
+    "result": "removed owned exact/effective-equivalent QA file"
+  },
+  {
+    "file": "Stratus-1.7.0-rc6-QA-v3-Restored.zip.txt",
+    "result": "removed owned exact/effective-equivalent QA file"
+  }
+]

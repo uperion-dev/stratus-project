@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Stratus-1.7.0-rc6-QA-v1-Before.zip",
+    "scope": "captured rc5 manual settings plus named overrides",
+    "overrides": {}
+  },
+  {
+    "name": "Stratus-1.7.0-rc6-QA-v1-Restored.zip",
+    "scope": "captured rc5 manual settings plus named overrides",
+    "overrides": {}
+  },
+  {
+    "name": "Stratus-1.7.0-rc6-QA-v1-Dry.zip",
+    "scope": "captured rc5 manual settings plus named overrides",
+    "overrides": {
+      "SURFACE_DAMPNESS": "0.00",
+      "WET_SHEEN": "0.00",
+      "ORIGINAL_DAMPNESS": "0.00",
+      "BLOOM_STRENGTH": "0.00"
+    }
+  },
+  {
+    "name": "Stratus-1.7.0-rc6-QA-v1-BloomZero.zip",
+    "scope": "captured rc5 manual settings plus named overrides",
+    "overrides": {
+      "BLOOM_STRENGTH": "0.00"
+    }
+  },
+  {
+    "name": "Stratus-1.7.0-rc6-QA-v1-BloomSmall.zip",
+    "scope": "captured rc5 manual settings plus named overrides",
+    "overrides": {
+      "BLOOM_STRENGTH": "0.35",
+      "BLOOM_RADIUS": "0.50"
+    }
+  },
+  {
+    "name": "Stratus-1.7.0-rc6-QA-v1-BloomWide.zip",
+    "scope": "captured rc5 manual settings plus named overrides",
+    "overrides": {
+      "BLOOM_STRENGTH": "0.35",
+      "BLOOM_RADIUS": "4.00"
+    }
+  },
+  {
+    "name": "Stratus-1.7.0-rc6-QA-v1-Original131.zip",
+    "scope": "exact131 with its saved settings; not equal quality to newer sky",
+    "overrides": {}
+  }
+]

@@ -1,0 +1,18 @@
+Compare final candidate TEMPORAL_OPTICS=0/1 and rc4 at identical saved quality,
+framebuffer/render distance, camera, time and weather. Verify selected ZIP,
+68 effective controls and all four actual Iris profiles. Confirm native RG16F
+history targets and adjacent-frame stamps, then test water waves/shorelines,
+waterfall, moving camera/disocclusion, reflected moving objects, glass/stacked
+transparency, underwater exit, zero optics, reload and viewport changes.
+Do not infer temporal hits from a slow/background screenshot; hints reject
+frames over 50ms. Inspect representative matched frames and motion.
+
+User has resumed focused FPS testing. Require real focus, active Dynamic FPS
+and Minecraft inactivity limiter state, stable five-second loaded-column and
+mesh gates and a fresh gate at sampling start. Compare repeated matched On/
+Off samples with frame-time distributions, and Reference separately from the
+user's manual full scenery reflections. Optional bounded activity timer must
+stop afterwards. No quality/resolution/draw-distance reduction for speed.
+Restore exact original settings/menu/camera only if no newer navigation was
+made; preserve newer user changes. Stop helpers and remove only unchanged QA
+files owned by this pass. Keep unverified requests in the active batch.

@@ -6,13 +6,14 @@ in vec2 rasterUV;
 layout(location = 0) out vec4 displayPixel;
 void main() {
     vec3 physicalColour = max(texture(colortex3, rasterUV).rgb, vec3(0.0));
+    if(BLOOM_STRENGTH>0.0)physicalColour+=max(texture(colortex6,rasterUV).rgb,vec3(0.0))*BLOOM_STRENGTH;
 #if REALISTIC_LIGHTING == 0
     // Original game lightmap/vertex colours: no exposure, colour grading,
-    // bloom or highlight shoulder changes their brightness or ambient level.
+    // highlight shoulder changes their brightness or ambient level.
+    // Requested bloom remains independent of this lighting/colour bypass.
     displayPixel=vec4(clamp(encodeDisplay(physicalColour),0.0,1.0),1.0);
     return;
 #endif
-    physicalColour += max(texture(colortex6, rasterUV).rgb, vec3(0.0)) * BLOOM_STRENGTH;
     // Camera exposure changes the complete scene, independently of the local
     // skylight/lamplight controls; UI brightness remains Minecraft's own.
     physicalColour *= exp2(EXPOSURE);

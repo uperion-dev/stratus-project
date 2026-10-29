@@ -1,0 +1,40 @@
+{
+  "version": "1.7.0-rc7",
+  "sha256": "cc0fd043e8f96d415d7376aba0f0835596971e28a2155cccda1458c78d986d9b",
+  "entries": 251,
+  "bytes": 7789615,
+  "source_archive_install_bytes_equal": true,
+  "final_zip_loaded_and_selected": true,
+  "effective_options": 70,
+  "all_four_profiles_match": true,
+  "all_saved_overrides_match": true,
+  "final_native_pairs": 768,
+  "final_native_failures": 0,
+  "restored": {
+    "normal_river_position_within_0.001": true,
+    "camera_angles": true,
+    "HUD_pause_flight_menu_time_rain": true,
+    "only_intended_Iris_selection_changed": true,
+    "Minecraft_options_bytes_unchanged": true,
+    "DynamicFPS_config_bytes_unchanged": true,
+    "rc5_override_values_unchanged": true,
+    "original131_settings_bytes_unchanged": true,
+    "exact3042_original_fixture_cells_restored": true,
+    "helpers_stopped": true,
+    "owned_QA_files_removed": true
+  },
+  "protected_documents_before_reconciliation": {
+    "work/Custom instructions/TASK.md": true,
+    "work/Custom instructions/CHANGES.md": true,
+    "work/Custom instructions/IN-PROGRESS/6d616ef5-4067-4c24-afdc-c69e622af1c9/TASK.md": true
+  },
+  "final_source_FPS_accepted_samples": 0,
+  "development_matched_pair_samples": 2,
+  "UI_controls_actual_reviewed": true,
+  "bloom_final_smooth_native_views_reviewed": true,
+  "pending": [
+    "finalrc7 focused FPS repeat and valid original131 comparison/60FPS target",
+    "full all-optics temporal implementation and motion/disocclusion acceptance"
+  ],
+  "QA_entity_scope": "No entity spawned/deleted/teleported by helper; sheep visible in test fixture was left untouched. Normal world simulation continued."
+}

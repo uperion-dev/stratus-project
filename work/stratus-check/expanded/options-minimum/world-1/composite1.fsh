@@ -3,6 +3,10 @@
 
 // BEGIN INCLUDE /core/lake.frag.glsl
 
+// BEGIN INCLUDE /core/water-optics.glsl
+#ifndef STRATUS_WATER_OPTICS_INCLUDED
+#define STRATUS_WATER_OPTICS_INCLUDED
+
 // BEGIN INCLUDE /core/options.glsl
 #ifndef STRATUS_OPTIONS_INCLUDED
 #define STRATUS_OPTIONS_INCLUDED
@@ -30,6 +34,7 @@ const float ambientOcclusionLevel = 0.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define MIST_DETAIL 1 //  [1 2 3]
 #define REFLECT_LEVEL 0.00 //  [0.00 0.40 0.60 0.85 1.00]
 #define REFLECTION_MODE 0 //  [0 1 2]
+#define REFLECTION_TRACE 0 //  [0 1]
 #define REFLECT_RANGE 24.0 //  [24.0 48.0 64.0 88.0 120.0 160.0 224.0 320.0]
 #define WATER_VISIBILITY 0.05 //  [0.05 0.10 0.20 0.35 0.50 0.70 0.90 1.10 1.30 1.70 2.20 3.00 4.00 6.00 8.00 12.00 16.00]
 #define WATER_EXTINCTION 0.10 //  [0.10 0.20 0.45 0.65 0.90 1.15 1.40 2.00 3.00]
@@ -38,6 +43,7 @@ const float ambientOcclusionLevel = 0.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define RIPPLE_RATE 0.00 //  [0.00 0.10 0.20 0.45 0.70 1.00 1.50 2.00 3.00]
 #define FACE_SHADING 0.00 //  [0.00 0.15 0.25 0.35 0.50 0.70 0.85 1.00 1.25 1.50 2.00]
 #define WET_DARKENING 0.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00 2.50]
+#define WET_FILM_STYLE 0 //  [0 1]
 #define WET_SHEEN 0.00 //  [0.00 0.15 0.35 0.65 0.85 1.00 1.35 1.70 2.00]
 #define BLOOM_STRENGTH 0.00 //  [0.00 0.03 0.06 0.12 0.18 0.25 0.35 0.50 0.75 1.00]
 #define BLOOM_RADIUS 0.25 //  [0.25 0.50 1.00 1.50 2.00 3.00 4.00 6.00 8.00 12.00]
@@ -67,6 +73,7 @@ const float ambientOcclusionLevel = 0.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define TEMPORAL_ATMOSPHERE 0 //  [0 1]
 #define TEMPORAL_OPTICS 0 //  [0 1]
 #define ORIGINAL_DAMPNESS 0.00 //  [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
+#define WATER_RENDERER 0 //  [0 1]
 #define WATER_RENDER_QUALITY 0 //  [0 1 2]
 #define CLOUD_DENSITY 0.15 //  [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 0.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
@@ -1166,11 +1173,98 @@ vec4 traceOpticalSegment(vec3 origin,vec3 direction,vec3 interfaceNormal,int sid
     if(bounded){path=maximum;return vec4(opticsColour(boundUV,boundPoint,boundNormal,cache),opticsBorderCoverage(boundUV,size));}
     return vec4(0.0);
 }
+#if REFLECTION_TRACE == 0
+
+// BEGIN INCLUDE /core/classic-reflection.glsl
+#ifndef STRATUS_CLASSIC_REFLECTION_INCLUDED
+#define STRATUS_CLASSIC_REFLECTION_INCLUDED
+// Restored from this project's1.3.1 archive; no geometry/pixel-budget substitution.
+float classicScreenDepthError(vec3 rayPoint, vec2 coordinate) {
+    float sampledDepth = texture(depthtex1, coordinate).r;
+    if (sampledDepth >= 0.999999) return -100000.0;
+    return positionFromDepth(coordinate, sampledDepth).z - rayPoint.z;
+}
+vec4 classicSceneryReflection(vec3 viewOrigin,vec3 viewDirection,vec3 interfaceNormal,int side,int quality,float maximum,out float path) {
+    path=0.0;
+    float distanceLimit = min(maximum,min(REFLECT_RANGE,max(16.0,far)));
+    if (viewDirection.z > 0.00001)
+        distanceLimit = min(distanceLimit, max(0.0, (-0.15 - viewOrigin.z) / viewDirection.z));
+    if (distanceLimit < 0.1) return vec4(0.0);
+    vec3 rayEnd = viewOrigin + viewDirection * distanceLimit;
+    vec4 clipBegin = gbufferProjection * vec4(viewOrigin, 1.0);
+    vec4 clipEnd = gbufferProjection * vec4(rayEnd, 1.0);
+    float reciprocalBegin = 1.0 / max(clipBegin.w, 0.00001);
+    float reciprocalEnd = 1.0 / max(clipEnd.w, 0.00001);
+    vec2 screenBegin = clipBegin.xy * reciprocalBegin * 0.5 + 0.5;
+    vec2 screenEnd = clipEnd.xy * reciprocalEnd * 0.5 + 0.5;
+    vec3 projectiveBegin = viewOrigin * reciprocalBegin;
+    vec3 projectiveEnd = rayEnd * reciprocalEnd;
+    int count=quality==2?28:16;
+    int bisections=quality==2?5:4;
+    float previousFraction = 0.0;
+    float previousError = -1.0;
+    for (int sampleIndex = 1; sampleIndex <= count; sampleIndex++) {
+        float fraction = float(sampleIndex) / float(count);
+        vec2 screen = mix(screenBegin, screenEnd, fraction);
+        if (min(screen.x, screen.y) < 0.001 || max(screen.x, screen.y) > 0.999) break;
+        float reciprocal = mix(reciprocalBegin, reciprocalEnd, fraction);
+        vec3 rayPoint = mix(projectiveBegin, projectiveEnd, fraction) / reciprocal;
+        float error = classicScreenDepthError(rayPoint, screen);
+        if (error >= 0.0 && previousError < 0.0) {
+            float left = previousFraction, right = fraction;
+            for (int refinement = 0; refinement < bisections; refinement++) {
+                float middle = (left + right) * 0.5;
+                vec2 middleScreen = mix(screenBegin, screenEnd, middle);
+                vec3 middlePoint = mix(projectiveBegin, projectiveEnd, middle)
+                                 / mix(reciprocalBegin, reciprocalEnd, middle);
+                if (classicScreenDepthError(middlePoint, middleScreen) >= 0.0) right = middle;
+                else left = middle;
+            }
+            vec2 hitScreen = mix(screenBegin, screenEnd, right);
+            vec3 hitPoint = mix(projectiveBegin, projectiveEnd, right)
+                          / mix(reciprocalBegin, reciprocalEnd, right);
+            // Current medium-side protection remains even in the classic path.
+            if(float(side)*dot(hitPoint-viewOrigin,interfaceNormal)<=0.005)return vec4(0.0);
+            path=length(hitPoint-viewOrigin);
+            float missDistance = abs(classicScreenDepthError(hitPoint, hitScreen));
+            float tolerance = 0.22 + abs(hitPoint.z) * 0.009;
+            vec2 border = min(hitScreen, 1.0 - hitScreen);
+            float confidence = 1.0 - smoothstep(tolerance * 0.35, tolerance, missDistance);
+            confidence *= smoothstep(0.0, 0.075, min(border.x, border.y));
+            confidence *= smoothstep(0.35, 1.4, -hitPoint.z);
+            confidence *= 1.0 - smoothstep(distanceLimit * 0.67, distanceLimit, length(hitPoint - viewOrigin));
+            vec4 centre = texture(colortex4, hitScreen);
+            confidence *= centre.a;
+            vec2 texel = vec2(0.85, 0.45) / viewportSize();
+            vec3 softened = centre.rgb * 0.60
+                          + texture(colortex4, hitScreen + texel).rgb * 0.20
+                          + texture(colortex4, hitScreen - texel).rgb * 0.20;
+            return vec4(softened, clamp(confidence, 0.0, 1.0));
+        }
+        previousFraction = fraction;
+        previousError = error;
+    }
+    return vec4(0.0);
+}
+
+#endif
+
+// END INCLUDE /core/classic-reflection.glsl
+
+#endif
 vec4 traceOpticalScene(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,bool unused,out float path){
+#if REFLECTION_TRACE == 0
+    return classicSceneryReflection(origin,direction,interfaceNormal,side,quality,maximum,path);
+#else
     return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path,0.0);
+#endif
 }
 vec4 traceOpticalSceneHint(vec3 origin,vec3 direction,vec3 interfaceNormal,int side,int quality,float maximum,out float path,float temporalDistance){
+#if REFLECTION_TRACE == 0
+    return classicSceneryReflection(origin,direction,interfaceNormal,side,quality,maximum,path);
+#else
     return traceOpticalSegment(origin,direction,interfaceNormal,side,quality,maximum,false,0.025,path,temporalDistance);
+#endif
 }
 
 #endif
@@ -1233,37 +1327,31 @@ vec2 nextOpticalHint(float value){return vec2(max(value,0.0),float(frameCounter%
 #if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
 uniform sampler2D colortex18;
 #endif
-in vec2 rasterUV;
-#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
-/* RENDERTARGETS: 12,18 */
-layout(location=1)out vec2 refractionHint;
-#else
-/* RENDERTARGETS: 12 */
-#endif
-layout(location=0)out vec4 completedScene;
-void main(){
+
+vec3 computeWaterOptics(vec2 screen,out vec2 refractionHint){
+    refractionHint=vec2(0.0);
 #if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
     refractionHint=nextOpticalHint(0.0);
 #endif
-    vec3 image=texture(colortex3,rasterUV).rgb;
-    vec4 markedColour=texture(colortex0,rasterUV);
+    vec3 image=texture(colortex3,screen).rgb;
+    vec4 markedColour=texture(colortex0,screen);
     if(isEyeInWater==1){
-        completedScene=vec4(max(image,vec3(0.0)),1.0);return;
+        return max(image,vec3(0.0));
     }
     if(markedColour.a<=0.5){
-        completedScene=vec4(max(image,vec3(0.0)),1.0);return;
+        return max(image,vec3(0.0));
     }
     // Reject underwater/non-water pixels before fetching interface metadata.
-    vec4 markedNormal=texture(colortex1,rasterUV),markedDepth=texture(colortex2,rasterUV);
-    float opaqueDepth=texture(depthtex1,rasterUV).r;
-    vec3 opaqueView=positionFromDepth(rasterUV,opaqueDepth);
+    vec4 markedNormal=texture(colortex1,screen),markedDepth=texture(colortex2,screen);
+    float opaqueDepth=texture(depthtex1,screen).r;
+    vec3 opaqueView=positionFromDepth(screen,opaqueDepth);
     float waterSky=clamp(float(eyeBrightnessSmooth.y)/240.0,0.0,1.0);
     float waterLamp=clamp(float(eyeBrightnessSmooth.x)/240.0,0.0,1.0);
     vec3 waterTint=biomeWaterTint;
     if(markedColour.a>0.5&&markedNormal.a>0.5&&markedDepth.a>0.5&&markedDepth.x>0.0){
-        vec3 viewRay=positionFromDepth(rasterUV,0.5);
+        vec3 viewRay=positionFromDepth(screen,0.5);
         vec3 waterView=viewRay*(markedDepth.x/max(-viewRay.z,0.00001));waterSky=markedDepth.y;
-        vec4 opticalData=texture(colortex8,rasterUV);
+        vec4 opticalData=texture(colortex8,screen);
 #if WATER_STYLE == 0
         waterTint=opticalData.rgb;waterLamp=opticalData.a;
 #endif
@@ -1277,7 +1365,7 @@ void main(){
         vec3 reflectedRay=boundary.reflected;
         vec3 reflectedWorld=mat3(gbufferModelViewInverse)*reflectedRay;
         vec3 fallback=reflectedEnvironment(reflectedWorld)*mix(0.03,1.0,smoothstep(0.04,0.8,waterSky));
-        vec4 traced=readWaterReflection(rasterUV,markedNormal.xyz,markedDepth.x);
+        vec4 traced=readWaterReflection(screen,markedNormal.xyz,markedDepth.x);
         vec3 reflected=mix(fallback,traced.rgb,traced.a);
         float thickness=opaqueDepth<0.999999?length(opaqueView-waterView):24.0;
         // v1.3.1 screen-space water refraction, with the original shoreline guard.
@@ -1285,7 +1373,7 @@ void main(){
 #if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
         hint=previousOpticalHint(colortex18,ivec2(gl_FragCoord.xy));
 #endif
-        vec2 shifted=legacyWaterRefractionUV(rasterUV,nView,faceView,thickness,markedDepth.x,hint,rejected);
+        vec2 shifted=legacyWaterRefractionUV(screen,nView,faceView,thickness,markedDepth.x,hint,rejected);
 #if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
         refractionHint=nextOpticalHint(rejected);
 #endif
@@ -1334,7 +1422,24 @@ void main(){
         // Native atlas colour/alpha is composed at full resolution in resolve,
         // so lower-resolution optics never blur the vanilla water texture.
     }
-    completedScene=vec4(max(image,vec3(0.0)),1.0);
+    return max(image,vec3(0.0));
+}
+#endif
+
+// END INCLUDE /core/water-optics.glsl
+
+in vec2 rasterUV;
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+/* RENDERTARGETS: 12,18 */
+layout(location=1)out vec2 refractionHint;
+#else
+/* RENDERTARGETS: 12 */
+#endif
+layout(location=0)out vec4 completedScene;
+void main(){vec2 hint;completedScene=vec4(computeWaterOptics(rasterUV,hint),1.0);
+#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+refractionHint=hint;
+#endif
 }
 
 // END INCLUDE /core/lake.frag.glsl

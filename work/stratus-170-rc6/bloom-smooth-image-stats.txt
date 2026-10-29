@@ -1,0 +1,2 @@
+work/stratus-170-rc6/screenshots/bloom-smooth-small.png ROI16_mean=141.78515625 max=215 ROI24_mean=40.72769953 max=193 ROI40_mean=19.49210904 max=37 ROI64_mean=51.33848839 max=201
+work/stratus-170-rc6/screenshots/bloom-smooth-wide.png ROI16_mean=132.06022135 max=190 ROI24_mean=52.74478873 max=182 ROI40_mean=32.36284758 max=49 ROI64_mean=55.00032219 max=200

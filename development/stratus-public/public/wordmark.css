@@ -1,3 +1,4 @@
-/* Original typography and layout, with aligned layers retaining the deeper extrusion. */
-body.stratus-immersive .wordmark-depth i{font-style:normal;font-weight:500;letter-spacing:inherit;color:var(--layer-color);transform:translate3d(calc(var(--layer)*.5px),calc(var(--layer)*.7px),calc(var(--layer)*-3px));backface-visibility:hidden}
-@media(max-width:650px){body.stratus-immersive .wordmark-depth i{transform:translate3d(calc(var(--layer)*.3px),calc(var(--layer)*.4px),calc(var(--layer)*-2px))}}
+/* One rear face keeps the wordmark straight with a restrained, visible depth. */
+body.stratus-immersive .wordmark-depth i{font-style:normal;font-weight:500;letter-spacing:inherit;color:var(--layer-color);transform:translate3d(3px,5px,-12px);backface-visibility:hidden}
+body.stratus-immersive .wordmark-depth b{color:#dfebd9;background:none}
+@media(max-width:650px){body.stratus-immersive .wordmark-depth i{transform:translate3d(2px,3.5px,-8px)}}

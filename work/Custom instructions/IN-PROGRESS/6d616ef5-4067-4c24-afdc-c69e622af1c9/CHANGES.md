@@ -1,0 +1,14 @@
+# Stratus — changes for the next coding pass
+
+Put only the changes you want worked on now under **Pending changes**. `TASK.md` is the complete shader target and remains in force for everything else. A saved file does not start work; tell the coding chat **“Apply the pending changes.”** After implementation and verification, move completed requests to [COMPLETED-CHANGES.md](COMPLETED-CHANGES.md) with the release/evidence reference. If none remain pending, leave **“No pending changes.”** Partial or unverified work stays pending. Studio run actions save the submitted brief as a separate `IN-PROGRESS/<request-id>/CHANGES.md` batch and clear this pending section for your next requests. The coder works on that saved batch; queued work is not completed work.
+
+## Pending changes
+
+- [ ] Finish restoration performance acceptance on the **final rc7 ZIP**: matched focused active-game baseline/restored repeats and a valid actual1.3.1 reference sample, recording options/algorithm differences honestly. Keep resolution, camera, weather, quality and441-column/zero-mesh gates matched where comparable; do not substitute background GPU timings. Development rc6 pair30.5145→48.5922FPS is accepted but predates final bloom fixes; reverse baseline/original1.3.1 samples lost focus and are invalid. Final repeat and approximately60FPS target remain unverified after the Mac locked. Resume only when actual focus is available; no repeated blocked sampling.
+- [ ] Complete the frozen delta’s **all-reflections/refractions temporal optimisation** target. Current Detailed geometry/shoreline hints remain optional/default Off and do not satisfy full coverage or a measured net gain. Classic restoration is complete, but does not implement full temporal reuse. Preserve sharp current colour, correct occlusion, all controls/selected quality, fallback and motion/disocclusion acceptance. Broader live motion/glass/waterline gates remain unverified; earlier batches retain their own unfinished work.
+
+## Reconciliation and evidence
+
+- Verified classic reflection implementation/diagnosis, Classic wet sheen, independent usable bloom/radius, control/migration/package/load/menu/finite visual checks and cleanup moved to `../../COMPLETED-CHANGES.md` under **Stratus1.7.0-rc7 / batch6d616ef5**, with `../../CHANGE-LOG.md` release evidence. No completed checked items remain here.
+- Final release: `outputs/Stratus-1.7.0-rc7.zip`, selected/enabled in Main;70 controls, prior68 defaults/ranges/preset assignments retained. Evidence for this batch remains in `work/stratus-170-rc6/`; rc6 intermediate archive was preserved without overwrite.
+- Shared next CHANGES and immutable TASK/.bridge snapshots are unchanged. Shared TASK had no newer conflict at reconciliation; only approved implemented designs/evidence were merged. Queueing or ending this turn does not complete either pending item.

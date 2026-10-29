@@ -30,6 +30,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define MIST_DETAIL 2 //  [1 2 3]
 #define REFLECT_LEVEL 1.00 //  [0.00 0.40 0.60 0.85 1.00]
 #define REFLECTION_MODE 0 //  [0 1 2]
+#define REFLECTION_TRACE 0 //  [0 1]
 #define REFLECT_RANGE 120.0 //  [24.0 48.0 64.0 88.0 120.0 160.0 224.0 320.0]
 #define WATER_VISIBILITY 2.20 //  [0.05 0.10 0.20 0.35 0.50 0.70 0.90 1.10 1.30 1.70 2.20 3.00 4.00 6.00 8.00 12.00 16.00]
 #define WATER_EXTINCTION 0.90 //  [0.10 0.20 0.45 0.65 0.90 1.15 1.40 2.00 3.00]
@@ -38,6 +39,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define RIPPLE_RATE 1.00 //  [0.00 0.10 0.20 0.45 0.70 1.00 1.50 2.00 3.00]
 #define FACE_SHADING 1.00 //  [0.00 0.15 0.25 0.35 0.50 0.70 0.85 1.00 1.25 1.50 2.00]
 #define WET_DARKENING 1.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00 2.50]
+#define WET_FILM_STYLE 0 //  [0 1]
 #define WET_SHEEN 0.85 //  [0.00 0.15 0.35 0.65 0.85 1.00 1.35 1.70 2.00]
 #define BLOOM_STRENGTH 0.18 //  [0.00 0.03 0.06 0.12 0.18 0.25 0.35 0.50 0.75 1.00]
 #define BLOOM_RADIUS 3.00 //  [0.25 0.50 1.00 1.50 2.00 3.00 4.00 6.00 8.00 12.00]
@@ -67,6 +69,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.15 0.30 0.45 0.60 0.80 1.00
 #define TEMPORAL_ATMOSPHERE 1 //  [0 1]
 #define TEMPORAL_OPTICS 0 //  [0 1]
 #define ORIGINAL_DAMPNESS 0.00 //  [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
+#define WATER_RENDERER 0 //  [0 1]
 #define WATER_RENDER_QUALITY 1 //  [0 1 2]
 #define CLOUD_DENSITY 1.00 //  [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
 #define CLOUD_DETAIL 1.00 //  [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
@@ -167,7 +170,10 @@ vec3 brightPixels(vec2 coordinate){
     vec3 colour=max(texture(colortex3,uv).rgb,vec3(0.0));
     float brightness=dot(colour,vec3(0.2126,0.7152,0.0722));
     vec4 metadata=texture(colortex0,uv);
-    float emission=metadata.a>0.5?0.0:clamp(metadata.g,0.0,1.0);
+    // The native lighting path has no artistic HDR emission boost. Treat its
+    // existing fractional emissive metadata as coverage, not a raised threshold
+    // that can reject the same native emitter's radiance. Ordinary pixels stay0.
+    float emission=metadata.a>0.5?0.0:smoothstep(0.0,0.20,clamp(metadata.g,0.0,1.0));
     float threshold=mix(2.2,0.22,emission);
     if(texture(depthtex0,uv).r>=0.999999)threshold=min(threshold,0.72);
     float knee=clamp(brightness-threshold+0.20,0.0,0.40);

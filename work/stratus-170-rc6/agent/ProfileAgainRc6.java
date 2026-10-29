@@ -1,0 +1,4 @@
+import java.lang.instrument.Instrumentation;import java.lang.reflect.*;import java.util.*;
+public class ProfileAgainRc6{
+ public static void agentmain(String dir,Instrumentation ins)throws Exception{ClassLoader cl=null;for(Class<?> c:ins.getAllLoadedClasses())if(c.getName().equals("net.minecraft.class_310")){cl=c.getClassLoader();break;}Class<?> hook=cl.loadClass("GpuProfileHookRc6");for(String name:new String[]{"results","pending"}){Field f=hook.getDeclaredField(name);f.setAccessible(true);Object value=f.get(null);if(value instanceof Map<?,?> map)map.clear();else if(value instanceof Collection<?> c){if(!c.isEmpty())throw new IllegalStateException("Unfinished GPU query cleanup");}}Class.forName("GpuProfileAgentRc6").getMethod("agentmain",String.class,Instrumentation.class).invoke(null,dir,ins);}
+}

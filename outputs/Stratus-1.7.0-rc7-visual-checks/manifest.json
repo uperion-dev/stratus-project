@@ -1,0 +1,82 @@
+[
+  {
+    "file": "rc7-release-river.png",
+    "sha256": "0528202a14c1377fd613c2ef162a31b08d863235eb13b80b06b022fcad112345",
+    "caption": "Exact installed release, saved user tuning. Current sky, water composition and controls retained. Finite static review, not final FPS acceptance."
+  },
+  {
+    "file": "river-before.png",
+    "sha256": "aa9bf31fa037162929652b29b5dbd87947f84bc907f192fca9fa837b4d4ff58d",
+    "caption": "Restoration baseline. Earlier static capture; do not infer FPS from it."
+  },
+  {
+    "file": "river-restored.png",
+    "sha256": "f9a604c2eb97331554b9c4144092165821fe46ee05236b11168e720c582afb8d",
+    "caption": "Classic reflection and wet style before final bloom corrections."
+  },
+  {
+    "file": "river-131.png",
+    "sha256": "318d06a602489635021c77f2117eb2ba7362295c105d71ad232e9f032254da6f",
+    "caption": "Historical visual reference with its own options/sky/half-resolution reflection implementation. Not a matched-quality FPS comparison."
+  },
+  {
+    "file": "panels-before-focused.png",
+    "sha256": "4e2fda89990c452377ad4634e259d90e4ce7f79dbae938b4a10b5768d87f32ee",
+    "caption": "Finite controlled fixture review; same current saved tuning as restoration panel."
+  },
+  {
+    "file": "panels-restored-focused.png",
+    "sha256": "f90ea8105c78e91468b63094747442ee9d7f0b56f06b1a78c7691220fde04e93",
+    "caption": "Restored dielectric sky film/GGX sun lobe, common material roughness and separate optional absorption."
+  },
+  {
+    "file": "panels-131-focused.png",
+    "sha256": "33063e674d434208667b9ca996be88c5bd1bf30a9a035d227de7c5b135941a95",
+    "caption": "Historical wet-sheen character reference; old material-specific roughness/absorption and sky differ."
+  },
+  {
+    "file": "panels-dry-focused.png",
+    "sha256": "58bf1a8c395b7ef7771d2898a13edd45de40bd90417bc200383dd6034d1b3d9d",
+    "caption": "Film/sheens/optional dampness off. Native material differences remain."
+  },
+  {
+    "file": "bloom-native-zero.png",
+    "sha256": "719f331d95daba0b6c71a83042f8640882453a2adfa9b26d53e4ff8df513d8f5",
+    "caption": "Zero-output reference from v2; v3 changes only bloom sampling, so zero remains exact. Ordinary white materials are not emissive."
+  },
+  {
+    "file": "bloom-smooth-small.png",
+    "sha256": "0a491c9df7f4ae2770c458df61447253c1414402e04670943a88d857b3522a09",
+    "caption": "Actual native sea-lantern fixture. Fractional emission coverage repaired; tight visible halo."
+  },
+  {
+    "file": "bloom-smooth-wide.png",
+    "sha256": "cb18c3c97049640c191cdec8ae8a17b30bd8c7919df64e3c3f5209d29c4995b2",
+    "caption": "Same final shader code/scene, broader smooth halo. Bloom-only mip prefilter removes sparse-sampling boxes. Animated particles may vary."
+  },
+  {
+    "file": "rc7-menu-bloom.png",
+    "sha256": "3d42ebcf84639d653ba212e66528193d1fa2b9462cbcbc0e956d298253da34be",
+    "caption": "Actual radius/strength menu access, full saved ranges retained. Bloom works in vanilla lighting."
+  },
+  {
+    "file": "rc7-menu-reflections.png",
+    "sha256": "ea0b289fa36987d60a5f372143010a14fbe79a0084a17892435d1efd639888a5",
+    "caption": "Classic 1.3.1 and Detailed selectable independently of reflection mode, resolution and range."
+  },
+  {
+    "file": "rc7-menu-materials.png",
+    "sha256": "b855117b9b54ca1801d8de549049bb680f59798a81db9096d38069bd2824cbea",
+    "caption": "Classic/current wet style, weather mode, film, sheen, Original dampness and retired saved control retained."
+  },
+  {
+    "file": "fps-before-a.png",
+    "sha256": "92ea12c25056adcafe23284274b3cdf814225c591c6329b3d534a65f24988b0e",
+    "caption": "20-second accepted sample, 1440 \u00d7 842, stable 441-column/zero-mesh gates, no focus/limiter violations."
+  },
+  {
+    "file": "fps-restored-a.png",
+    "sha256": "bb75cf217271aa98fe4f621f42ac1d8851a851f4735cfc8571da3b2b33d11b30",
+    "caption": "Matched development pair (~59.2% higher), before final bloom corrections. Not final rc7 FPS acceptance; valid 1.3.1 FPS still missing."
+  }
+]

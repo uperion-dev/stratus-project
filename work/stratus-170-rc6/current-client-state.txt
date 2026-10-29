@@ -1,0 +1,9 @@
+position=4199.100010671402,161.8818928327729,4212.900746029675
+yaw=-475.74146
+pitch=6.03459
+hud=true
+pause=false
+flying=true
+screen=null
+worldTime=1000
+rainGradient=0.0

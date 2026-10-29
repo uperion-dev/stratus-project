@@ -4,6 +4,16 @@ Archive of completed requests and their release/evidence references. This is his
 
 ## Completed changes
 
+### Stratus1.7.0-rc7 — 27 October 2026 — batch6d616ef5 — verified restoration
+
+- [x] Actual1.3.1 source comparison and labelled Classic reflection restoration, retaining Detailed/current selected resolution/range/quality controls. Added expensive geometry/reflected-mist work identified; finite trace parity and current river review pass. Final FPS acceptance is separately pending.
+- [x] Classic dielectric/GGX wet character restored with common material roughness, independent absorption, weather/zero/occlusion guards and selectable Current style.1152 material/96 wet cases and finite actual panel review pass.
+- [x] Independent native-emitter bloom in vanilla lighting, fractional coverage repair, true zero and meaningful smooth radius. Regression reproduced before fixing; targeted GPU and final actual small/wide/UI views pass, ordinary white bloom0.
+- [x] Finalrc7 package/install/source equality and actual load,70 controls/all four profiles,33 installer checks, saved68 values/controls/presets preserved. Fixture restored, helpers stopped,30 owned QA files removed. Current sky/water modules preserved. Exact finalrc7 left selected/enabled.
+
+[Release](../../outputs/Stratus-1.7.0-rc7.zip) · [Evidence/limits](CHANGE-LOG.md#27-october-2026--stratus-170-rc7--classic-restoration-and-independent-bloom) · [Actual visual checks](../../outputs/Stratus-1.7.0-rc7-visual-checks/index.html) · [Final audit](../../work/stratus-170-rc6/final-audit.json). Only verified parts are archived. Development30.51→48.59FPS pair predates final bloom fixes; final FPS/valid1.3.1 comparison and full temporal optimisation stay in [active batch](IN-PROGRESS/6d616ef5-4067-4c24-afdc-c69e622af1c9/CHANGES.md).
+
+
 ### Stratus1.7.0-rc5 — 26 October 2026 — batchc3ec7834 — focused comparison only
 
 - [x] Requested focused active-game comparison completed: six primary20-second samples,1440×842, Apple M1, actual focus/throttling/activity and loaded-column/mesh gates recorded. Two matched manual pairs (~31.4Off/30.4On and30.9Off/30.0On) and a separate strict Reference pair (50.24Off/49.91On) show no supported gain. All quality choices preserved; no60FPS acceptance. Nine finite river captures inspected. Original shader/config/options/HUD/pause restored, newer camera angle preserved and helpers/owned QA files cleaned up.

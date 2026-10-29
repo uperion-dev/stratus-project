@@ -8,7 +8,7 @@
  journey.innerHTML=`<div class="spatial-sticky"><div class="spatial-heading"><h2 id="spatial-title">Water, light<br>&amp; <em>atmosphere.</em></h2></div><div class="layer-stage" aria-hidden="true"><div class="layer-world"><div class="world-layer layer-sky"><span>03 / ATMOSPHERE</span></div><div class="world-layer layer-light"><span>02 / LIGHT</span><i></i></div><div class="world-layer layer-water"><span>01 / WATER</span></div><div class="layer-axis"></div></div></div></div><div class="spatial-steps"><article><span>01 / WATER</span><h3>Depth you can feel.</h3><p>Reflections meet refraction. The world above connects with the riverbed below.</p></article><article><span>02 / LIGHT</span><h3>A familiar sun.<br> A different mood.</h3><p>Square light, warm horizons and the character of the original world.</p></article><article><span>03 / ATMOSPHERE</span><h3>The space<br> between everything.</h3><p>Clouds, high wisps and mist bring distance and weather into the picture.</p></article></div>`;
  journey.querySelector('.spatial-sticky').append(journey.querySelector('.spatial-steps'));
  const wordmark=document.querySelector('.atmosphere-wordmark');
- if(wordmark){wordmark.dataset.effect='5';wordmark.removeAttribute('aria-hidden');wordmark.setAttribute('role','img');wordmark.setAttribute('aria-label','STRATUS');wordmark.innerHTML=`<span class="wordmark-depth" aria-hidden="true">${Array.from({length:8},(_,i)=>`<i style="--layer:${8-i};--layer-color:${['#153d2a','#1b4832','#23563c','#2f6749','#427a59','#5a906c','#74a783','#93bea0'][i]}">STRATUS</i>`).join('')}<b>STRATUS</b></span><span class="wordmark-arrow" aria-hidden="true">↘</span>`;wordmark.after(journey);}
+ if(wordmark){wordmark.dataset.effect='5';wordmark.removeAttribute('aria-hidden');wordmark.setAttribute('role','img');wordmark.setAttribute('aria-label','STRATUS');wordmark.innerHTML=`<span class="wordmark-depth" aria-hidden="true"><i style="--layer:1;--layer-color:#57776a">STRATUS</i><b>STRATUS</b></span><span class="wordmark-arrow" aria-hidden="true">↘</span>`;wordmark.after(journey);}
  // Effect 4: every release image lives in an accessible depth carousel.
  const gallery=document.querySelector('#home-gallery');
  let selected=0;
@@ -30,14 +30,13 @@
  const motion=window.StratusMotion;let active=false,pointer=null;
  const enabled=()=>!reduced.matches&&!body.classList.contains('effects-paused');
  const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
- function read(state){if(state.hidden||state.navBusy||hero.closest('[data-view][hidden]')||document.querySelector('.topbar.nav-animating'))return null;const r=journey.getBoundingClientRect(),box=wordmark?.getBoundingClientRect();let tilt=null;
+ function read(state){if(state.hidden||state.navBusy||hero.closest('[data-view][hidden]')||document.querySelector('.topbar.nav-animating'))return null;const r=journey.getBoundingClientRect();let tilt=null;
   if(pointer&&pointer.card.isConnected&&enabled()){const b=pointer.card.getBoundingClientRect();tilt={card:pointer.card,x:(pointer.x-b.left)/b.width,y:(pointer.y-b.top)/b.height};}pointer=null;
-  return {progress:clamp(-r.top/Math.max(1,r.height-state.h)),travel:box?clamp((state.h-box.top)/(state.h+box.height)):.5,tilt};
+  return {progress:clamp(-r.top/Math.max(1,r.height-state.h)),tilt};
  }
- function paint(data){if(!data)return;const {progress,travel,tilt}=data;active=enabled();body.classList.toggle('spatial-paused',!active);
+ function paint(data){if(!data)return;const {progress,tilt}=data;active=enabled();body.classList.toggle('spatial-paused',!active);
   motion.style(journey,'--unfold',active?progress:0.5);
   motion.style(journey,'--journey-turn',`${active?(progress-.5)*24:0}deg`);
-  if(wordmark)motion.style(wordmark,'--word-turn',`${active?(travel-.5)*20:0}deg`);
   if(tilt){motion.style(tilt.card,'--tilt-x',`${(tilt.x-.5)*7}deg`);motion.style(tilt.card,'--tilt-y',`${(tilt.y-.5)*-7}deg`);motion.style(tilt.card,'--shine-x',`${tilt.x*100}%`);}
   const part=Math.min(2,Math.floor(progress*3));journey.querySelectorAll('.spatial-steps article').forEach((el,i)=>el.classList.toggle('step-active',part===i));
  }

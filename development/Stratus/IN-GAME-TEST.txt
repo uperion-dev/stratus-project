@@ -1,18 +1,19 @@
-Compare final candidate TEMPORAL_OPTICS=0/1 and rc4 at identical saved quality,
-framebuffer/render distance, camera, time and weather. Verify selected ZIP,
-68 effective controls and all four actual Iris profiles. Confirm native RG16F
-history targets and adjacent-frame stamps, then test water waves/shorelines,
-waterfall, moving camera/disocclusion, reflected moving objects, glass/stacked
-transparency, underwater exit, zero optics, reload and viewport changes.
-Do not infer temporal hits from a slow/background screenshot; hints reject
-frames over 50ms. Inspect representative matched frames and motion.
+Main/Stratus Terrain Lab:compare rc5 and final rc6 at the exact latest saved
+settings, framebuffer, distance, camera, time and weather. Record actual70-option
+Iris state and all four profiles. Check Classic and Detailed reflection modes,
+water depth/shore/glass/particles/underside and current sky. Compare original
+1.3.1 separately with its saved tuning; do not label it constant-quality.
 
-User has resumed focused FPS testing. Require real focus, active Dynamic FPS
-and Minecraft inactivity limiter state, stable five-second loaded-column and
-mesh gates and a fresh gate at sampling start. Compare repeated matched On/
-Off samples with frame-time distributions, and Reference separately from the
-user's manual full scenery reflections. Optional bounded activity timer must
-stop afterwards. No quality/resolution/draw-distance reduction for speed.
-Restore exact original settings/menu/camera only if no newer navigation was
-made; preserve newer user changes. Stop helpers and remove only unchanged QA
-files owned by this pass. Keep unverified requests in the active batch.
+Compare Classic/Current/dry wet styles on matched materials and grazing/top
+faces, nonporous/porous surfaces, rain/caves and zero controls. Optional Original
+dampness remains independent. Bloom zero/small/wide:verify visible halo radius
+around emitters and clean white blocks with vanilla lighting selected. Confirm
+all sliders in the actual Bloom/Reflection/Materials UI and retained ranges.
+
+Focused FPS only:real focus, active DynamicFPS/noAFK limit, matched user quality,
+fresh stable5-second loaded-column/zero-mesh gate and continued camera/focus/
+size/loading guards. Bound activity resets to test duration, stop afterwards.
+Never improve benchmark numbers by silently lowering quality. Restore exact
+snapshot fixture blocks and original time/weather/camera/HUD/pause/flight,
+preserve newer user edits, and remove only unchanged owned QA files. Final
+release selection and remaining acceptance must be explicit in external receipt.

@@ -5,7 +5,7 @@ This workflow reduces repeated AI work. Existing shader scope, quality, controls
 ## Choose the smallest appropriate action
 
 - **Run pending changes** for an ordinary implementation batch. Combine closely related requests in one batch to share setup and verification.
-- **Stage & send** when TASK.md requirements were added, modified or removed. Stage and implement in the same coding pass; a separate AI refinement pass is only useful for an ambiguous brief.
+- **Stage & send** when TASK.md requirements were added, modified or removed. Stage and implement in the same coding pass. Preserve the submitted CHANGES.md wording; do not add an automatic refinement pass. Ask the user about ambiguities that materially affect implementation.
 - **Run Changes + TASK.md** only for an explicitly wanted full target review. Do not expand routine changes into a whole-project audit.
 - Saving, delivery, copying files, release feeds, feedback mail and GitHub sync are handled by code; do not ask a model to repeat those jobs.
 

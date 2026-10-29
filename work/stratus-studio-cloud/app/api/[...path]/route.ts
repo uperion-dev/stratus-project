@@ -1,7 +1,7 @@
 import { env } from 'cloudflare:workers';
 import seed from '../../../lib/seed.json';
 export const dynamic='force-dynamic';
-const chat='Coding Stratus (2)';
+const chat='Coding Stratus (Old)';
 const keys=['spec','changes'];
 const runActions=['run','stage_run','run_both'];
 function emptyPending(text:string){const headings=[...text.matchAll(/^##[ \t]+Pending changes[ \t]*\r?$/gmi)];if(headings.length!==1)return null;const heading=headings[0],start=heading.index!+heading[0].length;const next=text.slice(start).search(/^#{1,2}[ \t]+/m);return text.slice(0,start)+'\n\nNo pending changes.\n\n'+(next<0?'':text.slice(start+next));}
@@ -47,7 +47,7 @@ async function handle(request:Request){
   const detached=runActions.includes(body.operation);
   const cleared=detached?emptyPending(all.changes.text):null;
   if(detached&&cleared===null)return json({error:'CHANGES.md needs exactly one ## Pending changes heading before sending a run.'},400);
-  const created=new Date().toISOString();const detail=detached?'Saved as a separate batch. Pending changes is ready for new work. Coding Stratus (2) will receive this batch when your Mac is online.':'Saved in the cloud queue. Coding Stratus (2) will receive this when your Mac is online and synced.';
+  const created=new Date().toISOString();const detail=detached?'Saved as a separate batch. Pending changes is ready for new work. Coding Stratus (Old) will receive this batch when your Mac is online.':'Saved in the cloud queue. Coding Stratus (Old) will receive this when your Mac is online and synced.';
   const instructions=body.instructions;
   // One transaction stores the job and immutable snapshots before freeing the editor.
   // Every write is conditional on the inserted job and the original revisions.

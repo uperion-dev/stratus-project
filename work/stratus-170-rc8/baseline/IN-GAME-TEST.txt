@@ -1,0 +1,19 @@
+Main/Stratus Terrain Lab:compare rc5 and final rc6 at the exact latest saved
+settings, framebuffer, distance, camera, time and weather. Record actual70-option
+Iris state and all four profiles. Check Classic and Detailed reflection modes,
+water depth/shore/glass/particles/underside and current sky. Compare original
+1.3.1 separately with its saved tuning; do not label it constant-quality.
+
+Compare Classic/Current/dry wet styles on matched materials and grazing/top
+faces, nonporous/porous surfaces, rain/caves and zero controls. Optional Original
+dampness remains independent. Bloom zero/small/wide:verify visible halo radius
+around emitters and clean white blocks with vanilla lighting selected. Confirm
+all sliders in the actual Bloom/Reflection/Materials UI and retained ranges.
+
+Focused FPS only:real focus, active DynamicFPS/noAFK limit, matched user quality,
+fresh stable5-second loaded-column/zero-mesh gate and continued camera/focus/
+size/loading guards. Bound activity resets to test duration, stop afterwards.
+Never improve benchmark numbers by silently lowering quality. Restore exact
+snapshot fixture blocks and original time/weather/camera/HUD/pause/flight,
+preserve newer user edits, and remove only unchanged owned QA files. Final
+release selection and remaining acceptance must be explicit in external receipt.

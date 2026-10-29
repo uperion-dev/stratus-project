@@ -1,0 +1,41 @@
+{
+  "accepted_matched_development_pair": {
+    "before_fps": 30.5145,
+    "restored_fps": 48.5922,
+    "relative_change_percent": 59.24298284422158,
+    "before_median_ms": 32.7614,
+    "restored_median_ms": 20.476,
+    "before_p95_ms": 36.745,
+    "restored_p95_ms": 24.5187,
+    "framebuffer": [
+      1440,
+      842
+    ],
+    "seconds_each": 20,
+    "camera": [
+      165.0043,
+      64.0,
+      4.7953,
+      -33.681610107421875,
+      7.594681262969971
+    ],
+    "limiter": "NONE, cap70, focus/DynamicFPS FOCUSED/idlefalse checked each sampling poll; bounded activity resets",
+    "quality": "Same captured68 manual settings; new Classic renderer/wet style and restored bloom are intentional requested behaviour changes; not identical algorithm quality to Detailed",
+    "source": "rc6 development code before final native bloom/mip corrections",
+    "scope": "Not finalrc7 whole-game FPS acceptance"
+  },
+  "valid_unpaired_development_repeat_fps": 45.4638,
+  "rejected_reverse_baseline": "47 unfocused polls; invalid, not used for improvement",
+  "original131_FPS": "No accepted sample; unfocused start",
+  "final_rc7_FPS": "pending after Mac locked; no background FPS accepted",
+  "saved_VSync": true,
+  "DynamicFPS_reported_enableVsync": false,
+  "effective_swap_interval_verified": false,
+  "game_cap": 70,
+  "render_distance": 12,
+  "simulation_distance": 8,
+  "world_time": 1000,
+  "rain": 0,
+  "GPU": "Apple M1 / OpenGL4.1 Metal91.7",
+  "diagnostic_queries": "Five background composite draws only, not FPS; reflection median14.81ms before/1.23ms restored; sky about4.2ms both. Some other passes zero; limited reliability. Transformer removed, queries deleted, helper inert."
+}

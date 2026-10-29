@@ -1,0 +1,1 @@
+Queries deleted; profiler disabled; no settings/shader-quality changes. Helper class definition remains inert until normal JVM exit.

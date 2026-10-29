@@ -11,11 +11,11 @@ uniform sampler2D colortex0;
 uniform sampler2D colortex1;
 uniform sampler2D colortex2;
 #include "/core/temporal-optics.glsl"
-#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0 && REFLECTION_TRACE == 1
 uniform sampler2D colortex16;
 #endif
 in vec2 rasterUV;
-#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0 && REFLECTION_TRACE == 1
 /* RENDERTARGETS: 7,16 */
 layout(location=1)out vec2 reflectionHint;
 #else
@@ -24,7 +24,7 @@ layout(location=1)out vec2 reflectionHint;
 layout(location=0)out vec4 waterReflection;
 void main(){
     waterReflection=vec4(0.0);
-#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0 && REFLECTION_TRACE == 1
     reflectionHint=nextOpticalHint(0.0);
 #endif
     if(isEyeInWater==1)return;
@@ -39,18 +39,20 @@ void main(){
     WaterBoundary boundary=waterBoundary(view,n,false);
     float hitDistance;
     float hint=0.0;
-#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0 && REFLECTION_TRACE == 1
     hint=previousOpticalHint(colortex16,ivec2(gl_FragCoord.xy));
 #endif
     vec4 traced=traceOpticalSceneHint(view+n*0.015,boundary.reflected,n,1,REFLECTION_MODE,min(REFLECT_RANGE,max(16.0,far)),hitDistance,hint);
-#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0
+#if TEMPORAL_OPTICS == 1 && REFLECTION_MODE != 0 && REFLECTION_TRACE == 1
     reflectionHint=nextOpticalHint(traced.a>0.0?hitDistance:0.0);
 #endif
+#if REFLECTION_TRACE == 1
     if(traced.a>0.0){
         vec3 reflectedWorld=mat3(gbufferModelViewInverse)*boundary.reflected;
         vec4 fog=volumetricMist(playerFromView(view)+cameraPosition,reflectedWorld,hitDistance,depth.y,20);
         traced.rgb=mix(traced.rgb,fog.rgb,fog.a);
     }
+#endif
     waterReflection=vec4(traced.rgb*traced.a,traced.a);
 #endif
 }

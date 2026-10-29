@@ -11,7 +11,10 @@ vec3 brightPixels(vec2 coordinate){
     vec3 colour=max(texture(colortex3,uv).rgb,vec3(0.0));
     float brightness=dot(colour,vec3(0.2126,0.7152,0.0722));
     vec4 metadata=texture(colortex0,uv);
-    float emission=metadata.a>0.5?0.0:clamp(metadata.g,0.0,1.0);
+    // The native lighting path has no artistic HDR emission boost. Treat its
+    // existing fractional emissive metadata as coverage, not a raised threshold
+    // that can reject the same native emitter's radiance. Ordinary pixels stay0.
+    float emission=metadata.a>0.5?0.0:smoothstep(0.0,0.20,clamp(metadata.g,0.0,1.0));
     float threshold=mix(2.2,0.22,emission);
     if(texture(depthtex0,uv).r>=0.999999)threshold=min(threshold,0.72);
     float knee=clamp(brightness-threshold+0.20,0.0,0.40);

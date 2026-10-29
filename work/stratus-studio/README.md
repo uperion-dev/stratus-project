@@ -27,12 +27,12 @@ Python 3.10 or later is needed. No npm install or internet connection is needed 
 
 These are the real project files, not exported copies. TASK.md describes the complete absolute shader target for a clean rebuild, including intended appearance, behaviour, construction and verification. CHANGES.md contains only the next relevant coding pass. In-game defaults and choice lists remain in shader source. Saving either file does not start work.
 
-## Coding Stratus (2) connection
+## Coding Stratus (Old) connection
 
-Use **Chat** in the editor toolbar or **Connect to chat** on the overview. Requests go to the existing **Coding Stratus (2)** chat using the installed Codex CLI and its existing sign-in.
+Use **Chat** in the editor toolbar or **Connect to chat** on the overview. Requests go to the existing **Coding Stratus (Old)** chat using the installed Codex CLI and its existing sign-in.
 
-- **Stage & send** in the editor toolbar opens **Stage and send for running**. This captures the saved TASK.md additions, edits and removals, asks Coding Stratus (2) to stage them in CHANGES.md, then run the pending work. A frozen target, change brief and diff are kept with the receipt. The comparison starts from the target when this action was installed and advances on successful queue delivery; delivery does not mean implementation is finished. Existing pending CHANGES.md items remain included.
-- **Stage changes:** review and refine the saved CHANGES.md brief, without shader implementation.
+- **Stage & send** in the editor toolbar opens **Stage and send for running**. This captures the saved TASK.md additions, edits and removals, asks Coding Stratus (Old) to stage them in CHANGES.md, then run the pending work. A frozen target, change brief and diff are kept with the receipt. The comparison starts from the target when this action was installed and advances on successful queue delivery; delivery does not mean implementation is finished. Existing pending CHANGES.md items remain included.
+- **Stage changes:** review the saved CHANGES.md brief and report feedback, without rewriting it or implementing shader changes.
 - **Run Changes + TASK.md:** save both editors, then run pending incremental changes and audit the full target for unfinished requirements. Stage concrete gaps before implementing, preserve working features and newer edits, and keep unverified work pending. This is broader than Stage & send, which stages only the specification delta.
 - **Run pending changes:** explicitly request implementation of pending CHANGES.md items in that chat. The full TASK.md target remains in force; completed changes must be reconciled into it and evidence recorded in CHANGE-LOG.md.
 - **Related shader work:** send a specific request with relevant project-file references directly to the coding chat; unrelated pending items do not start automatically.

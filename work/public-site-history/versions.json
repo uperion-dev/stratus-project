@@ -280,6 +280,11 @@
       "commit": "9098ac5213529c0f800ae9d29b9dd5c6c9538a0d",
       "archive": "9098ac5213529c0f800ae9d29b9dd5c6c9538a0d.zip",
       "sha256": "b44d56ecb57d53f22557ae181c701dca63379a9c62f33cb25ac1f0d01cd2bb70"
+    },
+    {
+      "commit": "defb22bbf50e4d4d3c888c436d89f795e116ee69",
+      "archive": "defb22bbf50e4d4d3c888c436d89f795e116ee69.zip",
+      "sha256": "6c89d09cdcdd57bbf285f3ad7208200607c4752397b74f07255661b6763b1256"
     }
   ],
   "privacy_filtered": true,
