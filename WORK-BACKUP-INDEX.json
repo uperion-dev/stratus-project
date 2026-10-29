@@ -9139,9 +9139,9 @@
       "bytes": 15068
     },
     "work/stratus-main-qa/test.pid": {
-      "sha256": "cbaae07650a66b2e113f360d95b62eb552d55fb70deeca6691b0c2b5a541ee75",
+      "sha256": "c95ba46a2a2f99ae40796986b25560bf62d65b336379686ce92f4f757488a7d7",
       "tag": "project-work-snapshots",
-      "asset": "stratus-main-qa-e8c106da5298cb9a.zip",
+      "asset": "stratus-main-qa-8c8a2761c046456f.zip",
       "bytes": 5
     },
     "work/stratus-refine-1610/atmosphere-after-0.rgba32f": {
@@ -14375,6 +14375,30 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-brighter-upcoming-png-bd8343cc5fba0dbb.zip",
       "bytes": 36921
+    },
+    "outputs/Stratus-1.7.0-rc8.zip": {
+      "sha256": "10d60e7b3f4601ae29a74f760cc41c619c430c3df0b890acb250c7730690b7f0",
+      "tag": "project-work-snapshots",
+      "asset": "Stratus-1-7-0-rc8-dbd3fc28ed3c412b.zip",
+      "bytes": 7785867
+    },
+    "work/stratus-170-rc8/underwater/fog_probe": {
+      "sha256": "b110bf68162243e948435c8ad376e2c179bbf96151960540d6203b25ff3711c8",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-fed417d57dec5523.zip",
+      "bytes": 37144
+    },
+    "outputs/stratus-project-hub-home.png": {
+      "sha256": "6dd0de3e9d7c1536abd7255e5e01bf86bc7bd7fed21e5e4aa041ba4ef61afd11",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-project-hub-home-png-9cab61e73ac014bc.zip",
+      "bytes": 56188
+    },
+    "outputs/stratus-project-server.png": {
+      "sha256": "999aac36bd0ac3c13c653f755f673b9414dcbf164f6476ade4e899aef0bc1188",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-project-server-png-241d44b07a78e584.zip",
+      "bytes": 45539
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

@@ -35,14 +35,14 @@ body.stratus-immersive :is(.section-intro>p,.spec-section dd,.release-content li
 .scatter-0{left:var(--scatter-x)}.scatter-1{right:var(--scatter-x)}
 .blocks-visible>.block-scatter>.scattered-block{animation-play-state:running}
 body.effects-paused .scattered-block,body.spatial-paused .scattered-block{animation-play-state:paused}
-@media(max-width:800px){.scattered-block{width:38px;opacity:1}.scatter-0{left:-6px}.scatter-1{right:-6px}}
+@media(max-width:800px){.scattered-block{width:38px;opacity:1}.scatter-0{left:-18px}.scatter-1{right:-18px}}
 @media(prefers-reduced-motion:reduce){.scattered-block{animation:none;transform:rotate(var(--block-angle))}}
 @media(forced-colors:active){body.stratus-immersive :is(.section-intro h1,.home-heading h2,.water-story h2,.public-faq h2,.release-content h2,.spec-section h2,.upcoming-item h2,.shot-name h2,.workspace-card h3){background:none;color:CanvasText}.block-scatter{display:none}}
 
 .immersive-hero>.block-scatter .scatter-0{left:5%}.immersive-hero>.block-scatter .scatter-1{right:5%}
 @media(max-width:800px){.immersive-hero>.block-scatter .scattered-block{width:52px}.immersive-hero>.block-scatter .scatter-0{left:3%}.immersive-hero>.block-scatter .scatter-1{right:3%}}
 /* Content layering must not turn the full-page scatter into an empty flow row. */
-body.stratus-immersive main [data-view].scatter-scene>.block-scatter{position:absolute;inset:0;z-index:2}
+body.stratus-immersive main [data-view].scatter-scene>.block-scatter{position:absolute;inset:0;z-index:1}
 
 /* True cube geometry: front/right/top stay square and share the same Z depth. */
 .minecraft-block{display:block;aspect-ratio:1;height:auto;perspective:600px}

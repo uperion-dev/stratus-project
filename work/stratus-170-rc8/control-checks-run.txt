@@ -1,0 +1,21 @@
+{
+  "previous_controls": 70,
+  "current_controls": 71,
+  "previous_defaults_and_ranges_preserved": true,
+  "reachable_controls": 71,
+  "tooltips_present": true,
+  "all_four_original_preset_assignments_preserved": true,
+  "all_presets_native_water_default": true,
+  "block_tokens_preserved": 620,
+  "changed_shader_files": [
+    "shaders/core/diffuse.glsl",
+    "shaders/core/lake.frag.glsl",
+    "shaders/core/options.glsl",
+    "shaders/core/raster.vert.glsl",
+    "shaders/core/water-optics.glsl",
+    "shaders/core/water-resolve.frag.glsl",
+    "shaders/lang/en_us.lang",
+    "shaders/shaders.properties"
+  ],
+  "failures": 0
+}

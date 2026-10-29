@@ -498,7 +498,7 @@ vec3 formIrradiance(vec3 normal, float skyExposure) {
     vec3 physical = mix(vec3(indoor), sky, smoothstep(0.04, 0.85, skyExposure));
     // Separate controls: realistic=1/vanilla=1 reproduces the original
     // 1.3.1 form response; zero remains an exact component bypass.
-    vec3 realistic=mix(vec3(1.0),physical,REALISTIC_FACE_CONTRAST);
+    vec3 realistic=mix(vec3(1.0),physical,REALISTIC_FACE_CONTRAST*FACE_BLEND);
     vec3 irradiance=realistic*mix(1.0,vanilla,FACE_BLEND*VANILLA_FACE_CONTRAST);
     return mix(vec3(1.0),irradiance,FACE_SHADING);
 }

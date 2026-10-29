@@ -1,3 +1,6 @@
-CANCEL
-HUD show
-QUIT
+PACK Stratus-1.7.0-rc8.zip
+CAM 164.5 64.5 32.5 0 18
+FLY
+WAIT 20
+SHOT rc8-river-smoke
+DONE rc8-smoke-loaded

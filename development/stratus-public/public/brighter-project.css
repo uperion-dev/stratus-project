@@ -1,0 +1,13 @@
+/* Brighter forest-toned surfaces, while preserving contrast and the existing glass treatment. */
+body.stratus-immersive{--page:#172c24;background-color:#172c24;background-image:url('/assets/fine-grain.png'),linear-gradient(180deg,#446e5d 0%,#304f42 42%,#1b3026 100%);background-size:256px 256px,100% 100%;background-repeat:repeat,no-repeat}
+body.stratus-immersive .immersive-hero .hero-image{filter:brightness(1.12) saturate(1.03)!important}
+body.stratus-immersive .immersive-hero .hero-shade{background:linear-gradient(90deg,#10291d35,transparent 70%),radial-gradient(ellipse at 50% 48%,#10201835,transparent 60%)}
+body.stratus-immersive :is(.section-intro>p,.spec-section dd,.release-content li,.upcoming-item p,.faq-list p,.story-intro,.water-story dd){color:#d0ded1}
+body.stratus-immersive :is(.spec-section,.release,.upcoming-item,.feedback-form){background-color:#233e32a6}
+body.stratus-immersive :is(.release-evidence,.evidence-note,.roadmap-note,.spec-footnote p,.public-footer){color:#c0d3c2}
+@media(forced-colors:active){body.stratus-immersive :is(.section-intro>p,.spec-section dd,.release-content li,.upcoming-item p,.faq-list p,.story-intro,.water-story dd,.release-evidence,.evidence-note,.roadmap-note,.spec-footnote p,.public-footer){color:CanvasText}}
+
+/* Project introduction and server sections retain the established glass layout. */
+body.stratus-immersive .project-hero-intro{margin:0;color:#e3f0e2;font-size:clamp(14px,1.15vw,18px);font-weight:500;line-height:1.5;text-align:center;text-shadow:0 2px 12px #10291f99}
+body.stratus-immersive .home-heading p{max-width:48ch;color:#c8dbcd;line-height:1.7}
+body.stratus-immersive .server-view .spec-section p{color:#d0ded1;line-height:1.8;font-size:clamp(13px,1vw,15px);margin:0}

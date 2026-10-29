@@ -1,0 +1,450 @@
+--- before/shaders/core/diffuse.glsl
++++ after/shaders/core/diffuse.glsl
+@@ -17,26 +17,20 @@
+ vec3 formIrradiance(vec3 normal, float skyExposure) {
+     float vertical=normal.y>=0.0?1.0:0.5;
+     float vanilla=dot(normal*normal,vec3(0.6,vertical,0.8));
+-    float vanillaWeight=1.0,physicalWeight=0.0;
+-    float physical=1.0;
+-#if DIMENSION_TYPE == 0
+-    vec3 sun=broadLightDirection();
+-    float direct=daytimeWeight()*smoothstep(-0.04,0.16,sun.y)*(1.0-0.85*rainStrength);
+-    float facing=max(dot(normal,sun),0.0);
+-    float hemisphere=mix(0.38,0.78,normal.y*0.5+0.5);
+-    physical=hemisphere*(1.0-0.20*direct)+0.44*direct*facing;
+-    float exposure=smoothstep(0.08,0.85,skyExposure);
+-    vanillaWeight=1.0-0.35*exposure;physicalWeight=0.35*exposure;
+-#endif
+-    // Separate linear components preserve the exact old mixture at 1/1.
+-    // Each zero removes only that component; both zero produce unshaded faces.
+-    float contrast=(vanilla-1.0)*vanillaWeight*VANILLA_FACE_CONTRAST
+-                  +(physical-1.0)*physicalWeight*REALISTIC_FACE_CONTRAST;
+-    float irradiance=1.0+contrast;
+-    float strength=FACE_BLEND*FACE_SHADING;
+-    // Linear contrast keeps saved 2.0 settings readable instead of squaring
+-    // already-dark surfaces. Zero for either control is an exact bypass.
+-    return vec3(clamp(1.0+(irradiance-1.0)*strength,0.18,1.18));
++    float upperHemisphere = 0.5 + 0.5 * normal.y;
++    vec3 sky = mix(vec3(0.31, 0.295, 0.275), vec3(1.025, 1.0, 0.95), upperHemisphere);
++    vec3 skyKey=unitVector(broadLightDirection()+vec3(-0.20,0.0,0.13));
++    float directional = max(dot(normal, skyKey), 0.0);
++    sky += sunlightColour() * 0.23 * directional * daytimeWeight() * (1.0 - 0.65 * rainStrength);
++    sky /= 1.12;
++    // The lightmap has no point-light positions: retain broad indoor fill.
++    float indoor = 0.72 + 0.20 * max(normal.y, 0.0) - 0.12 * max(-normal.y, 0.0);
++    vec3 physical = mix(vec3(indoor), sky, smoothstep(0.04, 0.85, skyExposure));
++    // Separate controls: realistic=1/vanilla=1 reproduces the original
++    // 1.3.1 form response; zero remains an exact component bypass.
++    vec3 realistic=mix(vec3(1.0),physical,REALISTIC_FACE_CONTRAST*FACE_BLEND);
++    vec3 irradiance=realistic*mix(1.0,vanilla,FACE_BLEND*VANILLA_FACE_CONTRAST);
++    return mix(vec3(1.0),irradiance,FACE_SHADING);
+ }
+ // A surface film adds reflected highlights without changing the diffuse albedo.
+ // Absorption darkening/retained dampness was deliberately retired in 1.6.9.
+--- before/shaders/core/lake.frag.glsl
++++ after/shaders/core/lake.frag.glsl
+@@ -1,31 +1,4 @@
+-#include "/core/options.glsl"
+-#include "/core/frame.glsl"
+-#include "/core/ceiling.glsl"
+-#include "/core/air.glsl"
+-#include "/core/medium.glsl"
+-#include "/core/water-surface.glsl"
+-#include "/core/water-interface.glsl"
+-#include "/core/lake-normal.glsl"
+-#include "/core/environment.glsl"
+-#include "/core/volume.glsl"
+-#include "/core/water-path.glsl"
+-uniform sampler2D colortex13;
+-uniform sampler2D colortex8;
+-uniform sampler2D colortex4;
+-uniform sampler2D depthtex1;
+-uniform sampler2D colortex7;
+-uniform sampler2D colortex0;
+-uniform sampler2D colortex1;
+-uniform sampler2D colortex2;
+-uniform sampler2D colortex3;
+-uniform sampler2D depthtex0;
+-#include "/core/refraction.glsl"
+-#include "/core/scene-trace.glsl"
+-#include "/core/water-buffer.glsl"
+-#include "/core/temporal-optics.glsl"
+-#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+-uniform sampler2D colortex18;
+-#endif
++#include "/core/water-optics.glsl"
+ in vec2 rasterUV;
+ #if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+ /* RENDERTARGETS: 12,18 */
+@@ -34,98 +7,8 @@
+ /* RENDERTARGETS: 12 */
+ #endif
+ layout(location=0)out vec4 completedScene;
+-void main(){
++void main(){vec2 hint;completedScene=vec4(computeWaterOptics(rasterUV,hint),1.0);
+ #if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+-    refractionHint=nextOpticalHint(0.0);
++refractionHint=hint;
+ #endif
+-    vec3 image=texture(colortex3,rasterUV).rgb;
+-    vec4 markedColour=texture(colortex0,rasterUV);
+-    if(isEyeInWater==1){
+-        completedScene=vec4(max(image,vec3(0.0)),1.0);return;
+-    }
+-    if(markedColour.a<=0.5){
+-        completedScene=vec4(max(image,vec3(0.0)),1.0);return;
+-    }
+-    // Reject underwater/non-water pixels before fetching interface metadata.
+-    vec4 markedNormal=texture(colortex1,rasterUV),markedDepth=texture(colortex2,rasterUV);
+-    float opaqueDepth=texture(depthtex1,rasterUV).r;
+-    vec3 opaqueView=positionFromDepth(rasterUV,opaqueDepth);
+-    float waterSky=clamp(float(eyeBrightnessSmooth.y)/240.0,0.0,1.0);
+-    float waterLamp=clamp(float(eyeBrightnessSmooth.x)/240.0,0.0,1.0);
+-    vec3 waterTint=biomeWaterTint;
+-    if(markedColour.a>0.5&&markedNormal.a>0.5&&markedDepth.a>0.5&&markedDepth.x>0.0){
+-        vec3 viewRay=positionFromDepth(rasterUV,0.5);
+-        vec3 waterView=viewRay*(markedDepth.x/max(-viewRay.z,0.00001));waterSky=markedDepth.y;
+-        vec4 opticalData=texture(colortex8,rasterUV);
+-#if WATER_STYLE == 0
+-        waterTint=opticalData.rgb;waterLamp=opticalData.a;
+-#endif
+-        if(dot(waterTint,waterTint)<0.001)waterTint=biomeWaterTint;
+-        vec3 point=playerFromView(waterView);
+-        vec3 faceView=unitVector(mat3(gbufferModelView)*markedNormal.xyz);
+-        vec3 nWorld=lakeNormal(point,markedNormal.xyz,markedDepth.x,markedDepth.y);
+-        vec3 nView=unitVector(mat3(gbufferModelView)*nWorld);
+-        if(dot(nView,-waterView)<0.0){nView=-nView;nWorld=-nWorld;faceView=-faceView;}
+-        WaterBoundary boundary=waterBoundary(waterView,nView,false);
+-        vec3 reflectedRay=boundary.reflected;
+-        vec3 reflectedWorld=mat3(gbufferModelViewInverse)*reflectedRay;
+-        vec3 fallback=reflectedEnvironment(reflectedWorld)*mix(0.03,1.0,smoothstep(0.04,0.8,waterSky));
+-        vec4 traced=readWaterReflection(rasterUV,markedNormal.xyz,markedDepth.x);
+-        vec3 reflected=mix(fallback,traced.rgb,traced.a);
+-        float thickness=opaqueDepth<0.999999?length(opaqueView-waterView):24.0;
+-        // v1.3.1 screen-space water refraction, with the original shoreline guard.
+-        float hint=0.0,rejected;
+-#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+-        hint=previousOpticalHint(colortex18,ivec2(gl_FragCoord.xy));
+-#endif
+-        vec2 shifted=legacyWaterRefractionUV(rasterUV,nView,faceView,thickness,markedDepth.x,hint,rejected);
+-#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
+-        refractionHint=nextOpticalHint(rejected);
+-#endif
+-        float shiftedDepth=texture(depthtex1,shifted).r;
+-        vec3 transmitted=texture(colortex4,shifted).rgb;
+-        vec3 backRay=unitVector(mat3(gbufferModelViewInverse)*positionFromDepth(shifted,0.5));
+-        // Missing screen-space geometry must not import an outdoor sky into
+-        // an unlit cave. Use the same local-exposure fallback as reflection.
+-        if(shiftedDepth>=0.999999)transmitted=reflectedEnvironment(backRay)
+-            *mix(0.03,1.0,smoothstep(0.04,0.8,waterSky));
+-        bool backgroundGeometry=shiftedDepth<0.999999;
+-        vec3 receiver=backgroundGeometry?positionFromDepth(shifted,shiftedDepth):waterView+unitVector(waterView)*7000.0;
+-        float receiverDistance=length(receiver-waterView);
+-        float opticalPath=backgroundGeometry?receiverDistance:24.0;
+-        if(markedColour.b>0.5){
+-            vec3 worldViewRay=unitVector(mat3(gbufferModelViewInverse)*waterView);
+-            opticalPath=fallingWaterThickness(point+cameraPosition,markedNormal.xyz,worldViewRay,receiverDistance);
+-            float airDistance=max(receiverDistance-opticalPath,0.0);
+-            // depthtex1 omits ALL water. Keep a second horizontal entry so
+-            // an ocean behind a waterfall retains its own water depth.
+-            vec4 background=texture(colortex13,shifted);
+-            if(hasBackgroundWater(background,markedDepth.x,-receiver.z)){
+-                vec3 r=positionFromDepth(shifted,0.5);
+-                vec3 backgroundView=r*(background.x/max(-r.z,0.00001));
+-                transmitted=travelThroughWater(transmitted,min(length(receiver-backgroundView),96.0),biomeWaterTint,background.y,background.z);
+-                vec3 backgroundNormal=lakeNormal(playerFromView(backgroundView),vec3(0,1,0),background.x,background.y);
+-                vec3 reflectedBackground=reflect(unitVector(mat3(gbufferModelViewInverse)*backgroundView),backgroundNormal);
+-                float backgroundFresnel=dielectricWaterFresnel(clamp(dot(backgroundNormal,-backRay),0.0,1.0),1.0,1.333);
+-                transmitted=mix(transmitted,reflectedEnvironment(reflectedBackground)*mix(0.03,1.0,smoothstep(0.04,0.8,background.y)),clamp(REFLECT_LEVEL*backgroundFresnel,0.0,1.0));
+-                airDistance=max(length(backgroundView-waterView)-opticalPath,0.0);
+-            }else if(backgroundGeometry&&joinsSurroundingWater(colortex13,shifted,cameraPosition+point,backRay,receiverDistance)){
+-                // The falling volume joins the ocean without an air/water
+-                // face. Attenuate the continuous water path to its floor.
+-                opticalPath=receiverDistance;airDistance=0.0;
+-            }
+-            transmitted=airBehindWater(transmitted,cameraPosition+point+backRay*opticalPath,backRay,airDistance,waterSky,backgroundGeometry);
+-        }
+-        transmitted=travelThroughWater(transmitted,min(opticalPath,96.0),waterTint,waterSky,waterLamp);
+-        // Apply the native atlas pattern and biome colour after Fresnel mixing:
+-        // reflective/distant water receives the same surface treatment as nearby
+-        // water, with no distance cutoff or change to reflection trace/detail.
+-        image=mix(transmitted,reflected,waterReflectionWeight(boundary));
+-#if WATER_STYLE == 0
+-        image=vanillaWaterSurface(image,markedColour.r,waterTint);
+-#endif
+-        // Native atlas colour/alpha is composed at full resolution in resolve,
+-        // so lower-resolution optics never blur the vanilla water texture.
+-    }
+-    completedScene=vec4(max(image,vec3(0.0)),1.0);
+ }
+--- before/shaders/core/options.glsl
++++ after/shaders/core/options.glsl
+@@ -63,6 +63,7 @@
+ #define TEMPORAL_ATMOSPHERE 1 // [0 1]
+ #define TEMPORAL_OPTICS 0 // [0 1]
+ #define ORIGINAL_DAMPNESS 0.00 // [0.00 0.10 0.20 0.30 0.40 0.50 0.65 0.80 1.00 1.25 1.50 2.00]
++#define WATER_RENDERER 0 // [0 1]
+ #define WATER_RENDER_QUALITY 1 // [0 1 2]
+ #define CLOUD_DENSITY 1.00 // [0.15 0.30 0.50 0.75 1.00 1.30 1.70 2.20 3.00]
+ #define CLOUD_DETAIL 1.00 // [0.00 0.25 0.50 0.75 1.00 1.30 1.70 2.00]
+--- before/shaders/core/raster.vert.glsl
++++ after/shaders/core/raster.vert.glsl
+@@ -15,9 +15,9 @@
+     relativeLocation = playerFromView(cameraVertex.xyz);
+     orientedNormal = mat3(gbufferModelViewInverse) * (gl_NormalMatrix * gl_Normal);
+     tintAndOpacity = gl_Color;
+-#if REALISTIC_LIGHTING == 0 && PASS_KIND == 4 && (!defined(BLOCK_SURFACE) || BLOCK_SURFACE == 0)
+-    // Iris pack geometry supplies unlit entity vertex colour. Terrain's native
+-    // oldLighting shading is already present and must not be applied twice.
++#if REALISTIC_LIGHTING == 0 && (PASS_KIND == 4 || PASS_KIND == 5)
++    // All model geometry, including block entities and held items/hand, needs
++    // native directional lights. Terrain and emissive passes stay excluded.
+     tintAndOpacity.rgb*=nativeEntityLighting(unitVector(orientedNormal));
+ #endif
+     atlasCoordinate = (gl_TextureMatrix[0] * gl_MultiTexCoord0).st;
+--- before/shaders/core/water-optics.glsl
++++ after/shaders/core/water-optics.glsl
+@@ -0,0 +1,128 @@
++#ifndef STRATUS_WATER_OPTICS_INCLUDED
++#define STRATUS_WATER_OPTICS_INCLUDED
++#include "/core/options.glsl"
++#include "/core/frame.glsl"
++#include "/core/ceiling.glsl"
++#include "/core/air.glsl"
++#include "/core/medium.glsl"
++#include "/core/water-surface.glsl"
++#include "/core/water-interface.glsl"
++#include "/core/lake-normal.glsl"
++#include "/core/environment.glsl"
++#include "/core/volume.glsl"
++#include "/core/water-path.glsl"
++uniform sampler2D colortex13;
++uniform sampler2D colortex8;
++uniform sampler2D colortex4;
++uniform sampler2D depthtex1;
++uniform sampler2D colortex7;
++uniform sampler2D colortex0;
++uniform sampler2D colortex1;
++uniform sampler2D colortex2;
++uniform sampler2D colortex3;
++uniform sampler2D depthtex0;
++#include "/core/refraction.glsl"
++#include "/core/scene-trace.glsl"
++#include "/core/water-buffer.glsl"
++#include "/core/temporal-optics.glsl"
++#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
++uniform sampler2D colortex18;
++#endif
++
++vec3 computeWaterOptics(vec2 screen,out vec2 refractionHint){
++    refractionHint=vec2(0.0);
++#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
++    refractionHint=nextOpticalHint(0.0);
++#endif
++    vec3 image=texture(colortex3,screen).rgb;
++    vec4 markedColour=texture(colortex0,screen);
++    if(isEyeInWater==1){
++        return max(image,vec3(0.0));
++    }
++    if(markedColour.a<=0.5){
++        return max(image,vec3(0.0));
++    }
++    // Reject underwater/non-water pixels before fetching interface metadata.
++    vec4 markedNormal=texture(colortex1,screen),markedDepth=texture(colortex2,screen);
++    float opaqueDepth=texture(depthtex1,screen).r;
++    vec3 opaqueView=positionFromDepth(screen,opaqueDepth);
++    float waterSky=clamp(float(eyeBrightnessSmooth.y)/240.0,0.0,1.0);
++    float waterLamp=clamp(float(eyeBrightnessSmooth.x)/240.0,0.0,1.0);
++    vec3 waterTint=biomeWaterTint;
++    if(markedColour.a>0.5&&markedNormal.a>0.5&&markedDepth.a>0.5&&markedDepth.x>0.0){
++        vec3 viewRay=positionFromDepth(screen,0.5);
++        vec3 waterView=viewRay*(markedDepth.x/max(-viewRay.z,0.00001));waterSky=markedDepth.y;
++        vec4 opticalData=texture(colortex8,screen);
++#if WATER_STYLE == 0
++        waterTint=opticalData.rgb;waterLamp=opticalData.a;
++#endif
++        if(dot(waterTint,waterTint)<0.001)waterTint=biomeWaterTint;
++        vec3 point=playerFromView(waterView);
++        vec3 faceView=unitVector(mat3(gbufferModelView)*markedNormal.xyz);
++        vec3 nWorld=lakeNormal(point,markedNormal.xyz,markedDepth.x,markedDepth.y);
++        vec3 nView=unitVector(mat3(gbufferModelView)*nWorld);
++        if(dot(nView,-waterView)<0.0){nView=-nView;nWorld=-nWorld;faceView=-faceView;}
++        WaterBoundary boundary=waterBoundary(waterView,nView,false);
++        vec3 reflectedRay=boundary.reflected;
++        vec3 reflectedWorld=mat3(gbufferModelViewInverse)*reflectedRay;
++        vec3 fallback=reflectedEnvironment(reflectedWorld)*mix(0.03,1.0,smoothstep(0.04,0.8,waterSky));
++        vec4 traced=readWaterReflection(screen,markedNormal.xyz,markedDepth.x);
++        vec3 reflected=mix(fallback,traced.rgb,traced.a);
++        float thickness=opaqueDepth<0.999999?length(opaqueView-waterView):24.0;
++        // v1.3.1 screen-space water refraction, with the original shoreline guard.
++        float hint=0.0,rejected;
++#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
++        hint=previousOpticalHint(colortex18,ivec2(gl_FragCoord.xy));
++#endif
++        vec2 shifted=legacyWaterRefractionUV(screen,nView,faceView,thickness,markedDepth.x,hint,rejected);
++#if TEMPORAL_OPTICS == 1 && REFRACTION_QUALITY > 0
++        refractionHint=nextOpticalHint(rejected);
++#endif
++        float shiftedDepth=texture(depthtex1,shifted).r;
++        vec3 transmitted=texture(colortex4,shifted).rgb;
++        vec3 backRay=unitVector(mat3(gbufferModelViewInverse)*positionFromDepth(shifted,0.5));
++        // Missing screen-space geometry must not import an outdoor sky into
++        // an unlit cave. Use the same local-exposure fallback as reflection.
++        if(shiftedDepth>=0.999999)transmitted=reflectedEnvironment(backRay)
++            *mix(0.03,1.0,smoothstep(0.04,0.8,waterSky));
++        bool backgroundGeometry=shiftedDepth<0.999999;
++        vec3 receiver=backgroundGeometry?positionFromDepth(shifted,shiftedDepth):waterView+unitVector(waterView)*7000.0;
++        float receiverDistance=length(receiver-waterView);
++        float opticalPath=backgroundGeometry?receiverDistance:24.0;
++        if(markedColour.b>0.5){
++            vec3 worldViewRay=unitVector(mat3(gbufferModelViewInverse)*waterView);
++            opticalPath=fallingWaterThickness(point+cameraPosition,markedNormal.xyz,worldViewRay,receiverDistance);
++            float airDistance=max(receiverDistance-opticalPath,0.0);
++            // depthtex1 omits ALL water. Keep a second horizontal entry so
++            // an ocean behind a waterfall retains its own water depth.
++            vec4 background=texture(colortex13,shifted);
++            if(hasBackgroundWater(background,markedDepth.x,-receiver.z)){
++                vec3 r=positionFromDepth(shifted,0.5);
++                vec3 backgroundView=r*(background.x/max(-r.z,0.00001));
++                transmitted=travelThroughWater(transmitted,min(length(receiver-backgroundView),96.0),biomeWaterTint,background.y,background.z);
++                vec3 backgroundNormal=lakeNormal(playerFromView(backgroundView),vec3(0,1,0),background.x,background.y);
++                vec3 reflectedBackground=reflect(unitVector(mat3(gbufferModelViewInverse)*backgroundView),backgroundNormal);
++                float backgroundFresnel=dielectricWaterFresnel(clamp(dot(backgroundNormal,-backRay),0.0,1.0),1.0,1.333);
++                transmitted=mix(transmitted,reflectedEnvironment(reflectedBackground)*mix(0.03,1.0,smoothstep(0.04,0.8,background.y)),clamp(REFLECT_LEVEL*backgroundFresnel,0.0,1.0));
++                airDistance=max(length(backgroundView-waterView)-opticalPath,0.0);
++            }else if(backgroundGeometry&&joinsSurroundingWater(colortex13,shifted,cameraPosition+point,backRay,receiverDistance)){
++                // The falling volume joins the ocean without an air/water
++                // face. Attenuate the continuous water path to its floor.
++                opticalPath=receiverDistance;airDistance=0.0;
++            }
++            transmitted=airBehindWater(transmitted,cameraPosition+point+backRay*opticalPath,backRay,airDistance,waterSky,backgroundGeometry);
++        }
++        transmitted=travelThroughWater(transmitted,min(opticalPath,96.0),waterTint,waterSky,waterLamp);
++        // Apply the native atlas pattern and biome colour after Fresnel mixing:
++        // reflective/distant water receives the same surface treatment as nearby
++        // water, with no distance cutoff or change to reflection trace/detail.
++        image=mix(transmitted,reflected,waterReflectionWeight(boundary));
++#if WATER_STYLE == 0
++        image=vanillaWaterSurface(image,markedColour.r,waterTint);
++#endif
++        // Native atlas colour/alpha is composed at full resolution in resolve,
++        // so lower-resolution optics never blur the vanilla water texture.
++    }
++    return max(image,vec3(0.0));
++}
++#endif
+--- before/shaders/core/water-resolve.frag.glsl
++++ after/shaders/core/water-resolve.frag.glsl
+@@ -4,6 +4,10 @@
+ #include "/core/water-surface.glsl"
+ #include "/core/forward.glsl"
+ #include "/core/submerged-compose.glsl"
++#if WATER_RENDERER == 0 && TEMPORAL_OPTICS == 0
++#include "/core/water-optics.glsl"
++uniform sampler2D colortex14;
++#else
+ uniform sampler2D colortex0;
+ uniform sampler2D colortex1;
+ uniform sampler2D colortex2;
+@@ -15,6 +19,7 @@
+ uniform sampler2D colortex14;
+ uniform sampler2D depthtex0;
+ uniform sampler2D depthtex1;
++#endif
+ in vec2 rasterUV;
+ /* RENDERTARGETS: 3 */
+ layout(location=0)out vec4 completedScene;
+@@ -36,6 +41,12 @@
+     if(mark.a<=0.5||depth.a<=0.5){
+         completedScene=vec4(max(scene,vec3(0)),1.0);return;
+     }
++    vec4 tint=texture(colortex8,rasterUV);
++#if WATER_RENDERER == 0 && TEMPORAL_OPTICS == 0
++    // Like 1.3.1, compose current optics directly in the scene-resolution pass.
++    // Keep modern native atlas, foreground alpha and water-exit protections.
++    vec2 unusedHint;vec3 optics=computeWaterOptics(rasterUV,unusedHint);
++#else
+     ivec2 size=textureSize(colortex12,0);vec2 grid=rasterUV*vec2(size)-0.5;
+     ivec2 cell=ivec2(floor(grid));vec2 f=fract(grid);vec3 optics=vec3(0);float total=0.0;
+     for(int y=0;y<2;y++)for(int x=0;x<2;x++){
+@@ -46,7 +57,7 @@
+         weight*=exp(-abs(depth.x-d.x)/max(0.10,depth.x*0.025));
+         optics+=texelFetch(colortex12,c,0).rgb*weight;total+=weight;
+     }
+-    vec4 tint=texture(colortex8,rasterUV);
++    tint=texture(colortex8,rasterUV);
+ #if WATER_STYLE == 0
+     if(dot(tint.rgb,tint.rgb)<0.001)tint.rgb=biomeWaterTint;
+ #endif
+@@ -61,6 +72,7 @@
+         optics=travelThroughWater(texture(colortex4,rasterUV).rgb,path,tint.rgb,depth.y,tint.a);
+ 
+     }
++#endif
+ #if WATER_STYLE == 1
+     // Preserve native atlas detail independently of the selected optics buffer.
+     optics=nativeWaterSurface(optics,vec4(tint.rgb,mark.g*step(0.5,tint.a)));
+--- before/shaders/lang/en_us.lang
++++ after/shaders/lang/en_us.lang
+@@ -69,7 +69,7 @@
+ option.RIPPLE_RATE=Ripple speed
+ option.RIPPLE_RATE.comment=Zero freezes all surface movement.
+ option.FACE_SHADING=Combined face contrast
+-option.FACE_SHADING.comment=Master strength for vanilla and realistic components. Both new component multipliers at 1 reproduce the previous combined look.
++option.FACE_SHADING.comment=Master strength for the 1.3.1 realistic RGB sky/key/indoor response and vanilla face component. Original-equivalent controls at 1 reproduce 1.3.1 form lighting.
+ option.BLOOM_STRENGTH=Subtle bloom
+ option.BLOOM_STRENGTH.comment=Visible restrained light halos. Emissive masking protects ordinary entities and white blocks from glowing.
+ option.CLOUD_ALTITUDE=Physical cloud altitude
+@@ -152,7 +152,7 @@
+ option.VANILLA_FACE_CONTRAST=Vanilla face component
+ option.VANILLA_FACE_CONTRAST.comment=Independent multiplier for fixed vanilla axis contrast. 0 removes it; 1 retains the previous contribution. Existing master contrast/blend remain.
+ option.REALISTIC_FACE_CONTRAST=Realistic face component
+-option.REALISTIC_FACE_CONTRAST.comment=Adjusts only the directional face component. Use Realistic lighting: Off to restore vanilla face lighting, lightmap brightness and colour together.
++option.REALISTIC_FACE_CONTRAST.comment=Adjusts the restored 1.3.1 RGB hemisphere, soft sun key and indoor fill. Zero removes that component. Realistic lighting Off retains native model/lightmap shading.
+ option.SUN_CORE_BRIGHTNESS=Polished sun brightness
+ option.SUN_CORE_BRIGHTNESS.comment=HDR brightness of the blocky textured core in polished mode. 2.80 reproduces the previous core; vanilla mode is unaffected.
+ option.SUN_HALO_STRENGTH=Sun-local halo strength
+@@ -218,3 +218,8 @@
+ option.WET_FILM_STYLE.comment=Classic restores1.3.1 dielectric sky film and GGX sun highlights with common material roughness. Current retains the rc5 film. Both preserve weather/exposure, separate amount/sheen, zero controls and optional independent Original dampness; no forced pore darkening.
+ value.WET_FILM_STYLE.0=Classic1.3.1 (default)
+ value.WET_FILM_STYLE.1=Current restrained
++
++option.WATER_RENDERER=Water renderer
++option.WATER_RENDERER.comment=Classic fused follows 1.3.1 scene-resolution composition without an intermediate optics pass. Layered retains selected optics-buffer resolution. Experimental temporal hints use Layered. No proven FPS parity yet.
++value.WATER_RENDERER.0=Classic fused
++value.WATER_RENDERER.1=Layered
+--- before/shaders/shaders.properties
++++ after/shaders/shaders.properties
+@@ -31,7 +31,7 @@
+ # Two-column effect groups. Every retained option remains reachable.
+ screen=<profile> <empty> [LIGHTING] [WATER] [ATMOSPHERE] [MATERIALS] [POST] [PERFORMANCE]
+ screen.columns=2
+-screen.WATER=WATER_STYLE <empty> WATER_VISIBILITY BIOME_WATER WATER_TURBIDITY WATER_EXTINCTION WATER_TEXTURE <empty> [REFLECTIONS] [REFRACTION] [WAVES]
++screen.WATER=WATER_RENDERER WATER_STYLE <empty> WATER_VISIBILITY BIOME_WATER WATER_TURBIDITY WATER_EXTINCTION WATER_TEXTURE <empty> [REFLECTIONS] [REFRACTION] [WAVES]
+ screen.REFLECTIONS=REFLECTION_TRACE REFLECTION_MODE REFLECT_LEVEL REFLECT_RANGE TEMPORAL_ATMOSPHERE TEMPORAL_OPTICS
+ screen.REFRACTION=WATER_RENDER_QUALITY REFRACTION_QUALITY WATER_DISTORTION <empty>
+ screen.WAVES=RIPPLE_HEIGHT RIPPLE_SIZE RIPPLE_RATE <empty>
+@@ -52,10 +52,10 @@
+ screen.BLOOM=BLOOM_STRENGTH BLOOM_RADIUS
+ screen.PERFORMANCE=<profile> <empty> WATER_RENDER_QUALITY ATMOSPHERE_QUALITY CLOUD_LAYERS MIST_DETAIL REFLECTION_MODE REFRACTION_QUALITY REFLECT_RANGE TEMPORAL_ATMOSPHERE TEMPORAL_OPTICS
+ sliders=ORIGINAL_DAMPNESS WATER_TEXTURE VANILLA_FACE_CONTRAST REALISTIC_FACE_CONTRAST SUN_CORE_BRIGHTNESS SUN_HALO_STRENGTH SUN_HALO_RADIUS CIRRUS_DENSITY EXPOSURE WET_DARKENING CLOUD_DENSITY CLOUD_DETAIL MIST_SCALE MIST_BREAKUP MIST_LIGHT WATER_TURBIDITY SKY_AMBIENT ambientOcclusionLevel WHITE_BALANCE SURFACE_SATURATION SURFACE_DAMPNESS WET_SHEEN FACE_SHADING FACE_BLEND GROUND_WARMTH BLOOM_STRENGTH BLOOM_RADIUS LAMP_LEVEL LAMP_HEAT CLOUD_AMOUNT CLOUD_ALTITUDE CLOUD_THICKNESS SKY_LEAK SUN_VISIBILITY CIRRUS_AMOUNT CIRRUS_ALTITUDE CLOUD_SPAN CLOUD_DISTORTION CLOUD_RELIEF CLOUD_DRIFT MIST_AMOUNT MIST_Y MIST_THICKNESS MIST_CLEAR REFLECT_LEVEL REFLECT_RANGE WATER_VISIBILITY WATER_EXTINCTION WATER_DISTORTION RIPPLE_HEIGHT RIPPLE_SIZE RIPPLE_RATE
+-profile.FAST=WATER_RENDER_QUALITY:0 ATMOSPHERE_QUALITY:0 CLOUD_LAYERS:1 MIST_DETAIL:1 REFLECTION_MODE:0 REFRACTION_QUALITY:0 SKY_AMBIENT:1.00 EXPOSURE:0.20 WHITE_BALANCE:0.00 SURFACE_SATURATION:1.00 SURFACE_DAMPNESS:0.65 CLOUD_AMOUNT:0.68 CLOUD_ALTITUDE:256.0 CLOUD_THICKNESS:12.0 SKY_LEAK:0.35 CLOUD_SPAN:240.0 CLOUD_DISTORTION:0.85 CLOUD_RELIEF:0.75 CLOUD_DRIFT:0.25 MIST_AMOUNT:0.85 MIST_Y:70.0 MIST_THICKNESS:18.0 MIST_CLEAR:24.0 REFLECT_LEVEL:1.00 REFLECT_RANGE:120.0 WATER_VISIBILITY:2.20 WATER_EXTINCTION:0.90 RIPPLE_HEIGHT:0.55 RIPPLE_SIZE:0.40 RIPPLE_RATE:1.00 FACE_SHADING:1.00 WET_DARKENING:1.00 WET_SHEEN:0.85 BLOOM_STRENGTH:0.18 BLOOM_RADIUS:3.00 SUN_VISIBILITY:0.85 LAMP_LEVEL:1.00 LAMP_HEAT:0.25 VANILLA_FACE_CONTRAST:1.00 REALISTIC_FACE_CONTRAST:1.00 REALISTIC_LIGHTING:0 WET_WEATHER_MODE:0 SUN_CORE_BRIGHTNESS:4.50 SUN_HALO_STRENGTH:2.00 SUN_HALO_RADIUS:1.50 CIRRUS_DENSITY:1.00 FACE_BLEND:1.00 GROUND_WARMTH:0.00 WATER_DISTORTION:1.00 CIRRUS_AMOUNT:0.65 CIRRUS_ALTITUDE:360.0 CLOUD_STYLE:0 SUN_STYLE:0 WATER_TURBIDITY:3.00 BIOME_WATER:1 CLOUD_DENSITY:1.00 CLOUD_DETAIL:1.00 MIST_SCALE:96.0 MIST_BREAKUP:0.85 MIST_LIGHT:0.65 WATER_TEXTURE:1.00 ambientOcclusionLevel:1.00 WATER_STYLE:1 TRANSPARENT_REFLECTIONS:0.75 TRANSPARENT_REFRACTION:0.50 TEMPORAL_ATMOSPHERE:1 ORIGINAL_DAMPNESS:0.00 TEMPORAL_OPTICS:0 REFLECTION_TRACE:0 WET_FILM_STYLE:0
+-profile.BALANCED=WATER_RENDER_QUALITY:1 ATMOSPHERE_QUALITY:1 CLOUD_LAYERS:1 MIST_DETAIL:2 REFLECTION_MODE:0 REFRACTION_QUALITY:0 SKY_AMBIENT:1.00 EXPOSURE:0.20 WHITE_BALANCE:0.00 SURFACE_SATURATION:1.00 SURFACE_DAMPNESS:0.65 CLOUD_AMOUNT:0.68 CLOUD_ALTITUDE:256.0 CLOUD_THICKNESS:12.0 SKY_LEAK:0.35 CLOUD_SPAN:240.0 CLOUD_DISTORTION:0.85 CLOUD_RELIEF:0.75 CLOUD_DRIFT:0.25 MIST_AMOUNT:0.85 MIST_Y:70.0 MIST_THICKNESS:18.0 MIST_CLEAR:24.0 REFLECT_LEVEL:1.00 REFLECT_RANGE:120.0 WATER_VISIBILITY:2.20 WATER_EXTINCTION:0.90 RIPPLE_HEIGHT:0.55 RIPPLE_SIZE:0.40 RIPPLE_RATE:1.00 FACE_SHADING:1.00 WET_DARKENING:1.00 WET_SHEEN:0.85 BLOOM_STRENGTH:0.18 BLOOM_RADIUS:3.00 SUN_VISIBILITY:0.85 LAMP_LEVEL:1.00 LAMP_HEAT:0.25 VANILLA_FACE_CONTRAST:1.00 REALISTIC_FACE_CONTRAST:1.00 REALISTIC_LIGHTING:0 WET_WEATHER_MODE:0 SUN_CORE_BRIGHTNESS:4.50 SUN_HALO_STRENGTH:2.00 SUN_HALO_RADIUS:1.50 CIRRUS_DENSITY:1.00 FACE_BLEND:1.00 GROUND_WARMTH:0.00 WATER_DISTORTION:1.00 CIRRUS_AMOUNT:0.65 CIRRUS_ALTITUDE:360.0 CLOUD_STYLE:0 SUN_STYLE:0 WATER_TURBIDITY:3.00 BIOME_WATER:1 CLOUD_DENSITY:1.00 CLOUD_DETAIL:1.00 MIST_SCALE:96.0 MIST_BREAKUP:0.85 MIST_LIGHT:0.65 WATER_TEXTURE:1.00 ambientOcclusionLevel:1.00 WATER_STYLE:1 TRANSPARENT_REFLECTIONS:0.75 TRANSPARENT_REFRACTION:0.50 TEMPORAL_ATMOSPHERE:1 ORIGINAL_DAMPNESS:0.00 TEMPORAL_OPTICS:0 REFLECTION_TRACE:0 WET_FILM_STYLE:0
+-profile.REFERENCE=WATER_RENDER_QUALITY:1 ATMOSPHERE_QUALITY:1 CLOUD_LAYERS:2 MIST_DETAIL:3 REFLECTION_MODE:0 REFRACTION_QUALITY:1 SKY_AMBIENT:1.00 EXPOSURE:0.20 WHITE_BALANCE:0.00 SURFACE_SATURATION:1.00 SURFACE_DAMPNESS:0.65 CLOUD_AMOUNT:0.68 CLOUD_ALTITUDE:256.0 CLOUD_THICKNESS:12.0 SKY_LEAK:0.35 CLOUD_SPAN:240.0 CLOUD_DISTORTION:0.85 CLOUD_RELIEF:0.75 CLOUD_DRIFT:0.25 MIST_AMOUNT:0.85 MIST_Y:70.0 MIST_THICKNESS:18.0 MIST_CLEAR:24.0 REFLECT_LEVEL:1.00 REFLECT_RANGE:120.0 WATER_VISIBILITY:2.20 WATER_EXTINCTION:0.90 RIPPLE_HEIGHT:0.55 RIPPLE_SIZE:0.40 RIPPLE_RATE:1.00 FACE_SHADING:1.00 WET_DARKENING:1.00 WET_SHEEN:0.85 BLOOM_STRENGTH:0.18 BLOOM_RADIUS:3.00 SUN_VISIBILITY:0.85 LAMP_LEVEL:1.00 LAMP_HEAT:0.25 VANILLA_FACE_CONTRAST:1.00 REALISTIC_FACE_CONTRAST:1.00 REALISTIC_LIGHTING:0 WET_WEATHER_MODE:0 SUN_CORE_BRIGHTNESS:4.50 SUN_HALO_STRENGTH:2.00 SUN_HALO_RADIUS:1.50 CIRRUS_DENSITY:1.00 FACE_BLEND:1.00 GROUND_WARMTH:0.00 WATER_DISTORTION:1.00 CIRRUS_AMOUNT:0.65 CIRRUS_ALTITUDE:360.0 CLOUD_STYLE:0 SUN_STYLE:0 WATER_TURBIDITY:3.00 BIOME_WATER:1 CLOUD_DENSITY:1.00 CLOUD_DETAIL:1.00 MIST_SCALE:96.0 MIST_BREAKUP:0.85 MIST_LIGHT:0.65 WATER_TEXTURE:1.00 ambientOcclusionLevel:1.00 WATER_STYLE:1 TRANSPARENT_REFLECTIONS:0.75 TRANSPARENT_REFRACTION:0.50 TEMPORAL_ATMOSPHERE:1 ORIGINAL_DAMPNESS:0.00 TEMPORAL_OPTICS:0 REFLECTION_TRACE:0 WET_FILM_STYLE:0
+-profile.HIGH=WATER_RENDER_QUALITY:2 ATMOSPHERE_QUALITY:2 CLOUD_LAYERS:3 MIST_DETAIL:3 REFLECTION_MODE:2 REFRACTION_QUALITY:2 SKY_AMBIENT:1.00 EXPOSURE:0.20 WHITE_BALANCE:0.00 SURFACE_SATURATION:1.00 SURFACE_DAMPNESS:0.65 CLOUD_AMOUNT:0.68 CLOUD_ALTITUDE:256.0 CLOUD_THICKNESS:12.0 SKY_LEAK:0.35 CLOUD_SPAN:240.0 CLOUD_DISTORTION:0.85 CLOUD_RELIEF:0.75 CLOUD_DRIFT:0.25 MIST_AMOUNT:0.85 MIST_Y:70.0 MIST_THICKNESS:18.0 MIST_CLEAR:24.0 REFLECT_LEVEL:1.00 REFLECT_RANGE:120.0 WATER_VISIBILITY:2.20 WATER_EXTINCTION:0.90 RIPPLE_HEIGHT:0.55 RIPPLE_SIZE:0.40 RIPPLE_RATE:1.00 FACE_SHADING:1.00 WET_DARKENING:1.00 WET_SHEEN:0.85 BLOOM_STRENGTH:0.18 BLOOM_RADIUS:3.00 SUN_VISIBILITY:0.85 LAMP_LEVEL:1.00 LAMP_HEAT:0.25 VANILLA_FACE_CONTRAST:1.00 REALISTIC_FACE_CONTRAST:1.00 REALISTIC_LIGHTING:0 WET_WEATHER_MODE:0 SUN_CORE_BRIGHTNESS:4.50 SUN_HALO_STRENGTH:2.00 SUN_HALO_RADIUS:1.50 CIRRUS_DENSITY:1.00 FACE_BLEND:1.00 GROUND_WARMTH:0.00 WATER_DISTORTION:1.00 CIRRUS_AMOUNT:0.65 CIRRUS_ALTITUDE:360.0 CLOUD_STYLE:0 SUN_STYLE:0 WATER_TURBIDITY:3.00 BIOME_WATER:1 CLOUD_DENSITY:1.00 CLOUD_DETAIL:1.00 MIST_SCALE:96.0 MIST_BREAKUP:0.85 MIST_LIGHT:0.65 WATER_TEXTURE:1.00 ambientOcclusionLevel:1.00 WATER_STYLE:1 TRANSPARENT_REFLECTIONS:0.75 TRANSPARENT_REFRACTION:0.50 TEMPORAL_ATMOSPHERE:1 ORIGINAL_DAMPNESS:0.00 TEMPORAL_OPTICS:0 REFLECTION_TRACE:0 WET_FILM_STYLE:0
++profile.FAST=WATER_RENDER_QUALITY:0 ATMOSPHERE_QUALITY:0 CLOUD_LAYERS:1 MIST_DETAIL:1 REFLECTION_MODE:0 REFRACTION_QUALITY:0 SKY_AMBIENT:1.00 EXPOSURE:0.20 WHITE_BALANCE:0.00 SURFACE_SATURATION:1.00 SURFACE_DAMPNESS:0.65 CLOUD_AMOUNT:0.68 CLOUD_ALTITUDE:256.0 CLOUD_THICKNESS:12.0 SKY_LEAK:0.35 CLOUD_SPAN:240.0 CLOUD_DISTORTION:0.85 CLOUD_RELIEF:0.75 CLOUD_DRIFT:0.25 MIST_AMOUNT:0.85 MIST_Y:70.0 MIST_THICKNESS:18.0 MIST_CLEAR:24.0 REFLECT_LEVEL:1.00 REFLECT_RANGE:120.0 WATER_VISIBILITY:2.20 WATER_EXTINCTION:0.90 RIPPLE_HEIGHT:0.55 RIPPLE_SIZE:0.40 RIPPLE_RATE:1.00 FACE_SHADING:1.00 WET_DARKENING:1.00 WET_SHEEN:0.85 BLOOM_STRENGTH:0.18 BLOOM_RADIUS:3.00 SUN_VISIBILITY:0.85 LAMP_LEVEL:1.00 LAMP_HEAT:0.25 VANILLA_FACE_CONTRAST:1.00 REALISTIC_FACE_CONTRAST:1.00 REALISTIC_LIGHTING:0 WET_WEATHER_MODE:0 SUN_CORE_BRIGHTNESS:4.50 SUN_HALO_STRENGTH:2.00 SUN_HALO_RADIUS:1.50 CIRRUS_DENSITY:1.00 FACE_BLEND:1.00 GROUND_WARMTH:0.00 WATER_DISTORTION:1.00 CIRRUS_AMOUNT:0.65 CIRRUS_ALTITUDE:360.0 CLOUD_STYLE:0 SUN_STYLE:0 WATER_TURBIDITY:3.00 BIOME_WATER:1 CLOUD_DENSITY:1.00 CLOUD_DETAIL:1.00 MIST_SCALE:96.0 MIST_BREAKUP:0.85 MIST_LIGHT:0.65 WATER_TEXTURE:1.00 ambientOcclusionLevel:1.00 WATER_STYLE:1 TRANSPARENT_REFLECTIONS:0.75 TRANSPARENT_REFRACTION:0.50 TEMPORAL_ATMOSPHERE:1 ORIGINAL_DAMPNESS:0.00 TEMPORAL_OPTICS:0 WATER_RENDERER:0 REFLECTION_TRACE:0 WET_FILM_STYLE:0
++profile.BALANCED=WATER_RENDER_QUALITY:1 ATMOSPHERE_QUALITY:1 CLOUD_LAYERS:1 MIST_DETAIL:2 REFLECTION_MODE:0 REFRACTION_QUALITY:0 SKY_AMBIENT:1.00 EXPOSURE:0.20 WHITE_BALANCE:0.00 SURFACE_SATURATION:1.00 SURFACE_DAMPNESS:0.65 CLOUD_AMOUNT:0.68 CLOUD_ALTITUDE:256.0 CLOUD_THICKNESS:12.0 SKY_LEAK:0.35 CLOUD_SPAN:240.0 CLOUD_DISTORTION:0.85 CLOUD_RELIEF:0.75 CLOUD_DRIFT:0.25 MIST_AMOUNT:0.85 MIST_Y:70.0 MIST_THICKNESS:18.0 MIST_CLEAR:24.0 REFLECT_LEVEL:1.00 REFLECT_RANGE:120.0 WATER_VISIBILITY:2.20 WATER_EXTINCTION:0.90 RIPPLE_HEIGHT:0.55 RIPPLE_SIZE:0.40 RIPPLE_RATE:1.00 FACE_SHADING:1.00 WET_DARKENING:1.00 WET_SHEEN:0.85 BLOOM_STRENGTH:0.18 BLOOM_RADIUS:3.00 SUN_VISIBILITY:0.85 LAMP_LEVEL:1.00 LAMP_HEAT:0.25 VANILLA_FACE_CONTRAST:1.00 REALISTIC_FACE_CONTRAST:1.00 REALISTIC_LIGHTING:0 WET_WEATHER_MODE:0 SUN_CORE_BRIGHTNESS:4.50 SUN_HALO_STRENGTH:2.00 SUN_HALO_RADIUS:1.50 CIRRUS_DENSITY:1.00 FACE_BLEND:1.00 GROUND_WARMTH:0.00 WATER_DISTORTION:1.00 CIRRUS_AMOUNT:0.65 CIRRUS_ALTITUDE:360.0 CLOUD_STYLE:0 SUN_STYLE:0 WATER_TURBIDITY:3.00 BIOME_WATER:1 CLOUD_DENSITY:1.00 CLOUD_DETAIL:1.00 MIST_SCALE:96.0 MIST_BREAKUP:0.85 MIST_LIGHT:0.65 WATER_TEXTURE:1.00 ambientOcclusionLevel:1.00 WATER_STYLE:1 TRANSPARENT_REFLECTIONS:0.75 TRANSPARENT_REFRACTION:0.50 TEMPORAL_ATMOSPHERE:1 ORIGINAL_DAMPNESS:0.00 TEMPORAL_OPTICS:0 WATER_RENDERER:0 REFLECTION_TRACE:0 WET_FILM_STYLE:0
++profile.REFERENCE=WATER_RENDER_QUALITY:1 ATMOSPHERE_QUALITY:1 CLOUD_LAYERS:2 MIST_DETAIL:3 REFLECTION_MODE:0 REFRACTION_QUALITY:1 SKY_AMBIENT:1.00 EXPOSURE:0.20 WHITE_BALANCE:0.00 SURFACE_SATURATION:1.00 SURFACE_DAMPNESS:0.65 CLOUD_AMOUNT:0.68 CLOUD_ALTITUDE:256.0 CLOUD_THICKNESS:12.0 SKY_LEAK:0.35 CLOUD_SPAN:240.0 CLOUD_DISTORTION:0.85 CLOUD_RELIEF:0.75 CLOUD_DRIFT:0.25 MIST_AMOUNT:0.85 MIST_Y:70.0 MIST_THICKNESS:18.0 MIST_CLEAR:24.0 REFLECT_LEVEL:1.00 REFLECT_RANGE:120.0 WATER_VISIBILITY:2.20 WATER_EXTINCTION:0.90 RIPPLE_HEIGHT:0.55 RIPPLE_SIZE:0.40 RIPPLE_RATE:1.00 FACE_SHADING:1.00 WET_DARKENING:1.00 WET_SHEEN:0.85 BLOOM_STRENGTH:0.18 BLOOM_RADIUS:3.00 SUN_VISIBILITY:0.85 LAMP_LEVEL:1.00 LAMP_HEAT:0.25 VANILLA_FACE_CONTRAST:1.00 REALISTIC_FACE_CONTRAST:1.00 REALISTIC_LIGHTING:0 WET_WEATHER_MODE:0 SUN_CORE_BRIGHTNESS:4.50 SUN_HALO_STRENGTH:2.00 SUN_HALO_RADIUS:1.50 CIRRUS_DENSITY:1.00 FACE_BLEND:1.00 GROUND_WARMTH:0.00 WATER_DISTORTION:1.00 CIRRUS_AMOUNT:0.65 CIRRUS_ALTITUDE:360.0 CLOUD_STYLE:0 SUN_STYLE:0 WATER_TURBIDITY:3.00 BIOME_WATER:1 CLOUD_DENSITY:1.00 CLOUD_DETAIL:1.00 MIST_SCALE:96.0 MIST_BREAKUP:0.85 MIST_LIGHT:0.65 WATER_TEXTURE:1.00 ambientOcclusionLevel:1.00 WATER_STYLE:1 TRANSPARENT_REFLECTIONS:0.75 TRANSPARENT_REFRACTION:0.50 TEMPORAL_ATMOSPHERE:1 ORIGINAL_DAMPNESS:0.00 TEMPORAL_OPTICS:0 WATER_RENDERER:0 REFLECTION_TRACE:0 WET_FILM_STYLE:0
++profile.HIGH=WATER_RENDER_QUALITY:2 ATMOSPHERE_QUALITY:2 CLOUD_LAYERS:3 MIST_DETAIL:3 REFLECTION_MODE:2 REFRACTION_QUALITY:2 SKY_AMBIENT:1.00 EXPOSURE:0.20 WHITE_BALANCE:0.00 SURFACE_SATURATION:1.00 SURFACE_DAMPNESS:0.65 CLOUD_AMOUNT:0.68 CLOUD_ALTITUDE:256.0 CLOUD_THICKNESS:12.0 SKY_LEAK:0.35 CLOUD_SPAN:240.0 CLOUD_DISTORTION:0.85 CLOUD_RELIEF:0.75 CLOUD_DRIFT:0.25 MIST_AMOUNT:0.85 MIST_Y:70.0 MIST_THICKNESS:18.0 MIST_CLEAR:24.0 REFLECT_LEVEL:1.00 REFLECT_RANGE:120.0 WATER_VISIBILITY:2.20 WATER_EXTINCTION:0.90 RIPPLE_HEIGHT:0.55 RIPPLE_SIZE:0.40 RIPPLE_RATE:1.00 FACE_SHADING:1.00 WET_DARKENING:1.00 WET_SHEEN:0.85 BLOOM_STRENGTH:0.18 BLOOM_RADIUS:3.00 SUN_VISIBILITY:0.85 LAMP_LEVEL:1.00 LAMP_HEAT:0.25 VANILLA_FACE_CONTRAST:1.00 REALISTIC_FACE_CONTRAST:1.00 REALISTIC_LIGHTING:0 WET_WEATHER_MODE:0 SUN_CORE_BRIGHTNESS:4.50 SUN_HALO_STRENGTH:2.00 SUN_HALO_RADIUS:1.50 CIRRUS_DENSITY:1.00 FACE_BLEND:1.00 GROUND_WARMTH:0.00 WATER_DISTORTION:1.00 CIRRUS_AMOUNT:0.65 CIRRUS_ALTITUDE:360.0 CLOUD_STYLE:0 SUN_STYLE:0 WATER_TURBIDITY:3.00 BIOME_WATER:1 CLOUD_DENSITY:1.00 CLOUD_DETAIL:1.00 MIST_SCALE:96.0 MIST_BREAKUP:0.85 MIST_LIGHT:0.65 WATER_TEXTURE:1.00 ambientOcclusionLevel:1.00 WATER_STYLE:1 TRANSPARENT_REFLECTIONS:0.75 TRANSPARENT_REFRACTION:0.50 TEMPORAL_ATMOSPHERE:1 ORIGINAL_DAMPNESS:0.00 TEMPORAL_OPTICS:0 WATER_RENDERER:0 REFLECTION_TRACE:0 WET_FILM_STYLE:0
+ blend.deferred=off
+ blend.composite=off
+ blend.composite1=off
+@@ -253,3 +253,8 @@
+ #endif
+ #endif
+ #endif
++
++# Fused classic composition removes the separate optics-buffer pass.
++#if WATER_RENDERER == 0 && TEMPORAL_OPTICS == 0
++program.composite1.enabled=false
++#endif

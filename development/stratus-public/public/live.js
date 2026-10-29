@@ -1,13 +1,14 @@
 'use strict';
-let currentRelease=null,currentUpdates=null,showcaseVersion=null,latestVersion=null;
+let currentRelease=null,currentUpdates=null,showcaseVersion=null,latestVersion='1.6.12';
+const versionAtLeast=(a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if((x[i]||0)!==(y[i]||0))return (x[i]||0)>(y[i]||0);}return true;};
 function feedStatus(){
- const status=latestVersion?`Latest release: Stratus ${latestVersion}${showcaseVersion?' · Showcase: '+showcaseVersion:''}`:showcaseVersion?`Live showcase · Stratus ${showcaseVersion}`:null;
+ const status=latestVersion?`Latest shader release: Stratus ${latestVersion}${showcaseVersion?' · Showcase: '+showcaseVersion:''}`:showcaseVersion?`Shader showcase · Stratus ${showcaseVersion}`:null;
  if(status){document.querySelector('#latest-release-note').textContent=status;document.querySelector('#feed-status').textContent=status;}
 }
 async function refreshUpdates(){
  try{
   const response=await fetch('/api/updates',{cache:'no-store'});if(!response.ok)return;
-  const feed=await response.json();if(!Array.isArray(feed.releases)||!feed.releases.length||feed.updated===currentUpdates)return;
+  const feed=await response.json();if(!Array.isArray(feed.releases)||!feed.releases.length||!/^\d+\.\d+\.\d+$/.test(feed.releases[0].version)||!versionAtLeast(feed.releases[0].version,'1.6.12')||feed.updated===currentUpdates)return;
   currentUpdates=feed.updated;latestVersion=feed.releases[0].version;
   const list=document.querySelector('#live-update-list');list.replaceChildren();
   for(const [index,release] of feed.releases.entries()){

@@ -1,0 +1,10 @@
+[
+  "shaders/core/diffuse.glsl",
+  "shaders/core/lake.frag.glsl",
+  "shaders/core/options.glsl",
+  "shaders/core/raster.vert.glsl",
+  "shaders/core/water-optics.glsl",
+  "shaders/core/water-resolve.frag.glsl",
+  "shaders/lang/en_us.lang",
+  "shaders/shaders.properties"
+]
