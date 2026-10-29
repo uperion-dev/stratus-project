@@ -1,6 +1,6 @@
 # Batch progress
 
-Status: rc8 technical candidate packaged; in-game visual/FPS checks deferred by user on30 October2026. All five requests remain pending acceptance.
+Status: rc8 technical candidate packaged. User resumed FPS comparison on30 October2026; currently awaiting Mac unlock and Main/Stratus Terrain Lab in front. All five requests remain pending acceptance.
 
 - Frozen delta staged: rc7 Classic reflection/wet-film and independent bloom retained; no formatting-only work or whole-target audit. Shared CHANGES.md untouched, frozen snapshots unchanged.
 - Source: actual1.3.1 RGB face response with independent controls/zero bypasses; nonnegative extended contrast; native two-light shading includes block entities and hand. Shared water-optics library permits scene-resolution fused composition with Layered selectable; temporal hints retain Layered. Existing underwater exit/segment fog/transparent protections unchanged; underwater/top visual consistency still needs review.
@@ -10,3 +10,7 @@ Status: rc8 technical candidate packaged; in-game visual/FPS checks deferred by 
 - User chose “Finish technical checks only for now”. No speedup/parity/60FPS claim. Fused runs at scene resolution and may cost more than lower-resolution Layered. TEMPORAL_OPTICS=1 uses Layered; saved overrides deliberately preserved.
 - Reconciliation: shared TASK now identifies candidate/limits and approved1.3.1 face design; no pending item marked complete. Shared next queue preserved. No document conflict detected.
 - Next, only when live testing is resumed: install final candidate safely preserving prior ZIP/settings, confirm actual Iris options, use Main/Stratus Terrain Lab normal-world river and hand/block-entity/underwater views, then matched focused1.3.1/rc7/fused/Layered samples with fresh five-second loaded-column/zero-mesh gates. Do not accept fixed-wait or background/AFK samples. Restore newer selection/settings after comparison.
+
+## FPS resumption checkpoint
+
+User reports actual1.3.1 about65FPS with70FPS cap and authorises the comparison. Saved Main values confirmed:maxFps70,VSync=true,render12/simulation8. Read-only current-client probe found no integrated server; CUA explicitly reports Mac locked/automatic unlock failed. Asked user to unlock/open the test world/focus Main; no benchmark attempted while blocked. Prepared existing bounded driver adaptation (agent/visual.jar) and benchmark-plan.json; driver NOT attached or running. It captures/restores initial Iris selection/enabled state and existing HUD/pause/flight state. Current Main files/settings unchanged; final candidate still not installed. Resume after user readiness, verify current process/world/focus, use temporary test copies/settings instead of overwriting saved user sidecars. Evidence: work/stratus-170-rc8/benchmark-plan.json and benchmark-preparation/ snapshots. Do not call this a failed or completed FPS sample.

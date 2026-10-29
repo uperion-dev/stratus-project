@@ -11,6 +11,8 @@
 
 Active batch: [35e4400d brief](IN-PROGRESS/35e4400d-e968-4a39-891a-a8101d519c45/CHANGES.md). Frozen rc7 delta already implemented and preserved; no whole-target audit. Shared unsent CHANGES.md and immutable snapshots preserved. Shared TASK reconciled to approved face-design change and honest candidate/evidence state after confirming unchanged starting hashes; no newer-edit conflict.
 
+FPS follow-up: the user subsequently authorised benchmarking against their reported approximately65FPS1.3.1 baseline with70FPS cap. Saved cap70/render12/simulation8 confirmed. The Mac is locked and Main has no integrated server, so focus/world prerequisites prevent a valid comparison. Existing bounded driver and comparison plan prepared locally only; no live driver, install, selection change or FPS sample. Await user unlock and Main/Stratus Terrain Lab foreground; see active PROGRESS.md.
+
 ### Implementation and trade-offs
 
 Eight shader files listed in `work/stratus-170-rc8/source-changes.json`/`changes.diff`: diffuse response; raster vertex lighting; shared water-optics library; lake wrapper/resolve; options/properties/English labels. The original1.3.1 hemisphere colours, broad sun-key and indoor fill replace the former scalar realistic component. Both face components/master/blend remain; full original-equivalent values match archived1.3.1 exactly. Extended values clamp at black rather than generating negative colours. Native two-light coverage now includes PASS_KIND4 block entities and PASS_KIND5 hands/held models; emissive passes remain separate. Actual model appearance/double-shading acceptance needs live checks.

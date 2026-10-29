@@ -14429,6 +14429,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-170-rc8-5629351748ad266f.zip",
       "bytes": 37200
+    },
+    "work/stratus-170-rc8/agent/visual.jar": {
+      "sha256": "1bf606108d21a7568ade7e8df994be009a4557705adb9dab9b894fc00a5f7160",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-22ef43ee1d621bce.zip",
+      "bytes": 17227
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

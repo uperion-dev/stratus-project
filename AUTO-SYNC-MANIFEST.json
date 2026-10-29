@@ -3229,8 +3229,11 @@
     "work/stratus-170-rc6/wet-rain-only.fsh",
     "work/stratus-170-rc6/wet-sheen-zero.fsh",
     "work/stratus-170-rc8/after-resolve.fsh",
+    "work/stratus-170-rc8/agent/ChunkGateRc8.java",
     "work/stratus-170-rc8/agent/CurrentRc8.java",
     "work/stratus-170-rc8/agent/MANIFEST.MF",
+    "work/stratus-170-rc8/agent/VisualRc8.java",
+    "work/stratus-170-rc8/agent/visual.MF",
     "work/stratus-170-rc8/audit_controls.py",
     "work/stratus-170-rc8/baseline/CHECKS.json",
     "work/stratus-170-rc8/baseline/IN-GAME-TEST.txt",
@@ -3484,6 +3487,10 @@
     "work/stratus-170-rc8/baseline/shaders/world1/gbuffers_weather.vsh",
     "work/stratus-170-rc8/before-lake.fsh",
     "work/stratus-170-rc8/before-resolve.fsh",
+    "work/stratus-170-rc8/benchmark-plan.json",
+    "work/stratus-170-rc8/benchmark-preparation/config/dynamic_fps.json",
+    "work/stratus-170-rc8/benchmark-preparation/config/iris.properties",
+    "work/stratus-170-rc8/benchmark-preparation/options.txt",
     "work/stratus-170-rc8/changes.diff",
     "work/stratus-170-rc8/control-checks-run.txt",
     "work/stratus-170-rc8/control-checks.json",
@@ -12458,6 +12465,6 @@
     "stratus-studio-cloud": "bb94ab1c5ae832b1650b79c2f5e89fa4dc664b9b"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "443ee327c719f1b5ed89523fe910ff4bef8f2509c96dacbef55e23bd6b2f2447",
+  "fingerprint": "5bde7b0b951dbfd2e68abfb4a79ff412faca9d8ac977be56b94b925af5df781d",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }

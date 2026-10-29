@@ -1,0 +1,25 @@
+{
+  "status": "prepared; not started; Mac locked and Main not in local test world",
+  "user_reported_131_fps": 65,
+  "user_cap": 70,
+  "observed_saved_cap": 70,
+  "saved_vsync": true,
+  "render_distance": 12,
+  "simulation_distance": 8,
+  "required_world": "Stratus Terrain Lab in Main",
+  "sample_seconds": 20,
+  "minimum_stable_chunks_seconds": 5,
+  "comparisons": [
+    "actual 1.3.1 saved tuning (historical renderer, different visual design)",
+    "rc7 controlled modern tuning",
+    "final rc8 fused controlled modern tuning, TEMPORAL_OPTICS=0",
+    "final rc8 Layered, same modern tuning"
+  ],
+  "constraints": [
+    "do not reduce quality to achieve a target",
+    "record actual effective options and framebuffer",
+    "reject unfocused, AFK, changed camera/loading/size",
+    "stop polling helper and restore original Iris/HUD/pause/flight state",
+    "do not overwrite user sidecars or original archives"
+  ]
+}
