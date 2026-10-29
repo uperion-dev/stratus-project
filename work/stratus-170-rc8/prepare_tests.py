@@ -6,7 +6,7 @@ w=Path('work/stratus-170-rc8');r=Path('outputs/Stratus/shaders').resolve();old=(
 (w/'screen.vsh').write_text('#version 330 core\nout vec2 rasterUV;void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);rasterUV=p;gl_Position=vec4(p*2.-1.,0,1);}')
 for name,root,file in [('before-lake',old,'lake.frag.glsl'),('before-resolve',old,'water-resolve.frag.glsl'),('after-resolve',r,'water-resolve.frag.glsl')]:
  s='#version 330 compatibility\n#define DIMENSION_TYPE 0\n'+expand(root/'core'/file,root)
- (w/(name+'.fsh')).write_text(adapt(override(s,{'WATER_RENDER_QUALITY':'2','REFLECTION_MODE':'0','TEMPORAL_OPTICS':'0','WATER_STYLE':'0'}),'.fsh'))
+ (w/(name+'.fsh')).write_text(adapt(override(s,{'WATER_RENDER_QUALITY':'2','REFLECTION_MODE':'0','TEMPORAL_OPTICS':'0','WATER_STYLE':sys.argv[1] if len(sys.argv)>1 else '0'}),'.fsh'))
 # Independent exact archived reference for the realistic component.
 with zipfile.ZipFile('outputs/Stratus-1.3.1.zip') as z:s=z.read('shaders/core/diffuse.glsl').decode()
 a=s.index('vec3 formIrradiance');e=s.index('\nfloat waterFresnel',a);ref=s[a:e].replace('formIrradiance','referenceFace')

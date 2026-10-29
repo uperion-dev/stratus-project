@@ -1,13 +1,154 @@
 {
   "version": "1.7.0-rc8",
-  "status": "candidate pending final checks",
+  "status": "technical checks passed; visual and FPS acceptance pending",
+  "native_program_pairs": 768,
+  "native_failures": 0,
   "face_gpu": {
     "cases": 144,
-    "classic_face_max_rgb_error": 0.0,
+    "classic_face_max_rgb_error": 3e-08,
     "entity_light_min": 0.4,
     "entity_light_max": 1.0,
     "gl_errors": 0
   },
-  "runtime_visual": "pending",
-  "FPS": "pending"
+  "maximum_face_contrast": {
+    "cases": 72,
+    "invalid_or_negative_rgb": 0,
+    "gl_errors": 0
+  },
+  "water_stratus_gpu": {
+    "scope": "actual two-pass baseline versus fused water at matched full resolution, sky-only reflections, Stratus water",
+    "pixels": 4096,
+    "max_rgba_error": 0.0,
+    "nonfinite": 0,
+    "gl_errors": 0
+  },
+  "water_native_gpu": {
+    "scope": "actual two-pass baseline versus fused water at matched full resolution, sky-only reflections, native water",
+    "pixels": 4096,
+    "max_rgba_error": 0.0,
+    "nonfinite": 0,
+    "gl_errors": 0
+  },
+  "underwater_gpu": {
+    "scope": "actual full-resolution water-resolve shader",
+    "cases": [
+      {
+        "name": "air_receiver_near",
+        "rgb": [
+          0.3176273,
+          0.2803899,
+          0.1829588
+        ],
+        "max_error": 3e-08
+      },
+      {
+        "name": "air_receiver_far",
+        "rgb": [
+          0.3176273,
+          0.2803899,
+          0.1829588
+        ],
+        "max_error": 3e-08
+      },
+      {
+        "name": "submerged_receiver",
+        "rgb": [
+          0.4977731,
+          0.332056,
+          0.1906237
+        ],
+        "max_error": 0.0
+      },
+      {
+        "name": "deep_submerged",
+        "rgb": [
+          0.0637219,
+          0.1481078,
+          0.1588745
+        ],
+        "max_error": 3e-08
+      },
+      {
+        "name": "sky_after_exit",
+        "rgb": [
+          0.3176273,
+          0.2803899,
+          0.1829588
+        ],
+        "max_error": 3e-08
+      },
+      {
+        "name": "sky_missing_exit",
+        "rgb": [
+          0.8,
+          0.4,
+          0.2
+        ],
+        "max_error": 0.0
+      },
+      {
+        "name": "glass_before_exit",
+        "rgb": [
+          0.3963326,
+          0.1520035,
+          0.1031235
+        ],
+        "max_error": 6e-08
+      },
+      {
+        "name": "glass_after_exit",
+        "rgb": [
+          0.2820984,
+          0.167633,
+          0.1194729
+        ],
+        "max_error": 6e-08
+      },
+      {
+        "name": "additive_particle",
+        "rgb": [
+          0.5492423,
+          0.3675921,
+          0.1829588
+        ],
+        "max_error": 3e-08
+      },
+      {
+        "name": "vertical_exit",
+        "rgb": [
+          0.4539303,
+          0.3205609,
+          0.1889648
+        ],
+        "max_error": 3e-08
+      }
+    ],
+    "failures": 0,
+    "opengl_errors": 0
+  },
+  "controls": {
+    "previous_controls": 70,
+    "current_controls": 71,
+    "previous_defaults_and_ranges_preserved": true,
+    "reachable_controls": 71,
+    "tooltips_present": true,
+    "all_four_original_preset_assignments_preserved": true,
+    "all_presets_native_water_default": true,
+    "block_tokens_preserved": 620,
+    "changed_shader_files": [
+      "shaders/core/diffuse.glsl",
+      "shaders/core/lake.frag.glsl",
+      "shaders/core/options.glsl",
+      "shaders/core/raster.vert.glsl",
+      "shaders/core/water-optics.glsl",
+      "shaders/core/water-resolve.frag.glsl",
+      "shaders/lang/en_us.lang",
+      "shaders/shaders.properties"
+    ],
+    "failures": 0
+  },
+  "installer_checks": 35,
+  "runtime_visual": "deferred by user; previous candidate loaded but screenshot rejected for moved camera",
+  "FPS": "deferred by user; no samples or speed/parity claim",
+  "final_install": "not installed; Main retains earlier rc8 archive, rc7 selected and shaders disabled in newer settings"
 }

@@ -111,8 +111,8 @@
   },
   {
     "path": "shaders/core/diffuse.glsl",
-    "bytes": 8009,
-    "sha256": "73ab8b5f5287dac365440805ddf27fc1b47289b6b569a52b25fe85ad9088a2d6"
+    "bytes": 8119,
+    "sha256": "7a25356de8f5dc4fceef927069f156bf8b2974454b3f3b596271f4bf923dc572"
   },
   {
     "path": "shaders/core/entity-lighting.glsl",

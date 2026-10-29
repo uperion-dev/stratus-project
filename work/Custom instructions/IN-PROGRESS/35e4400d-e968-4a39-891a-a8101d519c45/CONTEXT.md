@@ -2,12 +2,12 @@
 
 Navigation and fingerprints only; this file does not certify a release or authorise additional work.
 Project: /Users/william.lei/Documents/ChatGPT/MC Shader Making
-Active brief: /Users/william.lei/Documents/ChatGPT/MC Shader Making/work/Custom instructions/IN-PROGRESS/35e4400d-e968-4a39-891a-a8101d519c45/CHANGES.md
-Target snapshot: /Users/william.lei/Documents/ChatGPT/MC Shader Making/work/Custom instructions/IN-PROGRESS/35e4400d-e968-4a39-891a-a8101d519c45/TASK.md
-Brief SHA256: 8866970ad88fc1df64d805c5dbb9a819cec78d4304077a75dbe2cae9bb026757
+Active brief: work/Custom instructions/IN-PROGRESS/35e4400d-e968-4a39-891a-a8101d519c45/CHANGES.md
+Target snapshot: work/Custom instructions/IN-PROGRESS/35e4400d-e968-4a39-891a-a8101d519c45/TASK.md
+Brief SHA256: 95f1e4ab62fb2a0816edaa182142c2c2875d2c42315bd55dd090bf01757854b8
 Target SHA256: f8fc3d8acefab329e65a18385189af9b01fd89c9914cb3b0a36d1280813c1983
-Current shared TASK SHA256: f8fc3d8acefab329e65a18385189af9b01fd89c9914cb3b0a36d1280813c1983
-Current shader tree SHA256: 26802b40ade03b68332751b256a7185f05bb31c570514b8196c80cbf3b54a8c4 (242 files)
+Current shared TASK SHA256: 2e8d1f4cd2071c19f2ee06f757e4e156c079c38b708ec5b10c6fab9f10de8f25
+Current shader tree SHA256: 094a8c6fc290863c0b2ce2e49a90f016f51fb2d0a3f0e533bb56225a4456c214 (243 files)
 
 ## Read first
 - Project AGENTS.md, work/Custom instructions/AGENTS.md, GOALS.md and WORKFLOW.md.
@@ -29,30 +29,31 @@ Current shader tree SHA256: 26802b40ade03b68332751b256a7185f05bb31c570514b8196c8
 
 ## Current source navigation hints
 - outputs/Stratus/shaders/core/water-surface.glsl
-- outputs/Stratus/shaders/core/water-interface.glsl
-- outputs/Stratus/shaders/block.properties
+- outputs/Stratus/shaders/core/classic-reflection.glsl
 - outputs/Stratus/shaders/core/entity-lighting.glsl
-- outputs/Stratus/shaders/core/water-buffer.glsl
+- outputs/Stratus/shaders/core/temporal-optics.glsl
+- outputs/Stratus/shaders/core/transparent-optics.glsl
+- outputs/Stratus/shaders/core/water-interface.glsl
+- outputs/Stratus/shaders/core/water-optics.glsl
 - outputs/Stratus/shaders/core/water-path.glsl
 - outputs/Stratus/shaders/core/water-reflection.frag.glsl
-- outputs/Stratus/shaders/core/water-resolve.frag.glsl
-- outputs/Stratus/shaders/entity.properties
-- outputs/Stratus/shaders/shaders.properties
+- outputs/Stratus/shaders/block.properties
 - outputs/Stratus/shaders/core/options.glsl
+- outputs/Stratus/shaders/shaders.properties
 - outputs/Stratus/package.py and outputs/Stratus/install.py: existing release tooling.
 Hints are filename matches only, not a diagnosis or a complete dependency list.
 
 ## Latest recorded release summary — reported evidence, not a live check
-## 27 October 2026 — Stratus 1.7.0-rc7 — classic restoration and independent bloom
+## 30 October 2026 — Stratus 1.7.0-rc8 — technical candidate, live checks deferred
 
 ### At a glance
 
-- Restored selectable **Classic1.3.1 reflection** and **Classic wet sheen** defaults, retaining Detailed geometry/Current film and every prior control. Current sky, cloud/mist producer, water/refraction/underwater modules preserved. Bloom now works in vanilla lighting; fractional native emitters and visibly adjustable smooth radius repaired.
-- [Final ZIP](../../outputs/Stratus-1.7.0-rc7.zip) · [Actual visual checks](../../outputs/Stratus-1.7.0-rc7-visual-checks/index.html) · [Install/load receipt](../../outputs/Stratus-1.7.0-rc7-install.json).251 entries,7,789,615bytes;SHA256 `cc0fd043e8f96d415d7376aba0f0835596971e28a2155cccda1458c78d986d9b`. Exact source/archive/installed bytes match; final ZIP loaded and left selected/enabled in Main.
--768 native pairs,1152 material cases,96 wet cases,288 original1.3.1 trace comparisons, targeted bloom GPU checks,33 installer cases,70 reachable options and four actual70-option Iris profiles pass. All prior68 defaults/ranges/preset assignments and620 block tokens retained.
-- **Focused development pair30.51→48.59FPS (~59.2%) predates final bloom corrections. Final rc7 FPS and valid1.3.1 comparison remain pending after the Mac locked.** No final60FPS/max-FPS or full temporal completion claim.
+- Restored actual1.3.1 RGB face-light response, retained independent controls, and enabled native model lighting for block entities and player hand/held items. Added nonnegative extended-contrast guards.
+- Added selectable Classic fused water composition using the same current optics in the full-resolution resolve; Layered remains available. Existing native atlas, transparent ordering and nearest-exit underwater fog protections retained.
+- [Candidate ZIP](../../outputs/Stratus-1.7.0-rc8.zip):252files,7,787,770bytes;SHA256 `77da8afdce004277a0cbc04290bbafeb7cb49f65ece6fc67bd34548d57b830e3`. Final source/archive/manifest integrity verified. **Final archive not installed or live-loaded.**
+-768 native program pairs, targeted face/water/underwater GPU checks,35 actual installer cases and71 reachable controls pass. **User deferred live visuals and FPS; no speedup,1.3.1 parity or60FPS claim. All five requests remain pending acceptance.**
 
-Batch: [6d616ef5 active brief](IN-PROGRESS/6d616ef5-4067-4c24-afdc-c69e622af1c9/CHANGES.md). Shared next queue and immutable snapshots preserved; no newer document conflict before reconciliation. Frozen delta’s unfinished all-optics temporal target is staged and retained, not treated as completed by classic restoration. Old chat was read only (three recent turns); no handoff/message/revival. Actual own1.3.1 archive source is the restoration reference.
+Active batch: [35e4400d brief](IN-PROGRESS/35e4400d-e968-4a39-891a-a8101d519c45/CHANGES.md). Frozen rc7 delta already implemented and preserved; no whole-target audit. Shared unsent CHANGES.md and immutable snapshots preserved. Shared TASK reconciled to approved face-design change and honest candidate/evidence state after confirming unchanged starting hashes; no newer-edit conflict.
 
 
 For earlier evidence, search the exact version or issue in CHANGE-LOG.md; do not dump its entire history.

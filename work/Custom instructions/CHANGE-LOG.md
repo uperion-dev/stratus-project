@@ -1,5 +1,33 @@
 # Stratus change and output log
 
+## 30 October 2026 — Stratus 1.7.0-rc8 — technical candidate, live checks deferred
+
+### At a glance
+
+- Restored actual1.3.1 RGB face-light response, retained independent controls, and enabled native model lighting for block entities and player hand/held items. Added nonnegative extended-contrast guards.
+- Added selectable Classic fused water composition using the same current optics in the full-resolution resolve; Layered remains available. Existing native atlas, transparent ordering and nearest-exit underwater fog protections retained.
+- [Candidate ZIP](../../outputs/Stratus-1.7.0-rc8.zip):252files,7,787,770bytes;SHA256 `77da8afdce004277a0cbc04290bbafeb7cb49f65ece6fc67bd34548d57b830e3`. Final source/archive/manifest integrity verified. **Final archive not installed or live-loaded.**
+-768 native program pairs, targeted face/water/underwater GPU checks,35 actual installer cases and71 reachable controls pass. **User deferred live visuals and FPS; no speedup,1.3.1 parity or60FPS claim. All five requests remain pending acceptance.**
+
+Active batch: [35e4400d brief](IN-PROGRESS/35e4400d-e968-4a39-891a-a8101d519c45/CHANGES.md). Frozen rc7 delta already implemented and preserved; no whole-target audit. Shared unsent CHANGES.md and immutable snapshots preserved. Shared TASK reconciled to approved face-design change and honest candidate/evidence state after confirming unchanged starting hashes; no newer-edit conflict.
+
+### Implementation and trade-offs
+
+Eight shader files listed in `work/stratus-170-rc8/source-changes.json`/`changes.diff`: diffuse response; raster vertex lighting; shared water-optics library; lake wrapper/resolve; options/properties/English labels. The original1.3.1 hemisphere colours, broad sun-key and indoor fill replace the former scalar realistic component. Both face components/master/blend remain; full original-equivalent values match archived1.3.1 exactly. Extended values clamp at black rather than generating negative colours. Native two-light coverage now includes PASS_KIND4 block entities and PASS_KIND5 hands/held models; emissive passes remain separate. Actual model appearance/double-shading acceptance needs live checks.
+
+`WATER_RENDERER=0` selects fused current optics in composite2 and disables composite1 when temporal optics is Off;1 retains Layered. It follows1.3.1's direct composition layout, not a wholesale rollback of its water algorithms. Fused evaluates at scene resolution; Layered retains the selected optics-buffer resolution. Therefore fewer passes do not prove faster rendering, especially against half-resolution optics. Existing WATER_RENDER_QUALITY values remain available through Layered and are explained by the selector tooltip. Experimental temporal hints use Layered. Preserved saved TEMPORAL_OPTICS=1 can therefore keep the layered path active; do not reset user values to manufacture a speed gain. Existing underwater code intentionally stays straight-through without reintroducing a Snell window/reflection overlay; this does not complete the requested underwater/top appearance review.
+
+All previous70 option defaults/ranges, four preset assignments and620 material tokens retained. Added WATER_RENDERER makes71 reachable controls with labels/tooltips. Current presets select fused; no proven performance advantage. No existing setting removed/narrowed. Installer reset list empty;35 temporary-profile checks cover old/new overrides, dry-run safety, atomic refusal and archive conflicts. Main mods, resource packs and unrelated worlds unchanged on this resume.
+
+### Verification and delivery state
+
+Evidence directory `work/stratus-170-rc8/`: `compile-final.log`768 pairs/8variants/0failures using native compatibility shims; `face-gpu.json`144 cases/RGB reference error0/entity-light range0.4..1/GLerror0; `face-extreme-gpu.json`72 max-contrast cases without invalid/negative RGB; `water-gpu.json` and `water-native-gpu.json` each4096 synthetic pixels at matched full resolution and sky-only reflection, baseline two-pass versus fused RGBA error0, no nonfinite/API error. Ten actual underwater resolve cases in `underwater-gpu.json` cover submerged/air/exit/glass/additive/vertical composition with max error about6e-8. These are finite fixtures, not actual-world visual or throughput evidence. No GPU timing/FPS sampled. `control-checks.json`, `migration-checks.json`, `final-audit.json` record controls,35 actual installer checks and exact package hashes.
+
+An earlier rc8 archive (SHA256 `10d60e7b3f4601ae29a74f760cc41c619c430c3df0b890acb250c7730690b7f0`) loaded in Main, but its camera moved and capture was rejected. It remains preserved at `work/stratus-170-rc8/pre-final-installed-rc8.zip` and installed in Main; it is not byte-identical to the final technical candidate above. Final contrast guard/technical documentation were packaged locally only after the user's “Finish technical checks only for now”. Earlier smoke load is not final build verification.
+
+At resume, read-only attach found no integrated server; Main's newer rc7 selection with shaders disabled was preserved. No restart, live pack selection, camera/world mutation or benchmark occurred during this resume. The one-shot probe finished and no polling helper was started. Broader world/entity/motion checks, final install/load and matched1.3.1/rc7/fused/Layered FPS remain pending. Next live gate: Main/Stratus Terrain Lab in front, exact final package/options, stable five-second loaded-column/zero-mesh state, then matched focused non-AFK samples. Do not represent this candidate as accepted or fully implemented.
+
+
 ## 27 October 2026 — Stratus 1.7.0-rc7 — classic restoration and independent bloom
 
 ### At a glance

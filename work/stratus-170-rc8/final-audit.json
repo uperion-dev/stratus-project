@@ -1,0 +1,16 @@
+{
+  "version": "1.7.0-rc8",
+  "files": 252,
+  "bytes": 7787770,
+  "sha256": "77da8afdce004277a0cbc04290bbafeb7cb49f65ece6fc67bd34548d57b830e3",
+  "source_archive_match": true,
+  "integrity_pass": true,
+  "manifest_entries": 242,
+  "installed_sha256": "10d60e7b3f4601ae29a74f760cc41c619c430c3df0b890acb250c7730690b7f0",
+  "installed_matches_final": false,
+  "previous_smoke_archive_sha256": "10d60e7b3f4601ae29a74f760cc41c619c430c3df0b890acb250c7730690b7f0",
+  "selected": "Stratus-1.7.0-rc7.zip",
+  "shaders_enabled": false,
+  "live_and_fps": "deferred by user; no live mutations on resume",
+  "runtime_helpers": "one-shot read-only probe completed; no polling helper started on resume"
+}

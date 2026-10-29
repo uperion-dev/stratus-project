@@ -1,1 +1,14 @@
-Stratus 1.7.0-rc8 candidate. Native/GPU/runtime validation recorded in work/stratus-170-rc8; live acceptance and FPS remain pending.
+Stratus 1.7.0-rc8 — technical candidate, not visual/FPS acceptance
+768 native compile/link pairs across 8 variants pass using compatibility shims.
+144 actual GPU face/entity cases match archived 1.3.1 at original-equivalent
+settings (RGB error 0); 72 maximum-contrast cases remain finite/nonnegative.
+Fused versus rc7 layered water matches 4096 synthetic full-resolution pixels
+for each of Stratus/native water (RGBA error 0). Sky-only reflections tested.
+Ten underwater/air/transparent/particle segment-composition cases pass.
+These finite GPU fixtures do not establish all world scenes or performance.
+35 actual installer checks pass in temporary profiles. Prior 70 defaults,
+ranges and preset values retained; 71 reachable controls with tooltips.
+Current user requested technical checks only; live visuals/FPS remain pending.
+The earlier rc8 archive loaded in Iris, but camera movement rejected its shot.
+Final archive is not installed or live-loaded; Main newer settings preserved.
+See work/stratus-170-rc8 and active batch PROGRESS.md for exact evidence.

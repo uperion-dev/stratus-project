@@ -1,9 +1,12 @@
 # Batch progress
 
-Status: rc8 source candidate implemented; acceptance pending.
+Status: rc8 technical candidate packaged; in-game visual/FPS checks deferred by user on30 October2026. All five requests remain pending acceptance.
 
-- Frozen delta reviewed/staged: existing rc7 restoration preserved. Shared queue and target unchanged.
-- Changes: 1.3.1 RGB face formula with retained controls; native model lighting now covers block entities/hand; shared water-optics library and fused composition selector; prior Layered renderer retained.
-- 768 native program pairs passed before the final FACE_BLEND bypass refinement; rerun final checks. GPU 144 face/entity cases pass, archived-reference RGB error0.
-- Remaining: final compile/control/migration/GPU water checks, actual Main entity/hand/waterline/underwater visual comparisons, matched focused FPS against actual1.3.1. Do not claim speedup/parity.
-- Evidence: work/stratus-170-rc8. Resume with final tests and Main QA. All five requests remain pending acceptance in this brief.
+- Frozen delta staged: rc7 Classic reflection/wet-film and independent bloom retained; no formatting-only work or whole-target audit. Shared CHANGES.md untouched, frozen snapshots unchanged.
+- Source: actual1.3.1 RGB face response with independent controls/zero bypasses; nonnegative extended contrast; native two-light shading includes block entities and hand. Shared water-optics library permits scene-resolution fused composition with Layered selectable; temporal hints retain Layered. Existing underwater exit/segment fog/transparent protections unchanged; underwater/top visual consistency still needs review.
+- Final checks:768 native pairs/8variants/0failures;144 GPU face/entity cases with archived RGB error0;72 maximum-contrast finite/nonnegative cases;4096-pixel parity for each Stratus/native water at full resolution/sky-only;10 submerged/air/glass/particle fog cases;35 actual installer tests. All prior70 defaults/ranges/presets and620 block tokens preserved;71 reachable options/tooltips.
+- Artifact: outputs/Stratus-1.7.0-rc8.zip,252files,7,787,770bytes,SHA25677da8afdce004277a0cbc04290bbafeb7cb49f65ece6fc67bd34548d57b830e3. Final source/ZIP/manifest integrity verified. Evidence work/stratus-170-rc8/final-audit.json and CHANGE-LOG.md.
+- Earlier smoke archive loaded in Iris but its screenshot was rejected due camera movement. Preserved at work/stratus-170-rc8/pre-final-installed-rc8.zip and still installed in Main; it is NOT the final archive. On resume, Main had no integrated server,rc7 selected/shaders disabled. Newer state preserved. One-shot read-only probe completed; no polling helper launched, no client restarted or benchmark taken.
+- User chose “Finish technical checks only for now”. No speedup/parity/60FPS claim. Fused runs at scene resolution and may cost more than lower-resolution Layered. TEMPORAL_OPTICS=1 uses Layered; saved overrides deliberately preserved.
+- Reconciliation: shared TASK now identifies candidate/limits and approved1.3.1 face design; no pending item marked complete. Shared next queue preserved. No document conflict detected.
+- Next, only when live testing is resumed: install final candidate safely preserving prior ZIP/settings, confirm actual Iris options, use Main/Stratus Terrain Lab normal-world river and hand/block-entity/underwater views, then matched focused1.3.1/rc7/fused/Layered samples with fresh five-second loaded-column/zero-mesh gates. Do not accept fixed-wait or background/AFK samples. Restore newer selection/settings after comparison.

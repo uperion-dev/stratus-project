@@ -1,0 +1,1 @@
+java.lang.NullPointerException: Cannot invoke "Object.getClass()" because "<parameter1>" is null

@@ -18,3 +18,7 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 ## Frozen delta staging
 
 The meaningful rc7 delta is already implemented in the starting source: Classic reflection/wet-film selectors and independent native-emitter bloom. It is preserved, not rebuilt. Its historical full-optics temporal and final rc7 FPS caveats remain with their original batches; this batch specifically requests an actual 1.3.1 performance comparison. No formatting-only changes were staged.
+
+## Technical candidate checkpoint — 30 October 2026
+
+The five requests above remain pending acceptance. Candidate1.7.0-rc8 restores the archived RGB face response, extends native model-lighting coverage and adds a selectable fused composition path while preserving current underwater-exit/transparent protections. Technical checks pass; underwater/top appearance and actual1.3.1 FPS are unverified. The user requested technical checks only for now. See [PROGRESS.md](PROGRESS.md), `work/stratus-170-rc8/final-audit.json` and the rc8 CHANGE-LOG entry. Shared next queue untouched.

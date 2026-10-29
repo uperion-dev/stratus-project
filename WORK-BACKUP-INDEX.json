@@ -14377,10 +14377,10 @@
       "bytes": 36921
     },
     "outputs/Stratus-1.7.0-rc8.zip": {
-      "sha256": "10d60e7b3f4601ae29a74f760cc41c619c430c3df0b890acb250c7730690b7f0",
+      "sha256": "77da8afdce004277a0cbc04290bbafeb7cb49f65ece6fc67bd34548d57b830e3",
       "tag": "project-work-snapshots",
-      "asset": "Stratus-1-7-0-rc8-dbd3fc28ed3c412b.zip",
-      "bytes": 7785867
+      "asset": "Stratus-1-7-0-rc8-44fa8ba59e7e217a.zip",
+      "bytes": 7787770
     },
     "work/stratus-170-rc8/underwater/fog_probe": {
       "sha256": "b110bf68162243e948435c8ad376e2c179bbf96151960540d6203b25ff3711c8",
@@ -14405,6 +14405,30 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-brighter-ui-png-3e426ff445278e2d.zip",
       "bytes": 43985
+    },
+    "work/stratus-170-rc8/agent/current.jar": {
+      "sha256": "b81acffcff37fbaa822d4ebe3c22c04426d5587244c9bcca79f3a1303d41d7c8",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-5629351748ad266f.zip",
+      "bytes": 2821
+    },
+    "work/stratus-170-rc8/face_extreme_probe": {
+      "sha256": "89915ff3e62718be117f4d90430e9fb0f3b8ebe4ba99d7ed54c099bd15d90a58",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-5629351748ad266f.zip",
+      "bytes": 36736
+    },
+    "work/stratus-170-rc8/pre-final-installed-rc8.zip": {
+      "sha256": "10d60e7b3f4601ae29a74f760cc41c619c430c3df0b890acb250c7730690b7f0",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-5629351748ad266f.zip",
+      "bytes": 7785867
+    },
+    "work/stratus-170-rc8/water_native_probe": {
+      "sha256": "bbfcfa8b5b0ff0a63d81a963ee76c2bdd64939987c91afcc84f1e1eeb1a9ee0f",
+      "tag": "project-work-snapshots",
+      "asset": "stratus-170-rc8-5629351748ad266f.zip",
+      "bytes": 37200
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

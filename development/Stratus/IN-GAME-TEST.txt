@@ -1,1 +1,12 @@
-Stratus 1.7.0-rc8 candidate. Native/GPU/runtime validation recorded in work/stratus-170-rc8; live acceptance and FPS remain pending.
+Stratus 1.7.0-rc8 — pending live checks, deferred by user
+Use Main / Stratus Terrain Lab, Creative, normal-world river.
+Compare rc7, candidate and actual 1.3.1 with matched settings and camera.
+Verify hand, held blocks, block entities and emissive exceptions in vanilla
+and enhanced lighting. Check underwater exits, river shallows/depths, waterline,
+flowing sides, glass/particles, submerged wood and both water styles.
+Compare Classic fused and Layered at each chosen quality. Fused evaluates at
+scene resolution; Layered retains the optics-buffer quality control. Temporal
+optics selects Layered. No efficiency or FPS parity is assumed.
+Before FPS, require loaded view-distance disk, zero mesh work and stable counts
+for five seconds, actual focus, no AFK/background throttle, matched framebuffer,
+quality, time/weather and camera. Do not infer FPS from fixed waits.
