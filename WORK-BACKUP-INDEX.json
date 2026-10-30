@@ -14459,6 +14459,12 @@
       "tag": "project-work-snapshots",
       "asset": "public-site-history-6b34d18a4c39cc1a.zip",
       "bytes": 24490272
+    },
+    "work/public-site-history/0a6e1c9de6e0e8efa6e1ef2f13e36890ce169ece.zip": {
+      "sha256": "946d293eb6545b6d10638a990509775675ec5ae40aa6862033242269364c8770",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-5a05935d1bb34a75.zip",
+      "bytes": 24486837
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

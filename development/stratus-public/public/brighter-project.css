@@ -83,3 +83,7 @@ body.stratus-immersive .feedback-form :is(input,textarea,select){background:line
 body.stratus-immersive .button.primary{background:radial-gradient(ellipse at var(--lg-x,25%) 0,#ffffff55,transparent 70%),linear-gradient(145deg,#d7f4e8b8,#a8d4c69c)}
 body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) .feedback-nav{background:radial-gradient(ellipse at 26% 0,#fffaff8c,transparent 70%),linear-gradient(130deg,#dbc4f8b0,#b99ae8a8 65%,#d4b8f4b0)}
 @media(prefers-reduced-transparency:reduce){body.nav-glass-fade .topbar.navigation-ready:before,body.stratus-immersive .feedback-form :is(input,textarea,select){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+
+/* Two project cards on the concise overview. */
+.workspace-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px){.workspace-cards{grid-template-columns:1fr}}
