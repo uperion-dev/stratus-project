@@ -339,6 +339,7 @@
     "development/stratus-public/public/page-experience.css",
     "development/stratus-public/public/page-experience.js",
     "development/stratus-public/public/performance.css",
+    "development/stratus-public/public/project-overview.css",
     "development/stratus-public/public/scroll-atmosphere.css",
     "development/stratus-public/public/scroll-performance.css",
     "development/stratus-public/public/server-address.js",
@@ -12476,6 +12477,6 @@
     "stratus-studio-cloud": "bb94ab1c5ae832b1650b79c2f5e89fa4dc664b9b"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "eca9ac0ea16d31f30320de890e74f99dec7e88875e3941736bf3bfa067171728",
+  "fingerprint": "df652cc5078fb022d354ef11a7c650e8f65bbdf912d3bea5ae5b01f42d35e138",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
