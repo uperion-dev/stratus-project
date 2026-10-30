@@ -4,5 +4,7 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 
 ## Pending changes
 
-No pending changes.
+- Make sure to use previous options as Referance preset and defualt. 
+
+- Make underwater, water surface consustant with the above. Eg. Refractions, *reflections (get the feel from 1.3.1), etc. 
 
