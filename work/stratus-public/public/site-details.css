@@ -1,0 +1,69 @@
+/* Quiet editorial typography: plain readable copy, expressive major headings. */
+body.stratus-immersive :is(.section-intro h1,.home-heading h2,.water-story h2,.public-faq h2){color:#e5ecde;letter-spacing:-.055em;line-height:1.04;text-wrap:balance;font-weight:500}
+body.stratus-immersive .type-accent{font-family:Georgia,'Times New Roman',serif;font-weight:400;color:#a9c6ad;letter-spacing:-.055em}
+body.stratus-immersive .section-intro h1{font-size:clamp(46px,6.7vw,100px);max-width:12ch;margin-bottom:24px}
+body.stratus-immersive .section-intro>p{font-size:clamp(13px,1.05vw,16px);line-height:1.8;max-width:47ch;color:#a9bbae}
+body.stratus-immersive :is(.shot-name h2,.release-content h2,.spec-section h2,.upcoming-item h2){letter-spacing:-.035em;font-weight:500;color:#dce8d7}
+body.stratus-immersive :is(.release-content li,.spec-section dd,.upcoming-item p,.faq-list p){color:#a6b9ac;line-height:1.9}
+.block-scene{position:relative}
+.site-block-cluster{position:absolute;width:190px;height:155px;right:4%;top:20px;pointer-events:none;z-index:0}
+.cluster-block{position:absolute;width:77px;height:auto;opacity:.95;animation:cluster-float 8s ease-in-out infinite;animation-delay:var(--drift-delay);animation-play-state:paused}
+.cluster-block-0{left:3px;top:64px;width:65px;--block-angle:-7deg}
+.cluster-block-1{left:57px;top:7px;width:91px;--block-angle:4deg}
+.cluster-block-2{right:0;top:86px;width:53px;--block-angle:9deg}
+.blocks-visible>.site-block-cluster>.cluster-block{animation-play-state:running}
+.immersive-hero>.site-block-cluster{right:5%;top:auto;bottom:13%;width:215px;height:175px}
+.spatial-journey>.site-block-cluster{top:26px;right:7%}
+.water-story>.site-block-cluster{top:auto;bottom:-90px;right:10%}
+.public-faq>.site-block-cluster{top:-65px;right:1%;transform:scale(.7);transform-origin:right top}
+body.stratus-immersive .public-view>.section-intro{max-width:none;padding-right:240px;min-height:175px;margin-bottom:55px}
+body.effects-paused .cluster-block,body.spatial-paused .cluster-block{animation-play-state:paused}
+@keyframes cluster-float{0%,100%{transform:translate3d(0,0,0) rotate(var(--block-angle))}50%{transform:translate3d(0,-10px,0) rotate(calc(var(--block-angle) + 4deg))}}
+@media(max-width:800px){.site-block-cluster{width:145px;height:120px;transform:scale(.8);transform-origin:right top}.immersive-hero>.site-block-cluster{bottom:12%;right:3%;transform:scale(.65);transform-origin:right bottom}.spatial-journey>.site-block-cluster{top:35px;right:2%;transform:scale(.55)}body.stratus-immersive .public-view>.section-intro{padding-right:0;margin-bottom:30px}.section-intro>.site-block-cluster{position:relative;top:auto;right:auto;margin-top:20px;height:125px;transform:scale(.85);transform-origin:left top}.public-faq>.site-block-cluster{display:none}.water-story>.site-block-cluster{bottom:-65px;right:2%;transform:scale(.6)}}
+@media(prefers-reduced-motion:reduce){.cluster-block{animation:none;transform:rotate(var(--block-angle))}}
+@media(forced-colors:active){body.stratus-immersive .type-accent{color:CanvasText}.site-block-cluster{display:none}}
+
+/* Luminous, lightly grained headings instead of flat white type. */
+@supports(background-clip:text){
+ body.stratus-immersive :is(.section-intro h1,.home-heading h2,.water-story h2,.public-faq h2,.release-content h2,.spec-section h2,.upcoming-item h2,.shot-name h2,.workspace-card h3){color:transparent;background-image:url('/assets/fine-grain.png'),linear-gradient(115deg,#f3f3df 4%,#e1ebd9 44%,#94b9a5 100%);background-size:180px 180px,100% 100%;background-clip:text;-webkit-background-clip:text;text-shadow:0 2px 16px #c0e2c00b}
+}
+body.stratus-immersive :is(.spec-section h2,.upcoming-item h2,.release-content h2,.shot-name h2) .type-accent{font-size:1.08em}
+body.stratus-immersive :is(.section-intro>p,.spec-section dd,.release-content li,.upcoming-item p){letter-spacing:.008em}
+.scatter-scene{position:relative}
+.block-scatter{position:absolute;inset:0;pointer-events:none;overflow:clip;z-index:0}
+.scattered-block{position:absolute;top:var(--scatter-y);width:var(--scatter-size);height:auto;opacity:1;animation:cluster-float 10s ease-in-out infinite;animation-delay:var(--drift-delay);animation-play-state:paused}
+.scatter-0{left:var(--scatter-x)}.scatter-1{right:var(--scatter-x)}
+.blocks-visible>.block-scatter>.scattered-block{animation-play-state:running}
+body.effects-paused .scattered-block,body.spatial-paused .scattered-block{animation-play-state:paused}
+@media(max-width:800px){.scattered-block{width:38px;opacity:1}.scatter-0{left:-18px}.scatter-1{right:-18px}}
+@media(prefers-reduced-motion:reduce){.scattered-block{animation:none;transform:rotate(var(--block-angle))}}
+@media(forced-colors:active){body.stratus-immersive :is(.section-intro h1,.home-heading h2,.water-story h2,.public-faq h2,.release-content h2,.spec-section h2,.upcoming-item h2,.shot-name h2,.workspace-card h3){background:none;color:CanvasText}.block-scatter{display:none}}
+
+.immersive-hero>.block-scatter .scatter-0{left:5%}.immersive-hero>.block-scatter .scatter-1{right:5%}
+@media(max-width:800px){.immersive-hero>.block-scatter .scattered-block{width:52px}.immersive-hero>.block-scatter .scatter-0{left:3%}.immersive-hero>.block-scatter .scatter-1{right:3%}}
+/* Content layering must not turn the full-page scatter into an empty flow row. */
+body.stratus-immersive main [data-view].scatter-scene>.block-scatter{position:absolute;inset:0;z-index:1}
+
+/* True cube geometry: front/right/top stay square and share the same Z depth. */
+.minecraft-block{display:block;aspect-ratio:1;height:auto;perspective:600px}
+.block-model{--edge:100%;position:absolute;left:16%;top:16%;width:68%;aspect-ratio:1;transform-style:preserve-3d;transform:rotateX(-25deg) rotateY(-35deg);container-type:inline-size}
+.block-face{position:absolute;inset:0;display:block;background-image:var(--side-texture);background-size:100% 100%;image-rendering:pixelated;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+/* cqw uses the cube's own edge size, including responsive sizes. */
+.face-front{transform:translateZ(50cqw)}
+.face-right{transform:rotateY(90deg) translateZ(50cqw)}
+.face-back{transform:rotateY(180deg) translateZ(50cqw)}
+.face-left{transform:rotateY(-90deg) translateZ(50cqw)}
+.face-top{transform:rotateX(90deg) translateZ(50cqw);background-image:var(--top-texture)}
+.face-bottom{transform:rotateX(-90deg) translateZ(50cqw);background-image:var(--bottom-texture,var(--side-texture))}
+.block-grass{--side-texture:url('/assets/blocks/grass-side.svg');--top-texture:url('/assets/blocks/grass-top.svg');--bottom-texture:url('/assets/blocks/dirt.png')}
+.block-stone{--side-texture:url('/assets/blocks/stone.png');--top-texture:url('/assets/blocks/stone.png')}
+.block-oak{--side-texture:url('/assets/blocks/oak_log.png');--top-texture:url('/assets/blocks/oak_log_top.png');--bottom-texture:url('/assets/blocks/oak_log_top.png')}
+.block-face:before,.block-face:after{content:'';position:absolute;inset:0;pointer-events:none}
+.block-face:before{background:#081c1822}
+.face-right:before{background:#04161155}
+.face-top:before{background:linear-gradient(140deg,#dcebc40a,#0b211c20)}
+/* Broad reflected sky plus a narrow specular streak, attached to each face. */
+.block-face:after{background:linear-gradient(132deg,transparent 18%,#e4fff32b 29%,#f7fff87a 31%,#d3fff22b 34%,transparent 46%),linear-gradient(180deg,#c2eee534,transparent 55%);opacity:.52}
+.face-top:after{opacity:.9;background:linear-gradient(138deg,#d5fff02e 6%,transparent 23%,#effff0b0 30%,#c7fff342 34%,transparent 46%),radial-gradient(ellipse at 20% 10%,#f4fff04a,transparent 72%)}
+.face-right:after{opacity:.35}
+.block-stone .block-face:after{opacity:.68}

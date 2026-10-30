@@ -51,3 +51,35 @@ body.stratus-immersive .type-accent{color:#d7ebd8}
 @media(prefers-reduced-transparency:reduce){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f);--lg-blur:none}body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser),body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,#scene-close,.showcase-image>span,.text-link,.card-icon,.public-footer a,#scene-dialog){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f)}}
 @media(forced-colors:active){body.stratus-immersive :is(.eyebrow,.card-index,.card-bottom,.release-meta time,.release-label,.pending-badge,.upcoming-number,.platform-strip span,.shot-name small,.carousel-status,.feedback-privacy,.spec-section dt,.faq-list summary,.workspace-card p,.reference-strip small,.public-footer,.type-accent){color:CanvasText}}
+/* Clearer glass, shared by both halves of the navigation during transitions. */
+body.stratus-immersive{--lg-material:radial-gradient(ellipse at var(--lg-x,22%) var(--lg-y,0%),#edfff71a,transparent 62%),linear-gradient(145deg,#e8fff310,#d5f5e703 48%,#173a2b08),#527b6658;--lg-blur:blur(3px) saturate(1.08)}
+body.stratus-immersive :is(.spec-section,.release,.upcoming-item,.feedback-form){background-color:#527b6658}
+body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser){backdrop-filter:blur(3px) saturate(1.08);-webkit-backdrop-filter:blur(3px) saturate(1.08)}
+body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,#scene-close,.showcase-image>span,.text-link,.card-icon,.public-footer a){backdrop-filter:blur(3px) saturate(1.08)!important;-webkit-backdrop-filter:blur(3px) saturate(1.08)!important}
+body.stratus-immersive :is(.feedback-form input,.feedback-form textarea,.feedback-form select,#scene-dialog){backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+body.stratus-immersive .topbar.navigation-ready .nav-track a{text-shadow:0 1px 4px #07190fa0}
+/* The shader keeps its own accessible secondary navigation. */
+body.stratus-immersive .shader-sections{display:flex;gap:6px;max-width:max-content;overflow-x:auto;overscroll-behavior-x:contain;margin:0 0 34px;padding:5px;background:var(--lg-material);border:1px solid var(--lg-rim);border-radius:999px;box-shadow:var(--lg-shadow);backdrop-filter:var(--lg-blur);-webkit-backdrop-filter:var(--lg-blur)}
+body.stratus-immersive .shader-sections a{flex:0 0 auto;min-height:44px;display:flex;align-items:center;justify-content:center;padding:0 18px;color:#edf8ef;border-radius:999px;text-decoration:none;font-size:12px}
+body.stratus-immersive .shader-sections a[aria-current=page]{background:#e0fff42e;box-shadow:inset 0 1px 2px #f3fff945}
+body.stratus-immersive .server-join{margin:0 0 35px;padding:28px;background:var(--lg-material);border:1px solid var(--lg-rim);border-radius:var(--lg-panel-radius);box-shadow:var(--lg-shadow);backdrop-filter:var(--lg-blur);-webkit-backdrop-filter:var(--lg-blur)}
+body.stratus-immersive .server-join h2{margin:0 0 10px;font-size:27px;font-weight:500}
+body.stratus-immersive .server-join>p{color:#e4f4e6;line-height:1.6}
+.server-addresses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.server-addresses article{min-width:0;padding:20px;border:1px solid #e4fff420;border-radius:16px;background:#d9fff00b}
+.server-addresses h3{margin:0 0 12px;font-size:15px;font-weight:500;color:#f0faf0}
+.server-addresses code{display:block;overflow-wrap:anywhere;color:#f4fff1;font:clamp(13px,1.2vw,16px)/1.6 ui-monospace,monospace;margin-bottom:15px;user-select:all}
+.server-addresses p{font-size:12px;line-height:1.6;color:#e4f4e6;margin:14px 0 0}
+.copy-address-status:empty{display:none}
+.server-updates{margin-top:48px}
+.server-updates>h2{font-size:30px;font-weight:500;color:#eaf5e9}
+@media(max-width:650px){body.stratus-immersive .shader-sections{max-width:100%;margin-bottom:25px}body.stratus-immersive .shader-sections a{padding:0 14px}.server-addresses{grid-template-columns:1fr}body.stratus-immersive .server-join{padding:22px}}
+@media(prefers-reduced-transparency:reduce){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f);--lg-blur:none}body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser),body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,#scene-close,.showcase-image>span,.text-link,.card-icon,.public-footer a,#scene-dialog,.shader-sections,.server-join){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+@media(pointer:coarse){body.stratus-immersive :is(.release,.upcoming-item,.spec-section,.roadmap-process li){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f)}}
+/* Keep the fade, fields and highlighted controls as clear as the other glass. */
+body.nav-glass-fade .topbar.navigation-ready:before{backdrop-filter:blur(3px) saturate(1.08);-webkit-backdrop-filter:blur(3px) saturate(1.08)}
+body.stratus-immersive .feedback-form :is(input,textarea,select){background:linear-gradient(145deg,#31594365,#648e7428)}
+body.stratus-immersive .button.primary{background:radial-gradient(ellipse at var(--lg-x,25%) 0,#ffffff55,transparent 70%),linear-gradient(145deg,#d7f4e8b8,#a8d4c69c)}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) .feedback-nav{background:radial-gradient(ellipse at 26% 0,#fffaff8c,transparent 70%),linear-gradient(130deg,#dbc4f8b0,#b99ae8a8 65%,#d4b8f4b0)}
+@media(prefers-reduced-transparency:reduce){body.nav-glass-fade .topbar.navigation-ready:before,body.stratus-immersive .feedback-form :is(input,textarea,select){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}

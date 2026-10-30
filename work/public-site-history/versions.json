@@ -285,6 +285,11 @@
       "commit": "defb22bbf50e4d4d3c888c436d89f795e116ee69",
       "archive": "defb22bbf50e4d4d3c888c436d89f795e116ee69.zip",
       "sha256": "6c89d09cdcdd57bbf285f3ad7208200607c4752397b74f07255661b6763b1256"
+    },
+    {
+      "commit": "e6e21b593878716fb12bdbd04c15c9e806dab5da",
+      "archive": "e6e21b593878716fb12bdbd04c15c9e806dab5da.zip",
+      "sha256": "0e098d6448d236cb30dd0d3f8b80afbf65147a716551dcfd7c904a2e93b96f4d"
     }
   ],
   "privacy_filtered": true,

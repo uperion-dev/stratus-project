@@ -14453,6 +14453,12 @@
       "tag": "project-work-snapshots",
       "asset": "stratus-three-section-server-png-2263a6bd65b58379.zip",
       "bytes": 65157
+    },
+    "work/public-site-history/e6e21b593878716fb12bdbd04c15c9e806dab5da.zip": {
+      "sha256": "0e098d6448d236cb30dd0d3f8b80afbf65147a716551dcfd7c904a2e93b96f4d",
+      "tag": "project-work-snapshots",
+      "asset": "public-site-history-6b34d18a4c39cc1a.zip",
+      "bytes": 24490272
     }
   },
   "source_files": "See AUTO-SYNC-MANIFEST.json for Git-tracked source.",

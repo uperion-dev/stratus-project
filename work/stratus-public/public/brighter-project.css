@@ -1,0 +1,85 @@
+/* Brighter forest-toned surfaces, while preserving contrast and the existing glass treatment. */
+body.stratus-immersive{--page:#172c24;background-color:#172c24;background-image:url('/assets/fine-grain.png'),linear-gradient(180deg,#446e5d 0%,#304f42 42%,#1b3026 100%);background-size:256px 256px,100% 100%;background-repeat:repeat,no-repeat}
+body.stratus-immersive .immersive-hero .hero-image{filter:brightness(1.12) saturate(1.03)!important}
+body.stratus-immersive .immersive-hero .hero-shade{background:linear-gradient(90deg,#10291d35,transparent 70%),radial-gradient(ellipse at 50% 48%,#10201835,transparent 60%)}
+body.stratus-immersive :is(.section-intro>p,.spec-section dd,.release-content li,.upcoming-item p,.faq-list p,.story-intro,.water-story dd){color:#d0ded1}
+body.stratus-immersive :is(.spec-section,.release,.upcoming-item,.feedback-form){background-color:#233e32a6}
+body.stratus-immersive :is(.release-evidence,.evidence-note,.roadmap-note,.spec-footnote p,.public-footer){color:#c0d3c2}
+@media(forced-colors:active){body.stratus-immersive :is(.section-intro>p,.spec-section dd,.release-content li,.upcoming-item p,.faq-list p,.story-intro,.water-story dd,.release-evidence,.evidence-note,.roadmap-note,.spec-footnote p,.public-footer){color:CanvasText}}
+
+/* Project introduction and server sections retain the established glass layout. */
+body.stratus-immersive .project-hero-intro{margin:0;color:#e3f0e2;font-size:clamp(14px,1.15vw,18px);font-weight:500;line-height:1.5;text-align:center;text-shadow:0 2px 12px #10291f99}
+body.stratus-immersive .home-heading p{max-width:48ch;color:#c8dbcd;line-height:1.7}
+body.stratus-immersive .server-view .spec-section p{color:#d0ded1;line-height:1.8;font-size:clamp(13px,1vw,15px);margin:0}
+
+/* Lift the shared glass material on every UI surface, including both moving nav halves. */
+body.stratus-immersive{
+ --lg-material:radial-gradient(ellipse at var(--lg-x,22%) var(--lg-y,0%),#edfff72b,transparent 62%),linear-gradient(145deg,#e8fff31e,#d5f5e708 48%,#173a2b18),#476d59df;
+ --lg-rim:#e4fff450;
+}
+body.stratus-immersive :is(.spec-section,.release,.upcoming-item,.feedback-form){background-color:#426c55df}
+body.stratus-immersive :is(.release-evidence,.release-content details,.platform-strip span,.release-label,.pending-badge,.scene-caption){background:linear-gradient(145deg,#e5fff12a,#d6f9e70d)}
+body.stratus-immersive .feedback-form :is(input,textarea,select){background:linear-gradient(145deg,#315943db,#648e744d);color:#f8fff9}
+body.stratus-immersive .feedback-form :is(input,textarea,select):focus{background:#3a7058e8}
+body.stratus-immersive .feedback-form option{background:#355c47;color:#fff}
+body.nav-glass-fade .topbar.navigation-ready:before{background:radial-gradient(ellipse at 50% 0,#d7ffeb18,transparent 68%),linear-gradient(#2b4c3c82,#32574938 58%,transparent)}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) .feedback-nav{color:#27133b!important;background:radial-gradient(ellipse at 26% 0,#fffaffb3,transparent 70%),linear-gradient(130deg,#dbc4f8,#b99ae8 65%,#d4b8f4);border-color:#f2e4ffb0}
+@media(prefers-reduced-transparency:reduce){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f)}body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser){background:#436a53}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f)}}
+/* Keep small copy legible against the brighter panels. */
+body.stratus-immersive :is(.spec-section dd,.release-content li,.upcoming-item p,.faq-list p,.water-story dd,.server-view .spec-section p){color:#f1faf1}
+body.stratus-immersive .feedback-form :is(input,textarea)::placeholder{color:#d4e6d9;opacity:1}
+
+/* Clearer glass with the same material for resting and travelling navigation. */
+body.stratus-immersive{
+ --lg-material:radial-gradient(ellipse at var(--lg-x,22%) var(--lg-y,0%),#edfff724,transparent 62%),linear-gradient(145deg,#e8fff318,#d5f5e704 48%,#173a2b0c),#527b6688;
+ --lg-rim:#e4fff42e;
+ --lg-blur:blur(6px) saturate(1.12);
+}
+body.stratus-immersive :is(.spec-section,.release,.upcoming-item,.feedback-form){background-color:#527b6688}
+body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser){backdrop-filter:blur(6px) saturate(1.12);-webkit-backdrop-filter:blur(6px) saturate(1.12)}
+body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,#scene-close,.showcase-image>span,.text-link,.card-icon,.public-footer a){backdrop-filter:blur(6px) saturate(1.12)!important;-webkit-backdrop-filter:blur(6px) saturate(1.12)!important}
+body.stratus-immersive .feedback-form :is(input,textarea,select){background:linear-gradient(145deg,#31594395,#648e7438);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+body.stratus-immersive #scene-dialog{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+body.stratus-immersive .button.primary{background:radial-gradient(ellipse at var(--lg-x,25%) 0,#ffffff66,transparent 70%),linear-gradient(145deg,#d7f4e8ce,#a8d4c6b0)}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) .feedback-nav{background:radial-gradient(ellipse at 26% 0,#fffaff9c,transparent 70%),linear-gradient(130deg,#dbc4f8de,#b99ae8d1 65%,#d4b8f4de)}
+/* Lift secondary labels without changing dark lettering on light buttons. */
+body.stratus-immersive :is(.eyebrow,.card-index,.card-bottom,.release-meta time,.release-label,.pending-badge,.upcoming-number,.platform-strip span,.shot-name small,.carousel-status,.feedback-privacy,.spec-section dt,.faq-list summary,.workspace-card p,.reference-strip small,.public-footer){color:#e4f4e6}
+body.stratus-immersive .type-accent{color:#d7ebd8}
+@media(max-width:800px){.block-scatter>.scatter-0{left:calc(-18px + var(--scatter-x))}.block-scatter>.scatter-1{right:calc(-18px + var(--scatter-x))}}
+@media(pointer:coarse){body.stratus-immersive :is(.release,.upcoming-item,.spec-section,.roadmap-process li){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+@media(prefers-reduced-transparency:reduce){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f);--lg-blur:none}body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser),body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,#scene-close,.showcase-image>span,.text-link,.card-icon,.public-footer a,#scene-dialog){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f)}}
+@media(forced-colors:active){body.stratus-immersive :is(.eyebrow,.card-index,.card-bottom,.release-meta time,.release-label,.pending-badge,.upcoming-number,.platform-strip span,.shot-name small,.carousel-status,.feedback-privacy,.spec-section dt,.faq-list summary,.workspace-card p,.reference-strip small,.public-footer,.type-accent){color:CanvasText}}
+/* Clearer glass, shared by both halves of the navigation during transitions. */
+body.stratus-immersive{--lg-material:radial-gradient(ellipse at var(--lg-x,22%) var(--lg-y,0%),#edfff71a,transparent 62%),linear-gradient(145deg,#e8fff310,#d5f5e703 48%,#173a2b08),#527b6658;--lg-blur:blur(3px) saturate(1.08)}
+body.stratus-immersive :is(.spec-section,.release,.upcoming-item,.feedback-form){background-color:#527b6658}
+body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser){backdrop-filter:blur(3px) saturate(1.08);-webkit-backdrop-filter:blur(3px) saturate(1.08)}
+body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,#scene-close,.showcase-image>span,.text-link,.card-icon,.public-footer a){backdrop-filter:blur(3px) saturate(1.08)!important;-webkit-backdrop-filter:blur(3px) saturate(1.08)!important}
+body.stratus-immersive :is(.feedback-form input,.feedback-form textarea,.feedback-form select,#scene-dialog){backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+body.stratus-immersive .topbar.navigation-ready .nav-track a{text-shadow:0 1px 4px #07190fa0}
+/* The shader keeps its own accessible secondary navigation. */
+body.stratus-immersive .shader-sections{display:flex;gap:6px;max-width:max-content;overflow-x:auto;overscroll-behavior-x:contain;margin:0 0 34px;padding:5px;background:var(--lg-material);border:1px solid var(--lg-rim);border-radius:999px;box-shadow:var(--lg-shadow);backdrop-filter:var(--lg-blur);-webkit-backdrop-filter:var(--lg-blur)}
+body.stratus-immersive .shader-sections a{flex:0 0 auto;min-height:44px;display:flex;align-items:center;justify-content:center;padding:0 18px;color:#edf8ef;border-radius:999px;text-decoration:none;font-size:12px}
+body.stratus-immersive .shader-sections a[aria-current=page]{background:#e0fff42e;box-shadow:inset 0 1px 2px #f3fff945}
+body.stratus-immersive .server-join{margin:0 0 35px;padding:28px;background:var(--lg-material);border:1px solid var(--lg-rim);border-radius:var(--lg-panel-radius);box-shadow:var(--lg-shadow);backdrop-filter:var(--lg-blur);-webkit-backdrop-filter:var(--lg-blur)}
+body.stratus-immersive .server-join h2{margin:0 0 10px;font-size:27px;font-weight:500}
+body.stratus-immersive .server-join>p{color:#e4f4e6;line-height:1.6}
+.server-addresses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.server-addresses article{min-width:0;padding:20px;border:1px solid #e4fff420;border-radius:16px;background:#d9fff00b}
+.server-addresses h3{margin:0 0 12px;font-size:15px;font-weight:500;color:#f0faf0}
+.server-addresses code{display:block;overflow-wrap:anywhere;color:#f4fff1;font:clamp(13px,1.2vw,16px)/1.6 ui-monospace,monospace;margin-bottom:15px;user-select:all}
+.server-addresses p{font-size:12px;line-height:1.6;color:#e4f4e6;margin:14px 0 0}
+.copy-address-status:empty{display:none}
+.server-updates{margin-top:48px}
+.server-updates>h2{font-size:30px;font-weight:500;color:#eaf5e9}
+@media(max-width:650px){body.stratus-immersive .shader-sections{max-width:100%;margin-bottom:25px}body.stratus-immersive .shader-sections a{padding:0 14px}.server-addresses{grid-template-columns:1fr}body.stratus-immersive .server-join{padding:22px}}
+@media(prefers-reduced-transparency:reduce){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f);--lg-blur:none}body.stratus-immersive .topbar.navigation-ready :is(.brand-cluster,.nav-backplate,.nav-traveller,.nav-collapser),body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,#scene-close,.showcase-image>span,.text-link,.card-icon,.public-footer a,#scene-dialog,.shader-sections,.server-join){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+@media(pointer:coarse){body.stratus-immersive :is(.release,.upcoming-item,.spec-section,.roadmap-process li){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body.stratus-immersive{--lg-material:linear-gradient(145deg,#527960,#3e654f)}}
+/* Keep the fade, fields and highlighted controls as clear as the other glass. */
+body.nav-glass-fade .topbar.navigation-ready:before{backdrop-filter:blur(3px) saturate(1.08);-webkit-backdrop-filter:blur(3px) saturate(1.08)}
+body.stratus-immersive .feedback-form :is(input,textarea,select){background:linear-gradient(145deg,#31594365,#648e7428)}
+body.stratus-immersive .button.primary{background:radial-gradient(ellipse at var(--lg-x,25%) 0,#ffffff55,transparent 70%),linear-gradient(145deg,#d7f4e8b8,#a8d4c69c)}
+body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-traveller,.nav-collapser) .feedback-nav{background:radial-gradient(ellipse at 26% 0,#fffaff8c,transparent 70%),linear-gradient(130deg,#dbc4f8b0,#b99ae8a8 65%,#d4b8f4b0)}
+@media(prefers-reduced-transparency:reduce){body.nav-glass-fade .topbar.navigation-ready:before,body.stratus-immersive .feedback-form :is(input,textarea,select){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
