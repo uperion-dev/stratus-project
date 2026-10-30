@@ -341,6 +341,7 @@
     "development/stratus-public/public/performance.css",
     "development/stratus-public/public/scroll-atmosphere.css",
     "development/stratus-public/public/scroll-performance.css",
+    "development/stratus-public/public/server-address.js",
     "development/stratus-public/public/showcase.css",
     "development/stratus-public/public/showcase.js",
     "development/stratus-public/public/site-details.css",
@@ -12461,10 +12462,10 @@
     "work/write_pack.py"
   ],
   "site_commits": {
-    "stratus-public": "defb22bbf50e4d4d3c888c436d89f795e116ee69",
+    "stratus-public": "e6e21b593878716fb12bdbd04c15c9e806dab5da",
     "stratus-studio-cloud": "bb94ab1c5ae832b1650b79c2f5e89fa4dc664b9b"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "3eee1c30444d1de041f7ac806752750fa4b2469b2bb450292bded976ba0b81fd",
+  "fingerprint": "4dbfe2e230be8c410c409155658cbd42c0c8a4a10b16105780b30f620bf80272",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }
