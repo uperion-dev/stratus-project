@@ -109,3 +109,14 @@ body.stratus-immersive .button:hover{translate:none;box-shadow:0 4px 12px #0b211
 body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,.server-join,.spec-section,.release,.upcoming-item){box-shadow:0 1px 0 #f0fff02e inset,0 9px 20px #071c1654}
 body.stratus-immersive :is(.scene,.showcase-image){box-shadow:0 12px 28px #071c1673}
 @media(prefers-reduced-transparency:reduce){body.stratus-immersive{--lg-material:linear-gradient(145deg,#42674f,#294b3d)}}
+/* The home page gets to the two projects and their images directly. */
+body.stratus-immersive .home-view>.spatial-journey{display:none!important}
+body.stratus-immersive .home-view>.home-heading{margin-top:24px}
+body.stratus-immersive .home-view .workspace-card{min-height:0}
+body.stratus-immersive .home-view .workspace-card .card-bottom{margin-top:16px;padding-top:14px}
+
+/* One clean treatment for every slide; the caption lives in the carousel status. */
+body.stratus-immersive .spatial-carousel .scene,
+body.stratus-immersive .spatial-carousel .scene.carousel-current{box-shadow:none}
+body.stratus-immersive .spatial-carousel .scene::after{display:none}
+body.stratus-immersive .spatial-carousel .scene>span{display:none}
