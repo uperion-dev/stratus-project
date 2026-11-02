@@ -96,3 +96,16 @@ body.stratus-immersive .gallery-section{margin-top:58px}
 body.stratus-immersive .workspace-card h3{font-size:22px;margin-top:15px}
 body.stratus-immersive .workspace-card p{font-size:13px;line-height:1.65}
 @media(max-width:600px){body.stratus-immersive .hero h1{font-size:48px}.hero-actions{flex-direction:row;flex-wrap:wrap}.hero-actions .button{min-width:0}}
+/* Give the content and controls a settled, tactile weight. */
+body.stratus-immersive{--lg-material:radial-gradient(ellipse at var(--lg-x,22%) var(--lg-y,0%),#ecfff31a,transparent 62%),linear-gradient(150deg,#a6d7bd1b,#10291d16 58%),#294b3dbe;--lg-rim:#e4fff457;--lg-shadow:0 1px 0 #f3fff42e inset,0 12px 30px #071b1690}
+body.stratus-immersive .immersive-hero .hero-shade{background:linear-gradient(90deg,#091e17a6 0%,#10291d4d 46%,transparent 78%),linear-gradient(0deg,#10291d9e,transparent 48%)}
+body.stratus-immersive .hero h1{font-weight:650;text-shadow:0 3px 20px #06181080}
+body.stratus-immersive .hero h1 em{font-weight:600;color:#f1fbf4}
+body.stratus-immersive .workspace-card{transform:none!important;background:linear-gradient(155deg,#799e8554,#2b4c3bd9 75%);border:1px solid #d5f4de51;box-shadow:0 1px 0 #effff037 inset,0 15px 28px #0a201a73}
+body.stratus-immersive .workspace-card:hover{transform:none!important;border-color:#ecfff279;box-shadow:0 1px 0 #effff04a inset,0 18px 32px #071a147d}
+body.stratus-immersive .workspace-card h3,body.stratus-immersive .home-heading h2{font-weight:650}
+body.stratus-immersive .card-icon,body.stratus-immersive .workspace-card:hover .card-icon{transform:none}
+body.stratus-immersive .button:hover{translate:none;box-shadow:0 4px 12px #0b211952}
+body.stratus-immersive :is(.button,#motion-control,.carousel-controls button,.server-join,.spec-section,.release,.upcoming-item){box-shadow:0 1px 0 #f0fff02e inset,0 9px 20px #071c1654}
+body.stratus-immersive :is(.scene,.showcase-image){box-shadow:0 12px 28px #071c1673}
+@media(prefers-reduced-transparency:reduce){body.stratus-immersive{--lg-material:linear-gradient(145deg,#42674f,#294b3d)}}
