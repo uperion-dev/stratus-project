@@ -87,3 +87,7 @@ body.stratus-immersive .topbar.navigation-ready.nav-has-selector :is(nav,.nav-tr
 /* Two project cards on the concise overview. */
 .workspace-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:600px){.workspace-cards{grid-template-columns:1fr}}
+
+/* Keep slide shadows inside the carousel and lift the wordmark depth. */
+body.stratus-immersive .spatial-carousel .scene,body.stratus-immersive .spatial-carousel .scene.carousel-current{box-shadow:0 8px 20px #0005}
+body.stratus-immersive .wordmark-depth i{color:#8cae9b}
