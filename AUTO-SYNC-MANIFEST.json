@@ -263,6 +263,10 @@
     "development/stratus-public/app/chatgpt-auth.ts",
     "development/stratus-public/app/layout.tsx",
     "development/stratus-public/app/page.tsx",
+    "development/stratus-public/backups/before-restore-20261103-004401/public/brighter-project.css",
+    "development/stratus-public/backups/before-restore-20261103-004401/public/index.html",
+    "development/stratus-public/backups/before-restore-20261103-004401/public/site-details.css",
+    "development/stratus-public/backups/before-restore-20261103-004401/public/spatial.js",
     "development/stratus-public/db/schema.ts",
     "development/stratus-public/drizzle.config.ts",
     "development/stratus-public/drizzle/0000_huge_ultron.sql",
@@ -12477,6 +12481,6 @@
     "stratus-studio-cloud": "bb94ab1c5ae832b1650b79c2f5e89fa4dc664b9b"
   },
   "shader_release": "1.6.12",
-  "fingerprint": "ec407ed4ce536cdb896f83bfc68ebe2327fb9d94c72feeab55e3e572ba375354",
+  "fingerprint": "abb01bc894fbb77fafca3db0e6fbe710e74076436e63101f40ef40f9b59fb4ef",
   "policy": "Per-file settled authored work, separately labelled development source, committed websites, final shader and indexed binary backups. No model calls."
 }

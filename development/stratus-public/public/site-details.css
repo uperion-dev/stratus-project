@@ -67,5 +67,3 @@ body.stratus-immersive main [data-view].scatter-scene>.block-scatter{position:ab
 .face-top:after{opacity:.9;background:linear-gradient(138deg,#d5fff02e 6%,transparent 23%,#effff0b0 30%,#c7fff342 34%,transparent 46%),radial-gradient(ellipse at 20% 10%,#f4fff04a,transparent 72%)}
 .face-right:after{opacity:.35}
 .block-stone .block-face:after{opacity:.68}
-/* Decorative shards and floating block models removed from the public site. */
-.shard-reflections,.site-block-cluster,.block-scatter{display:none!important}
