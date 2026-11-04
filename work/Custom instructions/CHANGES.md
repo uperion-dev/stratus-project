@@ -10,5 +10,5 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 
 - Add quaility motion blur. 
 
-- Think harder to push FPS up to 60 FPS. And if possible push to max. 
+- Think harder to push FPS up to 60 FPS. And if possible push to max. Like any other light/performance shaders. 
 
