@@ -8,5 +8,7 @@ Put only the changes you want worked on now under **Pending changes**. `TASK.md`
 
 - Make underwater, water surface consustant with the above. Eg. Refractions, *reflections (get the feel from 1.3.1), etc. 
 
-- Think harder to push FPS up to 60 FPS. 
+- Add quaility motion blur. 
+
+- Think harder to push FPS up to 60 FPS. And if possible push to max. 
 
